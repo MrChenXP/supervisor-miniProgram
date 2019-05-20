@@ -1,0 +1,129 @@
+.kw-list-cell {
+  min-height: 95rpx;
+  padding: 20rpx 20rpx;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  background: white;
+}
+
+.kw-list-cell-extraIcon ,.kw-list-cell-thumb{
+  width: 55rpx;
+  height: 55rpx;
+  line-height: 55rpx;
+  display: flex;
+  align-self: flex-start;
+  margin-right: 25rpx;
+}
+.kw-list-cell-isNote{
+  height: 145rpx;
+}
+.kw-list-cell-isNote .kw-list-cell-thumb{
+  width: 105rpx;
+  height: 105rpx;
+  line-height: 105rpx;
+}
+.kw-list-cell-isNote .kw-list-cell-extraIcon,.kw-list-cell-isNote .kw-list-cell-redDot,.kw-list-cell-isNote .kw-list-cell-isArrow,.kw-list-cell-isNote .kw-list-cell-rightNote{
+  line-height: 105rpx;
+}
+.kw-list-cell-isNote .kw-list-cell-title,.kw-list-cell-isNote .kw-list-cell-note{
+  line-height: 52.5rpx;
+}
+.kw-list-cell-thumb image{
+    width: 100%;
+    height: 100%;
+}
+.kw-list-cell-content {
+  width: calc(100% - 80rpx);
+  flex-shrink: 2;
+  flex-grow: 2;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.kw-list-cell-leftContent {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+  flex-grow: 10;
+  flex-shrink: 10;
+  line-height: 55rpx;
+}
+
+.kw-list-cell-title {
+  font-size: 28rpx;
+  color: #333;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.kw-list-cell-note {
+  font-size: 24rpx;
+  color: #666;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.kw-list-cell-rightContent{
+  line-height: 55rpx;
+  display: flex;
+  flex-direction: row-reverse;
+  max-width: 80%;
+  flex-grow: 10;
+  flex-shrink: 10;
+     
+}
+.kw-list-cell-rightNote{
+  font-size: 26rpx;
+  color: #999999;
+  text-overflow: ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.kw-list-cell-redDot{
+    line-height: 55rpx;
+    margin-left: 20rpx;
+    width: 18rpx;
+}
+.kw-list-cell-redDot-circle{
+  display: inline-block;
+  width: 18rpx;
+  height: 18rpx;
+  background: red;
+  border-radius: 50%;
+  animation: blink 2s linear infinite;
+}
+.kw-list-cell-isArrow{
+  margin-left: 20rpx;
+  line-height: 55rpx;
+  width: 18rpx;
+}
+
+.kw-list-cell-border-top::before{
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    top: 0;
+    left: 0;
+    height: 1rpx;
+    content: '';
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+    margin:0 20rpx;
+  }
+  .kw-list-cell-border-bottom::after{
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1rpx;
+    content: '';
+    transform: scaleY(.5);
+    background-color: #c8c7cc;  
+    margin:0 20rpx;
+  }

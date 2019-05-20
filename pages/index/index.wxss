@@ -1,4 +1,48 @@
 /**index.wxss**/
-.usermotto {
-  margin-top: 200px;
+swiper {
+  width: 100%;
+  height: 405rpx;
+}
+.newsIma{
+  width: 100%;
+  height: 405rpx;
+}
+.newBody{
+  flex-basis: 667rpx;
+  flex-grow: 2;
+  flex-shrink: 2;
+  width: 100%;
+}
+.btList{
+  white-space: nowrap;
+  height: 95rpx;
+  background: white;
+}
+.bt {
+  display: inline-block;
+  width: 170rpx;
+  height: 93rpx;
+  line-height: 93rpx;
+  border-bottom: #dedede solid 2rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #666666;
+}
+.active{
+  display: inline-block;
+  border-bottom:  #109DEA solid 4rpx;
+  height: 91rpx;
+  color: #109dea;
+  line-height: 91rpx;
+}
+.newsList{
+  height: calc(100% - 95rpx);
+  padding-top: 16rpx;
+  background: #f5f5f5;
+}
+.kw-list-cell-border-bottom::after{
+  background: none !important;
+}
+.changeBoder::after{
+  border-bottom: #d5d4d4 dashed 2rpx;
 }

@@ -1,0 +1,22 @@
+<!--index.wxml-->
+<view class="content">
+  <!-- 上面背景背景图 -->
+  <view class="title">
+    <image class="img" src="../../static/images/loginBG.png" ></image>
+    <!-- 用户简略信息 -->
+    <view class="info">
+        <image class="info-img" wx:if="{{!imgShow}}" src="../../static/images/DefaultImg.png"></image>
+        <image class="info-img" wx:else :src="user.IMAGE"></image>        
+        <view>
+          <view class="name-zw">
+            <text class="name text-bold" wx:if="{{user.name}}">{{user.name}}</text>
+            <text class="zw" wx:if="{{user.ddlx && user.ddlx!='null'}}">{{user.ddlx}}</text>
+          </view>
+          <view wx:if="{{!user.name}}" class="text-bold name">
+            请您先登录
+          </view>
+          <view class="info-jg" wx:if="{{user.orgMc}}">机构：{{user.orgMc}}</view>
+        </view>
+    </view>
+  </view>
+</view>

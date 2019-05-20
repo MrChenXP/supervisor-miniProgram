@@ -1,0 +1,33 @@
+<view class="kw-list-cell {{[note ? 'kw-list-cell-isNote' : '',border.top ? 'kw-list-cell-border-top' : '',border.bottom ? 'kw-list-cell-border-bottom' : '']}} kw-class">
+  <!-- 左侧图标(没有缩略图才会出现) -->
+  <view class="kw-list-cell-extraIcon" wx:if="{{!thumb}}" >
+      <i-icon type="{{extraIcon.type}}" size="{{extraIcon.size}}" color="{{extraIcon.color}}"></i-icon>
+  </view>
+  <!-- 中间内容(标题和描述) -->
+  <view class="kw-list-cell-content">
+    <!-- 标题 -->
+    <view class="kw-list-cell-leftContent" wx:if="{{title || note}}">
+        <text wx:if="{{title}}" class="kw-list-cell-title">{{title}}</text>
+        <text wx:if="{{note}}" class="kw-list-cell-note">{{note}}</text>
+    </view>
+    <!-- 右侧信息 -->
+    <view class="kw-list-cell-rightContent" wx:if="{{rightNote}}">
+      <text class="kw-list-cell-rightNote">{{rightNote}}</text>
+    </view>
+    <!-- 右侧描述位置插槽(右侧信息属性没有才会出现) -->
+    <view wx:if="{{!rightNote}}" class="kw-list-cell-rightContent">
+        <slot name="rightNote"></slot>
+    </view>
+  </view>
+  <!-- 中间内容(标题和描述)插槽(默认)(中间内容没有才会出现) -->
+  <view class="kw-list-cell-leftContent" wx:if="{{!(title || note || rightNote)}}">
+        <slot></slot>
+  </view>
+  <!-- 右测标记 -->
+  <view wx:if="{{redDot}}" class="kw-list-cell-redDot">
+      <text class="kw-list-cell-redDot-circle"></text>
+  </view>
+  <view class="kw-list-cell-isArrow" wx:if="{{isArrow}}">
+      <i-icon color="#c7c7c7" size="20" type="enter"></i-icon>
+  </view>
+</view>

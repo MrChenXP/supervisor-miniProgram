@@ -1,0 +1,38 @@
+<!--index.wxml-->
+<view class="content workspace">
+  <!-- 上部图片 -->
+	<view class="banner">
+      <image src="../../static/images/workspace.png" ></image>
+  </view>
+  <!-- 统计 -->
+  <view class="statistics">
+    <view class="s-body">
+      <view class="badge">
+        <text>{{tips.wddb}}</text>        	
+      </view>
+      <view class="s-title">我的待办</view>
+    </view>
+    <view class="s-body">
+      <view class="badge">
+        <text>{{tips.cxcs}}</text>        	
+      </view>
+      <view class="s-title">出行次数</view>
+    </view>
+    <view class="s-body">
+      <view class="badge">
+        <text>{{tips.tkcs}}</text>        	
+      </view>
+      <view class="s-title">听课次数</view>
+    </view>
+    <view class="s-body">
+      <view class="badge">
+        <text>{{tips.yss}}</text>        	
+      </view>
+      <view class="s-title">验收数</view>
+    </view>
+  </view>
+  <!-- 功能 -->
+  <view class="workspace-gn" >
+    <kw-list-cell title="督导纪实" note="督导纪实" redDot="{{true}}"></kw-list-cell>
+  </view>
+</view>

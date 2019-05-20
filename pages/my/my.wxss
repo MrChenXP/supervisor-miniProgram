@@ -1,0 +1,53 @@
+/**index.wxss**/
+.title{
+  height: 461rpx;
+  background-image: linear-gradient(to bottom, #028edf 0%, #00befe 100%);
+  position: relative;
+}
+.title .img{
+  position: absolute;
+  height: 125rpx;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+}
+.title .info{
+  position: absolute;
+  top: 80rpx;
+  height: 125rpx;
+  padding: 0 60rpx;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+}
+.title .info .info-img{
+  width: 125rpx;
+  height: 125rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+}
+.title .info .name-zw{
+  display: flex;
+  line-height: 80rpx;
+}
+.title .info .name-zw .name{
+  font-size: 36rpx;
+  color: white;
+}
+.title .info .name-zw .zw{
+  color: white;
+  font-size: 24rpx;
+  margin-left: 30rpx;
+  width: 140rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  background: #fdab3b;
+  align-self:center;
+  text-align: center;
+  border-radius: 5rpx;
+}
+.title .info .info-jg{
+  color: white;
+  line-height: 45rpx;
+  font-size: 28rpx;
+}

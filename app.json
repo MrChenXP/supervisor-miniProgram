@@ -1,12 +1,39 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/workspace/workspace",
+    "pages/my/my"
   ],
   "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "挂牌督导",
+    "navigationBarBackgroundColor": "#028edf",
+    "backgroundColor": "#F8F8F8"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "tabBar":{
+    "color": "#979696",
+    "selectedColor": "#109dea",
+    "backgroundColor": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/images/icons/index.png",
+        "selectedIconPath": "static/images/icons/index-active.png"
+      },
+      {
+        "pagePath": "pages/workspace/workspace",
+        "text": "工作区",
+        "iconPath": "static/images/icons/workspace.png",
+        "selectedIconPath": "static/images/icons/workspace-active.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "static/images/icons/my.png",
+        "selectedIconPath": "static/images/icons/my-active.png"
+      }
+    ]
+  }
 }

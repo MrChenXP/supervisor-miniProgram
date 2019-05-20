@@ -3,4 +3,5 @@
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>
+  <i-toast id="toast" />
 </view>

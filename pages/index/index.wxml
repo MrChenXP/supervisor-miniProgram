@@ -11,7 +11,7 @@
     <!-- 标题栏 -->
     <scroll-view class="btList" scroll-x="{{true}}" >
       <view wx:for="{{btList}}" wx:key="index" class="bt" bindtap="changeBt"
-        class="bt {{isActive == index ? 'active' : ''}}" data-index="{{index}}">{{item}}      </view>
+        class="bt {{isActive == index ? 'active' : ''}}" data-index="{{index}}">{{item}}</view>
     </scroll-view>
     <!-- 列表区 -->
     <scroll-view scroll-y="true" class="newsList">

@@ -112,6 +112,8 @@ const ajaxUrl = (option) => {
     ajaxOption.data = handleData(ajaxOption.data)
   }
   
+  ajaxOption = handleUrl(ajaxOption)
+
   ajaxOption.option = option
 
   ajaxOption.success = success(option.success, option.fail)
@@ -122,6 +124,27 @@ const ajaxUrl = (option) => {
 
   ajax(ajaxOption)
 
+}
+
+const handleUrl = (option) => {
+  if (store.getToken()) {
+    let url = option.url
+    let data = option.data || {}
+    // 如果url中没有包含token参数 && 数据请求中没有token
+    if (!/^.*(\?|&)token.*$/.test(url) && !data.token) {
+      if (url.endsWith('?') || url.endsWith('&')) {
+        url += 'token=' + store.getToken()
+      } else {
+        if (url.indexOf('?') < 0) {
+          url += '?token=' + store.getToken()
+        } else {
+          url += '&token=' + store.getToken()
+        }
+      }
+      option.url = url
+    }
+  }
+  return option
 }
 
 /**

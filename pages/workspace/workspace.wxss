@@ -11,6 +11,16 @@
   width: 100%;
   height: 254rpx;
 }
+.banner .trafficbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 854rpx;
+    background: var(--trafficbar);
+    animation: sparkle 4s linear infinite;
+    opacity: 0.4;
+}
 .statistics{
   z-index: 10;
   height: 200rpx;
@@ -38,7 +48,7 @@
   font-size: 32rpx;
   font-weight: normal;
 }
-.statistics .s-body .s-title{
+.statistics .s-body .s-title{ 
   font-size: 26rpx;
   color: #666666;
   text-align: center;
@@ -48,5 +58,6 @@
 .workspace-gn{
     margin-top: 20rpx;
     height: calc(100vh - 474rpx);
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }

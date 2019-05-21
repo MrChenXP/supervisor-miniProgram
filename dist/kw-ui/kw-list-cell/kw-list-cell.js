@@ -5,7 +5,7 @@ Component({
   },
   externalClasses: ['kw-class'],  // 接受外部传入的样式类
   data:{
-    msg:"Taylor"
+    isKwIcon: false
   },
   properties: {
     // 标题
@@ -17,7 +17,7 @@ Component({
       type: Object,
       value: {
         type: "accessory",
-        color: "#000000",
+        color: "#00bdfd",
         size: "20"
       }
     },
@@ -35,19 +35,25 @@ Component({
       type: Boolean,
       value: true
     },
-    // 上下边框
-    border: {
-      type: Object,
-      value:{
-          top: false,
-          bottom: true
-      }
+    // 上边框
+    borderTop: {
+      type: Boolean,
+      value: false,
+    },
+    // 下边框
+    borderBottom: {
+      type: Boolean,
+      value: true,
     },
     // 链接
     link: String,
   },
   ready(){
-    // console.log(this.data.extraIcon)
+    // 判断是否属于kw的icon
+    let kwReg = /^(kw)/g
+    this.setData(
+      { isKwIcon: kwReg.test(this.data.extraIcon.type) }
+    )
   },
   methods:{
     // 返回一个点击事件 如果有link属性则会跳转对应链接

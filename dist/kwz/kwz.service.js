@@ -33,6 +33,7 @@ const fail = (cb) => {
   return (error, option) => {
     if (error) {
       if (error.statusCode === 401) {
+        
         // token不对或session丢失 =》 刷新token,并重新请求,只重新请求一次
         initVisit(() => {
           if (option.repeat !== true) {
@@ -43,6 +44,7 @@ const fail = (cb) => {
             
             rOption.repeat = true
 
+            console.log(rOption)
             // 重新请求
             ajax(rOption)
 
@@ -58,6 +60,7 @@ const fail = (cb) => {
         return
       }
     }
+
     util.cfp(cb, (option.vue || (option.app || this)), [error, option.option])
   }
 }

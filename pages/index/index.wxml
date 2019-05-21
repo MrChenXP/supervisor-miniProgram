@@ -1,25 +1,26 @@
 <!--index.wxml-->
 <view class="content">
-  <!-- ÂÖ²¥Í¼ -->
+  <!-- è½®æ’­å›¾ -->
   <swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="3000"> 
     <swiper-item wx:for="{{newsImaUrl}}" wx:key="index">
       <image class='newsIma' src="{{item}}"></image>
     </swiper-item>
   </swiper>
-  <!-- Ñ¡Ïî¿¨ -->
+  <!-- é€‰é¡¹å¡ -->
   <view class="newBody">
-    <!-- ±êÌâÀ¸ -->
+    <!-- æ ‡é¢˜æ  -->
     <scroll-view class="btList" scroll-x="{{true}}" >
       <view wx:for="{{btList}}" wx:key="index" class="bt" bindtap="changeBt"
-        class="bt {{isActive == index ? 'active' : ''}}" data-index="{{index}}">{{item}}</view>
+        class="bt {{isActive == index ? 'active' : ''}}" data-index="{{index}}">{{item}}      </view>
     </scroll-view>
-    <!-- ÁĞ±íÇø -->
+    <!-- åˆ—è¡¨åŒº -->
     <scroll-view scroll-y="true" class="newsList">
       <!-- <view wx:for="newsBtList"> -->
-        <kw-list-cell extraIcon="{{extraIcon}}" title="ÕâÊÇĞÂÎÅ°¡"
+        <kw-list-cell extraIcon="{{extraIcon}}" title="è¿™æ˜¯æ–°é—»å•Š"
+          rightNote="11/33" isArrow="{{false}}" kw-class="changeBoder"></kw-list-cell>
+        <kw-list-cell extraIcon="{{extraIcon}}" title="è¿™æ˜¯æ–°é—»å•Š"
           rightNote="11/33" isArrow="{{false}}" kw-class="changeBoder"></kw-list-cell>
       <!-- </view> -->
     </scroll-view>
   </view>
-
 </view>

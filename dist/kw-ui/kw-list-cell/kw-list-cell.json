@@ -1,6 +1,7 @@
 {
   "component": true,
   "usingComponents": {
-    "i-icon": "../../iview/icon/index"
+    "i-icon": "../../iview/icon/index",
+    "kw-icon": "../kw-icon/kw-icon"
   }
 }

@@ -1,7 +1,11 @@
-<view class="kw-list-cell {{[note ? 'kw-list-cell-isNote' : '',border.top ? 'kw-list-cell-border-top' : '',border.bottom ? 'kw-list-cell-border-bottom' : '']}} kw-class">
+<view class="kw-list-cell {{[note ? 'kw-list-cell-isNote' : '',borderTop ? 'kw-list-cell-border-top' : '',borderBottom ? 'kw-list-cell-border-bottom' : '']}} kw-class">
   <!-- 左侧图标(没有缩略图才会出现) -->
-  <view class="kw-list-cell-extraIcon" wx:if="{{!thumb}}" >
-      <i-icon type="{{extraIcon.type}}" size="{{extraIcon.size}}" color="{{extraIcon.color}}"></i-icon>
+  <view class="kw-list-cell-extraIcon" wx:if="{{!thumb && extraIcon}}" >
+      <i-icon wx:if="{{!isKwIcon}}" type="{{extraIcon.type}}" size="{{extraIcon.size}}" color="{{extraIcon.color}}"></i-icon>
+      <kw-icon wx:else type='{{extraIcon.type}}' size='{{extraIcon.size}}' color="{{extraIcon.color}}"></kw-icon>
+  </view>
+  <view class="kw-list-cell-thumb" wx:if="{{thumb}}">
+      <image src="{{thumb}}" mode="scaleToFill"></image>
   </view>
   <!-- 中间内容(标题和描述) -->
   <view class="kw-list-cell-content">

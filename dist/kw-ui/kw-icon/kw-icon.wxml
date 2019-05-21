@@ -1,0 +1,1 @@
+<view class="kw-class kw-icon {{ type  }} {{ custom }}" style="font-size: {{ size }}px; {{ color ? 'color:' + color : '' }}"></view>

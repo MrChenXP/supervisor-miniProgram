@@ -11,6 +11,6 @@ Page = function (config) {
 
 App({
   onLaunch: function () {
-    kwz.initVisit()
+    // kwz.initVisit()
   }
 })

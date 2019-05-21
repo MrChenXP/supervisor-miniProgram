@@ -2,26 +2,26 @@
 
 Page({
   data: {
-    // ÂÖ²¥Í¼Í¼Æ¬Â·¾¶
+    // è½®æ’­å›¾å›¾ç‰‡è·¯å¾„
     newsImaUrl: [
       'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
       'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
       'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640'
 
       ],
-    // ±êÌâÀ¸ÎÄ×Ö
-    btList: ["ÏÖ³¡¶½µ¼", "ÏÖ³¡¶½µ¼", "ÏÖ³¡¶½µ¼", "ÏÖ³¡¶½µ¼", "ÏÖ³¡¶½µ¼", "ÏÖ³¡¶½µ¼"],
-    // ¿ØÖÆ±êÌâÀ¸Ñ¡ÖĞÑùÊ½
+    // æ ‡é¢˜æ æ–‡å­—
+    btList: ["ç°åœºç£å¯¼", "ç°åœºç£å¯¼", "ç°åœºç£å¯¼", "ç°åœºç£å¯¼", "ç°åœºç£å¯¼", "ç°åœºç£å¯¼"],
+    // æ§åˆ¶æ ‡é¢˜æ é€‰ä¸­æ ·å¼
     isActive: 2,
-    // ×ó²àÍ¼±êÊôĞÔÖµ
-    extraIcon: {type: 'accessory', color: '#00bdfd', size: '20' },
-    // Õû¸öĞÂÎÅÁĞ±íÊı¾İ
+    // å·¦ä¾§å›¾æ ‡å±æ€§å€¼
+    extraIcon: {type: 'kw-circle', color: '#00bdfd', size: '20' },
+    // æ•´ä¸ªæ–°é—»åˆ—è¡¨æ•°æ®
     newsBtList:[
       [],
       [],
     ]
   },
-  // ¸ü¸Ä±êÌâÀ¸Ñ¡ÖĞÖµ
+  // æ›´æ”¹æ ‡é¢˜æ é€‰ä¸­å€¼
   changeBt(e){
     this.setData({
       isActive: e.currentTarget.dataset.index,

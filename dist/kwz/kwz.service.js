@@ -252,10 +252,35 @@ const cacheAttach = (option) => {
   attachOption.header = handleHeader(attachOption)
 
   attachOption.success = (filepath) => {
-    util.cfp(option.success, option.app || (option.vue || this), [filepath])
+    util.cfp(option.success, option.page || (option.vue || this), [filepath])
   }
 
   weixin.requestAttach(attachOption)
+}
+
+/**
+ * 是否登陆
+ * @return true/false 是/否
+ */
+const isLogin = () => {
+  return store.isLogin()
+}
+
+/**
+ * 判断登陆，如果未登陆=》会切换至my tab然后提示登陆
+ */
+const checkLogin = (success, page) => {
+  if (!isLogin()) {
+    weixin.switchTab({
+      url: '../my/my', 
+      success () {
+        weixin.alert('请登录')
+        util.cfp(success, page || this)
+      }, page
+    })
+  } else {
+    return true
+  }
 }
 
 export default {
@@ -263,5 +288,5 @@ export default {
   // 兼容老的写法
   ajax: {
     ajaxUrl
-  }
+  }, checkLogin, isLogin
 }

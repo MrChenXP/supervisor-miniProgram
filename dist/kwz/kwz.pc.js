@@ -8,7 +8,7 @@ import {xxteaEncrypt64} from '../xxtea/xxtea'
 const kwbms = (data) => {
   if (data && typeof data === 'object') {
     for (var i in data) {
-      data[i] = kwbm()
+      data[i] = kwbm(data[i])
     }
   }
   return data
@@ -59,8 +59,21 @@ const kwfilter = (str) => {
  * @param {string} data 
  */
 const kwencrypts = (data) => {
+  if (data && typeof(data) === 'object') {
+    for (var i in data) {
+      data[i] = kwencrypt(data[i])
+    }
+  }
+  return data
+}
+
+/**
+ * 
+ * @param {object} data 
+ */
+const kwencrypt = (data) => {
   if (store.isEncrypt() && data) {
-    data = xxteaEncrypt64(data, kwz.token)
+    data = xxteaEncrypt64(data, store.getToken())
   }
   return data
 }

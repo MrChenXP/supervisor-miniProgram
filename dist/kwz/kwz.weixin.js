@@ -127,6 +127,7 @@ const closeLoading = (callback, app) => {
 
 /**
  * 微信request封装
+ * 底层使用 wx.downloadFile, https://developers.weixin.qq.com/miniprogram/dev/api/wx.request.html
  * @param {object} option 包含{url, data, type, dataType, header, success, fail, complete}
  */
 const request = (option) => {
@@ -285,6 +286,7 @@ const requestComplete = (response, option) => {
 
 /**
  * 请求文件
+ * 底层使用 wx.downloadFile, https://developers.weixin.qq.com/miniprogram/dev/api/wx.downloadFile.html
  * @param {object} option {url, header, filePath, success, fail, complete}
  */
 const requestAttach = (option) => {
@@ -319,8 +321,84 @@ const requestAttach = (option) => {
   }
 }
 
+/**
+ * 关闭所有页面，打开到应用内的某个页面
+ * 具体使用见官方：https://developers.weixin.qq.com/miniprogram/dev/api/wx.reLaunch.html
+ * @param {object} option 
+ */
+const reLaunch = (option) => {
+  if (option && canUse('reLaunch')) {
+    let newOption = util.copyJson(option)
+    newOption.success = option.success
+    newOption.complete = option.complete
+    newOption.fail = () => {
+      util.cfp(option.fail, option.app || (option.vue || this), [], () => {
+        alert('操作失败')
+      })
+    }
+    wx.reLaunch(newOption)
+  }
+}
+
+/**
+ * 跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面
+ * 具体使用见官方：https://developers.weixin.qq.com/miniprogram/dev/api/wx.switchTab.html
+ * @param {object} option 
+ */
+const switchTab = (option) => {
+  if (option && canUse('switchTab')) {
+    let newOption = util.copyJson(option)
+    newOption.success = option.success
+    newOption.complete = option.complete
+    newOption.fail = () => {
+      util.cfp(option.fail, option.app || (option.vue || this), [], () => {
+        alert('操作失败')
+      })
+    }
+    wx.switchTab(newOption)
+  }
+}
+
+/**
+ * 保留当前页面，跳转到应用内的某个页面。但是不能跳到 tabbar 页面。使用 #{navigateBack} 可以返回到原页面。小程序中页面栈最多十层。
+ * 具体使用见官方：https://developers.weixin.qq.com/miniprogram/dev/api/wx.navigateTo.html
+ * @param {object} option 
+ */
+const navigateTo = (option) => {
+  if (option && canUse('navigateTo')) {
+    let newOption = util.copyJson(option)
+    newOption.success = option.success
+    newOption.complete = option.complete
+    newOption.fail = () => {
+      util.cfp(option.fail, option.app || (option.vue || this), [], () => {
+        alert('操作失败')
+      })
+    }
+    wx.navigateTo(newOption)
+  }
+}
+
+/**
+ * 关闭当前页面，返回上一页面或多级页面。可通过 getCurrentPages 获取当前的页面栈，决定需要返回几层。
+ * 具体使用见官方：https://developers.weixin.qq.com/miniprogram/dev/api/wx.navigateBack.html
+ * @param {object} option 
+ */
+const navigateBack = (option) => {
+  if (option && canUse('navigateBack')) {
+    let newOption = util.copyJson(option)
+    newOption.success = option.success
+    newOption.complete = option.complete
+    newOption.fail = () => {
+      util.cfp(option.fail, option.app || (option.vue || this), [], () => {
+        alert('操作失败')
+      })
+    }
+    wx.navigateBack(newOption)
+  }
+}
+
 export default {
   canUse,
   getStringFromStorage, setStringToStorage, getStringFromStorageSync, setStringToStorageSync,
-  alert, openLoading, closeLoading, requestAttach, request
+  alert, openLoading, closeLoading, requestAttach, request, reLaunch, switchTab, navigateTo, navigateBack
 }

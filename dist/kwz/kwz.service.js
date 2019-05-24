@@ -1,7 +1,6 @@
 // kwz服务
 // kwz的封装方法
 
-import {xxteaEncrypt64} from '../xxtea/xxtea'
 import util from './kwz.util'
 import store from './kwz.store'
 import { kwbms, kwencrypts, kwfilters } from './kwz.pc'

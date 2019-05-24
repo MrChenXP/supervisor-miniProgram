@@ -81,6 +81,9 @@ let _jcIsencode = false
 // 是否加密
 let _jcIsencrypt = false
 
+// 是否登陆
+let _isLogin = false
+
 /**
  * 设置相关参数
  * @param {object} data 使用loadConfig返回的数据
@@ -88,8 +91,9 @@ let _jcIsencrypt = false
 const setRelData = (data) => {
   if (data) {
     _token = data.token
-    _jcIsencode = data._jc_isencode
-    _jcIsencrypt = data._jc_isencrypt
+    _jcIsencode = data.jc_isencode
+    _jcIsencrypt = data.jc_isencrypt
+    _isLogin = data.isLogin
   }
 }
 
@@ -114,7 +118,22 @@ const isEncrypt = () => {
   return _jcIsencrypt && !!_token
 }
 
+/**
+ * 是否登陆
+ */
+const isLogin = () => {
+  return _isLogin
+}
+
+/**
+ * 设置是否登陆
+ * @param {boolean} login 
+ */
+const setLogin = (login) => {
+  _isLogin = login
+}
+
 export default {
   getStringFromStorage, getObjectFromStorage, setStringToStorage, setObjectToStorage,
-  getSessionId, setSessionId, setRelData, getToken, isEncode, isEncrypt
+  getSessionId, setSessionId, setRelData, getToken, isEncode, isEncrypt, isLogin
 }

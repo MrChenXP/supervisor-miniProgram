@@ -1,0 +1,80 @@
+.kw-login {
+    animation: glide 1s;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 750rpx;
+    height: 100%;
+    background: white;
+    z-index: 1001;
+  }
+  .kw-login-title{
+    height: 400rpx;
+    background-image: linear-gradient(to bottom, #028edf 0%, #00befe 100%);
+    position: relative;
+    margin-bottom: 40rpx;
+  }
+  .kw-login-img{
+    position: absolute;
+    height: 126rpx;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+  }
+ .kw-login-title-ico{
+   position: fixed;
+    top: 15rpx;
+    right: 15rpx;
+  }
+  .kw-login-input_bg{
+    width: 544rpx;
+    height: 85rpx;
+    border-radius: 42.5rpx;
+    border: solid 1rpx #e1e1e1;
+    margin: 25rpx auto;
+    display: flex;
+  }
+  .kw-login-input_bg input{
+    margin-left: 47rpx;
+    margin-right:47rpx;
+    line-height: 83rpx;
+    height: 83rpx;
+    width: 100%;
+    font-size: 30rpx;
+    color: #b0b0b0;
+  }
+  .kw-login-input_bg .kw-login-input-placeholder{
+    text-align: left;
+  }
+  .kw-login-input_bg input{
+    text-align: left;
+  }
+  .kw-login-input_yzm{
+    margin-right: 0 !important;
+    width: 331rpx !important;
+  }
+  .kw-login-input_bg image{
+    width: 135rpx !important;
+    height: 55rpx !important;
+    margin-top: 14rpx;
+    border-radius: 22.5rpx;
+  }
+  .kw-login-input_bg button{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    border-radius: 42.5rpx;
+    background: linear-gradient(90deg, #00befe 0%, #028edf 100%), linear-gradient(#109dea, #109dea);
+    color: white;
+    line-height: 83rpx;
+  }
+  .kw-login-input_bg button:after{
+    border: none;
+  }
+  .kw-login-info{
+    color:#109dea;
+    width: 544rpx;
+    margin: 25rpx auto;
+    text-align: left;
+    font-size: 30rpx;
+  }

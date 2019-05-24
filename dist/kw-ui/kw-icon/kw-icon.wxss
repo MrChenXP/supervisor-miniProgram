@@ -7,12 +7,33 @@
   url('iconfont.svg?t=1558425103811#iconfont') format('svg'); /* iOS 4.1- */
 }
 
-.kw-icon {
+/* .kw-icon {
   font-family: "kw-icon" !important;
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+} */
+
+.kw-icon {
+  display: inline-block;
+  font-family: kw-icon !important;
+  /* // 听觉属性 */
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  /* 设置小型大写字母的字体显示文本 */
+  font-variant: normal;
+  /*  文字的大小写 */
+  text-transform: none;
+  /* 告诉渲染引擎工作时如何优化显示文本 */
+  text-rendering: auto;
+  line-height: 1;
+  /* 抗锯齿 ,使用后字体看起来会更清晰舒服 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* 定义行内元素的基线相对于该元素所在行的基线的垂直对齐 */
+  vertical-align: middle;
 }
 
 .kw-circle:before {

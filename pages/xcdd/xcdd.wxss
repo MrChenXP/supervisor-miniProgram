@@ -1,0 +1,4 @@
+/* pages/xcdd/xcdd.wxss */
+.lists {
+	  height: calc(100% - 186upx);
+}

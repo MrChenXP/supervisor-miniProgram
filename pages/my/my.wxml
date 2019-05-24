@@ -32,4 +32,7 @@
   <view class="my-gn close-login">
     <kw-list-cell title="退出" thumb="/static/images/icons/close.png" borderBottom="{{false}}" ></kw-list-cell>
   </view>
+
+  <kw-login wx:if="{{loginShow}}" bindcloseLogin="closeLogin"></kw-login>
+
 </view>

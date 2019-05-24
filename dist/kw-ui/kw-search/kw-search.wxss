@@ -1,0 +1,132 @@
+/* dist/kw-ui/kw-search/kw-search.wxss */
+.kw-search {
+  z-index: 999;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+.kw-search-body {
+  height: 100rpx;
+  background: white;
+  z-index: 1001;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding: 20rpx;
+  position: relative;
+}
+.kw-search-content {
+  background: #eeeeee;
+  height: 100%;
+  -webkit-flex-basis: 100%;
+      -ms-flex-preferred-size: 100%;
+          flex-basis: 100%;
+  border-radius: 5rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-shrink: 2;
+      -ms-flex-negative: 2;
+          flex-shrink: 2;
+}
+.kw-search-content .kw-search-icon {
+    height: 100%;
+    width: 60rpx;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+.kw-search-content .kw-search-input {
+    -webkit-flex-basis: 650rpx;
+        -ms-flex-preferred-size: 650rpx;
+            flex-basis: 650rpx;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-flex-shrink: 2;
+        -ms-flex-negative: 2;
+            flex-shrink: 2;
+    padding: 0 10rpx;
+}
+.kw-search-content .kw-search-input input {
+      -webkit-flex-basis: 100%;
+          -ms-flex-preferred-size: 100%;
+              flex-basis: 100%;
+      color: #9a9a9a;
+      height:100%;
+      font-size:30rpx;
+}
+.kw-search-cancel {
+  width: 100rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.kw-search-slot {
+  border-top: #dedede solid 2rpx;
+  position: absolute;
+  top: 100rpx;
+  width: 100%;
+  left: 0;
+  padding: 20rpx 0;
+  background: white;
+}
+.kw-search-slot .kw-search-slot-button {
+    background: #01a1eb;
+    height: 80rpx;
+    margin: 20rpx 20rpx 0;
+    line-height: 80rpx;
+}
+.kwSearchIsinput {
+  top: 0;
+  padding-top: 0;
+}
+.kw-search-mask {
+  z-index: 999;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  left: 0;
+  height: 100vh;
+  top: 0;
+}

@@ -1,0 +1,27 @@
+<view class="kw-class kw-login">
+<!-- 上面背景背景图 -->
+    <view class="kw-login-title">
+      <image class="kw-login-img" src="/static/images/loginBG.png" mode="scaleToFill"></image>
+      <view class="kw-login-title-ico" bindtap='close'>
+        <i-icon color="white" type="close" size="25"></i-icon>
+      </view>
+    </view>
+    <!-- 表单 -->
+    <form class="kw-login-form">
+      <view class="kw-login-input_bg">
+        <input type="text" value="userName" placeholder="请输入用户名"/>
+      </view>
+      <view class="kw-login-input_bg">
+        <input password value="passWord" placeholder="请输入密码"/>
+      </view>
+      <view class="kw-login-input_bg">
+        <input class="kw-login-input_yzm" type="text" value="vcode" placeholder="请输入验证码" />
+        <image src="{{vcodeUrl}}" bindtap="toggerVcode" style="width: 75px;height: 33px;"></image>
+      </view>
+      <view class="kw-login-input_bg" >
+        <button wx:if="!loadingLogin" bindtap="login">登录</button>
+        <button wx:else >登录</button>
+      </view>
+      <view class="kw-login-info" >点击验证码图片刷新验证码</view>
+    </form>
+</view>

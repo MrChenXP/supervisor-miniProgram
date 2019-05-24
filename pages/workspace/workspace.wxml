@@ -34,6 +34,8 @@
   </view>
   <!-- 功能 -->
   <view class="workspace-gn" >
-    <kw-list-cell title="督导纪实" note="督导纪实" redDot="{{true}}" thumb="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></kw-list-cell>
+    <kw-list-cell title="督导纪实" note="督导纪实" redDot="{{true}}" link="/pages/xcdd/xcdd" thumb="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></kw-list-cell>
   </view>
+
+  <kw-login wx:if="{{loginShow}}" bindcloseLogin="closeLogin"></kw-login>
 </view>

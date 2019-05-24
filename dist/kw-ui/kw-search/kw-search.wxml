@@ -1,0 +1,23 @@
+<view class="kw-search">
+    <!-- 蒙版 -->
+    <view class="kw-search-mask" hidden="{{!(ifFocus == true)}}" bindtap="cancel"></view>
+    <view class="kw-search-body">
+      <!-- 输入框 -->
+      <view v-if="{{inputShow}}" class="kw-search-content" bindtap="tapFocus" >
+        <view class="kw-search-icon" hidden="{{!(ifFocus == false)}}">
+          <i-icon type="search" size="25" color="#b0b0b0" ></i-icon>
+        </view>
+        <view class="kw-search-input">
+          <input placeholder="{{placeholder}}" adjust-position value="{{valueSync}}" bindtap="inputChange"/>
+        </view>
+      </view>
+      <!-- 取消 -->
+      <!-- <view v-show="ifFocus == true" class="kw-search-cancel" :class="{kwSearchIsinput: !inputShow}"
+            @tap="cancel" >取消</view> -->
+      <!-- 选择区 -->
+      <view class="kw-search-slot {{[!isInput ? 'kwSearchIsinput': '']}}" hidden="{{!(ifFocus == true)}}">
+        <slot></slot>
+        <button class="kw-search-slot-button" type="primary" bindtap="confirm">确定</button>
+      </view>
+    </view>
+	</view>

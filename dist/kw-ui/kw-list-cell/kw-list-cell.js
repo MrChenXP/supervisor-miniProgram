@@ -13,14 +13,7 @@ Component({
     // 描述
     note: String,
     // 左侧扩展图标 与左侧缩略图互斥
-    extraIcon: {
-      type: Object,
-      value: {
-        type: "accessory",
-        color: "#00bdfd",
-        size: "20"
-      }
-    },
+    extraIcon: Object,
     // 左侧缩略图
     thumb: String,
     // 右侧描述文字
@@ -51,9 +44,12 @@ Component({
   ready(){
     // 判断是否属于kw的icon
     let kwReg = /^(kw)/g
-    this.setData(
-      { isKwIcon: kwReg.test(this.data.extraIcon.type) }
-    )
+    if (this.data.extraIcon != null){
+      this.setData(
+        { isKwIcon: kwReg.test(this.data.extraIcon.type) }
+      )
+    }
+    
   },
   methods:{
     // 返回一个点击事件 如果有link属性则会跳转对应链接

@@ -1,0 +1,48 @@
+<view class='content'>
+	<!-- 搜索 -->
+  <kw-search>
+    <view>
+      <picker range="{{searchCondition.DM_XD}}" range-key="DMMX_MC" >
+					<kw-list-cell title="学段" right-note="{{pageParam.xdMc}}"></kw-list-cell>
+				</picker>
+    </view>
+  </kw-search>
+  <!-- 功能(新增删除) -->
+		<view class="gn">
+			<!-- <view class="check fl" wx:if="!deleteShow">
+				<checkbox checked="{{deleteParam._CHECK_ALL_}}">全选</checkbox>
+			</view> -->
+			<view class="delete fl" wx:if="hasScAuth && deleteShow">删除</view>
+			<!-- <view class="delete fl" wx:if="!deleteShow" >确认删除</view> -->
+			<view class="add fr"  wx:if="hasXzAuth">新增</view>
+		</view>
+
+    <checkbox-group class="lists">
+      <view>
+			<!-- 单项列表 -->
+			<view class="list">
+				<view class="info">
+					<view>
+            <label wx:if="{{!deleteShow}}">
+              <view class="check">
+                <checkbox checked="{{deleteParam[item.CONTENT_ID]}}" />
+              </view>
+            </label>
+            {{item.XXMC}}学校名称
+          </view>
+					<view class="clearfix time">
+						<view class="fl">{{item.AUTHOR}}姓名</view>
+						<view class="fr">督导时间：{{item.YWSJ}}1019-09-09</view>
+					</view>
+					<view class="clearfix status">
+						<view class="fl clyj {{item.ztClass}}" >
+						</view>
+						<view class="fr" >
+              <kw-tag type="border" color="blue" circle="{{true}}">编辑</kw-tag>
+						</view>
+					</view>
+				</view>
+			</view>
+      </view>
+    </checkbox-group>
+</view>

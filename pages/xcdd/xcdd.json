@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "kw-list-cell": "../../dist/kw-ui/kw-list-cell/kw-list-cell",
+    "kw-search": "../../dist/kw-ui/kw-search/kw-search",
+    "kw-tag": "../../dist/kw-ui/kw-tag/kw-tag"
+  }
+}

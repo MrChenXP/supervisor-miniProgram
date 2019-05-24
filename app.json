@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/workspace/workspace",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/xcdd/xcdd"
   ],
   "window": {
     "navigationBarTextStyle": "white",

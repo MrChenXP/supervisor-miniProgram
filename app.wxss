@@ -9,7 +9,198 @@
 view {
   color:#333333;
   box-sizing: border-box;
+  font-size:28rpx;
+  line-height:1.8;
 }
+progress, checkbox-group{
+	width: 100%;
+}
+form {
+	width: 100%;
+}
+
+/* ================================================功能模块，组合使用------------------------------------------ */
+/* -----------  列表单元右侧输入框(参考整改工作新增) ---------*/
+.list-right-input {
+  width: 400rpx;
+  text-align: right;
+}
+.list-right-input ._input, .list-right-input input {
+    color: #999999;
+}
+/* -------------- 功能区(参考督导列表页新增删除模块) ----------- */
+.gn {
+  height: 86rpx;
+  padding: 18rpx 0;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 100rpx;
+  background: #f5f5f5;
+}
+.gn .delete, .gn .add, .gn .check {
+    width: 125rpx;
+    height: 50rpx;
+    border-radius: 25rpx;
+    margin-left: 25rpx;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+.gn .delete {
+    border: solid 2rpx #e64c48;
+    color: #e64c48;
+}
+.gn .add {
+    margin-right: 25rpx;
+    border: solid 2rpx #68ae1d;
+    color: #68ae1d;
+}
+/* --------------- 分页(参考整改工作切换整改协商模块) ----------- */
+.pager {
+  z-index: 10;
+  height: 95rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-top: #dedede solid 2rpx;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 100rpx;
+  background: #f5f5f5;
+}
+.pager .zg, .pager .xs {
+    width: 355rpx;
+    height: 65rpx;
+    text-align: center;
+    line-height: 65rpx;
+    font-size: 28rpx;
+    color: #00bdfd;
+    background-color: #d6f1fb;
+}
+.pager .zg {
+    border-radius: 10rpx 0 0 10rpx;
+}
+.pager .xs {
+    border-radius: 0 10rpx 10rpx 0;
+}
+.pager .active {
+    color: #d6f1fb;
+    background-color: #00bdfd;
+}
+/* -------------- 列表(参考现场督导列表页) ----------- */
+.lists {
+  padding: 0 20rpx;
+  overflow: auto;
+}
+.lists .list {
+    margin-bottom: 20rpx;
+    background: white;
+    padding: 25rpx;
+    border-radius: 15rpx;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+}
+.lists .list label {
+      display: inline-block;
+}
+.lists .list .check {
+      width: 50rpx;
+}
+.lists .list .info {
+      -webkit-box-flex: 2;
+      -webkit-flex-grow: 2;
+          -ms-flex-positive: 2;
+              flex-grow: 2;
+      width: 100%;
+}
+.lists .list .info .time {
+        overflow: hidden;
+        color: #999999;
+        font-size: 26rpx;
+        margin: 10rpx 0;
+}
+.lists .list .info .time view {
+          color: #999999;
+}
+.lists .list .info .status {
+        margin: 10rpx 0 0;
+        font-size: 24rpx;
+}
+/* --------------- 自定义列表单元(参考督导-新增-督导纪实) ----------- */
+.ddjs-head {
+  height: 55rpx;
+}
+.ddjs-body {
+  padding: 0 20rpx;
+}
+.ddjs-body .time {
+    text-align: right;
+}
+.ddjs-body textarea {
+    border: 1rpx solid #dddddd;
+    width: 100%;
+}
+/* ================ 一个单独占一行的保存按钮（参考督导纪实新增页保存按钮） ====== */
+.save {
+  width: 710rpx;
+  height: 85rpx;
+  border-radius: 42.5rpx;
+  border: solid 1rpx #e1e1e1;
+  margin: 25rpx auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background: white;
+}
+.save button {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    border-radius: 42.5rpx;
+    background: -webkit-gradient(linear, left top, right top, from(#00befe), to(#028edf)), -webkit-gradient(linear, left top, left bottom, from(#109dea), to(#109dea));
+    background: -o-linear-gradient(left, #00befe 0%, #028edf 100%), -o-linear-gradient(#109dea, #109dea);
+    background: linear-gradient(90deg, #00befe 0%, #028edf 100%), linear-gradient(#109dea, #109dea);
+    color: white;
+    line-height: 83rpx;
+}
+.save button:after {
+    border: none;
+}
+.save text {
+    color: white;
+}
+
 /* ================================================ 简写样式--------------------------------------- */
 /* == clearfix == */
 .clearfix:after {   /*在元素的内容之后插入新内容*/

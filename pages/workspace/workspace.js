@@ -9,5 +9,19 @@ Page({
       tkcs: 0, // 听课次数
       yss: 0 // 验收数
     },
+    // 登录组件显示隐藏
+    loginShow: false,
+  },
+  // 关闭登录
+  closeLogin(){
+    this.setData({
+      loginShow: false
+    })
+    // if (!this.$kwz.isLogin()) {
+      // wx.reLaunch({
+      //   url: '/pages/index/index'
+      // })
+    // }
   }
+
 })

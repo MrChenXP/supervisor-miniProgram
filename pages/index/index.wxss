@@ -45,4 +45,4 @@ swiper {
 }
 .changeBoder::after{
   border-bottom: #d5d4d4 dashed 2rpx;
-}
+} 

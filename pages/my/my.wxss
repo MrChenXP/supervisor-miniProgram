@@ -51,3 +51,9 @@
   line-height: 45rpx;
   font-size: 28rpx;
 }
+.my-gn{
+    background: white;
+}
+.close-login{
+  margin-top: 20rpx;
+}

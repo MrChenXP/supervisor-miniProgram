@@ -18,8 +18,9 @@
       <!-- <view wx:for="newsBtList"> -->
         <kw-list-cell extraIcon="{{extraIcon}}" title="这是新闻啊"
           rightNote="11/33" isArrow="{{false}}" kw-class="changeBoder"></kw-list-cell>
+        <kw-list-cell extraIcon="{{extraIcon}}" title="这是新闻啊"
+          rightNote="11/33" isArrow="{{false}}" kw-class="changeBoder"></kw-list-cell>
       <!-- </view> -->
     </scroll-view>
   </view>
-
 </view>

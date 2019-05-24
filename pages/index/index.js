@@ -11,7 +11,7 @@ Page({
     // 控制标题栏选中样式
     isActive: 2,
     // 左侧图标属性值
-    extraIcon: { type: 'accessory', color: '#00bdfd', size: '20' },
+    extraIcon: {type: 'kw-circle', color: '#00bdfd', size: '20' },
     // 整个新闻列表数据
     newsBtList: [
       [],

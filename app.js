@@ -1,16 +1,9 @@
 //app.js
-import kwz from './dist/kwz/kwz.mp.js'
-
-// 扩展$kwz支持
-const originalPage = Page
-
-Page = function (config) {
-  config.$kwz = kwz
-  return originalPage(config)
-}
+import kwz from './dist/kwz/kwz.service'
 
 App({
   onLaunch: function () {
-    // kwz.initVisit()
-  }
+    kwz.initVisit()
+  },
+  $kwz: kwz
 })

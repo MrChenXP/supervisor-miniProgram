@@ -1,73 +1,76 @@
-// kwz存储的变量
-// 所有变量只能通过set和get方法来访问
-// 提供了set方法的才能修改，未提供的均为常量
+// kwz数据缓存
 
-import util from './kwz.util.js'
-
-// 请求路径
-const BASE_URL = 'http://www.dd.com:8080'
-
-// 是否开发者模式
-const DEV = true
-
-// 是否使用代理模式
-const PROXY = false
-
-// session的cookie名称
-const SESSION_NAME = 'JSESSIONID'
-
-// 默认请求头
-const REQUEST_DEFAULT_HEADER = {
-  'content-type': 'application/x-www-form-urlencoded'
-}
-
-// 代理头
-const PROXY_TAG = '/api'
+import weixin from './kwz.weixin'
+import util from './kwz.util'
 
 /**
- * BASE_URL
+ * 从缓存中异步取出字符串值
+ * @param {string} key 缓存key
+ * @param {function} callback 回调函数 (data) => {...}
+ * @param {object} app 回调函数的this指向
  */
-const getBaseUrl = () => {
-  return BASE_URL
+const getStringFromStorage = (key, callback, app) => {
+  weixin.getStringFromStorage(key, callback, app)
 }
 
 /**
- * DEV
+ * 从缓存中异步取出json对象
+ * @param {string} key 缓存key
+ * @param {function} callback 回调函数 (data) => {...}
+ * @param {object} app 回调函数的this指向
  */
-const isDev = () => {
-  return DEV
+const getObjectFromStorage = (callback, app) => {
+  getStringFromStorage(key, (data) => {
+    let dataObject = str2Json(data)
+    cfp(callback, app || this, [dataObject])
+  }, app)
 }
 
 /**
- * PROXY
+ * 将字符串值异步设置到缓存中
+ * @param {string} key 缓存key
+ * @param {string} data 缓存data
+ * @param {function} callback 回调函数 () => {...}
+ * @param {object} app 回调函数this指向
  */
-const isProxy = () => {
-  return PROXY
+const setStringToStorage = (key, data, callback, app) => {
+  setStringToStorage(key, data, callback, app)
 }
 
 /**
- * SESSION_NAME
+ * 将json对象值异步设置到缓存中
+ * @param {string} key 缓存key
+ * @param {object} data 缓存data
+ * @param {function} callback 回调函数 () => {...}
+ * @param {object} app 回调函数this指向
  */
-const getSessionName = () => {
-  return SESSION_NAME
+const setObjectToStorage = (key, data, callback, app) => {
+  setStringToStorage(key, toString(data), callback, app)
 }
 
-/**
- * REQUEST_DEFAULT_HEADER
- */
-const getRequestDefaultHeader = () => {
-  return util.copyJson(REQUEST_DEFAULT_HEADER)
-}
-
-/**
- * PROXY_TAG
- */
-const getProxyTag = () => {
-  return PROXY_TAG
-}
-
-// sessionId
 let _sessionId = ''
+
+const SESSIONID_STORAGE_KEY = 'SESSIONID'
+
+const getSessionId = () => {
+  if (!_sessionId) {
+    try {
+      _sessionId = weixin.getStringFromStorageSync(SESSIONID_STORAGE_KEY)
+    } catch (e) {
+      util.errorLog(e)
+    }
+  }
+  return _sessionId
+}
+
+const setSessionId = (sessionId) => {
+  _sessionId = sessionId
+  try {
+    weixin.setStringToStorageSync(SESSIONID_STORAGE_KEY, sessionId) 
+  } catch (e) {
+    util.errorLog(e)
+  }
+}
 
 // token
 let _token = ''
@@ -79,28 +82,8 @@ let _jcIsencode = false
 let _jcIsencrypt = false
 
 /**
- * getSessionId
- */
-const getSessionId = () => {
-  if (!_sessionId) {
-    _sessionId = util.getStringFromStorageSync('sessionId')
-  }
-
-  return _sessionId
-}
-
-/**
- * setSessionId
- * @param {string} id 
- */
-const setSessionId = (id) => {
-  _sessionId = id
-  util.setStringToStorage('sessionId', id)
-}
-
-/**
  * 设置相关参数
- * @param {object} data 
+ * @param {object} data 使用loadConfig返回的数据
  */
 const setRelData = (data) => {
   if (data) {
@@ -128,10 +111,10 @@ const isEncode = () => {
  * 是否加密
  */
 const isEncrypt = () => {
-  return _jcIsencrypt
+  return _jcIsencrypt && !!_token
 }
 
 export default {
-  getBaseUrl, isDev, isProxy, getSessionName, getRequestDefaultHeader,
-  getSessionId, setSessionId, setRelData, isEncode, isEncrypt, getToken, getProxyTag
+  getStringFromStorage, getObjectFromStorage, setStringToStorage, setObjectToStorage,
+  getSessionId, setSessionId, setRelData, getToken, isEncode, isEncrypt
 }

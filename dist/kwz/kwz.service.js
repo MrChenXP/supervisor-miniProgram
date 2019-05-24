@@ -1,20 +1,23 @@
-// kwz.service
+// kwz服务
+// kwz的封装方法
 
-import util from './kwz.util.js'
-import ajax from './kwz.ajax.js'
-import store from './kwz.store.js'
 import {xxteaEncrypt64} from '../xxtea/xxtea'
+import util from './kwz.util'
+import store from './kwz.store'
+import { kwbms, kwencrypts, kwfilters } from './kwz.pc'
+import weixin from './kwz.weixin'
+import consts from './kwz.const'
 
 /**
  * 发送get请求
  * @param {string} url 请求路径
  * @param {object} data 请求参数
  * @param {function} success 成功回调函数
- * @param {object} app 回调函数指向
+ * @param {object} page 回调函数指向
  * @param {function} fail 失败回调函数
  */
-const get = (url, data, success, app, fail) => {
-  ajaxUrl({ url, data, success, app, fail, type: 'GET'})
+const get = (url, data, success, page, fail) => {
+  ajaxUrl({ url, data, success, page, fail, type: 'GET'})
 }
 
 /**
@@ -22,87 +25,92 @@ const get = (url, data, success, app, fail) => {
  * @param {string} url 请求路径
  * @param {object} data 请求参数
  * @param {function} success 成功回调函数
- * @param {object} app 回调函数指向
+ * @param {object} page 回调函数指向
  * @param {function} fail 失败回调函数
  */
-const post = (url, data, success, app, fail) => {
-  ajaxUrl({ url, data, success, app, fail, type: 'POST'})
+const post = (url, data, success, page, fail) => {
+  ajaxUrl({ url, data, success, page, fail, type: 'POST'})
 }
 
-const fail = (cb) => {
-  return (error, option) => {
-    if (error) {
-      if (error.statusCode === 401) {
-        // token不对或session丢失 =》 刷新token,并重新请求,只重新请求一次
-        initVisit(() => {
-          if (option.repeat !== true) {
-            let rOption = util.copyJson(option)
-            rOption.success = option.success
-            rOption.fail = option.fail
-            option.complete = option.complete
-            
-            rOption.repeat = true
+// 是否已经初始化=》初始化主要包括请求token
+let _ajaxinited = false
 
-            // 重新请求
-            ajax(rOption)
-
-            return
-          } else {
-            util.wxAlert('请登录', 'none', 5000)
-            // session丢失
-            logout()
-          }
-        })
-      } else if (error.statusCode === 402) {
-        util.wxAlert('无权限进行此项操作', 'none', 5000)
-        return
-      }
-    }
-    util.cfp(cb, (option.vue || (option.app || this)), [error, option.option])
-  }
-}
-
-const success = (cb, eb) => {
-  return (data, option) => {
-    let responseData = data.data
-    if (responseData && (!responseData.statusCode || responseData.statusCode === '200')) {
-      util.cfp(cb, (option.vue || (option.app || this)), [responseData, option])
-    } else {
-      util.cfp(eb, (option.vue || (option.app || this)), [data, option], (data) => {
-        util.wxAlert(data.msg || '请求失败', 'none', 5000)
-      })
-    }
-  }
-}
-
-const complete = (cb) => {
-  return (data, option) => {
-    util.wxCloseLoadding()
-    setSession(data)
-    util.cfp(cb, (option.vue || (option.app || this)), [data, option.option])
-  }
-}
-
-const setSession = (response) => {
-  if (response && response.header && response.header['Set-Cookie']) {
-    let cookieArray = response.header['Set-Cookie'].split(';')
-    for (let i = 0; i < cookieArray.length; i++) {
-      if (cookieArray[i]) {
-        let cArray = cookieArray[i].split('=')
-        if (cArray[0] && cArray[0].trim() === store.getSessionName()) {
-          store.setSessionId(cArray[1])
-        }
-      }
-    }
+/**
+ * 加锁ajaxUrl
+ * @param {object} option
+ */
+const ajaxUrl = (option) => {
+  let that = this
+  if (!_ajaxinited) {
+    setTimeout(() => {
+      util.cfp(ajaxUrl, that, [option])
+    }, 500)
+  } else {
+    ajaxUrlUnLock(option)
   }
 }
 
 /**
- * ajaxUrl
- * @param {object} option
+ * 未加锁的ajaxUrl
+ * @param {object} option 
  */
-const ajaxUrl = (option) => {
+const ajaxUrlUnLock = (option) => {
+
+  const success = (cb, eb) => {
+    return (data, option) => {
+      // 按照weixin.request的封装，只有当httpcode=200时，才会进入此方法
+      let responseData = data.data
+      if (responseData && (!responseData.statusCode || responseData.statusCode === '200')) {
+        util.cfp(cb, (option.page || (option.vue || this)), [responseData, option])
+      } else {
+        util.cfp(eb, (option.page || (option.vue || this)), [data, option], (data) => {
+          weixin.alert(data.msg || '请求失败', 'none', 5000)
+        })
+      }
+    }
+  }
+
+  const fail = (cb) => {
+    return (error, option) => {
+      if (error) {
+        if (error.statusCode === 401) {
+          // token不对或者session丢失
+          initVisit(() => {
+            if (option.repeat !== true) {
+              let rOption = util.copyJson(option)
+              rOption.success = option.success
+              rOption.fail = option.fail
+              option.complete = option.complete
+              
+              rOption.repeat = true
+
+              // 重新请求
+              weixin.request(rOption)
+
+              return
+            }
+          }, option.page)
+        } else if (error.statusCode === 402) {
+          weixin.alert('无权限进行此项操作', 'none', 5000)
+          return
+        }
+      } else {
+        weixin.alert(data.msg || '网络错误', 'none', 5000)
+      }
+    }
+  }
+
+  const complete = (cb) => {
+    return (data, option) => {
+      weixin.closeLoading()
+      setSession(data)
+      util.cfp(cb, (option.page || (option.vue || this)), [data, option.option])
+    }
+  }
+
   let ajaxOption = util.copyJson(option)
+
+  // ajaxUrl默认post请求
   ajaxOption.type = ajaxOption.type || 'POST'
   
   if (ajaxOption.data) {
@@ -111,18 +119,35 @@ const ajaxUrl = (option) => {
   
   ajaxOption = handleUrl(ajaxOption)
 
+  ajaxOption.header = handleHeader(ajaxOption)
+
   ajaxOption.option = option
 
-  ajaxOption.success = success(option.success, option.fail)
-  ajaxOption.fail = fail(option.fail)
+  ajaxOption.success = success(option.success || option.then, option.fail)
+  ajaxOption.fail = fail(option.fail || option.catch)
   ajaxOption.complete = complete(option.complete)
 
-  util.wxOpenLoadding()
-
-  ajax(ajaxOption)
-
+  weixin.request(ajaxOption)
 }
 
+/**
+ * 处理请求数据，包括加密什么的
+ * @param {object} data 
+ */
+const handleData = (data) => {
+  if (store.isEncode()) {
+    data = kwbms(data)
+    if (store.isEncrypt()) {
+      data = kwfilters(kwencrypts(data))
+    }
+  }
+  return data || {}
+}
+
+/**
+ * 格式化url=》加入token
+ * @param {object} option 
+ */
 const handleUrl = (option) => {
   if (store.getToken()) {
     let url = option.url
@@ -144,119 +169,99 @@ const handleUrl = (option) => {
   return option
 }
 
-/**
- * 退出
- */
-const logout = () => {
-  get('/open/logout')
+const handleHeader = (option) => {
+  let header = option.header || {}
+  header['cookie'] = `${consts.getSessionName()}=${store.getSessionId()}`
+  return header
 }
 
 /**
- * 初始化访问=》1.退出。2.请求新的session。3.获取新的token
+ * 记录sessionid
+ * @param {object} response 
  */
-const initVisit = (callback) => {
-  get('/visit.jsp', null, () => {
-    initToken(callback)
-  }, null, (error, option) => {
-    util.wxAlert(error.msg || '初始化失败', 'none', 5000)
+const setSession = (response) => {
+  if (response && response.header && response.header['Set-Cookie']) {
+    let cookieArray = response.header['Set-Cookie'].split(';')
+    for (let i = 0; i < cookieArray.length; i++) {
+      if (cookieArray[i]) {
+        let cArray = cookieArray[i].split('=')
+        if (cArray[0] && cArray[0].trim() === consts.getSessionName()) {
+          store.setSessionId(cArray[1])
+        }
+      }
+    }
+  }
+}
+
+/**
+ * 初始化配置
+ * @param {function} callback 成功后的回调
+ * @param {object} page
+ */
+const initVisit = (callback, page) => {
+  weixin.request({
+    url: '/visit.jsp',
+    success (data) {
+      setSession(data)
+      initToken(callback, page)
+    },
+    error (error) {
+      weixin.alert(error.msg || '初始化错误-10001')
+    }
   })
 }
 
 /**
- * 获取新的token
+ * 初始化token
+ * @param {function} callback 
+ * @param {object} page 
  */
-const initToken = (callback) => {
-  post('/open/app/loadConfig', null, (response, option) => {
-    if (response) {
-      // 存储加密等数据
-      store.setRelData(response.data)
-    }
-    util.cfp(callback, (option.vue || (option.app || this)), [response, option.option])
-  }, null, () => {
-    util.wxAlert(data.msg || '加载配置失败', 'none', 5000)
-  })
-}
-
-/**
- * 参数处理
- * @param {object} data 
- */
-const handleData = (data) => {
-  if (store.isEncode()) {
-    data = kwbms(data)
-    if (store.isEncrypt()) {
-      data = kwfilters(kwencrypts(data))
+const initToken = (callback, page) => {
+  let option = {
+    url: '/open/app/loadConfig',
+    type: 'GET',
+    page,
+    success (response, option) {
+      if (response) {
+        _ajaxinited = true
+        // 存储加密等数据
+        store.setRelData(response.datas)
+      }
+      util.cfp(callback, (option.page || (option.vue || this)), [response, option.option])
+    },
+    error (error) {
+      util.alert(error.msg || '初始化错误-10002')
     }
   }
-  return data
+  ajaxUrlUnLock(option)
 }
 
 /**
- * 
- * @param {object} data 
+ * 缓存文件
+ * @param {object} option 
  */
-const kwbms = (data) => {
-  if (data && typeof data === 'object') {
-    for (var i in data) {
-      data[i] = kwbm()
-    }
+const cacheAttach = (option) => {
+  let attachOption = util.copyJson(option)
+
+  if (attachOption.data) {
+    attachOption.data = handleData(attachOption.data)
   }
-  return data
+  
+  attachOption = handleUrl(attachOption)
+
+  attachOption.header = handleHeader(attachOption)
+
+  attachOption.success = (filepath) => {
+    util.cfp(option.success, option.app || (option.vue || this), [filepath])
+  }
+
+  weixin.requestAttach(attachOption)
 }
 
-// 特殊字符替换正则
-const reg = new RegExp('([^\u0000-\u007F^\u0080-\u00FF]|\u00b7|\u44e3)', 'gm')
-
-/**
-  * @param {string} str 
- */
-const kwbm = (str) => {
-  if (store.isEncode() && str) {
-    str = str.toString().replace(reg, (a) => {
-      return '&#' + a.charCodeAt(0) + ';'
-    })
-  }
-  return str
-}
-
-/**
- * @param {object} data 
- */
-const kwfilters = (data) => {
-  if (data && typeof(data) === 'object') {
-    for (var i in data) {
-      data[i] = kwfilter(data[i])
-    }
-  }
-  return data
-}
-
-/**
- * @param {string} str 
- */
-const kwfilter = (str) => {
-  if (str) {
-    str = str.replace(/\+/g, '_abc123')
-      .replace(/-/g, '_def456')
-      .replace(/=/g, '_ghi789')
-      .replace(/\//g, '_jkl098')
-      .replace(/\*/g, '_mno765')
-  }
-  return str
-}
-
-/**
- * @param {string} data 
- */
-const kwencrypts = (data) => {
-  if (store.isEncrypt() && store.getToken() && data) {
-    data = xxteaEncrypt64(data, kwz.token)
-  }
-  return data
-}
-
-// 暴露指定的api
 export default {
-  get, post, ajaxUrl, initVisit, logout
+  ajaxUrl, get, post, initVisit, initToken, cacheAttach,
+  // 兼容老的写法
+  ajax: {
+    ajaxUrl
+  }
 }
-

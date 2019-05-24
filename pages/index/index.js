@@ -53,16 +53,5 @@ Page({
     this.setData({
       isActive: e.currentTarget.dataset.index,
     });
-  },
-  // 加载首页数据
-	loadIndexData() {
-    // app.$kwz.ajax.ajaxUrl({
-    //   url: 'jc_mobile/open/getYkXtsz',
-    //   type: 'POST',
-    //   vue: this,
-    //   then(data) {
-    //     console.log(data)
-    //   }
-    // })  
   }
 })

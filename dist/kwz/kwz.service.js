@@ -78,6 +78,8 @@ const ajaxUrlUnLock = (option) => {
           initVisit(() => {
             if (option.repeat !== true) {
               let rOption = util.copyJson(option)
+
+              rOption.page = option.page
               rOption.success = option.success
               rOption.fail = option.fail
               option.complete = option.complete
@@ -97,6 +99,7 @@ const ajaxUrlUnLock = (option) => {
       } else {
         weixin.alert(data.msg || '网络错误', 'none', 5000)
       }
+      util.cfp(cb, option.page || (option.vue || this), [error])
     }
   }
 
@@ -120,6 +123,8 @@ const ajaxUrlUnLock = (option) => {
   ajaxOption = handleUrl(ajaxOption)
 
   ajaxOption.header = handleHeader(ajaxOption)
+
+  ajaxOption.page = option.page
 
   ajaxOption.option = option
 

@@ -40,12 +40,19 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": -1,
 					"name": "xcdd",
 					"pathName": "pages/xcdd/xcdd",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "zzjgt",
+					"pathName": "pages/zzjgt/zzjgt",
 					"scene": null
 				}
 			]

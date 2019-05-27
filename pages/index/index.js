@@ -7,14 +7,11 @@ Page({
     // 标题栏文字
     btList: [],
     // 控制标题栏选中样式
-    isActive: 2,
+    isActive: 0,
     // 左侧图标属性值
     extraIcon: {type: 'kw-circle', color: '#00bdfd', size: '16' },
     // 整个新闻列表数据
-    newsBtList: [
-      [],
-      [],
-    ]
+    newsBtList: []
   },
   // onLoad事件 [微信文档](https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onloadobject-query)
   onLoad() {
@@ -22,7 +19,6 @@ Page({
   },
   // 加载首页数据
   loadIndexData() {
-    let that = this
     app.$kwz.ajax.ajaxUrl({
       url: '/jc_mobile/open/getYkXtsz',
       type: 'POST',
@@ -64,7 +60,6 @@ Page({
             btList: this.data.btList,
             newsBtList: this.data.newsBtList
           })
-          console.log(this.data.newsBtList)
         }
       }
     })

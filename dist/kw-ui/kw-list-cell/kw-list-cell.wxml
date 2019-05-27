@@ -1,4 +1,4 @@
-<view class="kw-list-cell {{[note ? 'kw-list-cell-isNote' : '',borderTop ? 'kw-list-cell-border-top' : '',borderBottom ? 'kw-list-cell-border-bottom' : '']}} kw-class" bindtap='goLink'>
+<view class="kw-list-cell {{[note ? 'kw-list-cell-isNote' : '',borderTop ? 'kw-list-cell-border-top' : '',borderBottom ? 'kw-list-cell-border-bottom' : '',twoLinesTitle ? 'kw-list-cell-twoLinesTitle' : '']}} kw-class" bindtap='goLink'>
   <!-- 左侧图标(没有缩略图才会出现) -->
   <view class="kw-list-cell-extraIcon" wx:if="{{!thumb && extraIcon}}" >
       <i-icon wx:if="{{!isKwIcon}}" type="{{extraIcon.type}}" size="{{extraIcon.size}}" color="{{extraIcon.color}}"></i-icon>
@@ -7,8 +7,9 @@
   <view class="kw-list-cell-thumb" wx:if="{{thumb}}">
       <image src="{{thumb}}" mode="scaleToFill"></image>
   </view>
+
   <!-- 中间内容(标题和描述) -->
-  <view class="kw-list-cell-content">
+  <view class="kw-list-cell-content" wx:if="{{title || note || rightNote}}">
     <!-- 标题 -->
     <view class="kw-list-cell-leftContent" wx:if="{{title || note}}">
         <text wx:if="{{title}}" class="kw-list-cell-title">{{title}}</text>
@@ -23,11 +24,13 @@
         <slot name="rightNote"></slot>
     </view>
   </view>
+  
   <!-- 中间内容(标题和描述)插槽(默认)(中间内容没有才会出现) -->
   <view class="kw-list-cell-leftContent" wx:if="{{!(title || note || rightNote)}}">
         <slot></slot>
   </view>
-  <!-- 右测标记 -->
+
+  <!-- 右测标记(小红点和右箭头) -->
   <view wx:if="{{redDot}}" class="kw-list-cell-redDot">
       <text class="kw-list-cell-redDot-circle"></text>
   </view>

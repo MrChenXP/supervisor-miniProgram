@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/workspace/workspace",
     "pages/my/my",
-    "pages/xcdd/xcdd"
+    "pages/xcdd/xcdd",
+    "pages/zzjgt/zzjgt"
   ],
   "window": {
     "navigationBarTextStyle": "white",

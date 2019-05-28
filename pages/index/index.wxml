@@ -15,12 +15,16 @@
     </scroll-view>
     <!-- 列表区 -->
     <scroll-view scroll-y="true" class="newsList">
-      <!-- <view wx:for="newsBtList"> -->
-        <kw-list-cell extraIcon="{{extraIcon}}" title="这是新闻啊"
-          rightNote="11/33" isArrow="{{false}}" kw-class="changeBoder"></kw-list-cell>
-        <kw-list-cell extraIcon="{{extraIcon}}" title="这是新闻啊"
-          rightNote="11/33" isArrow="{{false}}" kw-class="changeBoder"></kw-list-cell>
-      <!-- </view> -->
+      <view wx:for="{{newsBtList}}" wx:key="{{i}}" hidden="{{!(i===isActive)}}" wx:for-index="i" wx:for-item="list">
+        <kw-list-cell extraIcon="{{extraIcon}}"  isArrow="{{false}}" kw-class="changeBoder" wx:for="{{list}}" wx:for-index="j" wx:for-item="news" wx:key="j" link="{{news.CONTENT_ID === '组织架构图' ?'/pages/zzjgt/zzjgt' : '/pages/news/news?CONTENT_ID=' + news.CONTENT_ID }}">
+          <view class="news">
+            <view class="newsBt">
+              {{news.TITLE}}
+            </view>
+            <view class="newsDate">{{news.YWSJSJ}}</view>
+          </view>
+        </kw-list-cell>
+      </view>
     </scroll-view>
   </view>
 </view>

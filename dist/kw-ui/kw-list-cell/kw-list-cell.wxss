@@ -15,6 +15,7 @@
   align-self: flex-start;
   margin-right: 25rpx;
 }
+/* ↓↓↓↓↓↓↓↓↓如果标题下方有提示信息↓↓↓↓↓↓↓ */
 .kw-list-cell-isNote{
   height: 145rpx;
 }
@@ -23,12 +24,18 @@
   height: 105rpx;
   line-height: 105rpx;
 }
-.kw-list-cell-isNote .kw-list-cell-extraIcon,.kw-list-cell-isNote .kw-list-cell-redDot,.kw-list-cell-isNote .kw-list-cell-isArrow,.kw-list-cell-isNote .kw-list-cell-rightNote{
+.kw-list-cell-isNote .kw-list-cell-extraIcon,
+.kw-list-cell-isNote .kw-list-cell-redDot,
+.kw-list-cell-isNote .kw-list-cell-isArrow,
+.kw-list-cell-isNote .kw-list-cell-rightNote{
   line-height: 105rpx;
 }
-.kw-list-cell-isNote .kw-list-cell-title,.kw-list-cell-isNote .kw-list-cell-note{
+.kw-list-cell-isNote .kw-list-cell-title,
+.kw-list-cell-isNote .kw-list-cell-note,{
   line-height: 52.5rpx;
 }
+/* ↑↑↑↑↑↑↑↑↑如果标题下方有提示信息↑↑↑↑↑↑↑ */
+
 .kw-list-cell-thumb image{
     width: 100%;
     height: 100%;
@@ -113,7 +120,7 @@
     background-color: #c8c7cc;
     margin:0 20rpx;
 }
-  .kw-list-cell-border-bottom::after{
+.kw-list-cell-border-bottom::after{
     position: absolute;
     z-index: 3;
     right: 0;

@@ -1,0 +1,46 @@
+/* pages/zzjgt/zzjgt.wxss */
+.zzjgt{
+  height: auto;
+}
+.list-cell {
+  min-height: 95rpx;
+  padding: 20rpx 20rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: relative;
+  background: white;
+  margin-bottom: 20rpx;
+}
+.m-l {
+  margin-left: 40rpx;
+}
+.col-link {
+  color: #0580c2;
+}
+.ckdx {
+  z-index: 999;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+}
+.ckdx .ckdx-mask {
+    z-index: 999;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    left: 0;
+    height: 100vh;
+    top: 0;
+}
+.ckdx .ckdx-body {
+    background: white;
+    z-index: 1001;
+    padding: 20rpx;
+    position: absolute;
+    top: 150rpx;
+    width: 80%;
+    left: 10%;
+    border-radius: 10rpx;
+}

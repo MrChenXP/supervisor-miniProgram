@@ -40,6 +40,38 @@ swiper {
   padding-top: 16rpx;
   background: #f5f5f5;
 }
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 新闻列表 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+.news{
+  height: 105rpx;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+.news .newsBt{
+  width: 540rpx;
+  align-self:center;
+  color:#333333;
+  font-size: 28rpx;
+  flex-shrink: 2;
+  -webkit-line-clamp:2;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  text-overflow: ellipsis;
+}
+.news .newsDate{
+  width: 60rpx;
+  color: #999999;
+  font-size: 26rpx;
+  height: 20rpx;
+  line-height: 20rpx;
+  margin: auto;
+}
+.changeBoder .kw-list-cell-extraIcon{
+  line-height: 105rpx;
+}
+/* ↑↑↑↑↑↑↑↑↑ 新闻列表 ↑↑↑↑↑↑↑ */
+
 .kw-list-cell-border-bottom::after{
   background: none !important;
 }

@@ -1,0 +1,21 @@
+/* pages/news/news.wxss */
+.news{
+    padding: 20rpx;
+    background: white;
+}
+
+.head .title{
+  font-size: 38rpx;
+  font-weight: 900;
+}
+.head  .time{
+  color: #999999;
+  font-size: 24rpx;
+}
+.head .time-title{
+  margin-left: 5px;
+}
+.main-text{
+    margin-top: 20rpx;
+    text-indent: 56rpx;
+}

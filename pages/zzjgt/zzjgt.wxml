@@ -1,0 +1,51 @@
+<view class="content zzjgt">
+  <!-- 一级责任区 -->
+  <view wx:key="oneKey" class="list-cell" wx:for="{{data}}" wx:for-index="oneKey" wx:for-item="one">
+    <view>
+      {{one.ORG_MC}}
+      <text wx:if="{{one.ROLELIST.length > 0}}" bindtap="oneCkdx" data-list="{{one.ROLELIST}}" class="col-link m-l" >查看督学</text>
+        <text wx:if="{{one.CHILDREN.length == 0 && one.SCHOOLLIST.length>0}}" bindtap="oneCkdx" data-list="{{one.SCHOOLLIST}}" class="col-link m-l">查看学校（{{one.XX_COUNT}}）</text>
+    </view>
+
+    <!-- 二级责任区 -->
+    <view wx:if="{{one.CHILDREN.length > 0}}" wx:key="twoKey" wx:for="{{one.CHILDREN}}" wx:for-index="twoKey" wx:for-item="two" >
+        <text wx:if="{{twoKey == (one.CHILDREN.length - 1)}}" >└─</text>
+        <text wx:else >├─</text>{{two.ORG_MC}}
+        <text wx:if="{{two.ROLELIST.length > 0}}" bindtap="oneCkdx" class="col-link m-l" data-list="{{one.ROLELIST}}" >查看督学</text>
+        <text wx:if="{{two.CHILDREN.length == 0 && two.SCHOOLLIST.length>0}}" bindtap="oneCkdx" data-list="{{one.SCHOOLLIST}}" class="col-link m-l">查看学校（{{two.XX_COUNT}}）</text>
+
+      <!-- 三级责任区 -->
+      <view wx:if="{{two.CHILDREN.length > 0}}" wx:key="threeKey" wx:for="{{two.CHILDREN}}" wx:for-index="threeKey" wx:for-item="three">
+          <text wx:if="{{twoKey != (one.CHILDREN.length - 1)}}">│</text>
+          <text class="m-l">
+            <text wx:if="{{threeKey == (two.CHILDREN.length - 1)}}">└─</text>
+            <text wx:else>├─</text>{{three.ORG_MC}}</text>
+          <text wx:if="{{three.ROLELIST.length > 0}}" bindtap="oneCkdx" class="col-link m-l" ata-list="{{one.ROLELIST}}">查看督学</text>
+          <text wx:if="{{three.CHILDREN.length == 0 && three.SCHOOLLIST.length>0}}" bindtap="oneCkdx" class="col-link m-l" data-list="{{one.SCHOOLLIST}}">查看学校（{{three.XX_COUNT}}）</text>
+          
+          <!-- 四级责任区- -->
+          <view wx:if="{{three.CHILDREN.length > 0}}" wx:key="fourKey" wx:for="{{three.CHILDREN}}" wx:for-index="fourKey" wx:for-item="four">
+            <text wx:if="{{twoKey != (one.CHILDREN.length - 1)}}">│</text>
+            <text class="m-l"><text wx:if="{{threeKey != (two.CHILDREN.length - 1)}}">│</text></text>
+            <text class="m-l"><text wx:if="{{fourKey == (three.CHILDREN.length - 1)}}">└─</text>
+            <text wx:else class="_text 232b1a1f">├─</text>{{four.ORG_MC}}</text>
+            <text wx:if="{{four.ROLELIST.length > 0}}" bindtap="oneCkdx" class="col-link m-l" ata-list="{{one.ROLELIST}}">查看督学</text>
+            <text wx:if="{{four.CHILDREN.length == 0 && four.SCHOOLLIST.length>0}}" bindtap="oneCkdx" class="col-link m-l" data-list="{{one.SCHOOLLIST}}">查看学校（{{four.XX_COUNT}}）</text>
+          </view>
+      </view>
+    </view>  
+  </view>
+
+  <!-- 查看督学学校 -->
+  <view hidden="{{!(ckdxShow)}}" class="ckdx">
+    <view class="ckdx-mask" catchtap='oneCkdx'></view>
+    <view class="ckdx-body">
+      <view wx:key="key" wx:for="{{dxxxData}}" wx:for-index="key" wx:for-item="item">
+        <view wx:if="{{!item.ORG_MC}}">{{item.ROLE_MC}} :
+          <text class="color-999">{{item.DXMC}}</text>
+        </view>
+        <view wx:else>{{item.ORG_MC}}</view>
+      </view>
+    </view>
+  </view>
+</view>

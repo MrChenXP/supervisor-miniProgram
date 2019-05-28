@@ -174,7 +174,7 @@ const handleUrl = (option) => {
 }
 
 const handleHeader = (option) => {
-  let header = option.header || {}
+  let header = (option && option.header) || {}
   header['cookie'] = `${consts.getSessionName()}=${store.getSessionId()}`
   return header
 }
@@ -209,6 +209,8 @@ const initVisit = (callback, page) => {
       setSession(data)
       initToken(callback, page)
     },
+    page,
+    header: handleHeader(),
     error (error) {
       weixin.alert(error.msg || '初始化错误-10001')
     }
@@ -287,10 +289,19 @@ const checkLogin = (success, page) => {
   }
 }
 
+/**
+ * 初始化自动登陆信息
+ * @param {function} callback 
+ * @param {object} page 
+ */
+const initAutoLogin = (callback, page) => {
+  
+}
+
 export default {
   ajaxUrl, get, post, initVisit, initToken, cacheAttach,
   // 兼容老的写法
   ajax: {
     ajaxUrl
-  }, checkLogin, isLogin
+  }, checkLogin, isLogin, initAutoLogin
 }

@@ -1,5 +1,7 @@
 //index.js
 
+const app = getApp()
+
 Page({
   data: {
     // 统计数据 上面的看板数据
@@ -11,6 +13,11 @@ Page({
     },
     // 登录组件显示隐藏
     loginShow: false,
+  },
+  onShow () {
+    if(app.$kwz.checkLogin()) {
+      // 已登陆
+    }
   },
   // 关闭登录
   closeLogin(){

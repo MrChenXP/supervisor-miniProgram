@@ -1,5 +1,7 @@
 //index.js
 
+const app = getApp()
+
 Page({
   data: {
     // 用户数据
@@ -10,18 +12,19 @@ Page({
       orgMc:"白云区"
     },
     // 登录组件显示隐藏
-    loginShow: true,
+    loginShow: false,
   },
-  // 关闭登录
-  closeLogin() {
+  onShow () {
+    if(!app.$kwz.isLogin()) {
+      this.setData({
+        loginShow: true
+      })
+    }
+  },
+  // 登陆成功
+  loginSuccess ()   {
     this.setData({
       loginShow: false
     })
-    // if (!this.$kwz.isLogin()) {
-    // wx.reLaunch({
-    //   url: '/pages/index/index'
-    // })
-    // }
   }
-  
 })

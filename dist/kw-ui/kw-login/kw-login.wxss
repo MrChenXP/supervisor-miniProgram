@@ -75,6 +75,6 @@
     color:#109dea;
     width: 544rpx;
     margin: 25rpx auto;
-    text-align: left;
+    text-align: center;
     font-size: 30rpx;
   }

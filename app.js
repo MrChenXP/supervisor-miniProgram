@@ -1,9 +1,10 @@
 //app.js
 import kwz from './dist/kwz/kwz.service'
+import weixin from './dist/kwz/kwz.weixin'
 
 App({
-  onLaunch: function () {
+  onShow: function () {
     kwz.initVisit()
   },
-  $kwz: kwz
+  $kwz: {...kwz, ...weixin}
 })

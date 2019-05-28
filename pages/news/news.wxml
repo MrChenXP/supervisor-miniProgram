@@ -1,0 +1,20 @@
+<!--pages/news/news.wxml-->
+<view class='content news'>
+<!-- 头部信息 -->
+  <view class="head">
+      <view class="title">{{news.TITLE}}</view>
+      <view class="time">
+        <text class="time-title">作者：{{news.AUTHOR}}</text>
+        <text class="time-title">来源：{{news.LY}}</text>
+        <text class="time-title">浏览次数：{{news.DJS}}</text>
+      </view>
+      <view class="time">
+        <text class="time-title">时间：{{news.RELEASE_DATE}}</text>
+      </view>
+  </view>
+  <!-- 正文 -->
+  <view class="main-text">
+        <rich-text nodes="{{news.TXT}}"></rich-text>
+  </view>
+</view>
+

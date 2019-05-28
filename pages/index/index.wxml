@@ -16,17 +16,14 @@
     <!-- 列表区 -->
     <scroll-view scroll-y="true" class="newsList">
       <view wx:for="{{newsBtList}}" wx:key="{{i}}" hidden="{{!(i===isActive)}}" wx:for-index="i" wx:for-item="list">
-        <!-- <view wx:for="{{list}}" wx:for-index="j" wx:for-item="news" wx:key="j"  > 
-          <kw-list-cell extraIcon="{{extraIcon}}" twoLinesTitle="{{news.TITLE}}" rightNote="{{news.YWSJSJ}}" isArrow="{{false}}" kw-class="changeBoder"></kw-list-cell>
-        </view> -->
-        <kw-list-cell extraIcon="{{extraIcon}}"  isArrow="{{false}}" kw-class="changeBoder" wx:for="{{list}}" wx:for-index="j" wx:for-item="news" wx:key="j" link="{{news.CONTENT_ID === '组织架构图' ?'/pages/zzjgt/zzjgt' : '/pages/新闻' }}">
-            <view class="news">
-              <view class="newsBt">
-                {{news.TITLE}}
-              </view>
-              <view class="newsDate">{{news.YWSJSJ}}</view>
+        <kw-list-cell extraIcon="{{extraIcon}}"  isArrow="{{false}}" kw-class="changeBoder" wx:for="{{list}}" wx:for-index="j" wx:for-item="news" wx:key="j" link="{{news.CONTENT_ID === '组织架构图' ?'/pages/zzjgt/zzjgt' : '/pages/news/news?CONTENT_ID=' + news.CONTENT_ID }}">
+          <view class="news">
+            <view class="newsBt">
+              {{news.TITLE}}
             </view>
-          </kw-list-cell>
+            <view class="newsDate">{{news.YWSJSJ}}</view>
+          </view>
+        </kw-list-cell>
       </view>
     </scroll-view>
   </view>

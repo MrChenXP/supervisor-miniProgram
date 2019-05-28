@@ -4,7 +4,8 @@
     "pages/workspace/workspace",
     "pages/my/my",
     "pages/xcdd/xcdd",
-    "pages/zzjgt/zzjgt"
+    "pages/zzjgt/zzjgt",
+    "pages/news/news"
   ],
   "window": {
     "navigationBarTextStyle": "white",

@@ -1,0 +1,18 @@
+<!--pages/xcdd/xcdd-add/xcdd-add.wxml-->
+<view class='content'>
+	<kw-list-cell title="工作计划" right-note="三星小学" bindtap="openGzjh"></kw-list-cell>
+	<kw-list-cell title="学习（校园）" right-note="三星小学"></kw-list-cell>
+	<kw-list-cell title="随行督学" right-note="三星小学"></kw-list-cell>
+	<kw-list-cell title="时间" right-note="2019/01/23"></kw-list-cell>
+	<kw-list-cell title="督导纪实"></kw-list-cell>
+	<kw-list-cell title="资料采集"></kw-list-cell>
+	<kw-list-cell title="典型经验和做法" ></kw-list-cell>
+	<kw-list-cell title="存在问题" ></kw-list-cell>
+	<kw-list-cell title="后续处理意见" ></kw-list-cell>
+  <view class="save" >
+    <button>保存</button>
+  </view>
+
+  <!-- 选择工作计划 -->
+  <kw-gzjh-select wx:if="{{gzjhShow}}"></kw-gzjh-select>
+</view>

@@ -14,7 +14,7 @@
 			</view> -->
 			<view class="delete fl" wx:if="hasScAuth && deleteShow">删除</view>
 			<!-- <view class="delete fl" wx:if="!deleteShow" >确认删除</view> -->
-			<view class="add fr"  wx:if="hasXzAuth">新增</view>
+			<view class="add fr" wx:if="hasXzAuth" bindtap="goAdd">新增</view>
 		</view>
 
     <checkbox-group class="lists">

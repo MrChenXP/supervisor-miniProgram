@@ -59,7 +59,7 @@ Component({
           url: this.data.link
         });
       }
-      this.triggerEvent('click')
+      this.triggerEvent('tap')
     }
   }
 })

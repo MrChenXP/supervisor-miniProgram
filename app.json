@@ -5,7 +5,8 @@
     "pages/my/my",
     "pages/xcdd/xcdd",
     "pages/zzjgt/zzjgt",
-    "pages/news/news"
+    "pages/news/news",
+    "pages/xcdd/xcdd-add/xcdd-add"
   ],
   "window": {
     "navigationBarTextStyle": "white",

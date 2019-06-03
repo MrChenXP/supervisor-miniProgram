@@ -1,0 +1,71 @@
+<!--pages/xcdd/xcdd-add/xcdd-add.wxml-->
+<view class='content'>
+	<kw-list-cell title="工作计划" right-note="三星小学" bindtap="showGzjh"></kw-list-cell>
+	<kw-list-cell title="学校（校园）" right-note="三星小学" bindtap="showSchool"></kw-list-cell>
+	<kw-list-cell title="随行督学" right-note="三星小学" bindtap="showSxdx"></kw-list-cell>
+  <picker mode="date" value="{{data.ywsj}}" bindchange="changeYwsj">
+	  <kw-list-cell title="时间" right-note="{{data.ywsj}}"></kw-list-cell>
+  </picker>
+	<kw-list-cell isArrow="{{false}}">
+    <view>
+      <view class="ddjs-head clearfix" bindtap='changeDdjsShow'>
+        <text class="fl">督导纪实</text>
+        <view class="fr" hidden="{{!ddjsShow}}"><i-icon type="unfold" color="#c7c7c7" size="20"></i-icon></view>
+        <view class="fr" hidden="{{ddjsShow}}"><i-icon type="packup" color="#c7c7c7" size="20"></i-icon></view>
+      </view>
+      <view hidden="{{ddjsShow}}" class="ddjs-body">
+          编辑器
+      </view>
+    </view>
+  </kw-list-cell>
+	<kw-list-cell isArrow="{{false}}">
+    <view>
+      <view class="ddjs-head clearfix" bindtap='changeZlcjShow'>
+        <text class="fl">资料采集</text>
+        <view class="fr" hidden="{{!zlcjShow}}"><i-icon type="unfold" color="#c7c7c7" size="20"></i-icon></view>
+        <view class="fr" hidden="{{zlcjShow}}"><i-icon type="packup" color="#c7c7c7" size="20"></i-icon></view>
+      </view>
+      <view class="ddjs-body" hidden="{{zlcjShow}}">
+        <view>查阅资料 <i-input-number value="2"></i-input-number> 份</view>
+        <view>列席会议 <i-input-number value="2"></i-input-number> 次</view>
+        <view>座谈走访 <i-input-number value="2"></i-input-number> 次</view>
+        <view>问卷调查 <i-input-number value="2"></i-input-number> 次</view>
+        <view>校园巡视 <i-input-number value="2"></i-input-number> 次</view>
+      </view>
+    </view>
+  </kw-list-cell>
+	<kw-list-cell isArrow="{{false}}">
+    <view>
+        <view class="ddjs-head clearfix" bindtap='changeJyzfShow'>
+          <text class="fl">典型经验和做法</text>
+          <view class="fr" hidden="{{!jyzfShow}}"><i-icon type="unfold" color="#c7c7c7" size="20"></i-icon></view>
+          <view class="fr" hidden="{{jyzfShow}}"><i-icon type="packup" color="#c7c7c7" size="20"></i-icon></view>
+        </view>
+        <view class="ddjs-body" hidden="{{jyzfShow}}">
+          <textarea value="33" maxlength="4000" ></textarea>
+        </view>
+    </view>
+  </kw-list-cell>
+	<kw-list-cell isArrow="{{false}}">
+    <view>
+        <view class="ddjs-head clearfix" bindtap='changeCzwtShow'>
+          <text class="fl">存在问题</text>
+          <view class="fr" hidden="{{!czwtShow}}"><i-icon type="unfold" color="#c7c7c7" size="20"></i-icon></view>
+          <view class="fr" hidden="{{czwtShow}}"><i-icon type="packup" color="#c7c7c7" size="20"></i-icon></view>
+        </view>
+        <view class="ddjs-body" hidden="{{czwtShow}}">
+          <textarea value="33" maxlength="4000" ></textarea>
+        </view>
+    </view>
+  </kw-list-cell>
+	<kw-list-cell title="后续处理意见" ></kw-list-cell>
+  <view class="save" >
+    <button>保存</button>
+  </view>
+
+  <!-- 选择工作计划 学校 随行督学-->
+  <kw-gzjh-select wx:if="{{gzjhShow}}" bindclose="showGzjh"></kw-gzjh-select>
+  <kw-gzjh-select wx:if="{{schoolShow}}" bindclose="showSchool"></kw-gzjh-select>
+  <kw-gzjh-select wx:if="{{sxdxShow}}" bindclose="showSxdx"></kw-gzjh-select>
+  <xcdd-hxclyj wx:if="{{hxclyjShow}}" bindclose="showHxclyj"></xcdd-hxclyj>
+</view>

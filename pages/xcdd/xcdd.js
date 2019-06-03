@@ -1,9 +1,5 @@
 // pages/xcdd/xcdd.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     // 加载更多状态
     loadingType: "more",
@@ -55,6 +51,8 @@ Page({
       }
     }
   },
-
+  goAdd(){
+    wx.navigateTo({ url: '/pages/xcdd/xcdd-add/xcdd-add' })
+  }
  
 })

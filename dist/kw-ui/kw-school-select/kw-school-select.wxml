@@ -1,0 +1,18 @@
+<!--dist/kw-ui/kw-gzjh-select/kw-gzjh-select.wxml-->
+<view class="content kw-gzjh-select">
+  <!-- 蒙版 -->
+    <view class="kw-gzjh-select-mask" bindtap="close"></view>
+    <!-- 搜索 -->
+    <view class="kw-gzjh-select-content">
+      <kw-search placeholder="请输入学校名称"></kw-search>
+      <radio-group>
+        <label >
+          <radio />
+          <view class="kw-gzjh-select-radio-label">广州市白云区三星小学/2019-06-07/周雄</view>
+        </label>
+      </radio-group>
+      <view class="save" disabled="{{true}}">
+        <button>{{"点击加载更多"}}</button>
+      </view>
+    </view>  
+</view>

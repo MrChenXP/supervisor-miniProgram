@@ -82,7 +82,7 @@ let _jcIsencode = false
 let _jcIsencrypt = false
 
 // 是否登陆
-let _isLogin = false
+let _isLogin = true
 
 /**
  * 设置相关参数

@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "kw-search": "/dist/kw-ui/kw-search/kw-search"
+  }
+}

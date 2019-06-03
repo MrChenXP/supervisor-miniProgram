@@ -22,10 +22,7 @@ module.exports = {
             theme =  ( type === 'border' ? className + color +'-border' : className+'none' );
         }
         if( circle ){
-
             theme +=" " + className+'circle';
-          console.log(theme)
-
         }
         return theme;
     }

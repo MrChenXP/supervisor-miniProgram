@@ -1,5 +1,9 @@
 // dist/kw-ui/kw-search/kw-search.js
 Component({
+  options:{
+    styleIsolation: "apply-shared" // 表示页面wxss样式将影响到自定义组件，但自定义组件wxss中指定的样式不会影响页面
+  },
+  externalClasses: ['kw-class'],  // 接受外部传入的样式类
   properties: {
     value: { // 搜索框值
       value: '',

@@ -53,7 +53,7 @@ Component({
   },
   methods:{
     // 返回一个点击事件 如果有link属性则会跳转对应链接
-    goLink(){
+    goLink(e){
       if (this.data.link) {
         wx.navigateTo({
           url: this.data.link

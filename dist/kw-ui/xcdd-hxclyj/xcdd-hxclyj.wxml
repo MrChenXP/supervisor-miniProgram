@@ -1,0 +1,43 @@
+<view class='content xcdd-hxclyj'>
+  <!-- 蒙版 -->
+  <view class="xcdd-hxclyj-mask" catchtap='close'></view>
+  <!-- 内容 -->
+  <view class="xcdd-hxclyj-content">
+    <!-- 一般问题-向学校发送整改建议 严重问题-向督导办上报整改建议 -->
+    <view wx:if="{{false}}" class="xcdd-hxclyj-ybwt">
+      <kw-list-cell title="编号" rightNote="22" isArrow="{{false}}"></kw-list-cell>
+      <kw-list-cell title="单位" rightNote="22" isArrow="{{false}}"></kw-list-cell>
+      <kw-list-cell title="来源渠道" rightNote="经常性督导整改" isArrow="{{false}}"></kw-list-cell>
+      <view class="clyj">
+        <view>经挂牌督导，你单位存在以下问题及建议:</view>
+        <textarea value="22" maxlength="4000"></textarea>
+        <view>对以上问题要高度重视，采取措施，立即整改。整改报告于本通知下发
+          <i-input-number value="2" min="0" max="30"></i-input-number>
+          日内书面报责任督学，责任督学于接到报告的3日内上报人民政府教育督导室督管员备案。
+        </view>
+      </view>
+      <view class="ddsj">督导时间: 2010-10-10</view>
+    </view>
+    <!-- 复杂问题-向科室发送协商意见 -->
+    <view wx:if="{{true}}" class="xcdd-hxclyj-fzwt">
+      <kw-list-cell title="编号" rightNote="ybwtBh" isArrow="{{false}}"></kw-list-cell>
+      <picker value="data.ywsj" >
+        <kw-list-cell title="科室" right-note="data.ywsj"></kw-list-cell>
+      </picker>
+      <view class="clyj">
+        我室责任督学于
+        <text>ywsj</text>
+        对
+        <text>org.name</text>
+        进行了教育督导，发现该学校(幼儿园)存在以下问题及建议：
+        <textarea value="czwt" maxlength="4000"></textarea>
+        <view>请贵科室（中心）予以支持、配合、协调解决!</view>
+      </view>
+    </view>
+    <!-- 确定取消 -->
+    <view class="xcdd-hxclyj-save clearfix">
+        <button catchtap="close" size="mini" class="fl">取消</button>
+        <button catchtap="confirm" size="mini" class="fr">确定</button>
+    </view>
+  </view>
+</view>

@@ -18,6 +18,9 @@ progress, checkbox-group{
 form {
 	width: 100%;
 }
+i-input-number{
+  display: inline-block;
+}
 
 /* ================================================功能模块，组合使用================================================== */
 /* -----------  列表单元右侧输入框(参考整改工作新增) ---------*/
@@ -253,5 +256,14 @@ from {
     }
 to {
     background-position:0 -254rpx;
+    }
+}
+/*------------- 页面慢慢出现 ---------*/
+@keyframes show {
+from {
+    filter: opacity(0);
+    }
+to {
+    filter: opacity(1);    
     }
 }

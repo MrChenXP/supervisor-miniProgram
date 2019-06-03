@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "kw-list-cell": "/dist/kw-ui/kw-list-cell/kw-list-cell",
+    "i-input-number": "/dist/iview/input-number/index"
+  }
+}

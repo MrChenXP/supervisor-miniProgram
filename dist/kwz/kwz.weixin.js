@@ -76,6 +76,59 @@ const setStringToStorageSync = (key, value) => {
 }
 
 /**
+ * 从缓存中移除
+ * @param {string} key 
+ * @param {function} callback 
+ * @param {object} app 
+ */
+const removeFromStorage = (key, callback, app) => {
+  if (canUse('removeStorage')) {
+    wx.removeStorage({
+      key, 
+      success () {
+        util.cfp(callback, app || this, [])
+      }
+    })
+  }
+}
+
+/**
+ * 从缓存中移除(同步)
+ * @param {string} key 
+ */
+const removeFromStorageSync = (key) => {
+  if (canUse('removeStorageSync')) {
+    wx.removeStorageSync(key)
+  }
+}
+
+/**
+ * 清空缓存
+ * @param {function} callback 
+ * @param {object} app 
+ */
+const clearStorage = (callback, app) => {
+  if (canUse('clearStorage')) {
+    wx.clearStorage({
+      success () {
+        util.cfp(callback, app || this, [])
+      }
+    })
+  }
+}
+
+/**
+ * 清空缓存(同步)
+ * @param {function} callback 
+ * @param {object} app 
+ */
+const clearStorageSync = () => {
+  if (canUse('clearStorageSync')) {
+    wx.clearStorageSync()
+  }
+}
+
+/**
  * 微信弹窗
  * @param {string} content 
  */
@@ -131,6 +184,7 @@ const closeLoading = (callback, app) => {
  * @param {object} option 包含{url, data, type, dataType, header, success, fail, complete}
  */
 const request = (option) => {
+  // console.log(option)
   if (option && canUse('request')) {
     let url, method, data, dataType, header
     if (typeof option === 'object') {
@@ -400,5 +454,6 @@ const navigateBack = (option) => {
 export default {
   canUse,
   getStringFromStorage, setStringToStorage, getStringFromStorageSync, setStringToStorageSync,
-  alert, openLoading, closeLoading, requestAttach, request, reLaunch, switchTab, navigateTo, navigateBack
+  alert, openLoading, closeLoading, requestAttach, request, reLaunch, switchTab, navigateTo, navigateBack,
+  removeFromStorage, removeFromStorageSync, clearStorage, clearStorageSync
 }

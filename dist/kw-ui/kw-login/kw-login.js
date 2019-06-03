@@ -82,7 +82,9 @@ Component({
         data: {
           params: JSON.stringify(param)
         },
-        success (data) {
+        success (data, option, response) {
+          // 存储新的sessionid
+          app.$kwz.setSession(response)
           if (data && data.statusCode === '200') {
             // 登陆成功后要重新取回新的token
             app.$kwz.initToken(() => {

@@ -26,5 +26,12 @@ Page({
     this.setData({
       loginShow: false
     })
+  },
+  logout () {
+    app.$kwz.logout(() => {
+      this.setData({
+        loginShow: true
+      })
+    }, this)
   }
 })

@@ -135,5 +135,5 @@ const setLogin = (login) => {
 
 export default {
   getStringFromStorage, getObjectFromStorage, setStringToStorage, setObjectToStorage,
-  getSessionId, setSessionId, setRelData, getToken, isEncode, isEncrypt, isLogin
+  getSessionId, setSessionId, setRelData, getToken, isEncode, isEncrypt, isLogin, setLogin
 }

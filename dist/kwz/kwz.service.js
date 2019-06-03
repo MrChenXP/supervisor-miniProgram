@@ -60,7 +60,7 @@ const ajaxUrlUnLock = (option) => {
       // 按照weixin.request的封装，只有当httpcode=200时，才会进入此方法
       let responseData = data.data
       if (responseData && (!responseData.statusCode || responseData.statusCode === '200')) {
-        util.cfp(cb, (option.page || (option.vue || this)), [responseData, option])
+        util.cfp(cb, (option.page || (option.vue || this)), [responseData, option, data])
       } else {
         util.cfp(eb, (option.page || (option.vue || this)), [data, option], (data) => {
           weixin.alert(data.msg || '请求失败', 'none', 5000)
@@ -295,7 +295,24 @@ const checkLogin = (success, page) => {
  * @param {object} page 
  */
 const initAutoLogin = (callback, page) => {
-  
+  util.cfp(callback, page || this, [])
+}
+
+/**
+ * 退出
+ */
+const logout = (callback, app) => {
+  // 登出操作
+  get('/login/open/logout')
+  // 清除缓存
+  weixin.clearStorage()
+  // 设置登陆false
+  store.setLogin(false)
+  // 重置
+  initVisit(() => {
+    // 回调
+    util.cfp(callback, app || this, [])
+  })
 }
 
 export default {
@@ -303,5 +320,5 @@ export default {
   // 兼容老的写法
   ajax: {
     ajaxUrl
-  }, checkLogin, isLogin, initAutoLogin
+  }, checkLogin, isLogin, initAutoLogin, setSession, logout
 }

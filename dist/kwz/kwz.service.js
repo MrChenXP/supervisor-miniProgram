@@ -320,5 +320,6 @@ export default {
   // 兼容老的写法
   ajax: {
     ajaxUrl
-  }, checkLogin, isLogin, initAutoLogin, setSession, logout
+  }, checkLogin, isLogin, initAutoLogin, setSession, logout,
+  cfp: util.cfp
 }

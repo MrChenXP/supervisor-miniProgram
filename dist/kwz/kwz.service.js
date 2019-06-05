@@ -295,7 +295,23 @@ const checkLogin = (success, page) => {
  * @param {object} page 
  */
 const initAutoLogin = (callback, page) => {
-  util.cfp(callback, page || this, [])
+  initLoginUser(callback, page)
+  // util.cfp(callback, page || this, [])
+}
+
+/**
+ * 从后端加载当前登陆用户
+ * @param {function} callback 
+ * @param {object} page 
+ */
+const initLoginUser = (callback, page) => {
+  ajaxUrl({
+    url: '/open/loadInfos',
+		then (response) {
+			store.setLoginUser(response.datas);
+			util.cfp(callback, page || this, [response.datas])
+		}
+  })
 }
 
 /**
@@ -321,5 +337,6 @@ export default {
   ajax: {
     ajaxUrl
   }, checkLogin, isLogin, initAutoLogin, setSession, logout,
-  cfp: util.cfp
+  cfp: util.cfp,
+  getLoginUser: store.getLoginUser
 }

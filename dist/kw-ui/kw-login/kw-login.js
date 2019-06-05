@@ -108,12 +108,6 @@ Component({
           this.setLoadingLogin(false)
         }
       })
-      // let vcodeUrl = 'jc_yzm/open/getYzm?yzm=' + Math.random();
-      // vcodeUrl += this.$kwz.token ? ('&token=' + this.$kwz.token) : ''
-      // this.$kwz.ajax.loadSource(vcodeUrl, (imgUrl) => {
-      //   this.vcodeUrl = imgUrl
-      // }, this)
-      // this.triggerEvent('loginSuccess')
     },
     blurUserName (e) {
       this.setData({

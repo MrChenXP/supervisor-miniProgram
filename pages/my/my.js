@@ -19,6 +19,12 @@ Page({
       this.setData({
         loginShow: true
       })
+    } else {
+      app.$kwz.getLoginUser((user) => {
+        if (user) {
+          this.setData({user})
+        }
+      }, this)
     }
   },
   // 登陆成功

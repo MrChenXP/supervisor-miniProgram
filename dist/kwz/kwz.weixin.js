@@ -28,7 +28,10 @@ const getStringFromStorage = (key, callback, app) => {
   if (canUse('getStorage') && key) {
     wx.getStorage({
       key,
-      success (res) {
+      // success (res) {
+      //   util.cfp(callback, app || this, [res.data])
+      // }, 
+      complete (res) {
         util.cfp(callback, app || this, [res.data])
       }
     })
@@ -184,7 +187,6 @@ const closeLoading = (callback, app) => {
  * @param {object} option 包含{url, data, type, dataType, header, success, fail, complete}
  */
 const request = (option) => {
-  // console.log(option)
   if (option && canUse('request')) {
     let url, method, data, dataType, header
     if (typeof option === 'object') {

@@ -13,22 +13,15 @@ Page({
     },
     // 登录组件显示隐藏
     loginShow: false,
+    products: []
   },
   onShow () {
     if(app.$kwz.checkLogin()) {
-      // 已登陆
+      app.$kwz.initProducts((products) => {
+        if (commonMenus) {
+          this.setData({products})
+        }
+      }, this)
     }
-  },
-  // 关闭登录
-  closeLogin(){
-    this.setData({
-      loginShow: false
-    })
-    // if (!this.$kwz.isLogin()) {
-      // wx.reLaunch({
-      //   url: '/pages/index/index'
-      // })
-    // }
   }
-
 })

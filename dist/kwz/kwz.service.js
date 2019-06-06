@@ -167,7 +167,7 @@ const handleUrl = (option) => {
           url += '&token=' + store.getToken()
         }
       }
-      option.url = url
+      option.url = (url.startsWith('/') ? '' : '/') + url
     }
   }
   return option
@@ -331,12 +331,90 @@ const logout = (callback, app) => {
   })
 }
 
+/**
+ * 加载工作区
+ */
+const initProducts = (callback, page) => {
+  getCommonMenus((commonMenus) => {
+    // callback
+    let retMenus = []
+
+    if(commonMenus && commonMenus._menus_ && commonMenus._menus_.children){
+      // 产品树
+      let menus = hasFunc(commonMenus._menus_.children, commonMenus.readPro)
+      retMenus.push(...menus)
+    }
+
+    util.cfp(callback, this || page, [retMenus])
+  }, page)
+}
+
+const getCommonMenus = (callback, page) => {
+  store.getCommonMenus((commonMenus) => {
+    if (!commonMenus) {
+      ajaxUrl({
+        url: '/open/loadMenus',
+        page,
+        success (response) {
+          if (response && response.datas) {
+            store.setCommonMenus(response.datas)
+            util.cfp(callback, page || this, [response.datas])
+          }
+        }
+      })
+    } else {
+      util.cfp(callback, this || page, [commonMenus])
+    }
+  }, page)
+}
+
+/**
+ * from kwz.uniapp.js
+ * @param {array} comonProductsTree 
+ * @param {array} userReadPro 
+ */
+const hasFunc = (comonProductsTree = [], userReadPro = []) => {
+  let commonMenu = []
+  if (comonProductsTree.length > 0) {
+    let productConfig = consts.getProductConfig()
+    let workspace = productConfig.workspace
+    if (typeof userReadPro === 'string') {
+			userReadPro = userReadPro.split(',')
+    }
+    for (let i = 0; i< comonProductsTree.length; i++){
+			for (let j = 0; j< workspace.length; j++){
+				if (comonProductsTree[i].PRO_ID === workspace[j].proId) {
+					let childrenFun = workspace[j].children
+					let comonChildrenFun = comonProductsTree[i].children
+					for (let m = 0; m< childrenFun.length; m++){
+						for (let n = 0; n< comonChildrenFun.length; n++){
+							if (childrenFun[m].funId === comonChildrenFun[n].FUN_ID
+							 && userReadPro.length > 0) {
+								 for (let k = 0; k<userReadPro.length; k++) {
+									 if (userReadPro[k] === comonChildrenFun[n].PRO_ID) {
+										 comonChildrenFun[n].THUMB = childrenFun[m].icon
+										 comonChildrenFun[n].PRO_MC = childrenFun[m].funMc || comonChildrenFun[n].PRO_MC
+										 comonChildrenFun[n].LINK = childrenFun[m].link
+										 commonMenu.push(comonChildrenFun[n])
+										 break
+									 }
+								 }
+							}
+						}
+					}
+				}
+			}
+		}
+  }
+  return commonMenu
+}
+
 export default {
   ajaxUrl, get, post, initVisit, initToken, cacheAttach,
   // 兼容老的写法
   ajax: {
     ajaxUrl
-  }, checkLogin, isLogin, initAutoLogin, setSession, logout,
+  }, checkLogin, isLogin, initAutoLogin, setSession, logout, initProducts,
   cfp: util.cfp,
   getLoginUser: store.getLoginUser
 }

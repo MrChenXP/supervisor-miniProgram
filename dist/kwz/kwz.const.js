@@ -62,6 +62,15 @@ const getDefaultRequestHeader = () => {
     return JSON.parse(JSON.stringify(DEFAULT_REQUEST_HEADER))
 }
 
+import productConfig from './products'
+
+/**
+ * 获取产品配置信息
+ */
+const getProductConfig = () => {
+    return productConfig
+}
+
 export default {
-    getBaseUrl, isDev, isProxy, getProxyTag, getSessionName, getDefaultRequestHeader
+    getBaseUrl, isDev, isProxy, getProxyTag, getSessionName, getDefaultRequestHeader, getProductConfig
 }

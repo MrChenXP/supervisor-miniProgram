@@ -19,10 +19,10 @@ const getStringFromStorage = (key, callback, app) => {
  * @param {function} callback 回调函数 (data) => {...}
  * @param {object} app 回调函数的this指向
  */
-const getObjectFromStorage = (callback, app) => {
+const getObjectFromStorage = (key, callback, app) => {
   getStringFromStorage(key, (data) => {
-    let dataObject = str2Json(data)
-    cfp(callback, app || this, [dataObject])
+    let dataObject = util.str2Json(data)
+    util.cfp(callback, app || this, [dataObject])
   }, app)
 }
 
@@ -34,7 +34,7 @@ const getObjectFromStorage = (callback, app) => {
  * @param {object} app 回调函数this指向
  */
 const setStringToStorage = (key, data, callback, app) => {
-  setStringToStorage(key, data, callback, app)
+  weixin.setStringToStorage(key, data, callback, app)
 }
 
 /**
@@ -45,7 +45,7 @@ const setStringToStorage = (key, data, callback, app) => {
  * @param {object} app 回调函数this指向
  */
 const setObjectToStorage = (key, data, callback, app) => {
-  setStringToStorage(key, toString(data), callback, app)
+  setStringToStorage(key, util.json2Str(data), callback, app)
 }
 
 let _sessionId = ''
@@ -133,7 +133,60 @@ const setLogin = (login) => {
   _isLogin = login
 }
 
+let _loginUser = null
+
+/**
+ * 获取登陆用户信息
+ */
+const getLoginUser = (callback, app) => {
+  if (!_loginUser) {
+    getObjectFromStorage('_LOGIN_USER', (loginUser) => {
+      _loginUser = loginUser
+      util.cfp(callback, app || this, [loginUser])
+    })
+  } else {
+    util.cfp(callback, app || this, [_loginUser])
+  }
+}
+
+/**
+ * 设置登陆用户
+ * @param {object} loginUser 
+ */
+const setLoginUser = (loginUser) => {
+  _loginUser = loginUser
+  setObjectToStorage('_LOGIN_USER', loginUser)
+}
+
+let _commonMenus = null
+
+/**
+ * 获取菜单
+ * @param {function} callback 
+ * @param {object} app 
+ */
+const getCommonMenus = (callback, app) => {
+  if (!_commonMenus) {
+    getObjectFromStorage('_COMMON_MENUS', (commonMenus) => {
+      _commonMenus = commonMenus
+      util.cfp(callback, app || this, [commonMenus])
+    })
+  } else {
+    util.cfp(callback, app || this, [_commonMenus])
+  }
+}
+
+/**
+ * 设置菜单
+ * @param {object} commonMenus 
+ */
+const setCommonMenus = (commonMenus) => {
+  _commonMenus = commonMenus
+  setObjectToStorage('_COMMON_MENUS', commonMenus)
+}
+
 export default {
   getStringFromStorage, getObjectFromStorage, setStringToStorage, setObjectToStorage,
-  getSessionId, setSessionId, setRelData, getToken, isEncode, isEncrypt, isLogin, setLogin
+  getSessionId, setSessionId, setRelData, getToken, isEncode, isEncrypt, isLogin, setLogin,
+  getLoginUser, setLoginUser, getCommonMenus, setCommonMenus
 }

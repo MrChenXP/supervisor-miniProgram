@@ -10,9 +10,17 @@ Page({
     },
     // 提示红点显示隐藏
     redDot: {},
+    products: []
   },
   onShow () {
-    this.loadIndexData();
+    if (app.$kwz.checkLogin()) {
+      app.$kwz.initProducts((products) => {
+        if (commonMenus) {
+          this.setData({ products })
+        }
+      }, this)
+      this.loadIndexData()
+    }
   },
   // 初始化工作区数据
   loadIndexData() {
@@ -58,5 +66,4 @@ Page({
       }
     })
   }
-
 })

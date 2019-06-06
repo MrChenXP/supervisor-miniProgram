@@ -1,5 +1,6 @@
 <!--index.wxml-->
 <view class="content">
+
   <!-- 轮播图 -->
   <swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="3000"> 
     <swiper-item wx:for="{{newsImaUrl}}" wx:key="index">
@@ -24,7 +25,9 @@
             <view class="newsDate">{{news.YWSJSJ}}</view>
           </view>
         </kw-list-cell>
+        <i-load-more wx:if="{{i != newsBtList.length-1}}" tip="{{loadMore[i].text}}"  loading="{{ loadMore[i].show }}" />
       </view>
     </scroll-view>
   </view>
+
 </view>

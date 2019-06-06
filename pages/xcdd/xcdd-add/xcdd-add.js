@@ -2,10 +2,10 @@
 Page({
   data: {
     // 工作计划,学校,随行督学选择页面 后续处理意见 显示隐藏
-    gzjhShow: false,
+    gzjhShow: true,
     schoolShow: false,
     sxdxShow: false,
-    hxclyjShow: true,
+    hxclyjShow: false,
     // 督导纪实 资料采集 经验做法 存在问题 显示隐藏
     ddjsShow: true,
     zlcjShow: true,

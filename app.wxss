@@ -12,11 +12,12 @@ view {
   font-size:28rpx;
   line-height:1.8;
 }
-progress, checkbox-group{
+progress, checkbox-group, textarea, form{
 	width: 100%;
+  box-sizing: border-box;
 }
-form {
-	width: 100%;
+textarea {
+	padding: 8rpx;
 }
 i-input-number{
   display: inline-block;
@@ -261,7 +262,7 @@ to {
 /*------------- 页面慢慢出现 ---------*/
 @keyframes show {
 from {
-    filter: opacity(0);
+    filter: opacity(0.4);
     }
 to {
     filter: opacity(1);    

@@ -37,9 +37,11 @@ Component({
     },
     // 输入搜索时改变量
     inputChange(e) {
-      this.setData({
-        value: e.target.value
-      })
+      // this.setData({
+      //   value: e.detail.value
+      // })
+      this.data.value = e.detail.value
+      return e.detail.value
     },
     // 取消
     cancel() {

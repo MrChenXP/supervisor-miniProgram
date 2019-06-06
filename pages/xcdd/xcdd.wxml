@@ -1,6 +1,6 @@
 <view class='content'>
 	<!-- 搜索 -->
-  <kw-search>
+  <kw-search bindconfirm="searchList">
     <view>
       <picker range="{{searchCondition.DM_XD}}" range-key="DMMX_MC" >
 					<kw-list-cell title="学段" right-note="{{pageParam.xdMc}}"></kw-list-cell>
@@ -20,7 +20,7 @@
     <checkbox-group class="lists">
       <view>
 			<!-- 单项列表 -->
-			<view class="list">
+			<view class="list" wx:for="{{dataList}}" wx:key="index">
 				<view class="info">
 					<view>
             <label wx:if="{{!deleteShow}}">
@@ -31,11 +31,12 @@
             {{item.XXMC}}学校名称
           </view>
 					<view class="clearfix time">
-						<view class="fl">{{item.AUTHOR}}姓名</view>
-						<view class="fr">督导时间：{{item.YWSJ}}1019-09-09</view>
+						<view class="fl">{{item.AUTHOR}}</view>
+						<view class="fr">督导时间：{{item.YWSJ}}</view>
 					</view>
 					<view class="clearfix status">
 						<view class="fl clyj {{item.ztClass}}" >
+              <kw-tag  color="blue" circle="{{true}}">{{item.STATUS_MC || '未填写'}}</kw-tag>
 						</view>
 						<view class="fr" >
               <kw-tag type="border" color="blue" circle="{{true}}">编辑</kw-tag>

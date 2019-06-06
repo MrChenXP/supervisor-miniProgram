@@ -40,7 +40,6 @@ Page({
         this.setData({
           news: this.data.news
         })
-        console.log(this.data.news)
       }
     })
   }

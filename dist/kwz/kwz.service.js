@@ -1,11 +1,11 @@
 // kwz服务
 // kwz的封装方法
 
-import util from './kwz.util'
-import store from './kwz.store'
-import { kwbms, kwencrypts, kwfilters } from './kwz.pc'
-import weixin from './kwz.weixin'
-import consts from './kwz.const'
+import util from './kwz.util' // 工具类
+import store from './kwz.store' // 数据缓存
+import { kwbms, kwencrypts, kwfilters } from './kwz.pc' // pc端的一些kwz逻辑
+import weixin from './kwz.weixin' // kwz对微信接口的封装
+import consts from './kwz.const' // kwz常量配置
 
 /**
  * 发送get请求
@@ -149,7 +149,7 @@ const handleData = (data) => {
 }
 
 /**
- * 格式化url=》加入token
+ * 格式化url => 加入token
  * @param {object} option 
  */
 const handleUrl = (option) => {

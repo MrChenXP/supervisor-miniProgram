@@ -3,16 +3,18 @@
     "pages/index/index",
     "pages/workspace/workspace",
     "pages/my/my",
-    "pages/xcdd/xcdd",
     "pages/zzjgt/zzjgt",
     "pages/news/news",
-    "pages/xcdd/xcdd-add/xcdd-add"
+    "pages/xcdd/xcdd",
+    "pages/xcdd/xcdd-add/xcdd-add",
+    "pages/xcdd/xcdd-prview/xddd-prview"
   ],
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "挂牌督导",
     "navigationBarBackgroundColor": "#028edf",
-    "backgroundColor": "#F8F8F8"
+    "backgroundColor": "#F8F8F8",
+    "onReachBottomDistance": 70
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {

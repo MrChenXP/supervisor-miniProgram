@@ -15,8 +15,8 @@ Page({
   onShow () {
     if (app.$kwz.checkLogin()) {
       app.$kwz.initProducts((products) => {
-        if (commonMenus) {
-          this.setData({ products })
+        if (products) {
+          this.setData({products})
         }
       }, this)
       this.loadIndexData()

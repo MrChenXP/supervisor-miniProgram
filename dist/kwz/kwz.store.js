@@ -185,8 +185,35 @@ const setCommonMenus = (commonMenus) => {
   setObjectToStorage('_COMMON_MENUS', commonMenus)
 }
 
+let _dms = null
+
+/**
+ * 设置菜单
+ * @param {object} commonMenus 
+ */
+const setDms = (dms) => {
+  _dms = dms
+  setObjectToStorage('_DMS', _dms)
+}
+
+/**
+ * 
+ * @param {function} callback 
+ * @param {object} app 
+ */
+const getDms = (callback, app) => {
+  if (!_dms) {
+    getObjectFromStorage('_DMS', (dms) => {
+      _dms = dms
+      util.cfp(callback, app || this, [dms])
+    })
+  } else {
+    util.cfp(callback, app || this, [_dms])
+  }
+}
+
 export default {
   getStringFromStorage, getObjectFromStorage, setStringToStorage, setObjectToStorage,
   getSessionId, setSessionId, setRelData, getToken, isEncode, isEncrypt, isLogin, setLogin,
-  getLoginUser, setLoginUser, getCommonMenus, setCommonMenus
+  getLoginUser, setLoginUser, getCommonMenus, setCommonMenus, getDms, setDms
 }

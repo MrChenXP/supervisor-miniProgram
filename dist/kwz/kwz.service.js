@@ -1,11 +1,16 @@
 // kwz服务
 // kwz的封装方法
 
-import util from './kwz.util' // 工具类
-import store from './kwz.store' // 数据缓存
-import { kwbms, kwencrypts, kwfilters } from './kwz.pc' // pc端的一些kwz逻辑
-import weixin from './kwz.weixin' // kwz对微信接口的封装
-import consts from './kwz.const' // kwz常量配置
+// 工具类
+import util from './kwz.util'
+// 数据缓存
+import store from './kwz.store'
+// pc端的一些kwz逻辑
+import { kwbms, kwencrypts, kwfilters } from './kwz.pc'
+// kwz对微信接口的封装
+import weixin from './kwz.weixin'
+// kwz常量配置
+import consts from './kwz.const'
 
 /**
  * 发送get请求
@@ -409,6 +414,66 @@ const hasFunc = (comonProductsTree = [], userReadPro = []) => {
   return commonMenu
 }
 
+/**
+ * 加载代码
+ * @param {string} dmStr 
+ * @param {function} callback 
+ * @param {object} page 
+ */
+const loadDms = (dmStr = '', callback, page) => {
+  getDms(dmStr.split(','), callback, page)
+}
+
+/**
+ * 获取代码
+ * @param {array} dmArray 
+ * @param {function} callback 
+ * @param {object} page 
+ */
+const getDms = (dmArray, callback, page) => {
+  if (dmArray && dmArray.length > 0) {
+    store.getDms((dms) => {
+      let dmArrayTmp = []
+      let dmTmp = {}
+      if (!dms) {
+        dms = {}
+        dmArrayTmp = dmArray
+      } else {
+        for (let i = 0; i < dmArray.length; i++) {
+          let dmKey = dmArray[i]
+          if (!dms[dmKey]) {
+            dmArrayTmp.push(dmKey)
+          } else {
+            dmTmp[dmKey] = dms[dmKey]
+          }
+        }
+      }
+
+      if (dmArrayTmp.length < 1) {
+        util.cfp(callback, page || this, [util.copyJson(dmTmp)])
+      } else {
+        ajaxUrl({
+          url: 'jc_dmtab/open/selectDmmxData',
+          data: {
+            DM_CODES: dmArrayTmp.join(',')
+          },
+          success (data) {
+            if (data.statusCode === '200') {
+              let dmsData = data.datas
+              for (var i in dmsData) {
+                dms[i] = dmsData[i]
+                dmTmp[i] = dmsData[i]
+              }
+              store.setDms(dms)
+              util.cfp(callback, page || this, [util.copyJson(dmTmp)])
+            }
+          }
+        })
+      }
+    }, page)
+  }
+}
+
 export default {
   ajaxUrl, get, post, initVisit, initToken, cacheAttach,
   // 兼容老的写法
@@ -416,5 +481,5 @@ export default {
     ajaxUrl
   }, checkLogin, isLogin, initAutoLogin, setSession, logout, initProducts,
   cfp: util.cfp,
-  getLoginUser: store.getLoginUser
+  getLoginUser: store.getLoginUser, loadDms
 }

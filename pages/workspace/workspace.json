@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "kw-list-cell": "../../dist/kw-ui/kw-list-cell/kw-list-cell",
-    "kw-login": "../../dist/kw-ui/kw-login/kw-login"
+    "kw-list-cell": "../../dist/kw-ui/kw-list-cell/kw-list-cell"
   }
 }

@@ -2,7 +2,7 @@
 Page({
   data: {
     // 工作计划,学校,随行督学选择页面 后续处理意见 显示隐藏
-    gzjhShow: true,
+    gzjhShow: false,
     schoolShow: false,
     sxdxShow: false,
     hxclyjShow: false,

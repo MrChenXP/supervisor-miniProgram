@@ -41,7 +41,6 @@ Page({
         this.data.pageList[this.data.isActive] += 1
         this.data.newsBtList[this.data.isActive].push(...data.datas)
         this.data.loadMore[this.data.isActive].show = false
-        console.log(data.datas)
         if (data.datas.length >= 5) {
           this.data.loadMore[this.data.isActive].text = "上拉显示更多"
         } else {

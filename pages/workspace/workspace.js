@@ -10,24 +10,19 @@ Page({
     },
     // 提示红点显示隐藏
     redDot: {},
+    // 工作区功能数据信息
     products: []
   },
   onShow () {
+    // 判断登录
     if (app.$kwz.checkLogin()) {
+      // 加载工作区 异步的
       app.$kwz.initProducts((products) => {
         if (products) {
           this.setData({products})
+          this.initTips()
         }
       }, this)
-      this.loadIndexData()
-    }
-  },
-  // 初始化工作区数据
-  loadIndexData() {
-    // 验证是否属于登陆状态
-    if (app.$kwz.isLogin()) {
-      // this.initProducts();
-      this.initTips()
     }
   },
   // 获取桌面的提示信息

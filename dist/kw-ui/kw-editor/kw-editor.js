@@ -27,12 +27,7 @@ Component({
     },
     // 富文本输入
     input(e){
-      // this.editorCtx.setContents({
-      //   text: e.detail.html
-      // })
       this.editorCtx.action.args.html = e.detail.html
-      console.log(this.editorCtx.action.args.html )
-      console.log(e.detail.html)
     },
     // 插入图片
     insertImage(){
@@ -41,15 +36,10 @@ Component({
         count: 1,
         sizeType: "compressed",
         success(e){
-          console.log(e)
           that.editorCtx.insertImage({
             src: e.tempFilePaths[0],
-            data: {
-              id: 'abcd',
-              role: 'god'
-            },
             success: function () {
-              console.log('insert image success')
+              console.log('插入成功')
             }
           })
         }

@@ -234,6 +234,33 @@ const request = (option) => {
 }
 
 /**
+ * 上传文件 底层使用wx.uploadFile，https://developers.weixin.qq.com/miniprogram/dev/api/network/upload/wx.uploadFile.html
+ * @param {object} option {url, filePath, data, header, success, fail, complete}
+ */
+const upalodFile = (option) => {
+  if (option && canUse('uploadFile')) {
+    wx.uploadFile({
+      url: formatUrl(option.url),
+      filePath: option.filePath,
+      name: 'file',
+      header: option.header,
+      formData: option.data,
+      success(response) {
+        requestSuccess(response, option)
+      },
+      // 请求失败方法（如果请求没有回来会执行）
+      fail(error) {
+        requestFail(error, option)
+      },
+      // 请求完成执行方法
+      complete(response) {
+        requestComplete(response, option)
+      }
+    })
+  }
+}
+
+/**
  * 格式化url，将option中的参数格式化到url中
  * @param {string} url
  * @param {object} option 
@@ -453,9 +480,19 @@ const navigateBack = (option) => {
   }
 }
 
+/**
+ * 选择图片
+ * @param {object} option 
+ */
+const chooseImage = (option) => {
+  if (option && canUse('chooseImage')) {
+    wx.chooseImage(option)
+  }
+}
+
 export default {
   canUse,
-  getStringFromStorage, setStringToStorage, getStringFromStorageSync, setStringToStorageSync,
+  getStringFromStorage, setStringToStorage, getStringFromStorageSync, setStringToStorageSync, formatUrl,
   alert, openLoading, closeLoading, requestAttach, request, reLaunch, switchTab, navigateTo, navigateBack,
-  removeFromStorage, removeFromStorageSync, clearStorage, clearStorageSync
+  removeFromStorage, removeFromStorageSync, clearStorage, clearStorageSync, upalodFile, chooseImage
 }

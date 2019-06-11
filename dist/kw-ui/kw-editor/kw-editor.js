@@ -1,3 +1,4 @@
+const app = getApp()
 // dist/kw-ui/kw-editor/kw-editor.js
 Component({
   properties: {
@@ -36,14 +37,11 @@ Component({
     },
     // 插入图片
     insertImage(){
-      const that = this
-      wx.chooseImage({
-        count: 1,
-        sizeType: "compressed",
-        success(e){
-          console.log(e)
-          that.editorCtx.insertImage({
-            src: e.tempFilePaths[0],
+      app.$kwz.uploadImg({
+        success (file) {
+          console.log(this)
+          this.editorCtx.insertImage({
+            src: file.uri,
             data: {
               id: 'abcd',
               role: 'god'
@@ -52,8 +50,35 @@ Component({
               console.log('insert image success')
             }
           })
-        }
-      }) 
+        },
+        error (error) {
+          // 错误回调
+        },
+        page: this
+      })
+      // const that = this
+      // wx.chooseImage({
+      //   count: 1,
+      //   sizeType: "compressed",
+      //   success(e){
+      //     if (e.tempFilePaths && e.tempFilePaths.length > 0) {
+      //       app.$kwz.uploadImg(e.tempFilePaths[0], null, (response) => {
+      //         console.log(response)
+      //       })
+      //     }
+          // app.$kwz.uploadImg()
+          // that.editorCtx.insertImage({
+          //   src: e.tempFilePaths[0],
+          //   data: {
+          //     id: 'abcd',
+          //     role: 'god'
+          //   },
+          //   success: function () {
+          //     console.log('insert image success')
+          //   }
+          // })
+      //   }
+      // }) 
     }
   }
 })

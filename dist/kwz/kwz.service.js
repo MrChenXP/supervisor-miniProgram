@@ -60,53 +60,6 @@ const ajaxUrl = (option) => {
  */
 const ajaxUrlUnLock = (option) => {
 
-  const success = (cb, eb) => {
-    return (data, option) => {
-      // 按照weixin.request的封装，只有当httpcode=200时，才会进入此方法
-      let responseData = data.data
-      if (responseData && (!responseData.statusCode || responseData.statusCode === '200')) {
-        util.cfp(cb, (option.page || (option.vue || this)), [responseData, option, data])
-      } else {
-        util.cfp(eb, (option.page || (option.vue || this)), [data, option], (data) => {
-          weixin.alert(data.msg || '请求失败', 'none', 5000)
-        })
-      }
-    }
-  }
-
-  const fail = (cb) => {
-    return (error, option) => {
-      if (error) {
-        if (error.statusCode === 401) {
-          // token不对或者session丢失
-          initVisit(() => {
-            if (option.repeat !== true) {
-              let rOption = util.copyJson(option)
-
-              rOption.page = option.page
-              rOption.success = option.success
-              rOption.fail = option.fail
-              option.complete = option.complete
-              
-              rOption.repeat = true
-
-              // 重新请求
-              weixin.request(rOption)
-
-              return
-            }
-          }, option.page)
-        } else if (error.statusCode === 402) {
-          weixin.alert('无权限进行此项操作', 'none', 5000)
-          return
-        }
-      } else {
-        weixin.alert(data.msg || '网络错误', 'none', 5000)
-      }
-      util.cfp(cb, option.page || (option.vue || this), [error])
-    }
-  }
-
   const complete = (cb) => {
     return (data, option) => {
       weixin.closeLoading()
@@ -132,11 +85,129 @@ const ajaxUrlUnLock = (option) => {
 
   ajaxOption.option = option
 
-  ajaxOption.success = success(option.success || option.then, option.fail)
-  ajaxOption.fail = fail(option.fail || option.catch)
+  ajaxOption.success = ajaxSuccess(option.success || option.then, option.fail)
+  ajaxOption.fail = ajaxFail(option.fail || option.catch)
   ajaxOption.complete = complete(option.complete)
 
   weixin.request(ajaxOption)
+}
+
+const ajaxSuccess = (cb, eb) => {
+  return (data, option) => {
+    // 按照weixin.request的封装，只有当httpcode=200时，才会进入此方法
+    let responseData = data.data
+    if (responseData && (!responseData.statusCode || responseData.statusCode === '200')) {
+      util.cfp(cb, (option.page || (option.vue || this)), [responseData, option, data])
+    } else {
+      util.cfp(eb, (option.page || (option.vue || this)), [data, option], (data) => {
+        weixin.alert(data.msg || '请求失败', 'none', 5000)
+      })
+    }
+  }
+}
+
+const ajaxFail = (cb) => {
+  return (error, option) => {
+    if (error) {
+      if (error.statusCode === 401) {
+        // token不对或者session丢失
+        initVisit(() => {
+          if (option.repeat !== true) {
+            let rOption = util.copyJson(option)
+
+            rOption.page = option.page
+            rOption.success = option.success
+            rOption.fail = option.fail
+            option.complete = option.complete
+            
+            rOption.repeat = true
+
+            // 重新请求
+            weixin.request(rOption)
+
+            return
+          }
+        }, option.page)
+      } else if (error.statusCode === 402) {
+        weixin.alert('无权限进行此项操作', 'none', 5000)
+        return
+      }
+    } else {
+      weixin.alert(data.msg || '网络错误', 'none', 5000)
+    }
+    util.cfp(cb, option.page || (option.vue || this), [error])
+  }
+}
+
+/**
+ * 上传文件
+ * @param {object} option 
+ */
+const uploadImg = (option) => {
+
+  const complete = (cb) => {
+    return (data, option) => {
+      weixin.closeLoading()
+      setSession(data)
+      util.cfp(cb, (option.page || (option.vue || this)), [data, option.option])
+    }
+  }
+
+  let chooseImageOption = util.copyJson(option)
+  
+  chooseImageOption.success = (res) => {
+
+    weixin.openLoading('添加中...')
+
+    if (res && res.tempFilePaths) {
+      if (res.tempFilePaths.length  > 0) {
+        let url = consts.getUploadImgUrl()
+
+        let uploadOption = {
+          url, 
+          filePath: res.tempFilePaths[0],
+          success: option.success, 
+          fail: option.fail, 
+          complete,
+          page: option.page
+        }
+
+        uploadOption = handleUrl(uploadOption)
+    
+        uploadOption.header = handleHeader(option)
+
+        // 因为ueditor返回的内容是字符串，此处转json
+        let success = option.success
+        option.success = (response, option) => {
+          if (response) {
+            let responseObj = util.str2Json(response)
+            if (responseObj && responseObj.url) {
+              responseObj = handleUrl(responseObj, 'uri')
+              responseObj.uri = weixin.formatUrl(responseObj.uri)
+            }
+            util.cfp(success, option.page || (option.vue || this), [responseObj, option])
+          }
+        }
+
+        uploadOption.success = ajaxSuccess(option.success || option.then, option.fail)
+        uploadOption.fail = ajaxFail(option.fail || option.catch)
+        uploadOption.complete = complete(option.complete)
+    
+        // console.log(uploadOption)
+        weixin.upalodFile(uploadOption)
+      }
+    } else {
+      weixin.alert('选择图片失败')
+    }
+  }
+  
+  chooseImageOption.fail = option.fail
+
+  chooseImageOption.count = 1
+
+  // 选取图片
+  weixin.chooseImage(chooseImageOption)
+
 }
 
 /**
@@ -157,7 +228,7 @@ const handleData = (data) => {
  * 格式化url => 加入token
  * @param {object} option 
  */
-const handleUrl = (option) => {
+const handleUrl = (option, key = 'url') => {
   if (store.getToken()) {
     let url = option.url
     let data = option.data || {}
@@ -172,7 +243,7 @@ const handleUrl = (option) => {
           url += '&token=' + store.getToken()
         }
       }
-      option.url = (url.startsWith('/') ? '' : '/') + url
+      option[key] = (url.startsWith('/') ? '' : '/') + url
     }
   }
   return option
@@ -481,5 +552,6 @@ export default {
     ajaxUrl
   }, checkLogin, isLogin, initAutoLogin, setSession, logout, initProducts,
   cfp: util.cfp,
-  getLoginUser: store.getLoginUser, loadDms
+  getLoginUser: store.getLoginUser, loadDms, uploadImg,
+  canUse: weixin.canUse
 }

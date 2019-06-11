@@ -7,7 +7,7 @@ Page({
     sxdxShow: false,
     hxclyjShow: false,
     // 督导纪实 资料采集 经验做法 存在问题 显示隐藏
-    ddjsShow: true,
+    ddjsShow: false,
     zlcjShow: true,
     jyzfShow: true,
     czwtShow: true,   

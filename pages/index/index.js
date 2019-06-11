@@ -79,6 +79,7 @@ Page({
               })
             }
           }
+          this.data.newsImaUrl = this.data.newsImaUrl.length || ['/static/images/defaults.png']
           // 首页新闻
           if (ykinfo && ykinfo.length > 0) {
             for (let i = 0; i < ykinfo.length; i++) {

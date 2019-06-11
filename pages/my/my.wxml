@@ -22,9 +22,9 @@
 
   <!-- 功能 -->
   <view class="my-gn">
-    <kw-list-cell title="个人资料" thumb="/static/images/icons/set.png" ></kw-list-cell>
-    <kw-list-cell title="修改密码" thumb="/static/images/icons/change.png" ></kw-list-cell>
-    <kw-list-cell title="切换机构" thumb="/static/images/icons/repeat.png" ></kw-list-cell>
+    <!-- <kw-list-cell title="个人资料" thumb="/static/images/icons/set.png" ></kw-list-cell> -->
+    <!-- <kw-list-cell title="修改密码" thumb="/static/images/icons/change.png" ></kw-list-cell> -->
+    <!-- <kw-list-cell title="切换机构" thumb="/static/images/icons/repeat.png" ></kw-list-cell> -->
     <kw-list-cell title="扫码" borderBottom="{{false}}" thumb="/static/images/icons/scanCode.png" ></kw-list-cell>
   </view>
 

@@ -1,1 +1,16 @@
 /* dist/kw-ui/kw-editor/kw-editor.wxss */
+.kw-editor{
+  border: 1rpx solid #c8c7cc;
+  border-radius: 10px;
+  width: 100%;
+  position: relative;
+}
+.kw-editor-toolbar{
+  padding: 20rpx 20rpx 10rpx;
+  position: relative;
+  border-bottom: 1rpx solid #c8c7cc;
+}
+.kw-editor-content{
+  padding: 10rpx 20rpx 20rpx;
+  position: relative;
+}

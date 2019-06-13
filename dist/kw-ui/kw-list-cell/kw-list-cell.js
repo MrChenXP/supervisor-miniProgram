@@ -49,7 +49,6 @@ Component({
         { isKwIcon: kwReg.test(this.data.extraIcon.type) }
       )
     }
-    
   },
   methods:{
     // 返回一个点击事件 如果有link属性则会跳转对应链接
@@ -59,7 +58,6 @@ Component({
           url: this.data.link
         });
       }
-      this.triggerEvent('tap')
     }
   }
 })

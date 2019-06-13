@@ -1,9 +1,9 @@
 /**app.wxss**/
 @import "dist/kw-ui/base64.wxss";
 .content {
-  height: 100vh;
   background: #f5f5f5;
   box-sizing: border-box;
+  min-height: 100vh;
 }
 
 view {
@@ -165,7 +165,7 @@ i-input-number{
   height: 55rpx;
 }
 .ddjs-body {
-  padding: 0 20rpx;
+  padding: 20rpx 20rpx 0;
 }
 .ddjs-body .time {
     text-align: right;
@@ -250,7 +250,7 @@ i-input-number{
   from{transform: translateY(-100%);}
   to{transform: translateY(0);}
 }
-/*------------- 背景上移 ---------*/
+/*------------- 背景图上移 ---------*/
 @keyframes sparkle {
 from {
     background-position:0 0;

@@ -2,3 +2,28 @@
 .lists {
 	  height: calc(100% - 186upx);
 }
+.lists .wwt .kw-tag {
+  background: none;
+  border: none;
+  color: #999999;
+}
+.lists .xwt .kw-tag {
+  background-color: #d6f1fb;
+  border-color: #d6f1fb;
+  color: #109dea;
+}
+.lists .ybwt .kw-tag {
+  background-color: #dcf0c7;
+  border-color: #dcf0c7;
+  color: #68ae1d;
+}
+.lists .yzwt .kw-tag {
+	background-color: #f8dad9;
+	border-color: #f8dad9;
+	color: #e64c48;
+}
+.lists .fzwt .kw-tag{
+  background-color: #f7e6c1;
+	border-color: #f7e6c1;
+	color: #f27506;
+}

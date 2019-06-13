@@ -1,6 +1,9 @@
-<view class='kw-editor'>
-  <i-icon type="picture_fill" size="28" color="#80848f" bindtap="insertImage"></i-icon>
-  <!-- <i-icon type="activity" size="28" color="#80848f" /> -->
-  <!-- <i-icon type="undo" size="28" color="#80848f" /> -->
-  <editor id="kw-editor" placeholder="{{placeholder}}" bindready="onEditorReady" bindinput="input" ></editor>
+<view class='kw-editor kw-class'>
+  <view class='kw-editor-toolbar'>
+    <i-icon type="picture_fill" size="28" color="#80848f" bindtap="insertImage"></i-icon>
+    <!-- <i-icon type="activity" size="28" color="#80848f" /> -->
+    <!-- <i-icon type="undo" size="28" color="#80848f" /> -->
+  </view>
+
+  <editor id="kw-editor" class="kw-editor-content" placeholder="{{placeholder}}" bindready="onEditorReady" bindinput="input" ></editor>
 </view>

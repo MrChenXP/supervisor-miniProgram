@@ -14,7 +14,7 @@
         <view class="fr" hidden="{{ddjsShow}}"><i-icon type="packup" color="#c7c7c7" size="20"></i-icon></view>
       </view>
       <view hidden="{{ddjsShow}}" class="ddjs-body">
-        <kw-editor></kw-editor>
+        <kw-editor ></kw-editor>
       </view>
     </view>
   </kw-list-cell>

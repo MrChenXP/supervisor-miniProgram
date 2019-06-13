@@ -6,9 +6,9 @@ Component({
     // 登录头部标题
     title: '教育创新教育云平台',
     // 登录账号
-    userName: '',
+    userName: 'dddx',
     // 登录密码 
-    passWord: '',
+    passWord: '1234qwer',
     // 验证码输入框的值
     vcode: '',
     // 验证码图片地址

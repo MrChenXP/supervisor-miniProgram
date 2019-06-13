@@ -73,13 +73,13 @@ Page({
                   if (filepath.statusCode === 200) {
                     let newsImaUrl = this.data.newsImaUrl
                     newsImaUrl.push(filepath.tempFilePath)
+                    this.data.newsImaUrl = this.data.newsImaUrl.length == 0 ? ['/static/images/defaults.png'] : this.data.newsImaUrl
                     this.setData({newsImaUrl})
                   }
                 }
               })
             }
           }
-          this.data.newsImaUrl = this.data.newsImaUrl.length || ['/static/images/defaults.png']
           // 首页新闻
           if (ykinfo && ykinfo.length > 0) {
             for (let i = 0; i < ykinfo.length; i++) {

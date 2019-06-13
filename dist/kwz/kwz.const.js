@@ -71,6 +71,15 @@ const getProductConfig = () => {
     return productConfig
 }
 
+const UPLOAD_URL_IMG = '/ueditor/jsp/controller.jsp?action=uploadimage'
+
+/**
+ * 获取上传路径
+ */
+const getUploadImgUrl = () => {
+    return UPLOAD_URL_IMG
+}
+
 export default {
-    getBaseUrl, isDev, isProxy, getProxyTag, getSessionName, getDefaultRequestHeader, getProductConfig
+    getBaseUrl, isDev, isProxy, getProxyTag, getSessionName, getDefaultRequestHeader, getProductConfig, getUploadImgUrl
 }

@@ -7,7 +7,8 @@
     "pages/news/news",
     "pages/xcdd/xcdd",
     "pages/xcdd/xcdd-add/xcdd-add",
-    "pages/xcdd/xcdd-prview/xddd-prview"
+    "pages/xcdd/xcdd-preview/xcdd-preview",
+    "pages/xcdd/xcdd-zgxs/xcdd-zgxs"
   ],
   "window": {
     "navigationBarTextStyle": "white",

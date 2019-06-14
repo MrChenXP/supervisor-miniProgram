@@ -192,10 +192,6 @@ Page({
     this.data.pageParam.keyword = e.detail.value
     this.pageList(true)
   },
-  // 去新增
-  goAdd(){
-    wx.navigateTo({ url: '/pages/xcdd/xcdd-add/xcdd-add' })
-  },
   // 删除
   deleteAction() {
     this.setData({
@@ -246,5 +242,34 @@ Page({
       })
     }
     this.setData({deleteShow : true})
+  },
+  // 去新增 || 编辑
+  goAdd(e) {
+    let id = e.currentTarget.dataset.id
+    if (id){
+      wx.navigateTo({ url: '/pages/xcdd/xcdd-add/xcdd-add?CONTENT_ID=' + id })
+    } else{
+      wx.navigateTo({ url: '/pages/xcdd/xcdd-add/xcdd-add' })
+    }
+  },
+  // 去预览
+  toPreview(e) {
+    let id = e.currentTarget.dataset.id
+    if (id) {
+      wx.navigateTo({ url: '/pages/xcdd/xcdd-preview/xcdd-preview?contentId=' + id })
+    }
+  },
+  // 去整改通知 || 协商意见 
+  toZgxs(e) {
+    let status = e.currentTarget.dataset.status,
+        ids = e.currentTarget.dataset.ids
+    if (status == "2" || status == '3' || status == '5' ){
+      wx.navigateTo({ url: "/pages/xcdd/xcdd-zgxs/xcdd-zgxs?status=" + status + "zgxsId" + ids })
+    }
+    // if (status == '2' || status == '5') {
+    //   wx.navigateTo({ url: '/pages/xcdd/xcdd-zgtzs?zgxsId=' + ids })
+    // } else if (status == '3') {
+    //   wx.navigateTo({ url: '/pages/xcdd/xcdd-xsyjs?zgxsId=' + ids })
+    // }
   },
 })

@@ -13,11 +13,21 @@ Page({
     czwtShow: true,   
     // 页面数据
     data:{
-      ywsj: "2016-09-01", // 业务时间
+      ywsj: "", // 业务时间
     }
   },
-  onLoad: function (options) {
-    
+  onLoad (param) {
+    console.log(param)
+    if (param) {
+      if (param.CONTENT_ID) {
+        // this.contentId = param.CONTENT_ID
+        // this.loadData()
+      } else if (param.workplanId) {
+        // this.gzjh.value = param.workplanId
+        // this.loadDdGzjh()
+      }
+    }
+    // this.loginUser = this.$kwz.getLoginUser()
   },
   // 打开工作计划 学校 随行督学 
   showGzjh(e){

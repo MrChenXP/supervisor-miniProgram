@@ -1,4 +1,4 @@
-// pages/xcdd/xcdd-prview/xddd-prview.js
+// pages/xcdd/xcdd-zgxs/xcdd-zgxs.js
 Page({
 
   /**

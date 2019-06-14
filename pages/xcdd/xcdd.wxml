@@ -23,7 +23,7 @@
     <checkbox-group class="lists">
       <view>
 			<!-- 单项列表 -->
-			<view class="list" wx:for="{{dataList}}" wx:key="index">
+			<view class="list" wx:for="{{dataList}}" wx:key="index" bindtap='toPreview' data-id='{{item.CONTENT_ID}}'>
 				<view class="info">
 					<view>
             <label wx:if="{{!deleteShow}}">
@@ -38,10 +38,10 @@
 						<view class="fr">督导时间：{{item.YWSJ}}</view>
 					</view>
 					<view class="clearfix status">
-						<view class="fl clyj {{item.ztClass}}" >
+						<view class="fl clyj {{item.ztClass}}" catchtap='toZgxs' data-status="{{item.STATUS}}" data-ids="{{item.IDS}}">
               <kw-tag  color="blue" circle="{{true}}">{{item.STATUS_MC || '未填写'}}</kw-tag>
 						</view>
-						<view class="fr" >
+						<view class="fr" catchtap='goAdd' data-id='{{item.CONTENT_ID}}'>
               <kw-tag type="border" color="blue" wx:if="{{hasXzAuth}}" circle="{{true}}">编辑</kw-tag>
 						</view>
 					</view>

@@ -60,6 +60,8 @@ const ajaxUrl = (option) => {
  */
 const ajaxUrlUnLock = (option) => {
 
+  weixin.openLoading()
+
   const complete = (cb) => {
     return (data, option) => {
       weixin.closeLoading()
@@ -547,8 +549,8 @@ const getDms = (dmArray, callback, page) => {
 
 /**
  * 获取权限
- * @param {String} url
- * @param {function} callback
+ * @param {String} url 路径
+ * @param {function} callback(e) 回调(参数：是否有权限）
  */
 const hasAuth = (url, callback) => {
   if (url) {
@@ -570,6 +572,33 @@ const hasAuth = (url, callback) => {
   } 
 }
 
+/**
+ * 日期格式化 
+ * @param {String} fmt 日期格式
+ * @param {function} DefalutDate 传入的时间
+ */
+const formatDate = (fmt = 'yyyy-MM-dd', DefalutDate = new Date()) => {
+  let date = new Date(DefalutDate)
+  let o = {
+    'M+': date.getMonth() + 1,
+    'd+': date.getDate(),
+    'h+': date.getHours(),
+    'm+': date.getMinutes(),
+    's+': date.getSeconds(),
+    'q+': Math.floor((date.getMonth() + 3) / 3),
+    'S': date.getMilliseconds()
+  }
+  if (/(y+)/.test(fmt)) {
+    fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
+  }
+  for (let k in o) {
+    if (new RegExp('(' + k + ')').test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
+    }
+  }
+  return fmt
+}
+
 export default {
   ajaxUrl, get, post, initVisit, initToken, cacheAttach,
   // 兼容老的写法
@@ -578,5 +607,5 @@ export default {
   }, checkLogin, isLogin, initAutoLogin, setSession, logout, initProducts,
   cfp: util.cfp,
   getLoginUser: store.getLoginUser, loadDms, uploadImg,
-  canUse: weixin.canUse, copyJson: util.copyJson, hasAuth
+  canUse: weixin.canUse, copyJson: util.copyJson, hasAuth, formatDate
 }

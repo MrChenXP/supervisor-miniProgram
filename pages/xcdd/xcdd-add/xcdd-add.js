@@ -1,4 +1,5 @@
 // pages/xcdd/xcdd-add/xcdd-add.js
+const app = getApp()
 Page({
   data: {
     // 工作计划,学校,随行督学选择页面 后续处理意见 显示隐藏
@@ -13,21 +14,54 @@ Page({
     czwtShow: true,   
     // 页面数据
     data:{
-      ywsj: "", // 业务时间
-    }
+      ywsj: "", // 业务时间 督导时间
+      gzjhName: "", // 工作计划名字
+      gzjhId: "", // 工作计划Id
+      schoolName: "", // 学校名字
+      schoolId: "", // 学校Id
+      sxdxName: "", // 随行督学名字
+      sxdxId: "", // 随行督学Id
+    },
+    // 督导纪实id
+    contentId: '',
+    // 登录用户数据
+    loginUser: {},
   },
   onLoad (param) {
-    console.log(param)
     if (param) {
       if (param.CONTENT_ID) {
-        // this.contentId = param.CONTENT_ID
-        // this.loadData()
+        this.data.contentId = param.CONTENT_ID
+        this.loadData()
       } else if (param.workplanId) {
-        // this.gzjh.value = param.workplanId
-        // this.loadDdGzjh()
+        this.data.gzjh.value = param.workplanId
+        this.loadDdGzjh()
       }
     }
-    // this.loginUser = this.$kwz.getLoginUser()
+    app.$kwz.getLoginUser((e)=>{
+      this.data.loginUser = e
+    })
+  },
+  // 工作计划确定
+  confirmGzjh(e) {
+    let gzjh = e.detail.data
+    // 随行督学传的是用户id
+    console.log(gzjh)
+    if (gzjh) {
+      this.data.data.gzjhId = gzjh.value
+      this.data.data.schoolName = gzjh.data.XXMC
+      this.data.data.schoolId = gzjh.data.ORG_ID_TARGET
+      this.data.data.sxdxName = gzjh.data.CJID_MC || ""
+      this.data.data.sxdxId = gzjh.data.CJID
+      this.data.data.ywsj = gzjh.data.YWSJ && gzjh.data.YWSJ.length > 10 ? gzjh.data.YWSJ.substr(0, 10) : app.$kwz.formatDate('yyyy-MM-dd')
+      let gzjhMc = `${this.data.data.schoolName}/${this.data.data.sxdxName}/${this.data.data.ywsj}`
+      this.data.data.gzjhName = gzjhMc.length > 20 ? (gzjhMc.substr(0, 19) + '...') : gzjhMc
+    }
+    this.setData({ 
+      gzjhShow: false,
+      data: this.data.data
+    })
+    console.log(this.data.loginUser)
+
   },
   // 打开工作计划 学校 随行督学 
   showGzjh(e){

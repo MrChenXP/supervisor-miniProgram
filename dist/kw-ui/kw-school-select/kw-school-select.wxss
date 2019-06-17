@@ -8,7 +8,7 @@
   background: rgba(0, 0, 0, 0.2);
   height: 100vh;
   top: 0;
-  animation: show 1s;
+  animation: show 7500ms;
 }
 .kw-gzjh-select label {
     display: inline-block;

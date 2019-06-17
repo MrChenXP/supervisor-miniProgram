@@ -137,6 +137,8 @@ let _loginUser = null
 
 /**
  * 获取登陆用户信息
+ * @param {function} callback
+ * @param {object} app
  */
 const getLoginUser = (callback, app) => {
   if (!_loginUser) {

@@ -1,8 +1,8 @@
 <!--pages/xcdd/xcdd-add/xcdd-add.wxml-->
 <view class='content'>
-	<kw-list-cell title="工作计划" right-note="三星小学" bindtap="showGzjh"></kw-list-cell>
-	<kw-list-cell title="学校（校园）" right-note="三星小学" bindtap="showSchool"></kw-list-cell>
-	<kw-list-cell title="随行督学" right-note="三星小学" bindtap="showSxdx"></kw-list-cell>
+	<kw-list-cell title="工作计划" right-note="{{data.gzjhName}}" bindtap="showGzjh"></kw-list-cell>
+	<kw-list-cell title="学校（校园）" right-note="{{data.schoolName}}" bindtap="showSchool"></kw-list-cell>
+	<kw-list-cell title="随行督学" right-note="{{data.sxdxName}}" bindtap="showSxdx"></kw-list-cell>
   <picker mode="date" value="{{data.ywsj}}" bindchange="changeYwsj">
 	  <kw-list-cell title="时间" right-note="{{data.ywsj}}"></kw-list-cell>
   </picker>
@@ -64,7 +64,7 @@
   </view>
 
   <!-- 选择工作计划 学校 随行督学-->
-  <kw-gzjh-select wx:if="{{gzjhShow}}" bindclose="showGzjh"></kw-gzjh-select>
+  <kw-gzjh-select wx:if="{{gzjhShow}}" bindclose="showGzjh" bindconfirm="confirmGzjh"></kw-gzjh-select>
   <kw-gzjh-select wx:if="{{schoolShow}}" bindclose="showSchool"></kw-gzjh-select>
   <kw-gzjh-select wx:if="{{sxdxShow}}" bindclose="showSxdx"></kw-gzjh-select>
   <xcdd-hxclyj wx:if="{{hxclyjShow}}" bindclose="showHxclyj"></xcdd-hxclyj>

@@ -10,7 +10,9 @@ Component({
     checkRadio: {
       type: [Object, Array, String],
       value: []
-    }
+    },
+    // 控制显示隐藏
+    hidden: Boolean
   },
   data: {
     // 搜索学校用的关键字
@@ -29,7 +31,6 @@ Component({
     // 加载工作计划 type => true(全新)/false(增量)
     loadGzjh(type) {
       this.data.page = type == true ? 1 : this.data.page
-      this.data.loadStatus = 'loading'
       app.$kwz.ajax.ajaxUrl({
         url: '/dd_gzap/doList/DDGZAP',
         type: 'POST',
@@ -41,7 +42,6 @@ Component({
         success(data) {
           let datas = data.datas
           this.data.page++
-
           if (datas && datas.length > 0) {
             let loadDataList = []
             for (let i = 0; i < datas.length; i++) {

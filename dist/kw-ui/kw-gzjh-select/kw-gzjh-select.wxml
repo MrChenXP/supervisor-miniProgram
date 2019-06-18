@@ -1,5 +1,5 @@
 <!--dist/kw-ui/kw-gzjh-select/kw-gzjh-select.wxml-->
-<view class="content kw-gzjh-select" catchtouchmove="catchtouchmove">
+<view hidden='{{hidden}}' class="content kw-gzjh-select" catchtouchmove="catchtouchmove">
   <!-- 蒙版 -->
   <view class="kw-gzjh-select-mask" bindtap="close"></view>
   <!-- 搜索 -->

@@ -8,7 +8,7 @@
   background: rgba(0, 0, 0, 0.2);
   height: 100vh;
   top: 0;
-  animation: show 7500ms;
+  animation: show 750ms;
 }
 .kw-gzjh-select label {
     display: inline-block;
@@ -19,8 +19,8 @@
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
 }
-.kw-gzjh-select radio-group {
-    max-height: calc(100% - 235rpx);
+.kw-gzjh-select checkbox-group {
+    max-height: calc(100% - 205rpx);
     overflow: auto;
 }
 .kw-gzjh-select .kw-search-body {
@@ -68,6 +68,7 @@
 .save {
   width: 670rpx;
   margin: 0 20rpx;
+  border: none !important;
 }
 /* .save button[disabled] {
   color: rgba(0, 0, 0, 0.3);

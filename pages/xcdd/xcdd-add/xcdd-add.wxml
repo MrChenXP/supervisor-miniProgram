@@ -48,14 +48,14 @@
   </kw-list-cell>
 	<kw-list-cell isArrow="{{false}}">
     <view>
-        <view class="ddjs-head clearfix" bindtap='changeCzwtShow'>
-          <text class="fl">存在问题</text>
-          <view class="fr" hidden="{{!czwtShow}}"><i-icon type="unfold" color="#c7c7c7" size="20"></i-icon></view>
-          <view class="fr" hidden="{{czwtShow}}"><i-icon type="packup" color="#c7c7c7" size="20"></i-icon></view>
-        </view>
-        <view class="ddjs-body" hidden="{{czwtShow}}">
-          <textarea value="33" maxlength="4000" ></textarea>
-        </view>
+      <view class="ddjs-head clearfix" bindtap='changeCzwtShow'>
+        <text class="fl">存在问题</text>
+        <view class="fr" hidden="{{!czwtShow}}"><i-icon type="unfold" color="#c7c7c7" size="20"></i-icon></view>
+        <view class="fr" hidden="{{czwtShow}}"><i-icon type="packup" color="#c7c7c7" size="20"></i-icon></view>
+      </view>
+      <view class="ddjs-body" hidden="{{czwtShow}}">
+        <textarea value="33" maxlength="4000" ></textarea>
+      </view>
     </view>
   </kw-list-cell>
 	<kw-list-cell title="后续处理意见" ></kw-list-cell>
@@ -64,8 +64,8 @@
   </view>
 
   <!-- 选择工作计划 学校 随行督学-->
-  <kw-gzjh-select wx:if="{{gzjhShow}}" bindclose="showGzjh" bindconfirm="confirmGzjh"></kw-gzjh-select>
-  <kw-gzjh-select wx:if="{{schoolShow}}" bindclose="showSchool"></kw-gzjh-select>
-  <kw-gzjh-select wx:if="{{sxdxShow}}" bindclose="showSxdx"></kw-gzjh-select>
+  <kw-gzjh-select hidden="{{gzjhShow}}" bindclose="showGzjh" bindconfirm="confirmGzjh"></kw-gzjh-select>
+  <kw-school-select hidden="{{schoolShow}}" bindclose="showSchool" bindconfirm="confirmSchool">></kw-school-select>
+  <kw-sxdx-select hidden="{{sxdxShow}}" bindclose="showSxdx" bindconfirm="sxdxConfirm"></kw-sxdx-select>
   <xcdd-hxclyj wx:if="{{hxclyjShow}}" bindclose="showHxclyj"></xcdd-hxclyj>
 </view>

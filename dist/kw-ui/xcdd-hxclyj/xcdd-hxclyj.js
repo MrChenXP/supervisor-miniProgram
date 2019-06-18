@@ -1,7 +1,6 @@
 // dist/kw-ui/xcdd-hxclyj/xcdd-hxclyj.js
 Component({
   properties: {
-
   },
   data: {
 

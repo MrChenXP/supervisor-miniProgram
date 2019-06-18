@@ -20,7 +20,7 @@
             box-sizing: border-box;
 }
 .kw-gzjh-select radio-group {
-    max-height: calc(100% - 235rpx);
+    max-height: calc(100% - 205rpx);
     overflow: auto;
 }
 .kw-gzjh-select .kw-search-body {

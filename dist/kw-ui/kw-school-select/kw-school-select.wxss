@@ -8,7 +8,7 @@
   background: rgba(0, 0, 0, 0.2);
   height: 100vh;
   top: 0;
-  animation: show 7500ms;
+  animation: show 750ms;
 }
 .kw-gzjh-select label {
     display: inline-block;
@@ -20,7 +20,7 @@
             box-sizing: border-box;
 }
 .kw-gzjh-select radio-group {
-    max-height: calc(100% - 235rpx);
+    max-height: calc(100% - 205rpx);
     overflow: auto;
 }
 .kw-gzjh-select .kw-search-body {

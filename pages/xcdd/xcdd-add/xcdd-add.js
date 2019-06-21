@@ -8,7 +8,7 @@ Page({
     sxdxShow: true,
     hxclyjShow: false,
     // 督导纪实 资料采集 经验做法 存在问题 显示隐藏
-    ddjsShow: false,
+    ddjsShow: true,
     zlcjShow: true,
     jyzfShow: true,
     czwtShow: true,   
@@ -17,13 +17,29 @@ Page({
       ywsj: "", // 业务时间 督导时间
       gzjhName: "", // 工作计划名字
       gzjhId: "", // 工作计划Id
-      schoolName: "", // 学校名字
+      xqid: "", // 学期id
+      schoolName: "测试后续处理意见的学校", // 学校名字
       schoolId: "", // 学校Id
       sxdxName: "", // 随行督学名字
       sxdxId: "", // 随行督学Id
+      ddjs:"", // 督导纪实内容
+      cyzl: 0, // 查阅资料
+      lxhy: 0, // 列席会议
+      ztzf: 0, // 座谈走访
+      wjdc: 0, // 问卷调查
+      xyxs: 0, // 校园巡视
+      dxjyzf: "", // 典型经验做法
+      czwt: "", // 存在问题
+      contentId: "", // 督导纪实id
+      status: "1", // 后续处理意见状态
+      status_mc: '无意见', // 后续处理意见状态名称
+      zgxsyj: "", // 整改建议，当STATUS=4，即后续处理意见选择 小问题 时，不能为空必传，其余状态时为空
+      zgxsid: "", // 整个协商id STATUS=2或3或5时 不能为空必传
+      pgid: "", //评估id，点了“去评估”才有，否则为空
+      minDate: "", // 最小时间限制
+      maxDate: "", // 最大时间限制
     },
-    // 督导纪实id
-    contentId: '',
+    
     // 登录用户数据
     loginUser: {},
   },
@@ -64,6 +80,72 @@ Page({
       data: this.data.data
     })
   },
+  // 保存督导
+  saveXcdd(sfXq) {
+    if (!this.data.data.schoolName || !this.data.data.ywsj || !this.data.data.ddjs) {
+      app.$kwz.alert('学校、时间、督导纪实为必填项')
+      return
+    }
+    // 如果没有选择工作计划,则学期id会为空,那么默认取当前学期
+    if (!this.data.data.xqid) {
+      app.$kwz.ajax.ajaxUrl({
+        url: '/jc_xq/getCurXq',
+        type: 'POST',
+        page: this,
+        then(response) {
+          let datas = response.datas
+          if (datas && datas.curXq && datas.curXq.XQ_ID) {
+            this.data.data.xqid = datas.curXq.XQ_ID
+            this.sendSaveXcdd()            
+          }
+        }
+      })
+    } else {
+      this.sendSaveXcdd()
+    }
+  },
+  // 保存督导的ajax
+  sendSaveXcdd(){
+    app.$kwz.ajax.ajaxUrl({
+      url: '/ddjl/doEdit',
+      type: 'POST',
+      page: this,
+      data: {
+        CONTENT_ID: this.data.data.contentId || "",
+        ORG_ID: this.data.data.schoolId,
+        XXMC: this.data.data.schoolName,
+        YWSJ: this.data.data.ywsj,
+        USERID: this.data.data.sxdxId,
+        USERID_MC: this.data.data.sxdxName,
+        DDJS: this.data.data.ddjs,
+        CYZL: this.data.data.cyzl,
+        LXHY: this.data.data.lxhy,
+        ZTZF: this.data.data.ztzf,
+        WJDC: this.data.data.wjdc,
+        XYXS: this.data.data.xyxs,
+        DXJY: this.data.data.dxjyzf,
+        CZWT: this.data.data.czwt,
+        GZAP_YWID: this.data.data.gzjhId,
+        XQID: this.data.data.xqid,
+        STATUS: this.data.data.status,
+        STATUS_MC: this.data.data.status_mc,
+        ZGJY: this.data.data.zgxsyj,
+        ZGXSID: this.data.data.zgxsid,
+        PGMC: '',
+        // BZID: this.data.data.pgbzID,
+        PGID: this.data.data.pgid,
+        minDate: this.data.data.minDate, // 最小时间限制
+        maxDate: this.data.data.maxDate // 最大时间限制
+      },
+      vue: this,
+      then(response) {
+        app.$kwz.alert('保存成功')
+        // 点击保存按钮时,将初始zgxsId置空,否则onUnload里的判断会真,会运行删除zgxsId函数
+        // this.zgxsidOld = ""
+        wx.redirectTo({ url: '/pages/xcdd/xcdd' })
+      }
+    })
+  },
   // 学校确定
   confirmSchool(e) {
     this.data.data.schoolName = e.detail.data.name;
@@ -91,6 +173,13 @@ Page({
       data: this.data.data
     })
   },
+  // 后续处理意见弹出框确认
+  hxclyjConfirm({detail}){
+    this.data.data.status = detail.status
+    this.data.data.status_mc = detail.status_mc
+    this.data.data.zgxsyj = detail.zgxsyj
+    this.data.data.zgxsid = detail.zgxsid
+  },
   // 打开关闭 工作计划 学校 随行督学
   showGzjh(e){
     this.setData({ gzjhShow: !this.data.gzjhShow })
@@ -109,7 +198,11 @@ Page({
     this.data.data.ywsj = e.detail.value
     this.setData({ data: this.data.data })
   },
-  //更改 督导纪实 资料采集 经验做法 存在问题 显示隐藏
+  // 督导纪实修改
+  ddjsInput({ detail }) {
+    this.data.data.ddjs = detail.data
+  },
+  //打开关闭 督导纪实 资料采集 经验做法 存在问题
   changeDdjsShow(){
     this.setData({ ddjsShow: !this.data.ddjsShow })
   },
@@ -122,5 +215,32 @@ Page({
   changeCzwtShow() {
     this.setData({ czwtShow: !this.data.czwtShow })
   },
-  
+  // 更改 查阅资料 列席会议 座谈作坊 问卷调查 校园寻访 值
+  changeCyzl({ detail }){
+    this.data.data.cyzl = detail.value
+    this.setData({ data: this.data.data })
+  },
+  changeLxhy({ detail }) {
+    this.data.data.lxhy = detail.value
+    this.setData({ data: this.data.data })
+  },
+  changeZtzf({ detail }) {
+    this.data.data.ztzf = detail.value
+    this.setData({ data: this.data.data })
+  },
+  changeWjdc({ detail }) {
+    this.data.data.wjdc = detail.value
+    this.setData({ data: this.data.data })
+  },
+  changeXyxs({ detail }) {
+    this.data.data.xyxs = detail.value
+    this.setData({ data: this.data.data })
+  },
+  // 更改 典型经验做法 存在问题 值
+  inputDxjyzf({ detail }){
+    this.data.data.dxjyzf = detail.value
+  },
+  inputCzwt({ detail }) {
+    this.data.data.czwt = detail.value
+  },
 })

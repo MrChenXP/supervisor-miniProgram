@@ -28,10 +28,11 @@ Component({
         })
       }).exec()
     },
-    // 富文本输入
-    input(e){
-      this.editorCtx.action.args.html = e.detail.html
-      this.triggerEvent("input")
+    // 富文本输入 并将html返回给父组件
+    input({ detail }){
+      this.triggerEvent("input",{
+        data: detail.html
+      })
     },
     // 插入图片
     insertImage(){

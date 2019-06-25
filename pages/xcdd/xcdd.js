@@ -17,7 +17,6 @@ Page({
       contentrefresh: "正在加载...",
       contentnomore: "没有更多数据了"
     },
-    
     // 搜索以及分页参数
     pageParam: {
       // 学段

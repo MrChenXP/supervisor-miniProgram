@@ -575,7 +575,7 @@ const hasAuth = (url, callback) => {
 /**
  * 日期格式化 
  * @param {String} fmt 日期格式
- * @param {function} DefalutDate 传入的时间
+ * @param {function} DefalutDate 传入的时间,不传默认当前系统时间
  */
 const formatDate = (fmt = 'yyyy-MM-dd', DefalutDate = new Date()) => {
   let date = new Date(DefalutDate)

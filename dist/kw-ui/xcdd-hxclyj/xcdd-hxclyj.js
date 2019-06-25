@@ -19,8 +19,20 @@ Component({
     schoolId: String,
     // 业务时间
     ywsj: String,
+    // 处理期限
+    clqx: String,
     // 督导纪实id
-    contentId: String
+    contentId: String,
+    // 整改建议 小问题是用到
+    zgxsyj: String,
+    // 编号
+    zgxsBh: String,
+    // 整改协商id
+    zgxsid: String,
+    // 科室id
+    ksid: String,
+    // 科室名字
+    ksName: String,
   },
   data: {
     // 后续处理意见显示隐藏
@@ -30,52 +42,52 @@ Component({
       {
       name: '无意见',
       value: '1'
-    }, {
-      name: '小问题--向学校现场反馈建议',
-      value: '4'
-    }, {
-      name: '一般问题--向学校发送整改建议',
-      value: '2'
-    }, {
-      name: '严重问题--向督导办上报整改建议',
-      value: '5'
-    }, {
-      name: '复杂问题--向科室发送协商意见',
-      value: '3'
-    }],
+      }, {
+        name: '小问题--向学校现场反馈建议',
+        value: '4'
+      }, {
+        name: '一般问题--向学校发送整改建议',
+        value: '2'
+      }, {
+        name: '严重问题--向督导办上报整改建议',
+        value: '5'
+      }, {
+        name: '复杂问题--向科室发送协商意见',
+        value: '3'
+      }
+    ],
     // 存储后续处理意见选择器下标
     hxclyjIndex: '0',
     // 选择器更改前的下标 取消的是用到
     hxclyjOld: "",
-    // 编号
-    ybwtBh:"",
     // 科室列表
     ksList: [],
-    // 复杂问题科室值
-    fzwtKs: {
-      name: '点击选择科室', // 科室的名字
-      value: '', // 科室的id
-      index: '' // 科室在列表中的下标
-    },
-    // 整改建议 小问题是用到
-    zgxsyj: "",
-    // 整改协商id
-    zgxsid: "",
-    // 处理期限
-    clqx: "0",
+    // 科室在列表中的下标
+    fzwtKsIndex: '',
     // 页面初始整改协商id,在用户返回的时,进行新旧id判断,若用户再发了整改后不保存直接返回,则要删除整改
     zgxsidOld: '',
   },
   lifetimes:{
     ready(){
+      // 根据状态值，事先改好选择器下标
+      switch (this.data.status){
+        case "4": this.data.hxclyjIndex = "1";break;
+        case "2": this.data.hxclyjIndex = "2"; break;
+        case "5": this.data.hxclyjIndex = "3"; break;
+        case "3": this.data.hxclyjIndex = "4"; break;
+      }
+      this.setData({ hxclyjIndex: this.data.hxclyjIndex })
       this.data.zgxsidOld = this.data.zgxsid
-      console.log(this.data.zgxsidOld)
     },
     detached() {
       // 进行新旧id判断,若用户再发了整改后不保存直接返回,则要删除整改
-      // if (this.data.zgxsid != this.data.zgxsidOld && this.zgxsidOld != "") {
-      //   this.deleteDisposeIdeaId()
-      // }
+      console.log(this.data.zgxsid)
+      console.log(this.data.zgxsidOld)
+      console.log((this.data.zgxsid != this.data.zgxsidOld) && this.data.zgxsidOld != "")
+
+      if ((this.data.zgxsid != this.data.zgxsidOld) && this.data.zgxsidOld != "") {
+        this.deleteDisposeIdeaId()
+      }
     },
   },
   methods: {
@@ -98,23 +110,21 @@ Component({
         })
         this.loadHxclyj()
       } else {
+        this.deleteDisposeIdeaId()
         this.setData({
           status: 1,
           status_mc: "无意见",
-          hxclyjShow: !this.data.hxclyjShow
-        })
-        this.deleteDisposeIdeaId()
-        this.setData({
+          hxclyjShow: !this.data.hxclyjShow,
+          hxclyjIndex: index,
           zgxsyj: "",
           zgxsid: ""
         })
-
         this.eventConfirm()
       }
     },
     // 后续处理意见弹框初始化
     loadHxclyj(){
-      if (!this.data.ybwtBh) {
+      if (!this.data.zgxsBh) {
         this.getBh()
       }
       if(this.data.status === '3' && this.data.ksList.length < 1){
@@ -130,7 +140,7 @@ Component({
         then (response) {
           let datas = response.datas;
           if (datas.BH) {
-            this.setData({ ybwtBh: datas.BH })
+            this.setData({ zgxsBh: datas.BH })
           }
         }
       })
@@ -185,7 +195,7 @@ Component({
           this.sendZgAjax()
         }
       } else{
-        if (this.data.fzwtKs.name == '点击选择科室' || !this.data.zgxsyj) {
+        if (this.data.ksName == '点击选择科室' || !this.data.zgxsyj) {
           app.$kwz.alert('未选择科室或整改建议')
           return
         } else{
@@ -193,21 +203,6 @@ Component({
           this.sendXsAjax()
         }
       }
-    },
-    // 创建一个确定事件
-    eventConfirm(){
-      this.triggerEvent('confirm',{
-        status: this.data.status,
-        status_mc: this.data.status_mc,
-        zgxsyj: this.data.zgxsyj,
-        zgxsid: this.data.zgxsid
-      })
-      console.log(this.data.status_mc);
-      this.setData({
-        hxclyjShow: !this.data.hxclyjShow,
-        hxclyjIndex: this.data.hxclyjIndex,
-        status_mc: this.data.status_mc,
-      });
     },
     // 发送整改ajax
     sendZgAjax(){
@@ -217,7 +212,7 @@ Component({
         page: this,
         data: {
           ORG_ID_TARGET: this.data.schoolId,
-          BH: this.data.ybwtBh,
+          BH: this.data.zgxsBh,
           ZGXSLYMC: '经常性督导整改',
           CLQX: this.data.clqx,
           ZGXSLY: '1',
@@ -243,9 +238,9 @@ Component({
         page: this,
         data: {
           ORG_ID_TARGET: this.data.schoolId,
-          BH: this.data.ybwtBh,
+          BH: this.data.zgxsBh,
           ZGXSLYMC: '经常性督导整改',
-          XS_ORG_ID: this.data.fzwtKs.value,
+          XS_ORG_ID: this.data.ksid,
           ZGXSLY: '1',
           ZGXSDM: "2",
           ZGXSMC: this.data.status_mc,
@@ -260,9 +255,24 @@ Component({
         }
       })
     },
+    // 创建一个确定事件
+    eventConfirm() {
+      this.triggerEvent('confirm', {
+        status: this.data.status,
+        status_mc: this.data.status_mc,
+        zgxsyj: this.data.zgxsyj,
+        zgxsid: this.data.zgxsid
+      })
+      this.setData({
+        hxclyjShow: !this.data.hxclyjShow,
+        hxclyjIndex: this.data.hxclyjIndex,
+        status_mc: this.data.status_mc,
+      });
+    },
     // 删除整改id
     deleteDisposeIdeaId(callback){
       if (this.data.zgxsid) {
+        console.log("马上删除整改")
         app.$kwz.ajax.ajaxUrl({
           url: '/dd_zgxs/doDelete',
           type: 'POST',
@@ -287,10 +297,11 @@ Component({
     // 科室选择
     changeKs({detail}) {
       let index = detail.value
-      this.data.fzwtKs.index = index
-      this.data.fzwtKs.name = this.data.ksList[index].name
-      this.data.fzwtKs.value = this.data.ksList[index].value
-      this.setData({ fzwtKs: this.data.fzwtKs})
+      this.setData({ 
+        fzwtKsIndex: index,
+        ksName: this.data.ksList[index].name,
+        ksid: this.data.ksList[index].value
+      })
     }
   }
 })

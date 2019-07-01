@@ -40,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 1,
 			"list": [
 				{
 					"id": -1,
@@ -53,7 +53,7 @@
 					"id": 1,
 					"name": "xcdd-add",
 					"pathName": "pages/xcdd/xcdd-add/xcdd-add",
-					"query": "CONTENT_ID=8C4B938589DA7664E0530100007FFDD1",
+					"query": "CONTENT_ID=8C97B285EC77330DE0530100007FE318",
 					"scene": null
 				},
 				{

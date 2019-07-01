@@ -1,61 +1,61 @@
 const app = getApp()
 Page({
   data: {
-// 督导纪实数据
-        ddjsData:{
-          STATUS_MC:"", // 整改类型名称
-          XXMC: '', // 学校名称
-				  YWSJ: '', // 督导时间
-          AUTHOR: '',	// 创建人
-          GZAP_YWID:"", // 工作计划id
-          DXJY: '',	// 亮点 督学建议 典型经验和做法
-          CZWT: '', // 存在问题
-				  ZGJY: '', // 整改意见 小问题
-          STATUS: '1', // 是整改还是协商
-          PGID:"", // 评估id
-        },
-        // 工作计划数据
-        gzjhData: {
-          TXT: "", // 督导事项
-          BZID:"", // 评估标准id
-        },
-        // 评估数据
-        pgbzData: {},
-        // 整改协商数据
-        zgxsData:{
-          XSNR: '', // 整改协商内容
-          CLQX: '', // 处理期限
-          CLBG: {}, // 处理报告
-				  YWSJ: '', // 整改协商时间
-          CLZTDM: '', // 整改协商处理状态代码
-        },
-				// 督导纪实
-				ddjs: {},
-				// 督导纪实id
-				contentId: '',
-				// 督导事项显示隐藏
-				ddsxShow: false,
-				// 督导事项cell显示隐藏
-				ddsxCellShow: false,
-				// 督导纪实显示隐藏
-				ddjsShow: false,
-				//评估结果显示隐藏
-				pgjgShow: false,
-				// 亮点(典型经验和做法)显示隐藏
-				jyzfShow: false,
-				// 存在问题显示隐藏
-				czwtShow: false,
-				// 整改报告显示隐藏
-				// zgbgShow: false,
-				// 整改报告Cell显示隐藏
-				// zgbgCellShow: false,
-				// 后续处理意见显示隐藏
-				hxclyjShow: false,
-				// 后续处理意见Cell显示隐藏
-				hxclyjCellShow: false,
-        raterContainer:{},
-        // 评估处理后的模板数据
-        pgContainer:{}
+    // 督导纪实数据
+    ddjsData:{
+      STATUS_MC:"", // 整改类型名称
+      XXMC: '', // 学校名称
+      YWSJ: '', // 督导时间
+      AUTHOR: '',	// 创建人
+      GZAP_YWID:"", // 工作计划id
+      DXJY: '',	// 亮点 督学建议 典型经验和做法
+      CZWT: '', // 存在问题
+      ZGJY: '', // 整改意见 小问题
+      STATUS: '1', // 是整改还是协商
+      PGID:"", // 评估id
+    },
+    // 工作计划数据
+    gzjhData: {
+      TXT: "", // 督导事项
+      BZID:"", // 评估标准id
+    },
+    // 评估数据
+    pgbzData: {},
+    // 整改协商数据
+    zgxsData:{
+      XSNR: '', // 整改协商内容
+      CLQX: '', // 处理期限
+      CLBG: {}, // 处理报告
+      YWSJ: '', // 整改协商时间
+      CLZTDM: '', // 整改协商处理状态代码
+    },
+    // 督导纪实
+    ddjs: {},
+    // 督导纪实id
+    contentId: '',
+    // 督导事项显示隐藏
+    ddsxShow: false,
+    // 督导事项cell显示隐藏
+    ddsxCellShow: false,
+    // 督导纪实显示隐藏
+    ddjsShow: false,
+    //评估结果显示隐藏
+    pgjgShow: false,
+    // 亮点(典型经验和做法)显示隐藏
+    jyzfShow: false,
+    // 存在问题显示隐藏
+    czwtShow: false,
+    // 整改报告显示隐藏
+    // zgbgShow: false,
+    // 整改报告Cell显示隐藏
+    // zgbgCellShow: false,
+    // 后续处理意见显示隐藏
+    hxclyjShow: false,
+    // 后续处理意见Cell显示隐藏
+    hxclyjCellShow: false,
+    raterContainer:{},
+    // 评估处理后的模板数据
+    pgContainer:{}
   },
   onLoad: function (param) {
     if (param && param.CONTENT_ID) {
@@ -63,6 +63,7 @@ Page({
     	this.loadData()
     }
   },
+  // 页面初始化
   loadData() {
     if (this.data.contentId) {
     	app.$kwz.ajax.ajaxUrl({
@@ -73,6 +74,7 @@ Page({
     		},
     		page: this,
     		then(response) {
+          response.datas.DDJS = app.$kwz.formatImg(response.datas.DDJS)
           this.data.ddjsData = response.datas
           this.setData({
             ddjsData: this.data.ddjsData
@@ -107,6 +109,7 @@ Page({
     		if(datas && datas.map) {
     			this.data.ddsxCellShow = true
           this.data.gzjhData = datas.map
+          this.data.gzjhData.TXT = app.$kwz.formatImg(this.data.gzjhData.TXT)
           // this.loadPgData() 评估暂时删除
           this.setData({ gzjhData: this.data.gzjhData})
           console.log(this.data.gzjhData)
@@ -129,6 +132,7 @@ Page({
     		if(this.data.zgxsData) {
     			this.data.zgxsData.YWSJ = this.data.zgxsData.YWSJ.substr(0, 10)
     		}
+        this.data.zgxsData.CLBG = app.$kwz.formatImg(this.data.zgxsData.CLBG)
         this.setData({ zgxsData: this.data.zgxsData})
     	}
     })

@@ -599,6 +599,19 @@ const formatDate = (fmt = 'yyyy-MM-dd', DefalutDate = new Date()) => {
   return fmt
 }
 
+/**
+ * html字符串img图片小程序查看 
+ * @param {String} html 要更改的html字符串
+ */
+const formatImg = (html)=>{
+  let imgReg = /<img\ssrc="(?:(?!http))/gi;
+  let src = "<img src=\"" + consts.getBaseUrl()
+  if(html){ // 有些时候字段值是空，但依然调用这个方法，故要判断
+    html = html.replace(imgReg, src)
+  }
+  return html
+}
+
 export default {
   ajaxUrl, get, post, initVisit, initToken, cacheAttach,
   // 兼容老的写法
@@ -607,5 +620,5 @@ export default {
   }, checkLogin, isLogin, initAutoLogin, setSession, logout, initProducts,
   cfp: util.cfp,
   getLoginUser: store.getLoginUser, loadDms, uploadImg,
-  canUse: weixin.canUse, copyJson: util.copyJson, hasAuth, formatDate
+  canUse: weixin.canUse, copyJson: util.copyJson, hasAuth, formatDate, formatImg
 }

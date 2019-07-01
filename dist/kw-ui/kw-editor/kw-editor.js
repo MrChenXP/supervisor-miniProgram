@@ -21,8 +21,9 @@ Component({
       if(this.data.value){
         this.createSelectorQuery().select('#kw-editor').context(function (res) {
           that.editorCtx = res.context
+          let html = app.$kwz.formatImg(that.data.value)
           that.editorCtx.setContents({
-            html: that.data.value
+            html: html
           })
         }).exec()
       }
@@ -33,14 +34,14 @@ Component({
   methods: {
     // 富文本初始化 暂时隐藏 因为监听了value值的变化，每次变化都初始化了
     onEditorReady(){
-      // const that = this
-      // this.createSelectorQuery().select('#kw-editor').context(function (res) {
-      //   that.editorCtx = res.context // 讲富文本编辑器对象化到this下
-      //   console.log("11"+this.editorCtx)
-      //   that.editorCtx.setContents({
-      //     html: that.data.value
-      //   })
-      // }).exec()
+      const that = this
+      this.createSelectorQuery().select('#kw-editor').context(function (res) {
+        that.editorCtx = res.context // 讲富文本编辑器对象化到this下
+        let html = app.$kwz.formatImg(that.data.value)
+        that.editorCtx.setContents({
+          html: html
+        })
+      }).exec()
     },
     // 富文本输入 并将html返回给父组件 输入使用setData会导致焦点失去
     input({ detail }){

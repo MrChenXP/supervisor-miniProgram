@@ -7,9 +7,9 @@ Page({
     status: "",
     // 页面数据
     data:{},
-    // 
+    // 处理加过显示隐藏
     cljgShow: false,
-    // 
+    // 处理结果整个列表是否显示
     cljgCellShow: false,
     
   },
@@ -31,6 +31,7 @@ Page({
       page: this,
       then(response) {
         let datas = response.datas
+        datas.CLBG = app.$kwz.formatImg(datas.CLBG)
         if (datas && datas.ZGXSID) {
           datas.YWSJ = datas.YWSJ.length > 10 ? datas.YWSJ.substr(0, 10) : datas.YWSJ
           this.setData({ data: datas})

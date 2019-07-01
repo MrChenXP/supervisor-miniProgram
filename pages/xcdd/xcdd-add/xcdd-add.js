@@ -83,7 +83,7 @@ Page({
             this.data.data.status= datas.STATUS
             this.data.data.status_mc= datas.STATUS_MC
             this.data.data.sxdxName= datas.USERNAME
-            this.data.data.schoolId= datas.USERID
+            this.data.data.sxdxId= datas.USERID
             this.data.data.dxjyzf= datas.DXJY || ''
             this.data.data.czwt= datas.CZWT || ''
             this.data.data.cyzl= datas.CYZL || 0
@@ -109,7 +109,6 @@ Page({
                   page: this,
                   then(response) {
                     let zgdatas = response.datas[0]
-                    console.log(zgdatas)
                     this.data.data.zgxsBh = zgdatas.BH
                     this.data.data.zgxsid = zgdatas.ZGXSID
                     this.data.data.zgxsyj = zgdatas.XSNR
@@ -193,7 +192,8 @@ Page({
   },
   // 保存督导的ajax
   sendSaveXcdd(){
-    console.log('saveddjs'+this.data.data.ddjs)
+    // 点击保存按钮时,将初始zgxsId置空,否则onUnload里的判断会真,会运行删除zgxsId函数
+    this.selectComponent(".xcdd-hxclyj").data.zgxsidOld = ""
     app.$kwz.ajax.ajaxUrl({
       url: '/ddjl/doEdit',
       type: 'POST',
@@ -228,8 +228,6 @@ Page({
       vue: this,
       then(response) {
         app.$kwz.alert('保存成功')
-        // 点击保存按钮时,将初始zgxsId置空,否则onUnload里的判断会真,会运行删除zgxsId函数
-        // this.zgxsidOld = ""
         wx.redirectTo({ url: '/pages/xcdd/xcdd' })
       }
     })
@@ -270,10 +268,14 @@ Page({
   },
   // 打开关闭 工作计划 学校 随行督学
   showGzjh(e){
-    this.setData({ gzjhShow: !this.data.gzjhShow })
+    if(!this.data.data.contentId){
+      this.setData({ gzjhShow: !this.data.gzjhShow })
+    }
   },
   showSchool(e) {
-    this.setData({ schoolShow: !this.data.schoolShow })
+    if(!this.data.data.contentId){
+      this.setData({ schoolShow: !this.data.schoolShow })
+    }
   },
   showSxdx(e) {
     this.setData({ sxdxShow: !this.data.sxdxShow })

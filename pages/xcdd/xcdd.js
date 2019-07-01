@@ -9,8 +9,6 @@ Page({
     hasXzAuth: false,
     // 删除权限
     hasScAuth: false,
-    // 加载更多状态
-    loadingType: "more",
     // 加载更多状态对应文字 键名不能改
     contentText: {
       contentdown: "上拉显示更多",
@@ -55,6 +53,11 @@ Page({
         '4': 'xwt',
         '5': 'yzwt',
       }
+    },
+    // 加载更多的提示信息
+    loadMore:{
+      text: "点击加载更多",
+      show: false
     }
   },
   onLoad(){
@@ -65,6 +68,12 @@ Page({
       auth ? this.setData({ hasScAuth: auth }) : ""
     })
     this.initData()
+  },
+  onReachBottom() {
+    this.data.loadMore.show= true
+    this.data.loadMore.show= "正在加载..."
+    this.setData({ loadMore: this.data.loadMore})
+    this.pageList()
   },
   // 初始化页面
   initData(){
@@ -152,17 +161,19 @@ Page({
             this.data.dataList = datas
           } else {
             this.data.dataList.push(...datas)
-            this.data.loadingType = "more"
+            this.data.loadMore.show= false
+            this.data.loadMore.text= "上拉显示更多"
           }
         } else {
-          this.data.loadingType = "noMore"
+          this.data.loadMore.show= false
+          this.data.loadMore.text= "没有更多数据了"
           if (type) {
             this.data.dataList = []
           }
         }
         this.setData({
           dataList: this.data.dataList,
-          loadingType: this.data.loadingType,
+          loadMore: this.data.loadMore,
           deleteParam: this.data.deleteParam
         })
       }
@@ -255,20 +266,15 @@ Page({
   toPreview(e) {
     let id = e.currentTarget.dataset.id
     if (id) {
-      wx.navigateTo({ url: '/pages/xcdd/xcdd-preview/xcdd-preview?contentId=' + id })
+      wx.navigateTo({ url: '/pages/xcdd/xcdd-preview/xcdd-preview?CONTENT_ID=' + id })
     }
   },
-  // 去整改通知 || 协商意见 
+  // 去整改通知 || 协商意见
   toZgxs(e) {
     let status = e.currentTarget.dataset.status,
         ids = e.currentTarget.dataset.ids
     if (status == "2" || status == '3' || status == '5' ){
-      wx.navigateTo({ url: "/pages/xcdd/xcdd-zgxs/xcdd-zgxs?status=" + status + "zgxsId" + ids })
+      wx.navigateTo({ url: "/pages/xcdd/xcdd-zgxs/xcdd-zgxs?status=" + status + "&zgxsId=" + ids })
     }
-    // if (status == '2' || status == '5') {
-    //   wx.navigateTo({ url: '/pages/xcdd/xcdd-zgtzs?zgxsId=' + ids })
-    // } else if (status == '3') {
-    //   wx.navigateTo({ url: '/pages/xcdd/xcdd-xsyjs?zgxsId=' + ids })
-    // }
   },
 })

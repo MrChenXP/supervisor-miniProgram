@@ -66,6 +66,8 @@ Component({
     fzwtKsIndex: '',
     // 页面初始整改协商id,在用户返回的时,进行新旧id判断,若用户再发了整改后不保存直接返回,则要删除整改
     zgxsidOld: '',
+    // 用来发送整个的编号
+    fsBh:""
   },
   lifetimes:{
     ready(){
@@ -81,10 +83,6 @@ Component({
     },
     detached() {
       // 进行新旧id判断,若用户再发了整改后不保存直接返回,则要删除整改
-      console.log(this.data.zgxsid)
-      console.log(this.data.zgxsidOld)
-      console.log((this.data.zgxsid != this.data.zgxsidOld) && this.data.zgxsidOld != "")
-
       if ((this.data.zgxsid != this.data.zgxsidOld) && this.data.zgxsidOld != "") {
         this.deleteDisposeIdeaId()
       }
@@ -124,9 +122,8 @@ Component({
     },
     // 后续处理意见弹框初始化
     loadHxclyj(){
-      if (!this.data.zgxsBh) {
-        this.getBh()
-      }
+      // 先获取编号存着，等用户发送整个的时候，把这个编号发送
+      this.getBh()
       if(this.data.status === '3' && this.data.ksList.length < 1){
         this.getKs()
       }
@@ -138,9 +135,12 @@ Component({
         type: 'POST',
         page: this,
         then (response) {
-          let datas = response.datas;
+          let datas = response.datas
           if (datas.BH) {
-            this.setData({ zgxsBh: datas.BH })
+            this.data.fsBh = datas.BH
+            if(!this.data.zgxsBh){ // 如果没有编号就是新增
+              this.setData({ zgxsBh: datas.BH })
+            }
           }
         }
       })
@@ -195,7 +195,7 @@ Component({
           this.sendZgAjax()
         }
       } else{
-        if (this.data.ksName == '点击选择科室' || !this.data.zgxsyj) {
+        if (!this.data.ksName || !this.data.zgxsyj) {
           app.$kwz.alert('未选择科室或整改建议')
           return
         } else{
@@ -212,7 +212,7 @@ Component({
         page: this,
         data: {
           ORG_ID_TARGET: this.data.schoolId,
-          BH: this.data.zgxsBh,
+          BH: this.data.fsBh,
           ZGXSLYMC: '经常性督导整改',
           CLQX: this.data.clqx,
           ZGXSLY: '1',
@@ -238,7 +238,7 @@ Component({
         page: this,
         data: {
           ORG_ID_TARGET: this.data.schoolId,
-          BH: this.data.zgxsBh,
+          BH: this.data.fsBh,
           ZGXSLYMC: '经常性督导整改',
           XS_ORG_ID: this.data.ksid,
           ZGXSLY: '1',
@@ -272,7 +272,6 @@ Component({
     // 删除整改id
     deleteDisposeIdeaId(callback){
       if (this.data.zgxsid) {
-        console.log("马上删除整改")
         app.$kwz.ajax.ajaxUrl({
           url: '/dd_zgxs/doDelete',
           type: 'POST',

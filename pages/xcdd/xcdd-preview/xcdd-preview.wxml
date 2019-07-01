@@ -1,2 +1,123 @@
-<!--pages/xcdd/xcdd-preview/xcdd-preview.wxml-->
-<text>pages/xcdd/xcdd-preview/xcdd-preview.wxml</text>
+<view class="content">
+  <kw-list-cell title="学校" rightNote="{{ddjsData.XXMC}}" isArrow="{{false}}"></kw-list-cell>
+  <kw-list-cell title="督导时间" rightNote="{{ddjsData.YWSJ}}" isArrow="{{false}}"></kw-list-cell>
+  <kw-list-cell title="创建人" rightNote="{{ddjsData.AUTHOR}}" isArrow="{{false}}"></kw-list-cell>
+  <kw-list-cell hidden="ddsxCellShow" isArrow="{{false}}" wx:if="{{gzjhData.TXT}}">
+  	<view>
+  		<view class="ddjs-head clearfix" bindtap="ddsxShow">
+  			<text class="fl">督导事项</text>
+  			<view class="fr" hidden="{{ddsxShow}}">
+  				<i-icon type="unfold" color="#c7c7c7" size="20"></i-icon>
+  			</view>
+  			<view class="fr" hidden="{{!ddsxShow}}">
+  				<i-icon type="packup" color="#c7c7c7" size="20"></i-icon>
+  			</view>
+  		</view>
+  		<view hidden="{{!ddsxShow}}" class="ddjs-body">
+        <rich-text nodes="{{gzjhData.TXT}}"></rich-text>
+  		</view>
+  	</view>
+  </kw-list-cell>
+  <kw-list-cell isArrow="{{false}}" wx:if="{{ddjsData.DDJS}}">
+  	<view>
+  		<view class="ddjs-head clearfix" bindtap="ddjsShow">
+  			<text class="fl">督导纪实</text>
+  			<view class="fr" hidden="{{ddjsShow}}">
+  				<i-icon type="unfold" color="#c7c7c7" size="20"></i-icon>
+  			</view>
+  			<view class="fr" hidden="{{!ddjsShow}}">
+  				<i-icon type="packup" color="#c7c7c7" size="20"></i-icon>
+  			</view>
+  		</view>
+  		<view hidden="{{!ddjsShow}}" class="ddjs-body">
+  			<rich-text nodes="{{ddjsData.DDJS}}"></rich-text>
+  		</view>
+  	</view>
+  </kw-list-cell>
+  <kw-list-cell isArrow="{{false}}" wx:if="{{ddjsData.DXJY}}">
+  	<view>
+  		<view class="ddjs-head clearfix" bindtap="jyzfShow">
+  			<text class="fl">亮点</text>
+  			<view class="fr" hidden="{{jyzfShow}}">
+  				<i-icon type="unfold" color="#c7c7c7" size="20"></i-icon>
+  			</view>
+  			<view class="fr" hidden="{{!jyzfShow}}">
+  				<i-icon type="packup" color="#c7c7c7" size="20"></i-icon>
+  			</view>
+  		</view>
+  		<view hidden="{{!jyzfShow}}" class="ddjs-body">
+  			<view>{{ddjsData.DXJY}}</view>
+  		</view>
+  	</view>
+  </kw-list-cell>
+  <kw-list-cell isArrow="{{false}}" wx:if="{{ddjsData.CZWT}}">
+  	<view>
+  		<view class="ddjs-head clearfix" bindtap="czwtShow">
+  			<text class="fl">存在问题</text>
+  			<view class="fr" hidden="{{czwtShow}}">
+  				<i-icon type="unfold" color="#c7c7c7" size="20"></i-icon>
+  			</view>
+  			<view class="fr" hidden="{{!czwtShow}}">
+  				<i-icon type="packup" color="#c7c7c7" size="20"></i-icon>
+  			</view>
+  		</view>
+  		<view hidden="{{!czwtShow}}" class="ddjs-body">
+  			<view>{{ddjsData.CZWT}}</view>
+  		</view>
+  	</view>
+  </kw-list-cell>
+  
+  <kw-list-cell isArrow="{{false}}" wx:if="{{ddjsData.STATUS != '1'}}">
+  	<view>
+  		<view class="ddjs-head clearfix" bindtap="hxclyjShow">
+  			<text class="fl">后续处理意见</text>
+  			<view class="fr" hidden="{{hxclyjShow}}">
+  				<i-icon type="unfold" color="#c7c7c7" size="20"></i-icon>
+  			</view>
+  			<view class="fr" hidden="{{!hxclyjShow}}">
+  				<i-icon type="packup" color="#c7c7c7" size="20"></i-icon>
+  			</view>
+  		</view>
+  		<view hidden="{{!hxclyjShow}}" class="ddjs-body">
+  			<view class="color-blue">{{ddjsData.STATUS_MC}}</view>
+        <!-- 小问题 -->
+        <view wx:if="{{ddjsData.STATUS =='4'}}">
+        	<view class="text-bold">{{ddjsData.ZGJY}}</view>
+        </view>
+         <!-- 整改 -->
+        <view wx:if="{{ddjsData.STATUS=='2' || ddjsData.STATUS=='5' }}">
+        	<view>经挂牌督导，你单位存在以下问题及建议:</view>
+        	<view class="text-bold">{{zgxsData.XSNR}}</view>
+        	<view>对以上问题要高度重视，采取措施，立即整改。整改报告于本通知下发 
+              <text class="text-bold">{{zgxsData.CLQX}}</text>
+              日内书面报责任督学，责任督学于接到报告的3日内上报人民政府教育督导室督管员备案。
+          </view>
+        	<view class="time">{{zgxsData.YWSJ}}</view>
+        </view>
+        <!-- 协商 -->
+        <view wx:if="{{ddjsData.STATUS=='3'}}">
+          <view>我室责任督学于 
+                <text class="text-bold">{{zgxsData.YWSJ}}</text>
+                对
+                <text class="text-bold">{{ddjsData.XXMC}}</text>
+                进行了教育督导，发现该学校(幼儿园)存在以下问题及建议:
+          </view>
+          <view class="text-bold">{{zgxsData.XSNR}}</view>
+          <view>请贵科室（中心）予以支持、配合、协调解决!</view>
+          <view class="time">{{zgxsData.YWSJ}}</view>
+        </view>
+        <!-- 处理状态码==6 整改完成 显示学校整改报告 -->
+        <view wx:if="{{zgxsData.CLZTDM == '6' || zgxsData.CLZTDM == '26'}}">
+        	<view>处理结果:</view>
+          <!-- kw-editor-preview会把处理报告里的html字符串全部屏蔽。然后变成纯文本。顾用rich-text -->
+        	<!-- <kw-editor-preview :content="this.zgxsData.CLBG"></kw-editor-preview> -->
+          <rich-text nodes="{{zgxsData.CLBG}}"></rich-text>
+          
+          <!-- <rich-text nodes='<img src="http://www.dd.com:8080/attached/images/20190627/765899b68b954d17a401cba174ee36a1.jpg"/>'></rich-text> -->
+
+        </view>
+        
+  		</view>
+  	</view>
+  </kw-list-cell>
+</view>

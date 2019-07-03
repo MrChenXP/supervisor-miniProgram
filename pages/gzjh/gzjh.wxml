@@ -1,0 +1,66 @@
+<view class='content'>
+  <!-- 搜索 -->
+  <kw-search bindconfirm="searchList">
+    <view>
+      <picker range="{{searchCondition.DM_XD}}" range-key="DMMX_MC" bindchange="changeXd">
+				<kw-list-cell title="学段" right-note="{{pageParam.xdMc}}"></kw-list-cell>
+			</picker>
+      <picker range="{{searchCondition.DM_XQ}}" range-key="DMMX_MC" bindchange="changeXq">
+				<kw-list-cell title="学期" right-note="{{pageParam.xqMc}}"></kw-list-cell>
+			</picker>
+    </view>
+  </kw-search>
+  
+  <!-- 功能(新增删除) -->
+  <view class="gn">
+    <view class="check fl" wx:if="{{!deleteShow}}" bindtap='checkAll'>
+      <checkbox checked="{{deleteParam._CHECK_ALL_}}">全选</checkbox>
+    </view>
+    <view class="delete fl" wx:if="{{hasScAuth && deleteShow}}" bindtap='deleteAction'>删除</view>
+    <view class="delete fl" wx:if="{{!deleteShow}}" bindtap='confirmDeleteAction'>确认删除</view>
+    <view class="add fr" wx:if="{{hasXzAuth}}" bindtap="goAdd">新增</view>
+  </view>
+  
+  <checkbox-group class="lists">
+    <view>
+      <!-- 单项列表 -->
+      <view class="list" wx:for="{{dataList}}" wx:key="index" bindtap='toPreview' data-id='{{item.CONTENT_ID}}'>
+        <view class="info">
+          <view>
+            <label wx:if="{{!deleteShow}}">
+              <view class="check">
+                <checkbox checked="{{deleteParam[item.CONTENT_ID]}}" catchtap='checkAction' data-id='{{item.CONTENT_ID}}'/>
+              </view>
+            </label>
+            {{item.ORG_ID_TARGET}}
+          </view>
+          <view class="clearfix time">
+            <view class="fl">{{item.AUTHOR}}</view>
+            <view class="fr">{{item.DDSD}}</view>
+          </view>
+          <view class="clearfix time">
+            <text class="color-999">{{item.TXT || "未填写"}}</text>
+          </view>
+          <view class="clearfix status">
+            <view class="fl clyj" wx:if="{{!!item.BZMC}}">
+              <kw-tag  color="blue" circle="{{true}}">{{item.BZMC || '未填写'}}</kw-tag>
+            </view>
+            <view class="fr" wx:if="{{item.STATUS == '1'}}" catchtap='doDispose"' data-id='{{item.CONTENT_ID}}'>
+              <kw-tag type="border" color="blue" wx:if="{{hasClAuth}}" circle="{{true}}">处理</kw-tag>
+            </view>
+            <view class="fr" wx:if="{{item.STATUS == '1'}}" catchtap='goAdd' data-id='{{item.CONTENT_ID}}'>
+              <kw-tag type="border" color="blue" wx:if="{{hasXgAuth}}" circle="{{true}}">修改</kw-tag>
+            </view>
+            <view class="fr" wx:if="{{item.STATUS == '1'}}" catchtap='toDD' data-id='{{item.CONTENT_ID}}'>
+              <kw-tag type="border" color="blue" wx:if="{{hasDdAuth}}" circle="{{true}}">督导</kw-tag>
+            </view>
+            <view class="fr" wx:if="{{item.ISQS && item.STATUS == '1'}}" catchtap='doBcj' data-id='{{item.CONTENT_ID}}'>
+              <kw-tag type="border" color="blue" wx:if="{{hasBcjAuth}}" circle="{{true}}">不参加</kw-tag>
+            </view>
+          </view>
+        </view>
+      </view>
+      <i-load-more tip="{{loadMore.text}}"  loading="{{ loadMore.show }}" />
+    </view>
+  </checkbox-group>
+</view>

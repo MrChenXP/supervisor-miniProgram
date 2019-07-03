@@ -112,7 +112,6 @@ Page({
           this.data.gzjhData.TXT = app.$kwz.formatImg(this.data.gzjhData.TXT)
           // this.loadPgData() 评估暂时删除
           this.setData({ gzjhData: this.data.gzjhData})
-          console.log(this.data.gzjhData)
     		}
     	}
     })

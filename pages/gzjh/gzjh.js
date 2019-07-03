@@ -1,42 +1,40 @@
-// pages/xcdd/xcdd.js
+// pages/gzjh/gzjh.js
 const app = getApp()
-
 Page({
   data: {
+    // 新增 修改 删除 处理 督导 不参加(签收) 权限
+    hasXzAuth: false,
+    hasXgAuth: false,
+    hasScAuth: false,
+    hasClAuth: false,
+    hasDdAuth: false,
+    hasBcjAuth: false,
     // 删除显示隐藏
     deleteShow: true,
-    // 新增权限
-    hasXzAuth: false,
-    // 删除权限
-    hasScAuth: false,
     // 搜索以及分页参数
     pageParam: {
-      // 学段
-      xd: '',
-      // 整改类型
-      xq: '',
-      xdMc: '全部',
-      xqMc: '',
-      // 页码
-      page: 1,
-      // 关键字
-      keyword: ''
+    	// 学段
+    	xd: '',
+    	// 整改类型
+    	xq: '',
+    	xdMc: '',
+    	xqMc: '',
+    	// 页码
+    	page: 1,
+    	// 关键字
+    	keyword: ''
     },
     dataList: [],
     // 搜索参数
     searchCondition: {
-      // 学段选择列表
-      DM_XD: [
-        {
-          DMMX_CODE: "", DMMX_MC: "全部"
-        }
-      ],
-      // 整改类型选择列表
-      DM_XQ: []
+    	// 学段选择列表
+    	DM_XD: [],
+    	// 整改类型选择列表
+    	DM_XQ: []
     },
     // 删除参数
     deleteParam: {
-      '_CHECK_ALL_': false
+    	'_CHECK_ALL_': false
     },
     // 徽标样式
     constParam: {
@@ -54,24 +52,15 @@ Page({
       show: false
     }
   },
-  onLoad(){
-    app.$kwz.hasAuth('ddjl/doEdit',(auth)=>{
-      auth ? this.setData({hasXzAuth: auth}) : ""
-    })
-    app.$kwz.hasAuth('ddjl/deleteddjl', (auth) => {
-      auth ? this.setData({ hasScAuth: auth }) : ""
-    })
+  onLoad() {
+    this.has()
     this.initData()
   },
   onReachBottom() {
-    this.data.loadMore.show= true
-    this.data.loadMore.show= "正在加载..."
-    this.setData({ loadMore: this.data.loadMore})
-    this.pageList()
+
   },
   // 初始化页面
-  initData(){
-    // 加载学段 学期 加载列表
+  initData() {
     app.$kwz.loadDms('DM_XD', dms =>{
       this.data.searchCondition = app.$kwz.copyJson(dms) || {}
       // 给选项加“全部”。其实就是显示全部，实际为空值，后台判断空为全部
@@ -126,13 +115,13 @@ Page({
       this.data.pageParam.page = 1
     }
     app.$kwz.ajax.ajaxUrl({
-      url: '/ddjl/doSchoolPageList',
+      url: '/dd_gzap/doPageList/DDGZAP',
       type: 'POST',
       page: this,
       data: {
         page: this.data.pageParam.page,
         XD: this.data.pageParam.xd,
-        XXMC: this.data.pageParam.keyword,
+        ORG_ID_TARGET: this.data.pageParam.keyword,
         XQID: this.data.pageParam.xq
       },
       then(data) {
@@ -144,6 +133,11 @@ Page({
             let tmp = datas[i]
             tmp.ztClass = this.data.constParam.ztClass[tmp.STATUS]
             deleteParam[tmp.CONTENT_ID] = false
+            tmp.ISQS = tmp.ISCYR === 1 && tmp.QDZT === '1'
+            tmp.DDSD = tmp.YWSJ ? (tmp.YWSJ.substr(0, 10) + (tmp.SD === '1' ? ' 上午' : ' 下午')) : tmp.YWSJ
+            // 截取内容
+            let text = datas[i].TXT
+            text = text && text.length > 35 ? text.substr(0, 35) + '...' : text
           }
           // 复制老的删除集至新的删除集
           for (let i in this.deleteParam) {
@@ -169,15 +163,37 @@ Page({
             this.data.dataList = []
           }
         }
+        console.log(this.data.dataList)
         this.setData({
           dataList: this.data.dataList,
           loadMore: this.data.loadMore,
           deleteParam: this.data.deleteParam
         })
       }
+    })  
+  },
+  // 按钮权限判断
+  has(){
+    app.$kwz.hasAuth('dd_gzap/toAdd',(auth)=>{
+      auth ? this.setData({hasXzAuth: auth}) : ""
+    })
+    app.$kwz.hasAuth('dd_gzap/toUpdate', (auth) => {
+      auth ? this.setData({ hasXgAuth: auth }) : ""
+    })
+    app.$kwz.hasAuth('dd_gzap/doDelete', (auth) => {
+      auth ? this.setData({ hasScAuth: auth }) : ""
+    })
+    app.$kwz.hasAuth('dd_gzap/doDeal', (auth) => {
+      auth ? this.setData({ hasClAuth: auth }) : ""
+    })
+    app.$kwz.hasAuth('dd_gzap/doSelectDdjlByGzapid', (auth) => {
+      auth ? this.setData({ hasDdAuth: auth }) : ""
+    })
+    app.$kwz.hasAuth('dd_gzap/toQs', (auth) => {
+      auth ? this.setData({ hasBcjAuth: auth }) : ""
     })
   },
-  // 选择搜索条件 => 学段
+  // 选择搜索条件 => 学段 学期
   changeXd(e) {
     let checkedOption = this.data.searchCondition.DM_XD[e.detail.value]
     this.data.pageParam.xd = checkedOption.DMMX_CODE
@@ -186,7 +202,6 @@ Page({
       pageParam: this.data.pageParam
     })
   },
-  // 选择搜索条件 => 学期
   changeXq(e) {
     let checkedOption = this.data.searchCondition.DM_XQ[e.detail.value]
     this.data.pageParam.xq = checkedOption.DMMX_CODE
@@ -228,28 +243,28 @@ Page({
   },
   // 确认删除
   confirmDeleteAction() {
-    let ids = []
-    for (let i in this.data.deleteParam) {
-      if (this.data.deleteParam[i] && i != '_CHECK_ALL_') {
-        ids.push(i)
-      }
-    }
-    if (ids.length > 0) {
-      app.$kwz.ajax.ajaxUrl({
-        url: '/jc_content/doDelete/DDJL',
-        type: 'POST',
-        data: {
-          ids: ids.join(',')
-        },
-        page: this,
-        then(response) {
-    wx.hideToast()
-          app.$kwz.alert('操作成功')
-          this.pageList(true)
-        }
-      })
-    }
-    this.setData({deleteShow : true})
+//     let ids = []
+//     for (let i in this.data.deleteParam) {
+//       if (this.data.deleteParam[i] && i != '_CHECK_ALL_') {
+//         ids.push(i)
+//       }
+//     }
+//     if (ids.length > 0) {
+//       app.$kwz.ajax.ajaxUrl({
+//         url: '/jc_content/doDelete/DDJL',
+//         type: 'POST',
+//         data: {
+//           ids: ids.join(',')
+//         },
+//         page: this,
+//         then(response) {
+//     wx.hideToast()
+//           app.$kwz.alert('操作成功')
+//           this.pageList(true)
+//         }
+//       })
+//     }
+//     this.setData({deleteShow : true})
   },
   // 去新增 || 编辑
   goAdd(e) {
@@ -265,14 +280,6 @@ Page({
     let id = e.currentTarget.dataset.id
     if (id) {
       wx.navigateTo({ url: '/pages/xcdd/xcdd-preview/xcdd-preview?CONTENT_ID=' + id })
-    }
-  },
-  // 去整改通知 || 协商意见
-  toZgxs(e) {
-    let status = e.currentTarget.dataset.status,
-        ids = e.currentTarget.dataset.ids
-    if (status == "2" || status == '3' || status == '5' ){
-      wx.navigateTo({ url: "/pages/xcdd/xcdd-zgxs/xcdd-zgxs?status=" + status + "&zgxsId=" + ids })
     }
   },
 })

@@ -11,7 +11,9 @@ Page({
     ddjsShow: true,
     zlcjShow: true,
     jyzfShow: true,
-    czwtShow: true,   
+    czwtShow: true,
+    // 保存权限
+    hasXzAuth: false,
     // 页面数据
     data:{
       ywsj: "", // 业务时间 督导时间
@@ -62,6 +64,9 @@ Page({
       this.data.data.sxdxName = e.name
       this.data.data.sxdxId = e.uid
       this.setData({ data: this.data.data })
+    })
+    app.$kwz.hasAuth('ddjl/doEdit', (auth) => {
+      auth ? this.setData({ hasXzAuth: auth }) : ""
     })
   },
   // 加载督导纪实

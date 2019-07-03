@@ -45,7 +45,7 @@
             <view class="fl clyj" wx:if="{{!!item.BZMC}}">
               <kw-tag  color="blue" circle="{{true}}">{{item.BZMC || '未填写'}}</kw-tag>
             </view>
-            <view class="fr" wx:if="{{item.STATUS == '1'}}" catchtap='doDispose"' data-id='{{item.CONTENT_ID}}'>
+            <view class="fr" wx:if="{{item.STATUS == '1'}}" catchtap='doDispose' data-id='{{item.CONTENT_ID}}'>
               <kw-tag type="border" color="blue" wx:if="{{hasClAuth}}" circle="{{true}}">处理</kw-tag>
             </view>
             <view class="fr" wx:if="{{item.STATUS == '1'}}" catchtap='goAdd' data-id='{{item.CONTENT_ID}}'>

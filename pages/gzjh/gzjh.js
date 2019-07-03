@@ -57,7 +57,10 @@ Page({
     this.initData()
   },
   onReachBottom() {
-
+    this.data.loadMore.show= true
+    this.data.loadMore.show= "正在加载..."
+    this.setData({ loadMore: this.data.loadMore})
+    this.pageList()
   },
   // 初始化页面
   initData() {
@@ -243,43 +246,86 @@ Page({
   },
   // 确认删除
   confirmDeleteAction() {
-//     let ids = []
-//     for (let i in this.data.deleteParam) {
-//       if (this.data.deleteParam[i] && i != '_CHECK_ALL_') {
-//         ids.push(i)
-//       }
-//     }
-//     if (ids.length > 0) {
-//       app.$kwz.ajax.ajaxUrl({
-//         url: '/jc_content/doDelete/DDJL',
-//         type: 'POST',
-//         data: {
-//           ids: ids.join(',')
-//         },
-//         page: this,
-//         then(response) {
-//     wx.hideToast()
-//           app.$kwz.alert('操作成功')
-//           this.pageList(true)
-//         }
-//       })
-//     }
-//     this.setData({deleteShow : true})
+    let ids = []
+    for (let i in this.data.deleteParam) {
+      if (this.data.deleteParam[i] && i != '_CHECK_ALL_') {
+        ids.push(i)
+      }
+    }
+    if (ids.length > 0) {
+      app.$kwz.ajax.ajaxUrl({
+        url: '/dd_gzap/doDelete',
+        type: 'POST',
+        data: {
+          ids: ids.join(',')
+        },
+        page: this,
+        then(response) {
+          wx.hideToast()
+          this.pageList(true)
+          app.$kwz.alert('操作成功')
+        }
+      })
+    }
+    this.setData({deleteShow : true})
   },
-  // 去新增 || 编辑
+  // 去 新增、编辑  去预览 去督导
   goAdd(e) {
     let id = e.currentTarget.dataset.id
     if (id){
-      wx.navigateTo({ url: '/pages/xcdd/xcdd-add/xcdd-add?CONTENT_ID=' + id })
+      wx.navigateTo({ url: '/pages/gzjh/gzjh-add/gzjh-add?CONTENT_ID=' + id })
     } else{
-      wx.navigateTo({ url: '/pages/xcdd/xcdd-add/xcdd-add' })
+      wx.navigateTo({ url: '/pages/gzjh/gzjh-add/gzjh-add' })
     }
   },
-  // 去预览
+  // 
   toPreview(e) {
     let id = e.currentTarget.dataset.id
     if (id) {
-      wx.navigateTo({ url: '/pages/xcdd/xcdd-preview/xcdd-preview?CONTENT_ID=' + id })
+      wx.navigateTo({ url: '/pages/gzjh/gzjh-preview/gzjh-preview?CONTENT_ID=' + id })
     }
+  },
+  toDD(e) {
+    let id = e.currentTarget.dataset.id
+    if (id) {
+      wx.navigateTo({ url: '/pages/xcdd/xcdd-add/xcdd-add?CONTENT_ID=' + id })
+    }
+  },
+  // 处理 不参加
+  doDispose(e) {
+    let id = e.currentTarget.dataset.id
+  	if (id) {
+  		app.$kwz.ajax.ajaxUrl({
+  			url: '/dd_gzap/doDeal',
+  			type: 'POST',
+  			data: {
+  				CONTENT_ID: id
+  			},
+  			page: this,
+  			then (response) {
+  				this.pageList(true)
+          app.$kwz.alert('操作成功')
+  			}
+  		})
+  	}
+  },
+  // 不参加
+  doBcj (e) {
+    let id = e.currentTarget.dataset.id
+  	if (id) {
+  		app.$kwz.ajax.ajaxUrl({
+  			url: '/dd_gzap/doQs',
+  			type: 'POST',
+  			data: {
+  				CONTENT_ID: id,
+          QSZT:'3'
+  			},
+  			page: this,
+  			then (response) {
+  				this.pageList(true)
+          app.$kwz.alert('操作成功')
+  			}
+  		})
+  	}
   },
 })

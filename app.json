@@ -9,7 +9,9 @@
     "pages/xcdd/xcdd-add/xcdd-add",
     "pages/xcdd/xcdd-preview/xcdd-preview",
     "pages/xcdd/xcdd-zgxs/xcdd-zgxs",
-    "pages/gzjh/gzjh"
+    "pages/gzjh/gzjh",
+    "pages/gzjh/gzjh-add/gzjh-add",
+    "pages/gzjh/gzjh-preview/gzjh-preview"
   ],
   "window": {
     "navigationBarTextStyle": "white",

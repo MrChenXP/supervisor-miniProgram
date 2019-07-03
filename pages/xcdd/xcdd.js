@@ -243,9 +243,9 @@ Page({
         },
         page: this,
         then(response) {
-    wx.hideToast()
-          app.$kwz.alert('操作成功')
+          wx.hideToast()
           this.pageList(true)
+          app.$kwz.alert('操作成功')
         }
       })
     }

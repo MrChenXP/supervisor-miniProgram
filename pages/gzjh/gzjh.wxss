@@ -1,3 +1,6 @@
 .lists {
 	  height: calc(100% - 186upx);
 }
+.lists .list .info .time {
+  max-height:100rpx;
+}

@@ -129,6 +129,7 @@ Page({
       },
       then(data) {
         let datas = data.datas
+        console.log(datas)
         let deleteParam = {}
         if (datas && datas.length > 0) {
           // 将数据集中的id放入删除集中的id
@@ -166,7 +167,6 @@ Page({
             this.data.dataList = []
           }
         }
-        console.log(this.data.dataList)
         this.setData({
           dataList: this.data.dataList,
           loadMore: this.data.loadMore,
@@ -278,7 +278,6 @@ Page({
       wx.navigateTo({ url: '/pages/gzjh/gzjh-add/gzjh-add' })
     }
   },
-  // 
   toPreview(e) {
     let id = e.currentTarget.dataset.id
     if (id) {
@@ -288,7 +287,7 @@ Page({
   toDD(e) {
     let id = e.currentTarget.dataset.id
     if (id) {
-      wx.navigateTo({ url: '/pages/xcdd/xcdd-add/xcdd-add?CONTENT_ID=' + id })
+      wx.navigateTo({ url: '/pages/xcdd/xcdd-add/xcdd-add?workplanId=' + id })
     }
   },
   // 处理 不参加
@@ -310,7 +309,7 @@ Page({
   	}
   },
   // 不参加
-  doBcj (e) {
+  doBcj(e) {
     let id = e.currentTarget.dataset.id
   	if (id) {
   		app.$kwz.ajax.ajaxUrl({

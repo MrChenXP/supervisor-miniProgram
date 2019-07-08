@@ -2,7 +2,7 @@
   <kw-list-cell title="学校" rightNote="{{ddjsData.XXMC}}" isArrow="{{false}}"></kw-list-cell>
   <kw-list-cell title="督导时间" rightNote="{{ddjsData.YWSJ}}" isArrow="{{false}}"></kw-list-cell>
   <kw-list-cell title="创建人" rightNote="{{ddjsData.AUTHOR}}" isArrow="{{false}}"></kw-list-cell>
-  <kw-list-cell hidden="ddsxCellShow" isArrow="{{false}}" wx:if="{{gzjhData.TXT}}">
+  <kw-list-cell hidden="{{ddsxCellShow}}" isArrow="{{false}}" wx:if="{{gzjhData.TXT}}">
   	<view>
   		<view class="ddjs-head clearfix" bindtap="ddsxShow">
   			<text class="fl">督导事项</text>

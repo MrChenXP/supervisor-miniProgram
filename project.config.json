@@ -44,16 +44,9 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "gzjh",
-					"pathName": "pages/gzjh/gzjh",
+					"name": "zggz",
+					"pathName": "pages/zggz/zggz",
 					"query": "",
-					"scene": null
-				},
-				{
-					"id": 1,
-					"name": "xcdd-add",
-					"pathName": "pages/xcdd/xcdd-add/xcdd-add",
-					"query": "CONTENT_ID=8C97B285EC77330DE0530100007FE318",
 					"scene": null
 				},
 				{
@@ -61,6 +54,13 @@
 					"name": "workspace",
 					"pathName": "pages/workspace/workspace",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "gzjh-preview",
+					"pathName": "pages/gzjh/gzjh-preview/gzjh-preview",
+					"query": "CONTENT_ID=8C313D5E7F79374EE0530100007FE466",
 					"scene": null
 				}
 			]

@@ -182,7 +182,7 @@ Page({
     let checkedOption = this.data.searchCondition.DM_XD[e.detail.value]
     this.data.pageParam.xd = checkedOption.DMMX_CODE
     this.data.pageParam.xdMc = checkedOption.DMMX_MC
-    this.setData({
+    this.setData({ 
       pageParam: this.data.pageParam
     })
   },
@@ -252,7 +252,7 @@ Page({
     this.setData({deleteShow : true})
   },
   // 去新增 || 编辑
-  goAdd(e) {
+  toAdd(e) {
     let id = e.currentTarget.dataset.id
     if (id){
       wx.navigateTo({ url: '/pages/xcdd/xcdd-add/xcdd-add?CONTENT_ID=' + id })

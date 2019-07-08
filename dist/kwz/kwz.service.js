@@ -616,6 +616,53 @@ const formatImg = (html)=>{
   return html
 }
 
+/**
+ * 返回当天为基准的指定日期
+ * @param {String} impose 参数{y,M,d} M大写是因为后台传来的是大写M
+ * @param {function} format 日期格式
+ */
+const getLimdat = (impose, format)=> {
+  if (typeof impose !== "object") {
+    impose = JSON.parse(impose)
+  }
+  let _y = parseInt(impose.y)
+  let _m = parseInt(impose.M)
+  let _d = parseInt(impose.d)
+  let date = new Date(Date.parse(new Date((new Date().getFullYear() + _y), (new Date().getMonth()) + _m, new Date().getDate())) + (86400000 * _d))
+  date = formatDate(format, date)
+  return date
+}
+
+/**
+ * 返回功能限制的日期参数
+ * @param {String} url 功能id
+ * @param {function} callback(commonMenus) 回调(菜单)
+ */
+const dateImpose = (url, callback, page) => {
+  store.getCommonMenus((commonMenus)=>{
+    if(commonMenus){
+      for (let arrs of commonMenus._menus_.children) { // arrs代表每个应用
+        for (let arr of arrs.children) { // arr代表应用中的每个功能
+          if (arr.PRO_ID === url) {
+            if (typeof arr.PRO_ATTRS === 'object') { // 没配限制日期返回null,给他加默认前后1年
+              arr.PRO_ATTRS = {
+                minDate: '{"y":"-1","M":"0","d":"0"}',
+                maxDate: '{"y":"1","M":"0","d":"0"}'
+              }
+              callback(arr.PRO_ATTRS)
+            }
+            let proAttrs = JSON.parse(arr.PRO_ATTRS)
+            proAttrs.minDate = typeof proAttrs.minDate === 'undefined' ? '{"y":"-1","M":"0","d":"0"}' : proAttrs.minDate
+            proAttrs.maxDate = typeof proAttrs.maxDate === 'undefined' ? '{"y":"1","M":"0","d":"0"}' : proAttrs.maxDate
+            callback(proAttrs)
+          }
+        }
+      }
+    }
+  })
+
+}
+
 export default {
   ajaxUrl, get, post, initVisit, initToken, cacheAttach,
   // 兼容老的写法
@@ -624,5 +671,6 @@ export default {
   }, checkLogin, isLogin, initAutoLogin, setSession, logout, initProducts,
   cfp: util.cfp,
   getLoginUser: store.getLoginUser, loadDms, uploadImg,
-  canUse: weixin.canUse, copyJson: util.copyJson, hasAuth, formatDate, formatImg
+  canUse: weixin.canUse, 
+  copyJson: util.copyJson, hasAuth, formatDate, formatImg, dateImpose, getLimdat
 }

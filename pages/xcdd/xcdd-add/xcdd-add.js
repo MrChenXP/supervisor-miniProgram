@@ -45,7 +45,6 @@ Page({
       minDate: "", // 最小时间限制
       maxDate: "", // 最大时间限制
     },
-    
     // 登录用户数据
     loginUser: {},
   },
@@ -55,7 +54,7 @@ Page({
         this.data.data.contentId = param.CONTENT_ID
         this.loadData()
       } else if (param.workplanId) {
-        this.data.gzjh.value = param.workplanId
+        this.data.data.gzjhId = param.workplanId
         this.loadDdGzjh()
       }
     }
@@ -234,6 +233,32 @@ Page({
       then(response) {
         app.$kwz.alert('保存成功')
         wx.redirectTo({ url: '/pages/xcdd/xcdd' })
+      }
+    })
+  },
+  // 加载工作计划数据=>从工作计划列表点击去督导,传过来工作计划id,然后加载工作计划内容填充至督导纪实
+  loadDdGzjh() {
+    app.$kwz.ajax.ajaxUrl({
+      url: '/dd_gzap/doSelectByPrimary/DDGZAP',
+      type: 'POST',
+      data: {
+        CONTENT_ID: this.data.data.gzjhId
+      },
+      page: this,
+      then (response) {
+        let datas = response.datas
+        if (datas && datas.map) {
+          let gzjh = datas.map
+          this.data.data.schoolName = gzjh.ORG_ID_TARGET_MC
+          this.data.data.schoolId = gzjh.ORG_ID_TARGET
+          this.data.data.sxdxName = gzjh.JGID_MC || ''
+          this.data.data.sxdxId = gzjh.JGID || ''
+          this.data.data.ywsj = gzjh.YWSJ && gzjh.YWSJ.length > 10 ? gzjh.YWSJ.substr(0, 10) : app.$kwz.formatDate('yyyy-MM-dd')
+          let gzjhMc = `${this.data.data.schoolName}/${this.data.data.sxdxName}/${this.data.data.ywsj}`
+          this.data.data.gzjhName = gzjhMc.length > 25 ? (gzjhMc.substr(0, 24) + '...') : gzjhMc,
+          this.setData({ data: this.data.data})
+          // 先不用获取标准
+        }
       }
     })
   },

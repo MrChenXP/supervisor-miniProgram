@@ -1,2 +1,23 @@
-<!--pages/gzjh/gzjh-preview/gzjh-preview.wxml-->
-<text>pages/gzjh/gzjh-preview/gzjh-preview.wxml</text>
+<view class="content">
+  <kw-list-cell title="学校" rightNote="{{XXMC}}"></kw-list-cell>
+  <kw-list-cell title="督导时段" rightNote="{{SDMC}}"></kw-list-cell>
+  <kw-list-cell title="小组成员" rightNote="{{SXDXMC}}"></kw-list-cell>
+  <kw-list-cell title="确认参加成员" rightNote="{{QRSXDXMC}}"></kw-list-cell>
+  <kw-list-cell wx:if="{{pgmcShow}}" title="规定任务评价" rightNote="{{PGMC}}"></kw-list-cell>
+  <kw-list-cell isArrow="{{false}}" >
+  	<view>
+  		<view class="ddjs-head clearfix" bindtap="ddsxShow">
+  			<text class="fl">督导事项</text>
+  			<view class="fr" hidden="{{ddsxShow}}">
+  				<i-icon type="unfold" color="#c7c7c7" size="20"></i-icon>
+  			</view>
+  			<view class="fr" hidden="{{!ddsxShow}}">
+  				<i-icon type="packup" color="#c7c7c7" size="20"></i-icon>
+  			</view>
+  		</view>
+  		<view hidden="{{!ddsxShow}}" class="ddjs-body">
+        <rich-text nodes="{{DDSX}}"></rich-text>
+  		</view>
+  	</view>
+  </kw-list-cell>
+</view>

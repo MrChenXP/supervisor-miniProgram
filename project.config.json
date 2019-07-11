@@ -40,12 +40,12 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 2,
 			"list": [
 				{
 					"id": 0,
-					"name": "zggz",
-					"pathName": "pages/zggz/zggz",
+					"name": "tkjl",
+					"pathName": "pages/tkjl/tkjl",
 					"query": "",
 					"scene": null
 				},
@@ -57,10 +57,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "gzjh-preview",
-					"pathName": "pages/gzjh/gzjh-preview/gzjh-preview",
-					"query": "CONTENT_ID=8C313D5E7F79374EE0530100007FE466",
+					"id": 2,
+					"name": "tkjl-add",
+					"pathName": "pages/tkjl/tkjl-add/tkjl-add",
+					"query": "id=fb8ca11efc534a57949d344f350fa162&isNew=undefined",
 					"scene": null
 				}
 			]

@@ -1,0 +1,20 @@
+.lists .fs .kw-tag {
+  background-color: #f8dad9;
+  border-color: #f8dad9;
+  color: #e64c48;
+}
+.lists .zgz .kw-tag {
+  background-color: #f7e6c1;
+  border-color: #f7e6c1;
+  color: #f27506;
+}
+.lists .qs .kw-tag {
+  background-color: #dcf0c7;
+  border-color: #dcf0c7;
+  color: #68ae1d;
+}
+.lists .zgwc .kw-tag {
+	background-color: #d6f1fb;
+	border-color: #d6f1fb;
+	color: #109dea;
+}

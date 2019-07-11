@@ -251,8 +251,8 @@ Page({
         maxDate: this.data.maxDate,
         end_time:"",
         start_time:"",
-          CURR_APP_ID:"56FDFCB3323E293AE0530100007FF7B0",
-          CURR_U_ID:"78304456e6f0404cbb1bd7fffc664a41",
+          // CURR_APP_ID:"56FDFCB3323E293AE0530100007FF7B0",
+          // CURR_U_ID:"78304456e6f0404cbb1bd7fffc664a41",
       },
       page: this,
       then (response) {

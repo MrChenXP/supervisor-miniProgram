@@ -1,0 +1,73 @@
+<view class='content'>
+  <!-- 搜索 -->
+  <kw-search bindconfirm="searchList">
+    <view>
+      <picker range="{{searchCondition.DM_XD}}" range-key="DMMX_MC" bindchange="changeXd">
+				<kw-list-cell title="学段" right-note="{{pageParam.xdMc}}"></kw-list-cell>
+			</picker>
+      <picker range="{{searchCondition.ksList}}" range-key="name" bindchange="changeKs">
+      	<kw-list-cell title="科室" right-note="{{pageParam.ksMc}}"></kw-list-cell>
+      </picker>
+      <picker range="{{searchCondition.DM_DD_ZGXSLY}}" range-key="DMMX_MC" bindchange="changeZglx">
+				<kw-list-cell title="整改类型" right-note="{{pageParam.zglxMc}}"></kw-list-cell>
+			</picker>
+      <picker range="{{searchCondition.DM_DD_CLZT}}" range-key="DMMX_MC" bindchange="changeZt">
+      	<kw-list-cell title="状态" right-note="{{pageParam.ztMc}}"></kw-list-cell>
+      </picker>
+    </view>
+  </kw-search>
+  
+  <!-- 分页 -->
+  <view class="pager">
+    <view class="zg" bindtap="toZg">整改</view>
+    <view class="xs active" >协商</view>
+  </view>
+  
+  <!-- 功能(新增删除) -->
+  <view class="gn" wx:if="{{hasScAuth || hasXzAuth}}">
+    <view class="check fl" wx:if="{{!deleteShow}}" bindtap='checkAll'>
+      <checkbox checked="{{deleteParam._CHECK_ALL_}}">全选</checkbox>
+    </view>
+    <view class="delete fl" wx:if="{{hasScAuth && deleteShow}}" bindtap='deleteAction'>删除</view>
+    <view class="delete fl" wx:if="{{!deleteShow}}" bindtap='confirmDeleteAction'>确认删除</view>
+    <view class="add fr" wx:if="{{hasXzAuth}}" bindtap="toAdd" data-id="add">新增</view>
+  </view>
+  
+  <checkbox-group class="lists">
+    <view>
+      <!-- 单项列表 -->
+      <view class="list" wx:for="{{dataList}}" wx:key="index" bindtap='toZgxs' data-id='{{item.ZGXSID}}'>
+        <view class="info">
+          <view>
+            <label wx:if="{{!deleteShow}}">
+              <view class="check">
+                <checkbox checked="{{deleteParam[item.ZGXSID]}}" catchtap='checkAction' data-id='{{item.ZGXSID}}'/>
+              </view>
+            </label>
+            {{item.XXMC || '未填写'}}
+          </view>
+          <view class="clearfix time">
+            <view class="fl">{{item.ORG_MC || "未填写"}}</view>
+            <view class="fr">发出时间：{{item.YWSJ}}</view>
+          </view>
+          <view class="clearfix time">{{item.ZGXSLYMC}}</view>
+          <view class="clearfix status">
+            <view class="fl {{item.ztClass}}" >
+              <kw-tag  color="blue" circle="{{true}}">{{item.CLZTMC || '未填写'}}</kw-tag>
+            </view>
+            <view class="fr cl" catchtap='toAdd' data-id='{{item.ZGXSID}}' wx:if="{{item.CLZTDM < '22'}}">
+              <kw-tag type="border" color="blue" wx:if="{{hasShAuth}}" circle="{{true}}">审核</kw-tag>
+            </view>
+            <view class="fr cl" wx:else>
+              <kw-tag type="border" color="blue" wx:if="{{hasShAuth}}" circle="{{true}}" wx:if="{{item.CLZTDM < 26 && item.CLZTDM >= 22 && hasClAuth}}"
+                 catchtap='toZgxs' data-id='{{item.ZGXSID}}' data-status="xx">处理</kw-tag>
+              <kw-tag type="border" color="blue" wx:if="{{hasShAuth}}" circle="{{true}}" wx:if="{{item.CLZTDM < 26 && hasYsAuth}}"
+                 catchtap='toZgxs' data-id='{{item.ZGXSID}}' data-status="dx">验收</kw-tag>
+            </view>
+          </view>
+        </view>
+      </view>
+      <i-load-more tip="{{loadMore.text}}"  loading="{{ loadMore.show }}" />
+    </view>
+  </checkbox-group>
+</view>

@@ -1,0 +1,50 @@
+<view class='content'>
+	<!-- 搜索 -->
+  <kw-search bindconfirm="searchList">
+    <view>
+      <picker mode="date" value="{{pageParam.startTime}}" bindchange="changeStart">
+        <kw-list-cell title="开始时间" right-note="{{pageParam.startTime}}"></kw-list-cell>
+      </picker>
+      <picker mode="date" value="{{pageParam.endTime}}" bindchange="changeEnd">
+        <kw-list-cell title="结束时间" right-note="{{pageParam.endTime}}"></kw-list-cell>
+      </picker>
+    </view>
+  </kw-search>
+  <!-- 功能(新增删除) -->
+  <view class="gn">
+    <view class="check fl" wx:if="{{!deleteShow}}" bindtap='checkAll'>
+      <checkbox checked="{{deleteParam._CHECK_ALL_}}">全选</checkbox>
+    </view>
+    <view class="delete fl" wx:if="{{hasScAuth && deleteShow}}" bindtap='deleteAction'>删除</view>
+    <view class="delete fl" wx:if="{{!deleteShow}}" bindtap='confirmDeleteAction'>确认删除</view>
+    <view class="add fr" wx:if="{{hasXzAuth}}" bindtap="toAdd">新增</view>
+  </view>
+
+  <checkbox-group class="lists">
+    <view>
+      <!-- 单项列表 -->
+      <view class="list" wx:for="{{dataList}}" wx:key="index" bindtap='toPreview' data-id='{{item.MXID}}' data-isnew="{{item.ISNEW}}">
+        <view class="info">
+          <view>
+            <label wx:if="{{!deleteShow}}">
+              <view class="check">
+                <checkbox checked="{{deleteParam[item.MXID]}}" catchtap='checkAction' data-id='{{item.MXID}}'/>
+              </view>
+            </label>
+            {{item.XXMC}}
+          </view>
+          <view class="clearfix time">
+            <view class="fl">{{item.XZRMC}}</view>
+            <view class="fr">督导时间：{{item.DDSJ}}</view>
+          </view>
+          <view class="clearfix status">
+            <view class="fr ys" wx:if="{{item.SELF == '1'}}" catchtap='toAdd' data-id="{{item.MXID}}" data-isnew="{{item.ISNEW}}">
+              <kw-tag type="border" color="blue" circle="{{true}}" wx:if="{{hasXgAuth}}">修改</kw-tag>
+            </view>
+          </view>
+        </view>
+      </view>
+      <i-load-more tip="{{loadMore.text}}"  loading="{{ loadMore.show }}" />
+    </view>
+  </checkbox-group>
+</view>

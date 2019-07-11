@@ -129,7 +129,6 @@ Page({
       },
       then(data) {
         let datas = data.datas
-        console.log(datas)
         let deleteParam = {}
         if (datas && datas.length > 0) {
           // 将数据集中的id放入删除集中的id

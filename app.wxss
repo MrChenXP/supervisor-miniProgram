@@ -7,10 +7,8 @@
 }
 
 view {
-  color:#333333;
   box-sizing: border-box;
   font-size:28rpx;
-  line-height:1.8;
 }
 progress, checkbox-group, textarea, form{
 	width: 100%;

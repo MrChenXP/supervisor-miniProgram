@@ -1,0 +1,46 @@
+<view class='content'>
+  <kw-list-cell title="编号">
+    <view slot="rightNote">
+      <view class="list-right-input"><input value="{{formData.BH}}" type="number" disabled="{{formData.ZGXSID}}" bindinput="inputBh"/></view>
+    </view>
+  </kw-list-cell>
+  <kw-list-cell title="学校/单位" wx:if="{{!formData.ZGXSID}}" rightNote="{{formData.XXMC}}" bindtap="showSchool"></kw-list-cell>
+  <picker range="{{ksList}}" range-key="name" bindchange="changeKs" disabled="{{formData.ZGXSID}}">
+    <kw-list-cell title="科室/中心" right-note="{{formData.XS_ORG.name}}"></kw-list-cell>
+  </picker>
+  <picker value="{{formData.YWSJ}}" mode="date" bindchange="changeYwsj" disabled="{{formData.ZGXSID}}" start="{{startDate}}" end="{{endDate}}">
+    <kw-list-cell title="时间" rightNote="{{formData.YWSJ}}"></kw-list-cell>
+  </picker>
+  
+  <kw-list-cell isArrow="{{false}}">
+    <view>
+      <view class="ddjs-body">
+        <view>
+          <view>
+            我室责任督学
+            <text>{{loginUser.name}}</text>
+            于
+            <text>{{formData.YWSJ}}</text>
+            对该校(幼儿园)进行了教育督导，发现该学校(幼儿园)存在以下问题：
+          </view>
+          <textarea maxlength="4000" value="{{formData.XSNR}}"  bindinput="changeCzwt"></textarea>
+          <view>
+           请贵科室（中心）予以支持、配合、协调解决!
+          </view>
+        </view>
+      </view>
+    </view>
+  </kw-list-cell>
+  
+  <view class="save">
+    <button bindtap="sendZg">
+      <text wx:if="{{formData.ZGXSID && hasShAuth}}">审核</text>
+      <text wx:if="{{!formData.ZGXSID && hasFsAuth}}">发送</text>
+    </button>
+  </view>
+  
+  <!-- 选择 学校-->
+  <block>
+    <kw-school-select hidden="{{schoolShow}}" bindclose="showSchool" bindconfirm="confirmSchool">></kw-school-select>
+  </block>
+</view>

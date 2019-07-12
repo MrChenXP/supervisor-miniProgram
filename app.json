@@ -24,7 +24,8 @@
     "pages/dxgl/dxgl",
     "pages/dxgl/dxgl-preview/dxgl-preview",
     "pages/xxglddb/xxglddb",
-    "pages/xxglddb/xxglddb-preview/xxglddb-preview"
+    "pages/xxglddb/xxglddb-preview/xxglddb-preview",
+    "pages/my/qdqt/qdqt"
   ],
   "window": {
     "navigationBarTextStyle": "white",

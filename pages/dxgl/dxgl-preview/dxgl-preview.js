@@ -1,66 +1,42 @@
-// pages/dxgl/dxgl-preview/dxgl-preview.js
+const app = getApp()
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    // 个人简介显示隐藏
+    jjShow:true,
+    id:"",
+    data: {
+    	IMAGE: '../../static/images/DefaultImg.png',
+    },
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  onLoad: function (query) {
+    this.data.id = query.id
+    this.loadData()
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  loadData(){
+    app.$kwz.ajax.ajaxUrl({
+      url: 'dd_dxgl/selectByPrimaryKey',
+      type: 'POST',
+      data: {
+        DXID: this.data.id
+      },
+      page: this,
+      then (response) {
+        let data= response.datas.data
+        if(data.IMAGE){
+          let _this = this
+          app.$kwz.cacheAttach({
+            url: 'jc_file/doDownload?F_ID=' + data.IMAGE,
+            success({tempFilePath}){
+              data.IMAGE = tempFilePath
+              _this.setData({data})
+              console.log(_this.data.data)
+            }
+          })
+        } else{
+          this.data.data.IMAGE = "/static/images/DefaultImg.png"
+          this.setData({data})
+        }
+      }
+    })
   }
 })

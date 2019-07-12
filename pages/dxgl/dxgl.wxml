@@ -1,2 +1,61 @@
-<!--pages/dxgl/dxgl.wxml-->
-<text>pages/dxgl/dxgl.wxml</text>
+<view class='content'>
+  <!-- 搜索 -->
+  <kw-search bindconfirm="searchList" placeholder="请输入账号">
+    <view>
+      <kw-list-cell title="姓名">
+        <view slot="rightNote">
+          <view class="list-right-input"><input value="{{pageParam.XM}}" placeholder="请输入姓名" bindinput="inputXm"/></view>
+        </view>
+      </kw-list-cell>
+      <kw-list-cell title="电话">
+        <view slot="rightNote">
+          <view class="list-right-input"><input value="{{pageParam.DH}}" placeholder="请输入电话" bindinput="inputDh"/></view>
+        </view>
+      </kw-list-cell>
+      <kw-list-cell title="编号">
+        <view slot="rightNote">
+          <view class="list-right-input"><input value="{{pageParam.BH}}" placeholder="请输入编号" bindinput="inputBh"/></view>
+        </view>
+      </kw-list-cell>
+      <picker range="{{searchCondition.DM_DD_DXLX}}" range-key="DMMX_MC" bindchange="changeDxlx">
+				<kw-list-cell title="督学类型" right-note="{{pageParam.DXLX}}"></kw-list-cell>
+			</picker>
+      <picker range="{{searchCondition.YXZTList}}" range-key="DMMX_MC" bindchange="changeZt">
+      	<kw-list-cell title="状态" right-note="{{pageParam.YXZTMC}}"></kw-list-cell>
+      </picker>
+    </view>
+  </kw-search>
+  
+  <checkbox-group class="lists">
+    <view>
+      <!-- 单项列表 -->
+      <view class="list" wx:for="{{dataList}}" wx:key="index" bindtap='toPreview' data-id='{{item.DXID}}'>
+        <view class="info">
+          <view>
+            {{item.U_USERID}}
+          </view>
+          <view class="clearfix time">
+            <view class="fl">姓名:{{item.XM || "未填写"}}</view>
+            <view class="fr">电话：{{item.DH || "未填写"}}</view>
+          </view>
+          <view class="clearfix time">
+            <view class="fl">督学类型:{{item.DXLX || "未填写"}}</view>
+            <view class="fr">所在机构：{{item.ORG_MC || "未填写"}}</view>
+          </view>
+          <view class="clearfix time">
+            <view class="fl">学历:{{item.DXXL || "未填写"}}</view>
+            <view class="fr">职称：{{item.DXZC || "未填写"}}</view>
+          </view>
+          <view class="clearfix time">
+            <view class="fl">职务:{{item.ZW || "未填写"}}</view>
+            <view class="fr">工作单位：{{item.WORKUNIT || "未填写"}}</view>
+          </view>
+          <view class="clearfix time">
+            <view class="fl">编号:{{item.BH || "未填写"}}</view>
+          </view>
+        </view>
+      </view>
+      <i-load-more tip="{{loadMore.text}}"  loading="{{ loadMore.show }}" />
+    </view>
+  </checkbox-group>
+</view>

@@ -1,2 +1,39 @@
-<!--pages/dxgl/dxgl-preview/dxgl-preview.wxml-->
-<text>pages/dxgl/dxgl-preview/dxgl-preview.wxml</text>
+<view class='content'>
+  <kw-list-cell>
+      <view >
+        <view class="head-img">
+          <view class="head-img-title">头像</view>
+          <view class="head-img-img">
+            <image src="{{data.IMAGE}}"></image>
+          </view>
+        </view>
+      </view>
+    </kw-list-cell>
+    <kw-list-cell title="账号" rightNote="{{data.U_USERID}}"></kw-list-cell>
+    <kw-list-cell title="编号" rightNote="{{data.BH}}"></kw-list-cell>
+    <kw-list-cell title="姓名" rightNote="{{data.XM}}"></kw-list-cell>
+    <kw-list-cell title="显示名" rightNote="{{data.U_USERNAME}}"></kw-list-cell>
+    <kw-list-cell title="督学类型" rightNote="{{data.DXLX}}"></kw-list-cell>
+    <kw-list-cell title="手机号码" rightNote="{{data.DH}}"></kw-list-cell>
+    <kw-list-cell title="归属机构" rightNote="{{data.YWSJ}}"></kw-list-cell>
+    <kw-list-cell title="年龄" rightNote="{{String(data.AGE)}}"></kw-list-cell>
+    <kw-list-cell title="性别" rightNote="{{data.XB}}"></kw-list-cell>
+    <kw-list-cell title="民族" rightNote="{{data.MZMC}}"></kw-list-cell>
+    <kw-list-cell title="出生年月" rightNote="{{data.BIRTH}}"></kw-list-cell>
+    <kw-list-cell title="身份证件类型" rightNote="{{data.SFZJLXMC}}"></kw-list-cell>
+    <kw-list-cell title="身份证件号" rightNote="{{data.SFZJH}}"></kw-list-cell>
+    <kw-list-cell title="学历" rightNote="{{data.DXXL}}"></kw-list-cell>
+    <kw-list-cell title="专业技术职称" rightNote="{{data.DXZC}}"></kw-list-cell>
+    <kw-list-cell title="职务" rightNote="{{data.ZW}}"></kw-list-cell>
+    <kw-list-cell title="工作单位" rightNote="{{data.WORKUNIT}}"></kw-list-cell>
+    <kw-list-cell isArrow="{{false}}">
+      <view>
+          <view class="ddjs-head clearfix" >
+            <text class="fl">个人简介</text>
+          </view>
+          <view class="ddjs-body">
+            <view class="ddjs-text">{{data.JL}}</view>
+          </view>
+      </view>
+    </kw-list-cell>
+</view>

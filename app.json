@@ -22,7 +22,9 @@
     "pages/tkjl/tkjl-add/tkjl-add",
     "pages/tkjl/tkjl-preview/tkjl-preview",
     "pages/dxgl/dxgl",
-    "pages/dxgl/dxgl-preview/dxgl-preview"
+    "pages/dxgl/dxgl-preview/dxgl-preview",
+    "pages/xxglddb/xxglddb",
+    "pages/xxglddb/xxglddb-preview/xxglddb-preview"
   ],
   "window": {
     "navigationBarTextStyle": "white",

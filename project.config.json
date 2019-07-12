@@ -43,13 +43,6 @@
 			"current": 2,
 			"list": [
 				{
-					"id": 0,
-					"name": "tkjl",
-					"pathName": "pages/tkjl/tkjl",
-					"query": "",
-					"scene": null
-				},
-				{
 					"id": -1,
 					"name": "workspace",
 					"pathName": "pages/workspace/workspace",
@@ -61,6 +54,13 @@
 					"name": "tkjl-add",
 					"pathName": "pages/tkjl/tkjl-add/tkjl-add",
 					"query": "id=fb8ca11efc534a57949d344f350fa162&isNew=undefined",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "dxgl",
+					"pathName": "pages/dxgl/dxgl",
+					"query": "",
 					"scene": null
 				}
 			]

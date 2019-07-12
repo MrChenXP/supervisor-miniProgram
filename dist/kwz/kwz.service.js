@@ -660,7 +660,22 @@ const dateImpose = (url, callback, page) => {
       }
     }
   })
+}
 
+/**
+ * 数组对象去重
+ * @param {String} arr 传入一个数组
+ */
+const uniq = (arr)=>{
+  var result = [];
+  var obj = {};
+  for (var i = 0; i < arr.length; i++) {
+    if (!obj[arr[i].XQ_XN]) {
+      result.push(arr[i]);
+      obj[arr[i].XQ_XN] = true;
+    }
+  }
+  return result
 }
 
 export default {
@@ -672,5 +687,5 @@ export default {
   cfp: util.cfp,
   getLoginUser: store.getLoginUser, loadDms, uploadImg,
   canUse: weixin.canUse, 
-  copyJson: util.copyJson, hasAuth, formatDate, formatImg, dateImpose, getLimdat
+  copyJson: util.copyJson, hasAuth, formatDate, formatImg, dateImpose, getLimdat, uniq
 }

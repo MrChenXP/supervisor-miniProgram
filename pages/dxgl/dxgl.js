@@ -163,7 +163,6 @@ Page({
   },
   // 搜素列表
   searchList({detail}) {
-    console.log(this.data.pageParam)
     this.data.pageParam.keyword = detail.value
     this.pageList(true)
   },

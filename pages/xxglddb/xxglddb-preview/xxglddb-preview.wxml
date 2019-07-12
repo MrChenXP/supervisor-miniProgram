@@ -1,2 +1,150 @@
-<!--pages/xxglddb/xxglddb-preview/xxglddb-preview.wxml-->
-<text>pages/xxglddb/xxglddb-preview/xxglddb-preview.wxml</text>
+<view class='content'>
+  <!-- 分页  -->
+  <view class="pager">
+  	<view class="zg {{xxsxShow ? 'active' : ''}} " bindtap="pageShow">基本信息</view>
+  	<view class="xs {{!xxsxShow ? 'active' : ''}}" bindtap="pageShow">年度属性</view>
+  </view>
+  
+  <!-- 基本信息 -->
+  <view hidden="{{!xxsxShow}}">
+    <kw-list-cell isArrow="{{false}}">
+      <view>
+      	<view class="ddjs-head clearfix">
+      		<text class="fl">上级机构</text>
+      	</view>
+      	<view class="ddjs-body">
+      		<view class="ddjs-text">{{jbxxData.PARENT_ORGS}}</view>
+      	</view>
+      </view>
+    </kw-list-cell>
+    <kw-list-cell title="学校名称" rightNote="{{jbxxData.ORG_MC}}"></kw-list-cell>
+    <kw-list-cell title="学校代码" rightNote="{{jbxxData.ORG_DM}}"></kw-list-cell>
+    <kw-list-cell title="办学类型" rightNote="{{jbxxData.XXBXLX}}"></kw-list-cell>
+    <kw-list-cell title="办学模式" rightNote="{{jbxxData.XXBBMC}}"></kw-list-cell>
+    <kw-list-cell title="所在地城乡类型" rightNote="{{jbxxData.XXZDCXLXDMC}}"></kw-list-cell>
+    <kw-list-cell title="学校等级" rightNote="{{jbxxData.XXDJMC}}"></kw-list-cell>
+    <kw-list-cell title="联系电话" rightNote="{{jbxxData.LXDH}}"></kw-list-cell>
+    <kw-list-cell title="主页地址" rightNote="{{jbxxData.ZYDZ}}"></kw-list-cell>
+    <kw-list-cell title="学校经度" rightNote="{{jbxxData.XXJD}}"></kw-list-cell>
+    <kw-list-cell title="学校纬度" rightNote="{{jbxxData.XXWD}}"></kw-list-cell>
+    <kw-list-cell title="学校地址" rightNote="{{jbxxData.XXDZ}}"></kw-list-cell>
+    <kw-list-cell isArrow="{{false}}">
+      <view>
+      	<view class="ddjs-head clearfix">
+      		<text class="fl">简介</text>
+      	</view>
+      	<view  class="ddjs-body">
+      		<view class="ddjs-text">{{jbxxData.LSYG}}</view>
+      	</view>
+      </view>
+    </kw-list-cell>
+  </view>
+  
+  <!-- 年度属性 -->
+  <view hidden="{{xxsxShow}}">
+    <picker range="{{xnList}}" range-key="XQ_XN" bindchange="changeXn">
+      <kw-list-cell title="查询条件" rightNote="{{xnValue}}"></kw-list-cell>
+    </picker>
+    <!-- 办学条件 -->
+    <view>
+      <view class="ddjs-head clearfix title">
+      	<text class="fl">办学条件</text>
+      </view>
+      <view >
+        <kw-list-cell title="占地面积/㎡" right-note="{{String(ndsxData.ZDMJ)}}"></kw-list-cell>
+        <kw-list-cell title="其中：绿化用地面积/㎡" right-note="{{ndsxData.LHYDMJ}}"></kw-list-cell>
+        <kw-list-cell title="其中：运动场地面积/㎡" right-note="{{ndsxData.YDCDMJ}}"></kw-list-cell>
+        <kw-list-cell title="校舍建筑面积/㎡" right-note="{{ndsxData.XSJZMJ}}"></kw-list-cell>
+        <kw-list-cell title="图书量/册" right-note="{{ndsxData.TSL}}"></kw-list-cell>
+        <kw-list-cell title="数字资源量/个" right-note="{{ndsxData.SZZYL}}"></kw-list-cell>
+        <kw-list-cell title="计算机台数/台" right-note="{{ndsxData.JSJTS}}"></kw-list-cell>
+        <kw-list-cell title="其中：教学用计算机/台" right-note="{{ndsxData.JXYJSJ}}"></kw-list-cell>
+        <kw-list-cell title="其中：平板电脑/台" right-note="{{ndsxData.PBDN}}"></kw-list-cell>
+        <kw-list-cell title="教室/间" right-note="{{ndsxData.JSZS}}"></kw-list-cell>
+        <kw-list-cell title="其中：网络多媒体教室/间" right-note="{{ndsxData.WLDMTJS}}"></kw-list-cell>
+        <kw-list-cell title="固定资产总值/元" right-note="{{ndsxData.GDZCZZ}}"></kw-list-cell>
+        <kw-list-cell title="其中：教学仪器设备资产值/元" right-note="{{ndsxData.JXYQSBZCZ}}"></kw-list-cell>
+      </view>
+    </view>
+    <!-- 学生 -->
+    <view>
+      <view class="ddjs-head clearfix title" >
+      	<text class="fl">学生</text>
+      </view>
+      <view >
+       <kw-list-cell title="毕业生数/人" right-note="{{ndsxData.BYSS}}"></kw-list-cell>
+       <kw-list-cell title="招生数/人" right-note="{{ndsxData.ZSS}}"></kw-list-cell>
+       <kw-list-cell title="教学班数/班" right-note="{{ndsxData.JXBS}}"></kw-list-cell>
+       <kw-list-cell title="在校学生数/人" right-note="{{ndsxData.ZXXSS}}"></kw-list-cell>
+       <kw-list-cell title="其中：女生人数/人" right-note="{{ndsxData.NSRS}}"></kw-list-cell>
+       <kw-list-cell title="其中：进城务工人员随迁子女数/人" right-note="{{ndsxData.WGSQZNS}}"></kw-list-cell>
+      </view>
+    </view>
+    <!-- 教职工 -->
+    <view>
+      <view class="ddjs-head clearfix title" >
+      	<text class="fl">教职工</text>
+      </view>
+      <view >
+       <kw-list-cell title="教职工总数/人" right-note="{{ndsxData.JZGZS}}"></kw-list-cell>
+       <kw-list-cell title="专任教师数/人" right-note="{{ndsxData.ZZJSS}}"></kw-list-cell>
+       <kw-list-cell title="其中：女专任教师数/人" right-note="{{ndsxData.NZZJSS}}"></kw-list-cell>
+       <kw-list-cell title="其中：体育/艺术教师数/人" right-note="{{ndsxData.TYJSS}}"></kw-list-cell>
+      </view>
+    </view>
+    <!-- 骨干教师 -->
+    <view>
+      <view class="ddjs-head clearfix title" >
+      	<text class="fl">骨干教师</text>
+      </view>
+      <view>
+       <kw-list-cell title="县级及以上骨干教师（小学）/人" right-note="{{ndsxData.XXXJYSJS}}"></kw-list-cell>
+       <kw-list-cell title="县级及以上骨干教师（初中）/人" right-note="{{ndsxData.CZXJYSJS}}"></kw-list-cell>
+       <kw-list-cell title="县级及以上骨干教师（高中）/人" right-note="{{ndsxData.GZXJYSJS}}"></kw-list-cell>
+      </view>
+    </view>
+    <!-- 学历分布 -->
+    <view>
+      <view class="ddjs-head clearfix title" >
+      	<text class="fl">学历分布</text>
+      </view>
+      <view >
+       <kw-list-cell title="中专/高中毕业人数/人" right-note="{{ndsxData.ZZGZBYRS}}"></kw-list-cell>
+       <kw-list-cell title="专科毕业人数/人" right-note="{{ndsxData.ZKBYRS}}"></kw-list-cell>
+       <kw-list-cell title="本科毕业人数/人" right-note="{{ndsxData.BKBYRS}}"></kw-list-cell>
+       <kw-list-cell title="研究生毕业人数/人" right-note="{{ndsxData.YJSBYRS}}"></kw-list-cell>
+       <kw-list-cell title="其他学历人数/人" right-note="{{ndsxData.QTXLRS}}"></kw-list-cell>
+      </view>
+    </view>
+    <!-- 职称分布 -->
+    <view>
+      <view class="ddjs-head clearfix title" >
+      	<text class="fl">职称分布</text>
+      </view>
+      <view >
+       <kw-list-cell title="高级职称人数/人" right-note="{{ndsxData.GJZCRS}}"></kw-list-cell>
+       <kw-list-cell title="中级职称人数/人" right-note="{{ndsxData.ZJZCRS}}"></kw-list-cell>
+       <kw-list-cell title="初级职称人数/人" right-note="{{ndsxData.CJZCRS}}"></kw-list-cell>
+       <kw-list-cell title="未评职称人数/人" right-note="{{ndsxData.WPZCRS}}"></kw-list-cell>
+      </view>
+    </view>
+    <!-- 年龄结构 -->
+    <view>
+      <view class="ddjs-head clearfix title" >
+      	<text class="fl">年龄结构</text>
+      </view>
+      <view >
+       <kw-list-cell title="24岁及以下人数/人" right-note="{{ndsxData.AGE0024}}"></kw-list-cell>
+       <kw-list-cell title="25-29岁人数/人" right-note="{{ndsxData.AGE2529}}"></kw-list-cell>
+       <kw-list-cell title="30-34岁人数/人" right-note="{{ndsxData.AGE3034}}"></kw-list-cell>
+       <kw-list-cell title="35-39岁人数/人" right-note="{{ndsxData.AGE3539}}"></kw-list-cell>
+       <kw-list-cell title="40-44岁人数/人" right-note="{{ndsxData.AGE4044}}"></kw-list-cell>
+       <kw-list-cell title="45-49岁人数/人" right-note="{{ndsxData.AGE4549}}"></kw-list-cell>
+       <kw-list-cell title="50-54岁人数/人" right-note="{{ndsxData.AGE5054}}"></kw-list-cell>
+       <kw-list-cell title="55-59岁人数/人" right-note="{{ndsxData.AGE5559}}"></kw-list-cell>
+       <kw-list-cell title="60岁以上人数/人" right-note="{{ndsxData.AGE60}}"></kw-list-cell>
+      </view>
+    </view>
+  </view>
+
+</view> 

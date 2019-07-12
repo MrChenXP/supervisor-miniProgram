@@ -50,17 +50,17 @@
 					"scene": null
 				},
 				{
-					"id": 2,
-					"name": "tkjl-add",
-					"pathName": "pages/tkjl/tkjl-add/tkjl-add",
-					"query": "id=fb8ca11efc534a57949d344f350fa162&isNew=undefined",
+					"id": -1,
+					"name": "xxglddb",
+					"pathName": "pages/xxglddb/xxglddb",
+					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "dxgl",
-					"pathName": "pages/dxgl/dxgl",
-					"query": "",
+					"name": "xxglddb",
+					"pathName": "pages/xxglddb/xxglddb-preview/xxglddb-preview",
+					"query": "id=29c5c503a232466496e6777e4c846c03",
 					"scene": null
 				}
 			]

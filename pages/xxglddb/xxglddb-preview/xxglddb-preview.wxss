@@ -1,1 +1,10 @@
-/* pages/xxglddb/xxglddb-preview/xxglddb-preview.wxss */
+.pager{
+    top:0;
+  }
+  .title{
+    padding: 5rpx 20rpx;
+    margin: 5rpx 0;
+  }
+  .kw-search-body{
+    top: -95rpx;
+  }

@@ -77,7 +77,7 @@ const getProductConfig = () => {
 const UPLOAD_URL_IMG = '/ueditor/jsp/controller.jsp?action=uploadimage'
 
 /**
- * 获取上传路径
+ * 获取Ueditor的上传路径
  */
 const getUploadImgUrl = () => {
     return UPLOAD_URL_IMG

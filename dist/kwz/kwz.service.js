@@ -142,7 +142,7 @@ const ajaxFail = (cb) => {
 }
 
 /**
- * 上传文件
+ * 上传文件，object中如果包含url，则使用url上传，否则默认使用ueditor的上传组件上传
  * @param {object} option 
  */
 const uploadImg = (option) => {
@@ -163,7 +163,13 @@ const uploadImg = (option) => {
 
     if (res && res.tempFilePaths) {
       if (res.tempFilePaths.length  > 0) {
-        let url = consts.getUploadImgUrl()
+        let isUeditor = false
+        let url = option.url
+        // 如果option中没有传url，默认使用ueditor的上传图片支持，（不会有返回附件id）
+        if (!url) {
+          isUeditor = true
+          url = consts.getUploadImgUrl()
+        }
 
         let uploadOption = {
           url, 
@@ -182,11 +188,16 @@ const uploadImg = (option) => {
         let success = option.success
         option.success = (response, option) => {
           if (response) {
-            let responseObj = util.str2Json(response)
-            if (responseObj && responseObj.url) {
-              responseObj = handleUrl(responseObj, 'uri')
-              responseObj.uri = weixin.formatUrl(responseObj.uri)
+
+            // 使用ueditor上传，返回的是字符串
+            if (isUeditor) {
+              let responseObj = util.str2Json(response)
+              if (responseObj && responseObj.url) {
+                responseObj = handleUrl(responseObj, 'uri')
+                responseObj.uri = weixin.formatUrl(responseObj.uri)
+              }
             }
+            
             util.cfp(success, option.page || (option.vue || this), [responseObj, option])
           }
         }
@@ -209,7 +220,6 @@ const uploadImg = (option) => {
 
   // 选取图片
   weixin.chooseImage(chooseImageOption)
-
 }
 
 /**

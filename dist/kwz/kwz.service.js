@@ -189,15 +189,17 @@ const uploadImg = (option) => {
         option.success = (response, option) => {
           if (response) {
             let responseObj
+
+            if (typeof response === 'string') {
+              responseObj = util.str2Json(response)
+            }
+
             // 使用ueditor上传，返回的是字符串
             if (isUeditor) {
-              let responseObj = util.str2Json(response)
               if (responseObj && responseObj.url) {
                 responseObj = handleUrl(responseObj, 'uri')
                 responseObj.uri = weixin.formatUrl(responseObj.uri)
               }
-            } else {
-              responseObj = response
             }
             
             util.cfp(success, option.page || (option.vue || this), [responseObj, option])

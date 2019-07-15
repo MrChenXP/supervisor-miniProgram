@@ -585,7 +585,7 @@ const hasAuth = (url, callback) => {
 /**
  * 日期格式化 
  * @param {String} fmt 日期格式
- * @param {function} DefalutDate 传入的时间
+ * @param {function} DefalutDate 传入的时间,不传默认当前系统时间
  */
 const formatDate = (fmt = 'yyyy-MM-dd', DefalutDate = new Date()) => {
   let date = new Date(DefalutDate)
@@ -609,6 +609,85 @@ const formatDate = (fmt = 'yyyy-MM-dd', DefalutDate = new Date()) => {
   return fmt
 }
 
+/**
+ * html字符串img图片小程序查看 
+ * @param {String} html 要更改的html字符串
+ */
+const formatImg = (html)=>{
+  // console.log(html)
+  let imgSrc = /<img\ssrc="(?:(?!http))/gi;
+  let src = "<img src=\"" + consts.getBaseUrl()
+  let imgClass = /(<img)/gi
+  let classImg = "<img style=\"max-width:100%;\""
+  if(html){ // 有些时候字段值是空，但依然调用这个方法，故要判断
+    html = html.replace(imgSrc, src)
+    html = html.replace(imgClass, classImg)
+  }
+  return html
+}
+
+/**
+ * 返回当天为基准的指定日期
+ * @param {String} impose 参数{y,M,d} M大写是因为后台传来的是大写M
+ * @param {function} format 日期格式
+ */
+const getLimdat = (impose, format)=> {
+  if (typeof impose !== "object") {
+    impose = JSON.parse(impose)
+  }
+  let _y = parseInt(impose.y)
+  let _m = parseInt(impose.M)
+  let _d = parseInt(impose.d)
+  let date = new Date(Date.parse(new Date((new Date().getFullYear() + _y), (new Date().getMonth()) + _m, new Date().getDate())) + (86400000 * _d))
+  date = formatDate(format, date)
+  return date
+}
+
+/**
+ * 返回功能限制的日期参数
+ * @param {String} url 功能id
+ * @param {function} callback(commonMenus) 回调(菜单)
+ */
+const dateImpose = (url, callback, page) => {
+  store.getCommonMenus((commonMenus)=>{
+    if(commonMenus){
+      for (let arrs of commonMenus._menus_.children) { // arrs代表每个应用
+        for (let arr of arrs.children) { // arr代表应用中的每个功能
+          if (arr.PRO_ID === url) {
+            if (typeof arr.PRO_ATTRS === 'object') { // 没配限制日期返回null,给他加默认前后1年
+              arr.PRO_ATTRS = {
+                minDate: '{"y":"-1","M":"0","d":"0"}',
+                maxDate: '{"y":"1","M":"0","d":"0"}'
+              }
+              callback(arr.PRO_ATTRS)
+            }
+            let proAttrs = JSON.parse(arr.PRO_ATTRS)
+            proAttrs.minDate = typeof proAttrs.minDate === 'undefined' ? '{"y":"-1","M":"0","d":"0"}' : proAttrs.minDate
+            proAttrs.maxDate = typeof proAttrs.maxDate === 'undefined' ? '{"y":"1","M":"0","d":"0"}' : proAttrs.maxDate
+            callback(proAttrs)
+          }
+        }
+      }
+    }
+  })
+}
+
+/**
+ * 数组对象去重
+ * @param {String} arr 传入一个数组
+ */
+const uniq = (arr)=>{
+  var result = [];
+  var obj = {};
+  for (var i = 0; i < arr.length; i++) {
+    if (!obj[arr[i].XQ_XN]) {
+      result.push(arr[i]);
+      obj[arr[i].XQ_XN] = true;
+    }
+  }
+  return result
+}
+
 export default {
   ajaxUrl, get, post, initVisit, initToken, cacheAttach,
   // 兼容老的写法
@@ -617,5 +696,6 @@ export default {
   }, checkLogin, isLogin, initAutoLogin, setSession, logout, initProducts,
   cfp: util.cfp,
   getLoginUser: store.getLoginUser, loadDms, uploadImg,
-  canUse: weixin.canUse, copyJson: util.copyJson, hasAuth, formatDate
+  canUse: weixin.canUse, 
+  copyJson: util.copyJson, hasAuth, formatDate, formatImg, dateImpose, getLimdat, uniq
 }

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "kw-list-cell": "/dist/kw-ui/kw-list-cell/kw-list-cell",
+    "kw-school-select": "/dist/kw-ui/kw-school-select/kw-school-select"
+ 
+  }
+}

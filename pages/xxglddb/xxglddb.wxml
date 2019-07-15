@@ -1,0 +1,51 @@
+<view class='content'>
+  <!-- 搜索 -->
+  <kw-search bindconfirm="searchList" placeholder="请输入学校名称">
+    <view>
+      <kw-list-cell title="学校代码">
+        <view slot="rightNote">
+          <view class="list-right-input"><input value="{{pageParam.ORG_DM}}" placeholder="请输入学校代码" bindinput="inputXm"/></view>
+        </view>
+      </kw-list-cell>
+      
+      <picker range="{{searchCondition.DM_BXLX}}" range-key="DMMX_MC" bindchange="changeBxlx">
+				<kw-list-cell title="办学类型" right-note="{{pageParam.XXBXLXMMC}}"></kw-list-cell>
+			</picker>
+      <picker range="{{searchCondition.DM_BXMS}}" range-key="DMMX_MC" bindchange="changeBxms">
+      	<kw-list-cell title="办学模式" right-note="{{pageParam.XXBBMMC}}"></kw-list-cell>
+      </picker>
+      <picker range="{{searchCondition.DM_XXZDCXLX}}" range-key="DMMX_MC" bindchange="changeCxlx">
+      	<kw-list-cell title="城乡类型" right-note="{{pageParam.XXZDCXLXDMMC}}"></kw-list-cell>
+      </picker>
+      <picker range="{{searchCondition.DM_XXDJ}}" range-key="DMMX_MC" bindchange="changeXxdj">
+      	<kw-list-cell title="学校等级" right-note="{{pageParam.XXDJMC}}"></kw-list-cell>
+      </picker>
+    </view>
+  </kw-search>
+  
+  <checkbox-group class="lists">
+    <view>
+      <!-- 单项列表 -->
+      <view class="list" wx:for="{{dataList}}" wx:key="index" bindtap='toPreview' data-id='{{item.ORG_ID}}'>
+        <view class="info">
+          <view>
+            {{item.XXMC}}
+          </view>
+          <view class="clearfix time">
+            <view class="fl">学校代码:{{item.ORG_DM || "未填写"}}</view>
+            <view class="fr">办学类型：{{item.XXBXLX || "未填写"}}</view>
+          </view>
+          <view class="clearfix time">
+            <view class="fl">办学模式:{{item.XXBBMC || "未填写"}}</view>
+            <view class="fr">城乡类型：{{item.XXZDCXLXDMC || "未填写"}}</view>
+          </view>
+          <view class="clearfix time">
+            <view class="fl">学校等级:{{item.XXDJMC || "未填写"}}</view>
+            <view class="fr">联系电话：{{item.LXDH || "未填写"}}</view>
+          </view>
+        </view>
+      </view>
+      <i-load-more tip="{{loadMore.text}}"  loading="{{ loadMore.show }}" />
+    </view>
+  </checkbox-group>
+</view>

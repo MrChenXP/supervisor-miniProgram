@@ -1,0 +1,46 @@
+<view class='content'>
+	<kw-list-cell title="编号" right-note="{{data.BH}}" ></kw-list-cell>
+	<kw-list-cell title="单位" right-note="{{data.XXMC}}"></kw-list-cell>
+  <kw-list-cell isArrow="{{false}}">
+    <view>
+      <view class="ddjs-body">
+        <view>
+          <view>经挂牌督导，你单位存在以下问题:</view>
+          <view class="text-bold">{{data.XSNR}}</view>
+          <view>
+            对以上问题要高度重视，采取措施，立即整改。整改报告于本通知下发
+            <text class="text-bold">{{data.CLQX}}</text>
+            日内书面报责任督学，责任督学于接到报告的3日内上报人民政府教育督导室督管员备案。
+          </view>
+        </view>
+      </view>
+    </view>
+  </kw-list-cell>
+  <kw-list-cell title="日期" right-note="{{data.RQ}}"></kw-list-cell>
+	<kw-list-cell title="处理状态" right-note="{{data.CLZTMC}}"></kw-list-cell>
+  <!-- 处理结果 -->
+  <kw-list-cell isArrow="{{false}}">
+    <view>
+      <view class="ddjs-head clearfix" bindtap='changeCljgShow'>
+        <text class="fl">处理结果</text>
+        <view class="fr" hidden="{{!cljgShow}}"><i-icon type="unfold" color="#c7c7c7" size="20"></i-icon></view>
+        <view class="fr" hidden="{{cljgShow}}"><i-icon type="packup" color="#c7c7c7" size="20"></i-icon></view>
+      </view>
+      <view hidden="{{cljgShow}}" class="ddjs-body">
+        <view wx:if="{{resultShow}}">
+         <kw-editor value="{{data.CLBG}}" bindinput="cljgInput"></kw-editor>
+        </view>
+        <view wx:if="{{detailShow}}">
+          <rich-text nodes="{{data.CLBG}}"></rich-text>
+        </view>
+      </view>
+    </view>
+  </kw-list-cell>
+  <!-- 处理和确认整改完成 -->
+  <view class="save" wx:if="{{SF}}">
+    <button bindtap="fn_zggz_zgtzs_dispose" wx:if="{{resultShow && hasClAuth}}" 
+      >处理</button>
+    <button bindtap="changeStatue" data-status="6" wx:if="{{data.CLZTDM < '6' && hasYsAuth}}"
+      hidden="{{SF !== 'dx'}}">确认整改完成</button>
+  </view>
+</view>  

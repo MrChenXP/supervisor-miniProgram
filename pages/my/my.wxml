@@ -25,7 +25,8 @@
     <!-- <kw-list-cell title="个人资料" thumb="/static/images/icons/set.png" ></kw-list-cell> -->
     <!-- <kw-list-cell title="修改密码" thumb="/static/images/icons/change.png" ></kw-list-cell> -->
     <!-- <kw-list-cell title="切换机构" thumb="/static/images/icons/repeat.png" ></kw-list-cell> -->
-    <kw-list-cell title="扫码" borderBottom="{{false}}" thumb="/static/images/icons/scanCode.png" ></kw-list-cell>
+    <!-- <kw-list-cell title="扫码" borderBottom="{{false}}" thumb="/static/images/icons/scanCode.png" ></kw-list-cell> -->
+    <kw-list-cell title="签到(签退)" thumb="/static/images/icons/repeat.png" link="/pages/my/qdqt/qdqt"></kw-list-cell>
   </view>
 
   <!-- 退出登录 -->

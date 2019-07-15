@@ -1,0 +1,50 @@
+<view class='content'>
+  <radio-group class="position-xx" wx:if="currentRecordShow" bindchange="changePostionOrg">
+			<label wx:for="{{userOrgs}}" wx:key="index" class="{{index < userOrgs.length-1? borderBottom :''}}">
+				<radio wx:if="{{userOrgsShow}}" value="{{item.ORG_ID}}"  />
+				<view class="radio-label">{{item.ORG_MC}}</view>
+			</label>
+      
+      <view class="save">
+        <button bindtap="checkPosition">签到</button>
+      </view>
+      <view class="lists-dkjl">打卡记录</view>
+		</radio-group>
+
+    <checkbox-group class="lists position-xx lists-pos" wx:else >
+		  <view>
+		    <view class="list" >
+		      <view class="info">
+		        <view>
+		          {{currentRecord.ORG_MC}}
+		        </view>
+		        <view class="clearfix time">
+		          <view class="fl">{{currentRecord.IN_TIME}}</view>
+		        </view>
+		      </view>
+		    </view>
+		  </view>
+			<view class="save">
+			  <button bindtap="checkPosition">签出</button>
+			</view>
+			<view class="lists-dkjl">打卡记录</view>
+		</checkbox-group>
+
+    <!-- 列表组 -->
+    <checkbox-group class="lists">
+      <view>
+    	<!-- 单项列表 -->
+        <view class="list" wx:for="{{currentRecords}}" wx:key="index"  >
+          <view class="info">
+            <view>{{item.ORG_MC}}</view>
+            <view class="clearfix time">
+              <view class="fl">签到时间:{{item.IN_TIME}}</view>
+              <view class="fr">签出时间:{{item.OUT_TIME}}</view>
+            </view>
+          </view>
+        </view>
+        <i-load-more tip="{{loadMore.text}}"  loading="{{ loadMore.show }}" />
+
+      </view>
+    </checkbox-group>
+</view>

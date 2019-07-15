@@ -1,0 +1,63 @@
+<view class='content'>
+  <view wx:if="{{isNew === '1' || !data.MXID}}">
+    <kw-list-cell title="学校(校园)" rightNote="{{data.MB_ORG_MC}}" bindtap="showSchool"></kw-list-cell>
+    <picker value="{{data.YWSJ}}" mode="date" bindchange="changeYwsj" disabled="{{data.MXID}}" start="{{startDate}}" end="{{endDate}}">
+      <kw-list-cell title="时间" rightNote="{{data.YWSJ}}"></kw-list-cell>
+    </picker>
+    <kw-list-cell title="听课班级">
+      <view slot="rightNote">
+        <view class="list-right-input"><input value="{{data.BJ}}" bindinput="inputBj" placeholder="请填写班级"/></view>
+      </view>
+    </kw-list-cell>
+    <kw-list-cell title="听课学科">
+      <view slot="rightNote">
+        <view class="list-right-input"><input value="{{data.XK}}" bindinput="inputXk" placeholder="请填写学科"/></view>
+      </view>
+    </kw-list-cell>
+    <kw-list-cell title="听课教师">
+      <view slot="rightNote">
+        <view class="list-right-input"><input value="{{data.JSMC}}" bindinput="inputJsmc" placeholder="请填写教师名称"/></view>
+      </view>
+    </kw-list-cell>
+    <kw-list-cell isArrow="{{false}}">
+      <view>
+        <view class="ddjs-head clearfix" bindtap='changeDdjsShow'>
+          <text class="fl">过程记录</text>
+          <view class="fr" hidden="{{!ddjsShow}}"><i-icon type="unfold" color="#c7c7c7" size="20"></i-icon></view>
+          <view class="fr" hidden="{{ddjsShow}}"><i-icon type="packup" color="#c7c7c7" size="20"></i-icon></view>
+        </view>
+        <view hidden="{{ddjsShow}}" class="ddjs-body">
+          <kw-editor value="{{data.GCJL}}" bindinput="gcjlInput"></kw-editor>
+        </view>
+      </view>
+    </kw-list-cell>
+    <kw-list-cell title="定性评价" isArrow="{{false}}">
+      <view slot="rightNote">
+        <view class="list-right-input"><i-rate bind:change="changeDxpj" value="{{data.FZ}}"></i-rate></view>
+      </view>
+    </kw-list-cell>
+    <kw-list-cell isArrow="{{false}}">
+      <view>
+          <view class="ddjs-head clearfix" bindtap='changeZhpjShow'>
+            <text class="fl">综合评价</text>
+            <view class="fr" hidden="{{!zhpjShow}}"><i-icon type="unfold" color="#c7c7c7" size="20"></i-icon></view>
+            <view class="fr" hidden="{{zhpjShow}}"><i-icon type="packup" color="#c7c7c7" size="20"></i-icon></view>
+          </view>
+          <view class="ddjs-body" hidden="{{zhpjShow}}">
+            <textarea value="{{data.ZHPJ}}" maxlength="4000" bindinput="inputZhpj"></textarea>
+          </view>
+      </view>
+    </kw-list-cell>
+    <view class="save" wx:if="{{hasBcAuth}}">
+      <button bindtap="save">保存</button>
+    </view>
+    <!-- 选择 学校-->
+    <block>
+      <kw-school-select hidden="{{schoolShow}}" bindclose="showSchool" bindconfirm="confirmSchool">></kw-school-select>
+    </block>
+  </view>
+  <view wx:else class="text-bold">
+    {{tbmbglData.MBNR}}
+  </view>
+
+</view>

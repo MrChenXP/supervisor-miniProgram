@@ -5,5 +5,5 @@
     <!-- <i-icon type="undo" size="28" color="#80848f" /> -->
   </view>
 
-  <editor id="kw-editor" class="kw-editor-content" placeholder="{{placeholder}}" bindready="onEditorReady" bindinput="input" ></editor>
+  <editor id="kw-editor" class="kw-editor-content" placeholder="{{placeholder}}"  bindinput="input" bindready="onEditorReady"></editor>
 </view>

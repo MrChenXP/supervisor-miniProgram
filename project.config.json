@@ -44,23 +44,23 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "xcdd",
-					"pathName": "pages/xcdd/xcdd",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "xcdd-add",
-					"pathName": "pages/xcdd/xcdd-add/xcdd-add",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "workspace",
 					"pathName": "pages/workspace/workspace",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "xxglddb",
+					"pathName": "pages/xxglddb/xxglddb",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "qdqt",
+					"pathName": "pages/my/qdqt/qdqt",
+					"query": "id=29c5c503a232466496e6777e4c846c03",
 					"scene": null
 				}
 			]

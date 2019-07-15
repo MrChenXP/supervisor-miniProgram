@@ -1,0 +1,38 @@
+<view class="content">
+  <kw-list-cell title="学校" rightNote="{{xx.name}}" bindtap="showSchool"></kw-list-cell>
+  <kw-list-cell title="随行督学" rightNote="{{sxdx.name}}" bindtap="showSxdx"></kw-list-cell>
+  <picker mode="date" value="{{ywsj}}" bindchange="changeYwsj"  start="{{startDate}}" end="{{endDate}}">
+	  <kw-list-cell title="时间" right-note="{{ywsj}}"></kw-list-cell>
+  </picker>
+  <picker range="{{sdList}}" value="{{sdValue.index}}" range-key="DMMX_MC" bindchange="changeSd" >
+    <kw-list-cell title="时段" rightNote="{{sdValue.name}}" ></kw-list-cell>
+  </picker>
+  <picker range="{{pjList}}" bindchange="changePj" range-key="name" value="{{pjValue.index}}" >
+    <kw-list-cell title="规定任务评价" rightNote="{{pjValue.name}}"></kw-list-cell>
+  </picker>
+  <kw-list-cell isArrow="{{false}}" >
+  	<view>
+  		<view class="ddjs-head clearfix" bindtap="ddsxShow">
+  			<text class="fl">督导事项</text>
+  			<view class="fr" hidden="{{ddsxShow}}">
+  				<i-icon type="unfold" color="#c7c7c7" size="20"></i-icon>
+  			</view>
+  			<view class="fr" hidden="{{!ddsxShow}}">
+  				<i-icon type="packup" color="#c7c7c7" size="20"></i-icon>
+  			</view>
+  		</view>
+  		<view hidden="{{!ddsxShow}}" class="ddjs-body">
+        <kw-editor value="{{formData.ddsxTxt}}" bindinput="ddsxInput"></kw-editor>
+  		</view>
+  	</view>
+  </kw-list-cell>
+  <view class="save">
+    <button bindtap="saveGzjh">保存</button>
+  </view>
+  
+  <!-- 选择工作计划 学校 随行督学-->
+  <block>
+    <kw-school-select hidden="{{schoolShow}}" bindclose="showSchool" bindconfirm="confirmSchool">></kw-school-select>
+    <kw-sxdx-select hidden="{{sxdxShow}}" bindclose="showSxdx" bindconfirm="sxdxConfirm"></kw-sxdx-select>
+  </block>
+</view>

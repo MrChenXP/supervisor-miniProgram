@@ -17,36 +17,37 @@
     </view>
     <view class="delete fl" wx:if="{{hasScAuth && deleteShow}}" bindtap='deleteAction'>删除</view>
     <view class="delete fl" wx:if="{{!deleteShow}}" bindtap='confirmDeleteAction'>确认删除</view>
-    <view class="add fr" wx:if="{{hasXzAuth}}" bindtap="goAdd">新增</view>
+    <view class="add fr" wx:if="{{hasXzAuth}}" bindtap="toAdd">新增</view>
   </view>
 
-    <checkbox-group class="lists">
-      <view>
-			<!-- 单项列表 -->
-			<view class="list" wx:for="{{dataList}}" wx:key="index" bindtap='toPreview' data-id='{{item.CONTENT_ID}}'>
-				<view class="info">
-					<view>
+  <checkbox-group class="lists">
+    <view>
+      <!-- 单项列表 -->
+      <view class="list" wx:for="{{dataList}}" wx:key="index" bindtap='toPreview' data-id='{{item.CONTENT_ID}}'>
+        <view class="info">
+          <view>
             <label wx:if="{{!deleteShow}}">
               <view class="check">
-                <checkbox checked="{{deleteParam[item.CONTENT_ID]}}" catchtap='checkAction' data-id='{{item.CONTENT_ID}}'/> 
+                <checkbox checked="{{deleteParam[item.CONTENT_ID]}}" catchtap='checkAction' data-id='{{item.CONTENT_ID}}'/>
               </view>
             </label>
             {{item.XXMC}}
           </view>
-					<view class="clearfix time">
-						<view class="fl">{{item.AUTHOR}}</view>
-						<view class="fr">督导时间：{{item.YWSJ}}</view>
-					</view>
-					<view class="clearfix status">
-						<view class="fl clyj {{item.ztClass}}" catchtap='toZgxs' data-status="{{item.STATUS}}" data-ids="{{item.IDS}}">
+          <view class="clearfix time">
+            <view class="fl">{{item.AUTHOR}}</view>
+            <view class="fr">督导时间：{{item.YWSJ}}</view>
+          </view>
+          <view class="clearfix status">
+            <view class="fl clyj {{item.ztClass}}" catchtap='toZgxs' data-status="{{item.STATUS}}" data-ids="{{item.IDS}}">
               <kw-tag  color="blue" circle="{{true}}">{{item.STATUS_MC || '未填写'}}</kw-tag>
-						</view>
-						<view class="fr" catchtap='goAdd' data-id='{{item.CONTENT_ID}}'>
+            </view>
+            <view class="fr" catchtap='toAdd' data-id='{{item.CONTENT_ID}}'>
               <kw-tag type="border" color="blue" wx:if="{{hasXzAuth}}" circle="{{true}}">编辑</kw-tag>
-						</view>
-					</view>
-				</view>
-			</view>
+            </view>
+          </view>
+        </view>
       </view>
-    </checkbox-group>
+      <i-load-more tip="{{loadMore.text}}"  loading="{{ loadMore.show }}" />
+    </view>
+  </checkbox-group>
 </view>

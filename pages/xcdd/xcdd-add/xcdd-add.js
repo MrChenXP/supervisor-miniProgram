@@ -11,14 +11,16 @@ Page({
     ddjsShow: true,
     zlcjShow: true,
     jyzfShow: true,
-    czwtShow: true,   
+    czwtShow: true,
+    // 保存权限
+    hasXzAuth: false,
     // 页面数据
     data:{
       ywsj: "", // 业务时间 督导时间
       gzjhName: "", // 工作计划名字
       gzjhId: "", // 工作计划Id
       xqid: "", // 学期id
-      schoolName: "测试后续处理意见的学校", // 学校名字
+      schoolName: "", // 学校名字
       schoolId: "", // 学校Id
       sxdxName: "", // 随行督学名字
       sxdxId: "", // 随行督学Id
@@ -35,21 +37,24 @@ Page({
       status_mc: '无意见', // 后续处理意见状态名称
       zgxsyj: "", // 整改建议，当STATUS=4，即后续处理意见选择 小问题 时，不能为空必传，其余状态时为空
       zgxsid: "", // 整个协商id STATUS=2或3或5时 不能为空必传
+      zgxsBh: "", // 整改协商编号
+      clqx: "", // 整改协商期限
+      ksid: "", // 协商科室id
+      ksName: "", // 协商科室名称
       pgid: "", //评估id，点了“去评估”才有，否则为空
       minDate: "", // 最小时间限制
       maxDate: "", // 最大时间限制
     },
-    
     // 登录用户数据
     loginUser: {},
   },
   onLoad (param) {
     if (param) {
       if (param.CONTENT_ID) {
-        this.data.contentId = param.CONTENT_ID
+        this.data.data.contentId = param.CONTENT_ID
         this.loadData()
       } else if (param.workplanId) {
-        this.data.gzjh.value = param.workplanId
+        this.data.data.gzjhId = param.workplanId
         this.loadDdGzjh()
       }
     }
@@ -59,6 +64,91 @@ Page({
       this.data.data.sxdxId = e.uid
       this.setData({ data: this.data.data })
     })
+    app.$kwz.hasAuth('ddjl/doEdit', (auth) => {
+      auth ? this.setData({ hasXzAuth: auth }) : ""
+    })
+  },
+  // 加载督导纪实
+  loadData(){
+    if(this.data.data.contentId) {
+      app.$kwz.ajax.ajaxUrl({
+        url: '/ddjl/doSelectByPrimaryKey',
+        type: 'POST',
+        data: {
+          CONTENT_ID: this.data.data.contentId
+        },
+        page: this,
+        then(response) {
+          let datas = response.datas
+          if (datas && datas.CONTENT_ID) {
+            this.data.data.schoolId = datas.ORG_ID
+            this.data.data.schoolName = datas.XXMC
+            this.data.data.ywsj = datas.YWSJ
+            this.data.data.status= datas.STATUS
+            this.data.data.status_mc= datas.STATUS_MC
+            this.data.data.sxdxName= datas.USERNAME
+            this.data.data.sxdxId= datas.USERID
+            this.data.data.dxjyzf= datas.DXJY || ''
+            this.data.data.czwt= datas.CZWT || ''
+            this.data.data.cyzl= datas.CYZL || 0
+            this.data.data.lxhy= datas.LXHY || 0
+            this.data.data.ztzf= datas.ZTZF || 0
+            this.data.data.wjdc= datas.WJDC || 0
+            this.data.data.xyxs= datas.XYXS || 0
+            this.data.data.pgid= datas.PGID
+            this.data.data.ddjs= datas.DDJS
+            this.setData({data: this.data.data})
+            if(datas.CONTENT_ID){
+              let status = datas.STATUS
+              if (status == '4') {
+                this.data.data.zgxsyj = datas.ZGJY || ''
+              } else if (status == '2' || status == '3' || status == '5') {
+                // 如果是一般问题-复杂-严重就加载整改协商
+                app.$kwz.ajax.ajaxUrl({
+                  url: '/dd_zgxs/selectZgxsList',
+                  type: 'POST',
+                  data: {
+                    CONTENT_ID: this.data.data.contentId
+                  },
+                  page: this,
+                  then(response) {
+                    let zgdatas = response.datas[0]
+                    this.data.data.zgxsBh = zgdatas.BH
+                    this.data.data.zgxsid = zgdatas.ZGXSID
+                    this.data.data.zgxsyj = zgdatas.XSNR
+                    this.data.data.clqx = zgdatas.CLQX
+                    this.data.data.ksid = zgdatas.ORG_ID
+                    this.data.data.ksName = zgdatas.ORG_MC
+                    this.setData({ data: this.data.data})
+                  }
+                })
+              }
+            }
+            // 加载工作安排
+            if (datas.GZAP_YWID) {
+              this.data.data.gzjhId = datas.GZAP_YWID
+              app.$kwz.ajax.ajaxUrl({
+                url: '/dd_gzap/doSelectByPrimary/DDGZAP',
+                type: 'POST',
+                data: {
+                  CONTENT_ID: datas.GZAP_YWID
+                },
+                page: this,
+                then(response) {
+                  let datas = response.datas.map
+                  datas.YWSJ = app.$kwz.formatDate('yyyy-MM-dd', datas.YWSJ)
+                  let workPlanName = datas.ORG_ID_TARGET_MC + '/' + datas.YWSJ + '/'
+                      + (datas.SD === '1' ? "上午" : "下午") + '/' + datas.AUTHOR
+                  this.data.data.gzjhName = workPlanName
+                  this.setData({ data: this.data.data})
+                  // 先不用获取标准
+                }
+              })
+            }
+          }
+        }
+      })
+    }
   },
   // 工作计划确定
   confirmGzjh(e) {
@@ -106,6 +196,8 @@ Page({
   },
   // 保存督导的ajax
   sendSaveXcdd(){
+    // 点击保存按钮时,将初始zgxsId置空,否则onUnload里的判断会真,会运行删除zgxsId函数
+    this.selectComponent(".xcdd-hxclyj").data.zgxsidOld = ""
     app.$kwz.ajax.ajaxUrl({
       url: '/ddjl/doEdit',
       type: 'POST',
@@ -140,9 +232,33 @@ Page({
       vue: this,
       then(response) {
         app.$kwz.alert('保存成功')
-        // 点击保存按钮时,将初始zgxsId置空,否则onUnload里的判断会真,会运行删除zgxsId函数
-        // this.zgxsidOld = ""
         wx.redirectTo({ url: '/pages/xcdd/xcdd' })
+      }
+    })
+  },
+  // 加载工作计划数据=>从工作计划列表点击去督导,传过来工作计划id,然后加载工作计划内容填充至督导纪实
+  loadDdGzjh() {
+    app.$kwz.ajax.ajaxUrl({
+      url: '/dd_gzap/doSelectByPrimary/DDGZAP',
+      type: 'POST',
+      data: {
+        CONTENT_ID: this.data.data.gzjhId
+      },
+      page: this,
+      then (response) {
+        let datas = response.datas
+        if (datas && datas.map) {
+          let gzjh = datas.map
+          this.data.data.schoolName = gzjh.ORG_ID_TARGET_MC
+          this.data.data.schoolId = gzjh.ORG_ID_TARGET
+          this.data.data.sxdxName = gzjh.JGID_MC || ''
+          this.data.data.sxdxId = gzjh.JGID || ''
+          this.data.data.ywsj = gzjh.YWSJ && gzjh.YWSJ.length > 10 ? gzjh.YWSJ.substr(0, 10) : app.$kwz.formatDate('yyyy-MM-dd')
+          let gzjhMc = `${this.data.data.schoolName}/${this.data.data.sxdxName}/${this.data.data.ywsj}`
+          this.data.data.gzjhName = gzjhMc.length > 25 ? (gzjhMc.substr(0, 24) + '...') : gzjhMc,
+          this.setData({ data: this.data.data})
+          // 先不用获取标准
+        }
       }
     })
   },
@@ -182,10 +298,14 @@ Page({
   },
   // 打开关闭 工作计划 学校 随行督学
   showGzjh(e){
-    this.setData({ gzjhShow: !this.data.gzjhShow })
+    if(!this.data.data.contentId){
+      this.setData({ gzjhShow: !this.data.gzjhShow })
+    }
   },
   showSchool(e) {
-    this.setData({ schoolShow: !this.data.schoolShow })
+    if(!this.data.data.contentId){
+      this.setData({ schoolShow: !this.data.schoolShow })
+    }
   },
   showSxdx(e) {
     this.setData({ sxdxShow: !this.data.sxdxShow })

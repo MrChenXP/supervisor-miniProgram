@@ -14,7 +14,7 @@
       </view>
       <!-- 一般问题-向学校发送整改建议 严重问题-向督导办上报整改建议 -->
       <view hidden="{{!(status === '2' || status === '5')}}" class="xcdd-hxclyj-ybwt">
-        <kw-list-cell title="编号" rightNote="{{ybwtBh}}" isArrow="{{false}}"></kw-list-cell>
+        <kw-list-cell title="编号" rightNote="{{zgxsBh}}" isArrow="{{false}}"></kw-list-cell>
         <kw-list-cell title="单位" rightNote="{{schoolName}}" isArrow="{{false}}"></kw-list-cell>
         <kw-list-cell title="来源渠道" rightNote="经常性督导整改" isArrow="{{false}}"></kw-list-cell>
         <view class="clyj">
@@ -29,9 +29,9 @@
       </view>
       <!-- 复杂问题-向科室发送协商意见 -->
       <view hidden="{{!(status === '3')}}" class="xcdd-hxclyj-fzwt">
-        <kw-list-cell title="编号" rightNote="{{ybwtBh}}" isArrow="{{false}}"></kw-list-cell>
+        <kw-list-cell title="编号" rightNote="{{zgxsBh}}" isArrow="{{false}}"></kw-list-cell>
         <picker range="{{ksList}}" range-key="name" bindchange="changeKs">
-          <kw-list-cell title="科室" right-note="{{fzwtKs.name}}"></kw-list-cell>
+          <kw-list-cell title="科室" right-note="{{ksName}}"></kw-list-cell>
         </picker>
         <view class="clyj">
           我室责任督学于

@@ -58,8 +58,8 @@
       </view>
     </view>
   </kw-list-cell>
-  <xcdd-hxclyj status="{{data.status}}" status_mc="{{data.status_mc}}" schoolName="{{data.schoolName}}" ywsj="{{data.ywsj}}" zgxsid="{{data.zgxsid}}" schoolId="{{data.schoolId}}" contentId="{{contentId}}" bindconfirm="hxclyjConfirm"></xcdd-hxclyj>
-  <view class="save" >
+  <xcdd-hxclyj class="xcdd-hxclyj" status="{{data.status}}" status_mc="{{data.status_mc}}" schoolName="{{data.schoolName}}" ywsj="{{data.ywsj}}" zgxsid="{{data.zgxsid}}" zgxsBh="{{data.zgxsBh}}" schoolId="{{data.schoolId}}" contentId="{{data.contentId}}" zgxsyj="{{data.zgxsyj}}" clqx="{{data.clqx}}" ksid="{{data.ksid}}" ksName="{{data.ksName}}" bindconfirm="hxclyjConfirm"></xcdd-hxclyj>
+  <view class="save" wx:if="{{hasXzAuth}}">
     <button bindtap="saveXcdd">保存</button>
   </view>
   <!-- 选择工作计划 学校 随行督学-->

@@ -1,66 +1,51 @@
-// pages/xcdd/xcdd-zgxs/xcdd-zgxs.js
+const app = getApp()
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    // 整改协商id
+    zgxsId: '',
+    // 整改协商状态
+    status: "",
+    // 页面数据
+    data:{},
+    // 处理加过显示隐藏
+    cljgShow: false,
+    // 处理结果整个列表是否显示
+    cljgCellShow: false,
+    
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  onLoad: function (param) {
+    if (param && param.zgxsId) {
+      this.data.zgxsId = param.zgxsId
+      this.setData({ status: param.status })
+      this.initData()
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  // 初始化页面
+  initData() {
+    app.$kwz.ajax.ajaxUrl({
+      url: '/dd_zgxs/doSelectByPrimary',
+      type: 'POST',
+      data: {
+        ZGXSID: this.data.zgxsId
+      },
+      page: this,
+      then(response) {
+        let datas = response.datas
+        datas.CLBG = app.$kwz.formatImg(datas.CLBG)
+        if (datas && datas.ZGXSID) {
+          datas.YWSJ = datas.YWSJ.length > 10 ? datas.YWSJ.substr(0, 10) : datas.YWSJ
+          this.setData({ data: datas})
+          if (datas.CLZTDM >= 24 || (datas.CLZTDM >= 4 && datas.CLZTDM <= 6) ) {
+            this.setData({
+              cljgCellShow: true
+            })
+          }
+        }
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  // 处理结果显示隐藏 
+  cljgShow(){
+    this.setData({ cljgShow: !this.data.cljgShow})
   }
 })

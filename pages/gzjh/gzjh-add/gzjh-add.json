@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "kw-list-cell": "/dist/kw-ui/kw-list-cell/kw-list-cell",
+    "kw-editor": "/dist/kw-ui/kw-editor/kw-editor",
+    "kw-gzjh-select": "/dist/kw-ui/kw-gzjh-select/kw-gzjh-select",
+    "kw-school-select": "/dist/kw-ui/kw-school-select/kw-school-select",
+    "kw-sxdx-select": "/dist/kw-ui/kw-sxdx-select/kw-sxdx-select",
+    "i-icon": "/dist/iview/icon/index"
+  }
+}

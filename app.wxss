@@ -7,10 +7,8 @@
 }
 
 view {
-  color:#333333;
   box-sizing: border-box;
   font-size:28rpx;
-  line-height:1.8;
 }
 progress, checkbox-group, textarea, form{
 	width: 100%;
@@ -22,6 +20,7 @@ textarea {
 i-input-number{
   display: inline-block;
 }
+
 
 /* ================================================功能模块，组合使用================================================== */
 /* -----------  列表单元右侧输入框(参考整改工作新增) ---------*/
@@ -265,6 +264,6 @@ from {
     filter: opacity(0.4);
     }
 to {
-    filter: opacity(1);    
+    filter: opacity(1);
     }
 }

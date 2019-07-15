@@ -27,7 +27,6 @@ Page({
   onReachBottom(){
     this.data.loadMore[this.data.isActive].show = true
     this.data.loadMore[this.data.isActive].text = "正在加载..."
-
     this.setData({ loadMore: this.data.loadMore})
     app.$kwz.ajax.ajaxUrl({
       url: '/jc_content/open/doCmsFbPageList/' + this.data.ywlxList[this.data.isActive],

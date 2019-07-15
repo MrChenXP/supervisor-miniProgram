@@ -1,2 +1,60 @@
-<!--pages/xcdd/xcdd-zgxs/xcdd-zgxs.wxml-->
-<text>pages/xcdd/xcdd-zgxs/xcdd-zgxs.wxml</text>
+<view class='content'>
+  <!-- 一般问题 复杂问题==整改 -->
+  <block  wx:if="{{status == '2' || status == '5'}}">
+    <kw-list-cell title="编号" rightNote="{{data.BH}}" isArrow="{{false}}"></kw-list-cell>
+    <kw-list-cell title="单位" rightNote="{{data.XXMC}}" isArrow="{{false}}"></kw-list-cell>
+    <kw-list-cell>
+      <view>
+        <view>经挂牌督导，你单位存在以下问题:</view>
+        <view class="text-bold">{{data.XSNR}}</view>
+        <view>
+          对以上问题要高度重视，采取措施，立即整改。整改报告于本通知下发
+          <text class="text-bold">{{data.CLQX}}</text>
+          日内书面报责任督学，责任督学于接到报告的3日内上报人民政府教育督导室督管员备案。
+        </view>
+      </view>
+    </kw-list-cell>
+    <kw-list-cell title="日期" rightNote="{{data.YWSJ}}" isArrow="{{false}}"></kw-list-cell>
+    <kw-list-cell title="状态" rightNote="{{data.CLZTMC}}" isArrow="{{false}}"></kw-list-cell>
+  </block>
+
+  <!-- 严重问题==协商 -->
+  <block  wx:if="{{status == '3'}}">
+    <kw-list-cell title="编号" rightNote="{{data.BH}}" isArrow="{{false}}"></kw-list-cell>
+    <kw-list-cell title="科室/中心" rightNote="{{data.XS_ORG}}" isArrow="{{false}}"></kw-list-cell>
+    <kw-list-cell isArrow="{{false}}">
+      <view>
+        我室
+        <text class="text-bold">{{data.AUTHOR}}</text>
+        责任督学于
+        <text class="text-bold">{{data.RQ}}</text>
+        对
+        <text class="text-bold">{{data.XXMC}}</text>
+        进行了教育督导，发现该学校(幼儿园)存在以下问题:
+        <view class="text-bold">{{data.XSNR}}</view>
+        <view>
+          请贵科室（中心）予以支持、配合、协调解决!
+        </view>
+      </view>
+    </kw-list-cell>
+  </block>
+
+  <kw-list-cell wx:if="{{cljgCellShow}}" isArrow="{{false}}">
+      <view>
+        <view class="cljg-head clearfix" bindtap="cljgShow">
+          <text class="fl">处理结果</text>
+          <view class="fr" hidden="{{cljgShow}}">
+  				  <i-icon type="unfold" color="#c7c7c7" size="20"></i-icon>
+          </view>
+          <view class="fr" hidden="{{!cljgShow}}">
+            <i-icon type="packup" color="#c7c7c7" size="20"></i-icon>
+          </view>
+        </view>
+        <view hidden="{{!cljgShow}}" class="cljg-body">
+          <view class="cljg-text">
+            <rich-text nodes="{{data.CLBG}}"></rich-text>
+          </view>
+        </view>
+      </view>
+  </kw-list-cell>
+</view>

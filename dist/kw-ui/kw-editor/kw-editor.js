@@ -12,23 +12,38 @@ Component({
       value: "请输入"
     },
     // 初始化内容
-    value: {
-      type: String,
-      value: ""
-    },
+    value: String    
+  },
+  observers:{
+    value(){
+      const that = this
+      // 请求是异步的，初始化的时候可能没有值，固不能用editor初始化属性
+      if(this.data.value){
+        this.createSelectorQuery().select('#kw-editor').context(function (res) {
+          that.editorCtx = res.context
+          let html = app.$kwz.formatImg(that.data.value)
+          that.editorCtx.setContents({
+            html: html
+          })
+        }).exec()
+      }
+    }
+  },
+  ready(){
   },
   methods: {
-    // 富文本初始化
+    // 富文本初始化 暂时隐藏 因为监听了value值的变化，每次变化都初始化了
     onEditorReady(){
       const that = this
       this.createSelectorQuery().select('#kw-editor').context(function (res) {
         that.editorCtx = res.context // 讲富文本编辑器对象化到this下
+        let html = app.$kwz.formatImg(that.data.value)
         that.editorCtx.setContents({
-          html: that.data.value
+          html: html
         })
       }).exec()
     },
-    // 富文本输入 并将html返回给父组件
+    // 富文本输入 并将html返回给父组件 输入使用setData会导致焦点失去
     input({ detail }){
       this.triggerEvent("input",{
         data: detail.html

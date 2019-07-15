@@ -1,0 +1,51 @@
+<view class='content'>
+	<kw-list-cell title="编号" right-note="{{data.BH}}" ></kw-list-cell>
+	<kw-list-cell title="科室中心" right-note="{{data.XXMC}}"></kw-list-cell>
+  <kw-list-cell isArrow="{{false}}">
+    <view>
+      <view class="ddjs-body">
+        <view>
+          <view>
+            我室
+            <text class="text-bold">{{data.AUTHOR}}</text>
+            责任督学于
+            <text class="text-bold">{{data.RQ}}</text>
+            对
+            <text class="text-bold">{{data.XXMC}}</text>
+            进行了教育督导，发现该学校(幼儿园)存在以下问题：
+          </view>
+          <view class="text-bold">{{data.XSNR}}</view>
+          <view>
+            请贵科室（中心）予以支持、配合、协调解决!
+          </view>
+        </view>
+      </view>
+    </view>
+  </kw-list-cell>
+  <kw-list-cell title="日期" right-note="{{data.RQ}}"></kw-list-cell>
+  <!-- 处理结果 -->
+  <kw-list-cell isArrow="{{false}}">
+    <view>
+      <view class="ddjs-head clearfix" bindtap='changeCljgShow'>
+        <text class="fl">处理结果</text>
+        <view class="fr" hidden="{{!cljgShow}}"><i-icon type="unfold" color="#c7c7c7" size="20"></i-icon></view>
+        <view class="fr" hidden="{{cljgShow}}"><i-icon type="packup" color="#c7c7c7" size="20"></i-icon></view>
+      </view>
+      <view hidden="{{cljgShow}}" class="ddjs-body">
+        <view wx:if="{{resultShow}}">
+         <kw-editor value="{{data.CLBG}}" bindinput="cljgInput"></kw-editor>
+        </view>
+        <view wx:if="{{detailShow}}">
+          <rich-text nodes="{{data.CLBG}}"></rich-text>
+        </view>
+      </view>
+    </view>
+  </kw-list-cell>
+  <!-- 处理和确认整改完成 -->
+  <view class="save" wx:if="{{SF}}">
+    <button bindtap="fn_zggz_zgtzs_dispose" wx:if="{{resultShow && hasClAuth}}" 
+      >处理</button>
+    <button bindtap="changeStatue" data-status="26" wx:if="{{data.CLZTDM < '26' && hasYsAuth}}"
+      hidden="{{SF !== 'dx'}}">确认整改完成</button>
+  </view>
+</view>  

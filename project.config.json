@@ -40,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -51,16 +51,23 @@
 				},
 				{
 					"id": -1,
-					"name": "xxglddb",
-					"pathName": "pages/xxglddb/xxglddb",
+					"name": "qdqt",
+					"pathName": "pages/my/qdqt/qdqt",
+					"query": "id=29c5c503a232466496e6777e4c846c03",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "my",
+					"pathName": "pages/my/my",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "qdqt",
-					"pathName": "pages/my/qdqt/qdqt",
-					"query": "id=29c5c503a232466496e6777e4c846c03",
+					"name": "grzl",
+					"pathName": "pages/my/grzl/grzl",
+					"query": "",
 					"scene": null
 				}
 			]

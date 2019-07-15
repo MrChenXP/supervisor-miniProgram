@@ -29,7 +29,6 @@ Page({
             success({tempFilePath}){
               data.IMAGE = tempFilePath
               _this.setData({data})
-              console.log(_this.data.data)
             }
           })
         } else{

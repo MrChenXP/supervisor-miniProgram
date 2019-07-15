@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "kw-list-cell": "/dist/kw-ui/kw-list-cell/kw-list-cell"
+
+  }
+}

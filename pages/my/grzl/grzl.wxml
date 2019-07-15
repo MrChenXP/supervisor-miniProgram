@@ -1,0 +1,94 @@
+<view class='content'>
+  <kw-list-cell>
+    <view >
+      <view class="head-img">
+        <view class="head-img-title">头像</view>
+        <view class="head-img-img" bindtap="changeIcon">
+          <image src="{{imageUrl}}"></image>
+        </view>
+      </view>
+    </view>
+  </kw-list-cell>
+  <kw-list-cell title="姓名">
+    <view slot="rightNote">
+      <view class="list-right-input">
+        <input value="{{user.XM}}" type="number" bindinput="inputXm" placeholder="请填写姓名"/>
+      </view>
+    </view>
+  </kw-list-cell>
+  <kw-list-cell title="显示名">
+    <view slot="rightNote">
+      <view class="list-right-input">
+        <input value="{{user.U_USERNAME}}" type="number" bindinput="inputXsm" placeholder="请填写显示名"/>
+      </view>
+    </view>
+  </kw-list-cell>
+  <kw-list-cell title="年龄">
+    <view slot="rightNote">
+      <view class="list-right-input">
+        <input value="{{user.AGE}}" type="number" bindinput="inputNl" placeholder="请填写年龄"/>
+      </view>
+    </view>
+  </kw-list-cell>
+  <picker range="{{dms.DM_XB}}" range-key="DMMX_MC" bindchange="changeXb">
+    <kw-list-cell title="性别" right-note="{{mc.xbMc}}"></kw-list-cell>
+  </picker>
+  
+  <kw-list-cell title="督学类型" right-note="{{mc.dxlxMc}}" isArrow="{{false}}"></kw-list-cell>
+  <kw-list-cell title="联系电话">
+    <view slot="rightNote">
+      <view class="list-right-input">
+        <input value="{{user.DH}}" type="number" bindinput="inputDh" placeholder="请填写联系电话"/>
+      </view>
+    </view>
+  </kw-list-cell>
+  <picker range="{{dms.DM_SFZJLX}}" range-key="DMMX_MC" bindchange="changeSfzjlx">
+    <kw-list-cell title="身份证件类型" right-note="{{mc.sfzjlxMc}}"></kw-list-cell>
+  </picker>
+  <kw-list-cell title="身份证件号">
+    <view slot="rightNote">
+      <view class="list-right-input">
+        <input value="{{user.SFZJH}}" type="number" bindinput="inputSfzjh" placeholder="请填写身份证件号"/>
+      </view>
+    </view>
+  </kw-list-cell>
+  <picker range="{{dms.DM_MZ}}" range-key="DMMX_MC" bindchange="changeMz">
+    <kw-list-cell title="民族" right-note="{{mc.mzMc}}"></kw-list-cell>
+  </picker>
+  <picker mode="date" value="{{user.BIRTH}}" bindchange="changeBIRTH">
+    <kw-list-cell title="出生年月" right-note="{{user.BIRTH}}"></kw-list-cell>
+  </picker>
+
+  <view class="group">
+    <picker range="{{dms.DM_XLCC}}" range-key="DMMX_MC" bindchange="changeXl">
+      <kw-list-cell title="学历" right-note="{{mc.xlMc}}"></kw-list-cell>
+    </picker>
+     <picker range="{{dms.DM_ZYJSDJ}}" range-key="DMMX_MC" bindchange="changeZyjszc">
+      <kw-list-cell title="专业技术职称" right-note="{{mc.zyjszcMc}}"></kw-list-cell>
+    </picker>
+    <kw-list-cell title="职务">
+      <view slot="rightNote">
+        <view class="list-right-input">
+          <input value="{{user.ZW}}" type="number" bindinput="inputZw" placeholder="请填写职务"/>
+        </view>
+      </view>
+    </kw-list-cell>
+    <kw-list-cell title="工作单位">
+      <view slot="rightNote">
+        <view class="list-right-input">
+          <input value="{{user.WORKUNIT}}" type="number" bindinput="inputZzdw" placeholder="请填写工作单位"/>
+        </view>
+      </view>
+    </kw-list-cell>
+    <kw-list-cell >
+      <view>
+         <view class="ddjs-head clearfix" >
+          <text class="fl">个人简介(1000字以内)</text>
+        </view>
+        <view class="ddjs-body">
+          <textarea maxlength="1000" value="{{user.JL}}"  bindinput="changeGrjj" placeholder="请填写个人简介"></textarea>
+        </view>
+      </view>
+    </kw-list-cell>
+  </view>
+</view>

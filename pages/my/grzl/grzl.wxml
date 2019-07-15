@@ -91,4 +91,7 @@
       </view>
     </kw-list-cell>
   </view>
+  <view class="save">
+    <button bindtap="saveUserSet">保存</button>
+  </view>
 </view>

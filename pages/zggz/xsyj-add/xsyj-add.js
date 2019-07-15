@@ -213,7 +213,6 @@ Page({
   },
   // 更改 存在问题 值
   changeCzwt({detail}){
-    console.log(detail)
     this.data.formData.XSNR = detail.value
   },
 })

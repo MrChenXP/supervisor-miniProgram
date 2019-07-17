@@ -28,10 +28,16 @@ Page({
     }
   },
   // 登陆成功
-  loginSuccess ()   {
-    this.setData({
-      loginShow: false
-    })
+  loginSuccess (){
+    app.$kwz.getLoginUser((user) => {
+      console.log(user)
+      if (user) {
+        this.setData({ 
+          user,
+          loginShow: false
+        })
+      }
+    }, this)
   },
   // 退出
   logout () {

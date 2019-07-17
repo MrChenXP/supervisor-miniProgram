@@ -36,6 +36,14 @@ const getObjectFromStorage = (key, callback, app) => {
 const setStringToStorage = (key, data, callback, app) => {
   weixin.setStringToStorage(key, data, callback, app)
 }
+/**
+ * 将字符串值同步设置到缓存中
+ * @param {string} key 缓存key
+ * @param {string} data 缓存data
+ */
+const setStringToStorageSync = (key, data) => {
+  weixin.setStringToStorageSync(key, data)
+}
 
 /**
  * 将json对象值异步设置到缓存中
@@ -46,6 +54,15 @@ const setStringToStorage = (key, data, callback, app) => {
  */
 const setObjectToStorage = (key, data, callback, app) => {
   setStringToStorage(key, util.json2Str(data), callback, app)
+}
+
+/**
+ * 将json对象值同步设置到缓存中
+ * @param {string} key 缓存key
+ * @param {object} data 缓存data
+ */
+const setObjectToStorageSync = (key, data) => {
+  setStringToStorageSync(key, util.json2Str(data))
 }
 
 let _sessionId = ''
@@ -157,7 +174,7 @@ const getLoginUser = (callback, app) => {
  */
 const setLoginUser = (loginUser) => {
   _loginUser = loginUser
-  setObjectToStorage('_LOGIN_USER', loginUser)
+  setObjectToStorageSync('_LOGIN_USER', loginUser)
 }
 
 let _commonMenus = null

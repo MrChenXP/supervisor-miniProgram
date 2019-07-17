@@ -700,7 +700,9 @@ export default {
     ajaxUrl
   }, checkLogin, isLogin, initAutoLogin, setSession, logout, initProducts,
   cfp: util.cfp,
-  getLoginUser: store.getLoginUser, loadDms, uploadImg,
+  getLoginUser: store.getLoginUser,
+  setLoginUser: store.setLoginUser,
+  loadDms, uploadImg,
   canUse: weixin.canUse, 
   copyJson: util.copyJson, hasAuth, formatDate, formatImg, dateImpose, getLimdat, uniq
 }

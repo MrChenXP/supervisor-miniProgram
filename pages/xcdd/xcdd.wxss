@@ -1,6 +1,6 @@
 /* pages/xcdd/xcdd.wxss */
 .lists {
-	  height: calc(100% - 186upx);
+	  height: calc(100% - 186rpx);
 }
 .lists .wwt .kw-tag {
   background: none;

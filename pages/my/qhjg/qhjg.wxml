@@ -1,0 +1,8 @@
+<view class="content">
+  <radio-group bindchange="radioChange">
+    <label wx:for="{{userOrgs}}" wx:key="index">
+  		<radio checked="{{item.value == userOrg}}" value="{{item.value}}" />
+      <view class="radio-label">{{item.label}}</view>
+    </label>
+  </radio-group>
+</view>

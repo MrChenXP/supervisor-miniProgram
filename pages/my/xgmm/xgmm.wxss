@@ -1,0 +1,39 @@
+ .form{
+    background: #f5f5f5;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+  .bg{
+    width: 544rpx;
+    height: 85rpx;
+    border-radius: 42.5rpx;
+    border: solid 1rpx #e1e1e1;
+    margin: 25rpx auto;
+    display: flex;
+    background: white;
+  }
+  .bg input{
+    margin-left: 47rpx;
+    margin-right:47rpx;
+    line-height: 83rpx;
+    height: 83rpx;
+    width: 100%;
+    font-size: 30rpx;
+    color: #b0b0b0;
+  }
+  .bg input{
+    text-align: left;
+  }
+  .bg button{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    border-radius: 42.5rpx;
+    background: linear-gradient(90deg, #00befe 0%, #028edf 100%), linear-gradient(#109dea, #109dea);
+    color: white;
+    line-height: 83rpx;
+  }
+  .bg button:after{
+    border: none;
+  }

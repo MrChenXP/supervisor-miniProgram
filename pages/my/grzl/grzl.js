@@ -53,7 +53,6 @@ Page({
       }
       this.data.dms = app.$kwz.copyJson(dms) || {}
       this.setData({ dms: this.data.dms})
-      console.log(this.data.dms)
       this.init()
     })
   },
@@ -89,7 +88,6 @@ Page({
           this.showMc(this.data.user.XL, 'DM_XLCC', 'xlMc')
           this.showMc(this.data.user.ZYJSZC, 'DM_ZYJSDJ', 'zyjszcMc')
           this.setData({user: this.data.user})
-          console.log(this.data.user)
         }
       }
     })

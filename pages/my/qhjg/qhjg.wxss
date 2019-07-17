@@ -1,0 +1,17 @@
+.content{
+    width: 100%;
+  }
+  label{
+    display: inline-block;
+    background: white;
+    width: 100%;
+    padding: 20rpx !important;
+    position: relative;
+    box-sizing: border-box;
+  }
+  .radio-label{
+    text-align: right;
+    position: absolute;
+    right: 20rpx;
+    top:20rpx;
+  }

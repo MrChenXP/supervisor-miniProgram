@@ -26,7 +26,9 @@
     "pages/xxglddb/xxglddb",
     "pages/xxglddb/xxglddb-preview/xxglddb-preview",
     "pages/my/qdqt/qdqt",
-    "pages/my/grzl/grzl"
+    "pages/my/grzl/grzl",
+    "pages/my/qhjg/qhjg",
+    "pages/my/xgmm/xgmm"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -60,5 +62,10 @@
         "selectedIconPath": "static/images/icons/my-active.png"
       }
     ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于签到（签退）功能"
+    }
   }
 }

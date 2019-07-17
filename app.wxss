@@ -6,11 +6,11 @@
   min-height: 100vh;
 }
 
-view {
+view{
   box-sizing: border-box;
   font-size:28rpx;
 }
-progress, checkbox-group, textarea, form{
+progress, checkbox-group, textarea, form,label{
 	width: 100%;
   box-sizing: border-box;
 }

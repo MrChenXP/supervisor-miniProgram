@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "i-load-more": "/dist/iview/load-more/index"
+  }
 }

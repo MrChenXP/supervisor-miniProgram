@@ -1,11 +1,11 @@
 <view class='content'>
-  <radio-group class="position-xx" wx:if="currentRecordShow" bindchange="changePostionOrg">
-			<label wx:for="{{userOrgs}}" wx:key="index" class="{{index < userOrgs.length-1? borderBottom :''}}">
-				<radio wx:if="{{userOrgsShow}}" value="{{item.ORG_ID}}"  />
+  <radio-group class="position-xx" wx:if="{{currentRecordShow}}" bindchange="changePostionOrg">
+			<label wx:if="{{userOrgsShow}}"  wx:for="{{userOrgs}}" wx:key="index" class="{{index < userOrgs.length-1? borderBottom :''}}">
+				<radio value="{{item.ORG_ID}}"  />
 				<view class="radio-label">{{item.ORG_MC}}</view>
 			</label>
-      
-      <view class="save">
+      <view wx:if="{{!userOrgsShow}}">未定位到学校（点此重新定位）</view>
+      <view class="save" wx:if="{{userOrgsShow}}">
         <button bindtap="checkPosition">签到</button>
       </view>
       <view class="lists-dkjl">打卡记录</view>
@@ -16,7 +16,7 @@
 		    <view class="list" >
 		      <view class="info">
 		        <view>
-		          {{currentRecord.ORG_MC}}
+		          {{currentRecord.IN_ORG_MC}}
 		        </view>
 		        <view class="clearfix time">
 		          <view class="fl">{{currentRecord.IN_TIME}}</view>
@@ -36,15 +36,14 @@
     	<!-- 单项列表 -->
         <view class="list" wx:for="{{currentRecords}}" wx:key="index"  >
           <view class="info">
-            <view>{{item.ORG_MC}}</view>
+            <view>{{item.inOrgMc}}</view>
             <view class="clearfix time">
-              <view class="fl">签到时间:{{item.IN_TIME}}</view>
-              <view class="fr">签出时间:{{item.OUT_TIME}}</view>
+              <view class="fl">签到时间:{{item.inTime}}</view>
+              <view class="fr">签出时间:{{item.outTime}}</view>
             </view>
           </view>
         </view>
         <i-load-more tip="{{loadMore.text}}"  loading="{{ loadMore.show }}" />
-
       </view>
     </checkbox-group>
 </view>

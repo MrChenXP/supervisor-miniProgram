@@ -1,0 +1,20 @@
+<view class="content">
+		<!-- 表单 -->
+		<form class="form clearfix">
+			<view>
+				<text>{{msg}}</text>
+			</view>
+		  <view class="bg">
+				<input password value="{{oldPassword}}" placeholder="请输入原始密码" bindinput="changeOld"/>
+			</view>
+			<view class="bg">
+				<input password value="{{newPassword}}" placeholder="请输入新密码" bindinput="changeNew"/>
+			</view>
+			<view class="bg">
+				<input password value="{{qrPassword}}" placeholder="请重新输入新密码" bindinput="changeNewr"/>
+			</view>
+			<view class="bg" >
+				<button bindtap="savePassword">保存</button>
+			</view>
+		</form>
+	</view>

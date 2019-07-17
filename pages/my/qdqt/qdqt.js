@@ -20,7 +20,8 @@ Page({
     currentRecordShow: true,
     // 历史记录
     currentRecords: [],
-    recordPageParam: {
+    // 分页参数
+    pageParam: {
     	page: 1
     }
   },
@@ -41,8 +42,6 @@ Page({
       type: 'GET',
       page: this,
       then(response) {
-        console.log('加载当前签到状态')
-        console.log(response)
         if (response.statusCode === '200' && response.datas && response.datas.length > 0) {
           // 已存在签到记录
           this.data.currentRecordShow = false
@@ -65,8 +64,6 @@ Page({
     wx.getSetting({
       success(res) {
         let authSet = res.authSetting
-        console.log('判断有无定位权限')
-        console.log(res)
         if (authSet['scope.userLocation']) {
           wx.getLocation({
             success(res) {
@@ -97,8 +94,6 @@ Page({
       },
       page: this,
       then(response) {
-        console.log('获取当前位置附近的学校列表')
-        console.log(response)
         if (response.statusCode === '200' && response.datas) {
           this.data.userOrgs = response.datas
           this.data.userOrgsShow = true
@@ -116,46 +111,50 @@ Page({
   loadPistionRecords() {
     this.initPage(true)
   },
-  // 初始化页面 flag =>true/false 初始化/增加
-  initPage(flag) {
-    let searchParam = {
-    	page: this.data.recordPageParam.page
-    }
+  // 初始化页面 type =>true/false 初始化/增加
+  initPage(type) {
+    this.data.pageParam.page = type ? 1 : this.data.pageParam.page
     // 加载用户所有签到结果
     app.$kwz.ajax.ajaxUrl({
       url: 'jc_gps/listPositionRecord',
       type: 'GET',
       page: this,
-      data: searchParam,
+      data: {
+        page: this.data.pageParam.page
+      },
       then(response) {
-        console.log('加载用户所有签到结果')
-        console.log(response)
         if (response.statusCode === '200') {
-          if (response.datas && response.datas.length > 0) {
-            let currentRecords = response.datas
-            for (let i = 0; i < currentRecords.length; i++) {
-              currentRecords[i].inOrgMc = currentRecords[i].IN_ORG_MC + '（' + currentRecords[i].IN_TIME.toString().substr(0, 10) + '）'
-              currentRecords[i].inTime = currentRecords[i].IN_TIME.toString().substr(11, currentRecords[i].IN_TIME.length)
-              currentRecords[i].outTime = currentRecords[i].OUT_TIME === null ? '未签出' : currentRecords[i].OUT_TIME.toString().substr(11, currentRecords[i].IN_TIME.length)
+          let datas = response.datas
+          if (datas && datas.length > 0) {
+            for (let i = 0; i < datas.length; i++) {
+              datas[i].inOrgMc = datas[i].IN_ORG_MC + '（' + datas[i].IN_TIME.toString().substr(0, 10) + '）'
+              datas[i].inTime = datas[i].IN_TIME.toString().substr(11, datas[i].IN_TIME.length)
+              datas[i].outTime = datas[i].OUT_TIME === null ? '未签出' : datas[i].OUT_TIME.toString().substr(11, datas[i].IN_TIME.length)
             }
-            this.data.loadMore.show= false
-            this.data.loadMore.text= "上拉显示更多"
-            if (flag) {
-              this.data.currentRecords = currentRecords
-              this.data.recordPageParam.page = 1
+            this.data.pageParam.page++
+            if (type) {
+              this.data.currentRecords = datas
+              if(datas.length < 20){
+                this.data.loadMore.show = false
+                this.data.loadMore.text = "没有更多数据了"
+              }
             } else {
-              this.data.currentRecords.concat(currentRecords)
-              this.data.recordPageParam.page++
+              this.data.currentRecords.concat(datas)
+              this.data.loadMore.show= false
+              this.data.loadMore.text= "上拉显示更多"
             }
           } else {
             this.data.loadMore.show= false
             this.data.loadMore.text= "没有更多数据了"
+            if (type) {
+              this.data.dataList = []
+            }
           }
         }
         this.setData({
           currentRecords: this.data.currentRecords,
           loadMore: this.data.loadMore,
-          recordPageParam: this.data.recordPageParam
+          pageParam: this.data.pageParam
         })
       }
     })
@@ -179,7 +178,6 @@ Page({
     this.loadPosition((res) => {
     	positionData.latitude = res.latitude
     	positionData.longitude = res.longitude
-      console.log(positionData)
     	app.$kwz.ajax.ajaxUrl({
     		url: 'jc_gps/savePositionRecord',
     		type: 'POST',

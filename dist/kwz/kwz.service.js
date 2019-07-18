@@ -210,7 +210,6 @@ const uploadImg = (option) => {
         uploadOption.fail = ajaxFail(option.fail || option.catch)
         uploadOption.complete = complete(option.complete)
     
-        // console.log(uploadOption)
         weixin.upalodFile(uploadOption)
       }
     } else {
@@ -444,7 +443,7 @@ const initProducts = (callback, page) => {
 
 const getCommonMenus = (callback, page) => {
   store.getCommonMenus((commonMenus) => {
-    if (!commonMenus) {
+    // if (!commonMenus) {
       ajaxUrl({
         url: '/open/loadMenus',
         page,
@@ -455,9 +454,9 @@ const getCommonMenus = (callback, page) => {
           }
         }
       })
-    } else {
-      util.cfp(callback, this || page, [commonMenus])
-    }
+    // } else {
+    //   util.cfp(callback, this || page, [commonMenus])
+    // }
   }, page)
 }
 
@@ -619,7 +618,6 @@ const formatDate = (fmt = 'yyyy-MM-dd', DefalutDate = new Date()) => {
  * @param {String} html 要更改的html字符串
  */
 const formatImg = (html)=>{
-  // console.log(html)
   let imgSrc = /<img\ssrc="(?:(?!http))/gi;
   let src = "<img src=\"" + consts.getBaseUrl()
   let imgClass = /(<img)/gi

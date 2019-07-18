@@ -72,12 +72,13 @@ Page({
                   if (filepath.statusCode === 200) {
                     let newsImaUrl = this.data.newsImaUrl
                     newsImaUrl.push(filepath.tempFilePath)
-                    this.data.newsImaUrl = this.data.newsImaUrl.length == 0 ? ['/static/images/defaults.png'] : this.data.newsImaUrl
                     this.setData({newsImaUrl})
                   }
                 }
               })
             }
+          } else{
+            this.data.newsImaUrl = ['/static/images/defaults.png']
           }
           // 首页新闻
           if (ykinfo && ykinfo.length > 0) {
@@ -110,7 +111,8 @@ Page({
             newsBtList: this.data.newsBtList,
             ywlxList: this.data.ywlxList,
             pageList: this.data.pageList,
-            loadMore: this.data.loadMore
+            loadMore: this.data.loadMore,
+            newsImaUrl: this.data.newsImaUrl
           })
         }
       }

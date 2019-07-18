@@ -30,7 +30,6 @@ Page({
   // 登陆成功
   loginSuccess (){
     app.$kwz.getLoginUser((user) => {
-      console.log(user)
       if (user) {
         this.setData({ 
           user,

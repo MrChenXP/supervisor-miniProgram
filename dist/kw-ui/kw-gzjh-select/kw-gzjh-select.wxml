@@ -1,10 +1,10 @@
 <!--dist/kw-ui/kw-gzjh-select/kw-gzjh-select.wxml-->
-<view hidden='{{hidden}}' class="content kw-gzjh-select" catchtouchmove="catchtouchmove">
+<view hidden='{{hidden}}' class="content kw-gzjh-select" >
   <!-- 蒙版 -->
-  <view class="kw-gzjh-select-mask" bindtap="close"></view>
+  <view class="kw-gzjh-select-mask" bindtap="close" catchtouchmove="catchtouchmove"></view>
   <!-- 搜索 -->
   <view class="kw-gzjh-select-content" >
-    <kw-search placeholder="请输入学校名称" bindconfirm="keywordConfirm" ></kw-search>
+    <kw-search placeholder="请输入学校名称" ></kw-search>
     <radio-group bindchange="radioChange">
       <label wx:for='{{loadDataList}}' wx:key="index">
         <radio value="{{item.value}}" />

@@ -72,8 +72,9 @@
 				},
 				{
 					"id": -1,
-					"name": "xgmm",
-					"pathName": "pages/my/xgmm/xgmm",
+					"name": "xcdd-add",
+					"pathName": "pages/xcdd/xcdd-add/xcdd-add",
+					"query": "",
 					"scene": null
 				}
 			]

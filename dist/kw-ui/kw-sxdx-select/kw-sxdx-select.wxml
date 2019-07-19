@@ -1,19 +1,21 @@
 <!--dist/kw-ui/kw-gzjh-select/kw-gzjh-select.wxml-->
-<view hidden='{{hidden}}' class="content kw-gzjh-select" >
-  <!-- 蒙版 -->
-    <view class="kw-gzjh-select-mask" bindtap="close" catchtouchmove="catchtouchmove"></view>
+<view hidden='{{hidden}}' class="content kw-gzjh-select" catchtouchmove="catchtouchmove">
+    <!-- 蒙版 -->
+    <view class="kw-gzjh-select-mask" bindtap="close"></view>
     <!-- 搜索 -->
     <view class="kw-gzjh-select-content">
-      <kw-search placeholder="请输入随行督学姓名" ></kw-search>
-      <checkbox-group bindchange="radioChange">
-        <label wx:for='{{loadDataList}}' wx:key="index">
-          <checkbox value="{{item.value}}"/>
-          <view class="kw-gzjh-select-radio-label">{{item.name}}</view>
-        </label>
-      </checkbox-group>
-      <view class="save">
-        <button class="fl" bindtap='loadSxdx' disabled="{{!moreName}}">{{moreName ? "点击加载更多":"已无更多数据"}}</button>
-        <button bindtap="confirm" class="fr">确定</button>
-      </view>
-    </view>  
+        <kw-search placeholder="请输入随行督学姓名"></kw-search>
+        <scroll-view scroll-y>
+            <checkbox-group bindchange="radioChange">
+                <label wx:for='{{loadDataList}}' wx:key="index">
+                    <checkbox value="{{item.value}}" />
+                    <view class="kw-gzjh-select-radio-label">{{item.name}}</view>
+                </label>
+            </checkbox-group>
+        </scroll-view>
+        <view class="save">
+            <button class="fl" bindtap='loadSxdx' disabled="{{!moreName}}">{{moreName ? "点击加载更多":"已无更多数据"}}</button>
+            <button bindtap="confirm" class="fr">确定</button>
+        </view>
+    </view>
 </view>

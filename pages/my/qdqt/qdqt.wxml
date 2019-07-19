@@ -4,7 +4,7 @@
             <radio value="{{item.ORG_ID}}" />
             <view class="radio-label">{{item.ORG_MC}}</view>
         </label>
-        <view wx:if="{{!userOrgsShow}}">未定位到学校（点此重新定位）</view>
+        <view wx:if="{{!userOrgsShow}}">暂未定位到学校</view>
         <view class="save" wx:if="{{userOrgsShow}}">
             <button bindtap="checkPosition">签到</button>
         </view>

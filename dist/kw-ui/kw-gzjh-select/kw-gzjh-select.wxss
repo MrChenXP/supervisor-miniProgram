@@ -16,12 +16,10 @@
     width: 100%;
     padding: 20rpx !important;
     position: relative;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
 }
-.kw-gzjh-select radio-group {
-  max-height: calc(100% - 205rpx);
-  overflow: auto;
+.kw-gzjh-select scroll-view {
+  height: calc(100% - 205rpx);
 }
 .kw-gzjh-select .kw-search-body {
     border-radius: 10rpx 10rpx 0 0;

@@ -1,16 +1,18 @@
 <!--dist/kw-ui/kw-gzjh-select/kw-gzjh-select.wxml-->
-<view hidden='{{hidden}}' class="content kw-gzjh-select" >
+<view hidden='{{hidden}}' class="content kw-gzjh-select" catchtouchmove='catchtouchmove'>
   <!-- 蒙版 -->
-  <view class="kw-gzjh-select-mask" bindtap="close" catchtouchmove="catchtouchmove"></view>
+  <view class="kw-gzjh-select-mask" bindtap="close" ></view>
   <!-- 搜索 -->
   <view class="kw-gzjh-select-content" >
     <kw-search placeholder="请输入学校名称" ></kw-search>
-    <radio-group bindchange="radioChange">
-      <label wx:for='{{loadDataList}}' wx:key="index">
-        <radio value="{{item.value}}" />
-        <view class="kw-gzjh-select-radio-label">{{item.name}}</view>
-      </label>
-    </radio-group>
+    <scroll-view scroll-y>
+        <radio-group bindchange="radioChange">
+            <label wx:for='{{loadDataList}}' wx:key="index">
+                <radio value="{{item.value}}" />
+                <view class="kw-gzjh-select-radio-label">{{item.name}}</view>
+            </label>
+        </radio-group>
+    </scroll-view>
     <view class="save"  bindtap='loadGzjh'>
       <button disabled="{{!moreName}}">{{moreName ? "点击加载更多":"已无更多数据"}}</button>
     </view>

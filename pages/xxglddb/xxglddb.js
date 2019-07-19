@@ -34,8 +34,8 @@ Page({
     dataList: [],
     // 加载更多的提示信息
     loadMore:{
-      text: "上拉加载更多",
-      show: false
+        text: "正在加载",
+        show: true
     }
   },
   onLoad: function (options) {
@@ -172,7 +172,6 @@ Page({
   },
   // 搜素列表
   searchList({detail}) {
-    console.log(this.data.pageParam)
     this.data.pageParam.keyword = detail.value
     this.pageList(true)
   },

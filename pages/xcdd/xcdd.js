@@ -50,8 +50,8 @@ Page({
     },
     // 加载更多的提示信息
     loadMore:{
-      text: "上拉加载更多",
-      show: false
+        text: "正在加载",
+        show: true
     }
   },
   onLoad(){

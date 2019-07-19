@@ -40,7 +40,6 @@ Page({
           data.SJ = JSON.parse(data.SJ)
           data.GCJL = app.$kwz.formatImg(data.GCJL)
           this.setData({data})
-          console.log(this.data.data)
         }
       })
     }

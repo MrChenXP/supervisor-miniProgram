@@ -150,7 +150,6 @@ Page({
       then (response) {
         let datas = response.datas
         if (datas && datas.map) {
-          console.log(datas)
           let map = datas.map
           this.data.xx.name = map.ORG_ID_TARGET_MC
           this.data.xx.value = map.ORG_ID_TARGET
@@ -256,7 +255,6 @@ Page({
       },
       page: this,
       then (response) {
-        console.log(response)
         wx.navigateTo({ url: '/pages/gzjh/gzjh' })
         app.$kwz.alert('保存成功')
       }

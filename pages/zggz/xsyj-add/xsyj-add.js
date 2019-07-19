@@ -58,7 +58,6 @@ Page({
       },
       page: this,
       then (response) {
-        console.log(response)
         let datas = response.datas
         this.data.formData.BH = datas.BH
         this.data.formData.XXMC = datas.XXMC

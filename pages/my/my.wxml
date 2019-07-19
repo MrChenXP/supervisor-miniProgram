@@ -5,8 +5,7 @@
     <image class="img" src="../../static/images/loginBG.png" ></image>
     <!-- 用户简略信息 -->
     <view class="info">
-        <image class="info-img" wx:if="{{!imgShow}}" src="../../static/images/DefaultImg.png"></image>
-        <image class="info-img" wx:else :src="user.IMAGE"></image>        
+        <image class="info-img" src="{{imageUrl || '/static/images/DefaultImg.png'}}"></image>        
         <view>
           <view class="name-zw">
             <text class="name text-bold" wx:if="{{user.name}}">{{user.name}}</text>
@@ -26,7 +25,7 @@
     <kw-list-cell title="修改密码" thumb="/static/images/icons/change.png" link="/pages/my/xgmm/xgmm"></kw-list-cell>
     <kw-list-cell title="切换机构" thumb="/static/images/icons/repeat.png" link="/pages/my/qhjg/qhjg"></kw-list-cell>
     <kw-list-cell title="扫码" thumb="/static/images/icons/scanCode.png" bindtap="scanCode"></kw-list-cell>
-    <kw-list-cell title="签到(签退)" thumb="/static/images/icons/position.png" link="/pages/my/qdqt/qdqt"></kw-list-cell>
+    <kw-list-cell title="签到(签退)" thumb="/static/images/icons/position.png" wx:if="{{hasQdqtAuth}}" link="/pages/my/qdqt/qdqt"></kw-list-cell>
   </view>
 
   <!-- 退出登录 -->

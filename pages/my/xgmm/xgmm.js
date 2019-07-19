@@ -41,7 +41,6 @@ Page({
   		U_PWD_NEW1: this.data.newPassword,
   		U_PWD_NEW2: this.data.qrPassword
   	}
-  	console.log(data)
   	app.$kwz.ajax.ajaxUrl({
   		url: 'jc_user/doJcUserGgmm',
   		data,

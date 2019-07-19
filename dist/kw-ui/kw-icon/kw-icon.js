@@ -21,6 +21,5 @@ Component({
     }
   },
   ready() {
-    // console.log(this.data.type)
   },
 });

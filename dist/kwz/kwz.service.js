@@ -65,8 +65,9 @@ const ajaxUrl = (option) => {
     let that = this
     if (!_ajaxinited) {
         setTimeout(() => {
+            console.log(option)
             util.cfp(ajaxUrl, that, [option])
-        }, 500)
+        }, 200)
     } else {
         ajaxUrlUnLock(option)
     }
@@ -313,6 +314,7 @@ const setSession = (response) => {
  * @param {object} page
  */
 const initVisit = (callback, page) => {
+    _ajaxinited = false
     weixin.request({
         url: '/visit.jsp',
         success(data) {
@@ -339,11 +341,11 @@ const initToken = (callback, page) => {
         page,
         success(response, option) {
             if (response) {
-                _ajaxinited = true
                 // 存储加密等数据
                 store.setRelData(response.datas)
+                _ajaxinited = true
+                util.cfp(callback, (option.page || (option.vue || this)), [response, option.option])
             }
-            util.cfp(callback, (option.page || (option.vue || this)), [response, option.option])
         },
         error(error) {
             util.alert(error.msg || '初始化错误-10002')

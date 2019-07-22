@@ -51,7 +51,8 @@ Page({
     				}
     			}
     			this.data.user.orgid = this.data.userOrg
-    			this.data.user.orgMc = this.data.userOrgName
+          this.data.user.orgMc = this.data.userOrgName
+          
     			app.$kwz.setLoginUser(this.data.user)
     			app.$kwz.initProducts(()=>{
     				wx.switchTab({ url: '/pages/my/my' })

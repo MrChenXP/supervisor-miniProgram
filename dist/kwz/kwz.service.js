@@ -65,7 +65,6 @@ const ajaxUrl = (option) => {
     let that = this
     if (!_ajaxinited) {
         setTimeout(() => {
-            console.log(option)
             util.cfp(ajaxUrl, that, [option])
         }, 200)
     } else {
@@ -113,6 +112,11 @@ const ajaxUrlUnLock = (option) => {
     weixin.request(ajaxOption)
 }
 
+/**
+ * 成功公共回调
+ * @param {function} cb 
+ * @param {object} eb 
+ */
 const ajaxSuccess = (cb, eb) => {
     return (data, option) => {
         // 按照weixin.request的封装，只有当httpcode=200时，才会进入此方法
@@ -127,6 +131,10 @@ const ajaxSuccess = (cb, eb) => {
     }
 }
 
+/**
+ * 失败公共回调
+ * @param {function} cb 
+ */
 const ajaxFail = (cb) => {
     return (error, option) => {
         if (error) {
@@ -135,6 +143,15 @@ const ajaxFail = (cb) => {
                 initVisit(() => {
                     if (option.repeat !== true) {
                         let rOption = util.copyJson(option)
+                        
+                        // 防止取到老的url（老的url可能会带token，token可能已经变了）
+                        rOption.url = option._old_url || option.url
+
+                        console.log(rOption.url)
+                        console.log(store.getToken())
+                        rOption = handleUrl(rOption)
+                        console.log(store.getToken())
+                        console.log(rOption.url)
 
                         rOption.page = option.page
                         rOption.success = option.success
@@ -278,6 +295,8 @@ const handleUrl = (option, key = 'url') => {
                     url += '&token=' + store.getToken()
                 }
             }
+            // 备份
+            option['_old_' + key] = option.url
             option[key] = (url.startsWith('/') ? '' : '/') + url
         }
     }

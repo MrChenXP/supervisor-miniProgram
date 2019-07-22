@@ -21,9 +21,9 @@
 
   <!-- 功能 -->
   <view class="my-gn">
-    <kw-list-cell title="个人资料" thumb="/static/images/icons/set.png" link="/pages/my/grzl/grzl"></kw-list-cell>
-    <kw-list-cell title="修改密码" thumb="/static/images/icons/change.png" link="/pages/my/xgmm/xgmm"></kw-list-cell>
-    <kw-list-cell title="切换机构" thumb="/static/images/icons/repeat.png" link="/pages/my/qhjg/qhjg"></kw-list-cell>
+    <kw-list-cell title="个人资料" thumb="/static/images/icons/set.png" wx:if="{{hasGrzlAuth}}" link="/pages/my/grzl/grzl"></kw-list-cell>
+    <kw-list-cell title="修改密码" thumb="/static/images/icons/change.png" wx:if="{{hasXgmmAuth}}" link="/pages/my/xgmm/xgmm"></kw-list-cell>
+    <kw-list-cell title="切换机构" thumb="/static/images/icons/repeat.png" wx:if="{{hasQhjgAuth}}" link="/pages/my/qhjg/qhjg"></kw-list-cell>
     <kw-list-cell title="扫码" thumb="/static/images/icons/scanCode.png" bindtap="scanCode"></kw-list-cell>
     <kw-list-cell title="签到(签退)" thumb="/static/images/icons/position.png" wx:if="{{hasQdqtAuth}}" link="/pages/my/qdqt/qdqt"></kw-list-cell>
   </view>

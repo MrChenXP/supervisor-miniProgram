@@ -640,12 +640,18 @@ const formatDate = (fmt = 'yyyy-MM-dd', DefalutDate = new Date()) => {
 const formatImg = (html) => {
     let imgSrc = /<img\ssrc="(?:(?!http))/gi;
     let src = "<img src=\"" + consts.getBaseUrl()
+
     let imgClass = /(<img)/gi
     let classImg = "<img style=\"max-width:100%;\""
+    // console.log(html.replace(imgSrc, src))
+
     if (html) { // 有些时候字段值是空，但依然调用这个方法，故要判断
         html = html.replace(imgSrc, src)
+
         html = html.replace(imgClass, classImg)
     }
+    // console.log(html)
+
     return html
 }
 

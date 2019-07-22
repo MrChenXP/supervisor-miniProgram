@@ -78,9 +78,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "xcddadd",
-					"pathName": "pages/xcdd/xcdd-add/xcdd-add",
+					"id": 5,
+					"name": "news",
+					"pathName": "pages/news/news",
+					"query": "CONTENT_ID=72E3E235B2233E4EE053D26FA8C0E6E4",
 					"scene": null
 				}
 			]

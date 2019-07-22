@@ -13,7 +13,10 @@ Page({
         },
         // 登录组件显示隐藏
         loginShow: false,
-        // 签到签退 权限
+        //  个人资料 修改密码 切换机构(用'默认机构设置'的功能路径) 签到签退  权限
+        hasGrzlAuth: false,
+        hasXgmmAuth: false,
+        hasQhjgAuth: false,
         hasQdqtAuth: false,
         // 头像路径
         imageUrl:""
@@ -38,9 +41,8 @@ Page({
                 })
             }
         }, this)
-        app.$kwz.hasAuth('jc_gps/toSavePositionRecord', (auth) => {
-            auth ? this.setData({ hasQdqtAuth: auth }) : ""
-        })
+        this.has()
+        // 获取头像
         app.$kwz.ajax.ajaxUrl({
             url: 'dd_dxgl/selectByPrimaryKeyGrzl',
             type: 'POST',
@@ -67,6 +69,22 @@ Page({
                 loginShow: true
             })
         }, this)
+    },
+    // 获取权限 dd_dxgl/toGrzl
+    has(){
+        app.$kwz.hasAuth('dd_dxgl/toGrzl', (auth) => {
+            auth ? this.setData({ hasGrzlAuth: auth }) : ""
+        })
+        app.$kwz.hasAuth('jc_user/toJcUserGgmm', (auth) => {
+            auth ? this.setData({ hasXgmmAuth: auth }) : ""
+        })
+        app.$kwz.hasAuth('dd_index/toChangeOrgRole', (auth) => {
+            auth ? this.setData({ hasQhjgAuth: auth }) : ""
+        })
+        app.$kwz.hasAuth('jc_gps/toSavePositionRecord', (auth) => {
+            auth ? this.setData({ hasQdqtAuth: auth }) : ""
+        })
+        
     },
     // 扫码
     scanCode() {

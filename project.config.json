@@ -79,9 +79,9 @@
 				},
 				{
 					"id": 5,
-					"name": "news",
-					"pathName": "pages/news/news",
-					"query": "CONTENT_ID=72E3E235B2233E4EE053D26FA8C0E6E4",
+					"name": "gzjhadd",
+					"pathName": "pages/gzjh/gzjh-add/gzjh-add",
+					"query": "",
 					"scene": null
 				}
 			]

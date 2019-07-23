@@ -708,7 +708,8 @@ const dateImpose = (url, callback, page) => {
                             }
                             callback(arr.PRO_ATTRS)
                         }
-                        let proAttrs = JSON.parse(arr.PRO_ATTRS)
+                        // 有时返回的是object 如高新网
+                        let proAttrs = typeof arr.PRO_ATTRS === 'string' ? JSON.parse(arr.PRO_ATTRS) : arr.PRO_ATTRS
                         proAttrs.minDate = typeof proAttrs.minDate === 'undefined' ? '{"y":"-1","M":"0","d":"0"}' : proAttrs.minDate
                         proAttrs.maxDate = typeof proAttrs.maxDate === 'undefined' ? '{"y":"1","M":"0","d":"0"}' : proAttrs.maxDate
                         callback(proAttrs)

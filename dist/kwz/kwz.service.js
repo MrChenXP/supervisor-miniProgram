@@ -147,11 +147,7 @@ const ajaxFail = (cb) => {
                         // 防止取到老的url（老的url可能会带token，token可能已经变了）
                         rOption.url = option._old_url || option.url
 
-                        console.log(rOption.url)
-                        console.log(store.getToken())
                         rOption = handleUrl(rOption)
-                        console.log(store.getToken())
-                        console.log(rOption.url)
 
                         rOption.page = option.page
                         rOption.success = option.success
@@ -659,19 +655,20 @@ const formatDate = (fmt = 'yyyy-MM-dd', DefalutDate = new Date()) => {
  * @param {String} html 要更改的html字符串
  */
 const formatImg = (html) => {
-    let imgSrc = /<img\ssrc="(?:(?!http))/gi;
-    let src = "<img src=\"" + consts.getBaseUrl()
-
-    let imgClass = /(<img)/gi
+    let img = /(<img)/gi
     let classImg = "<img style=\"max-width:100%;\""
-    // console.log(html.replace(imgSrc, src))
-
+    let src = consts.getBaseUrl()
+    let imgReg = /<img[^>]+src="(?:(?!(https|http))[^>]+)>/g
     if (html) { // 有些时候字段值是空，但依然调用这个方法，故要判断
-        html = html.replace(imgSrc, src)
-
-        html = html.replace(imgClass, classImg)
+        html = html.replace(imgReg,(imgs)=>{
+            let srcI = imgs.indexOf('src') + 5
+            let imgBefore = imgs.substr(0, srcI) + src
+            let imgAfter = imgs.substring(srcI)
+            console.log()
+            return imgBefore + imgAfter
+        })
+        html = html.replace(img, classImg)
     }
-    // console.log(html)
 
     return html
 }

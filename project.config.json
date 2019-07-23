@@ -78,9 +78,9 @@
 					"scene": null
 				},
 				{
-					"id": 5,
-					"name": "gzjhadd",
-					"pathName": "pages/gzjh/gzjh-add/gzjh-add",
+					"id": -1,
+					"name": "zzjgt",
+					"pathName": "pages/zzjgt/zzjgt",
 					"query": "",
 					"scene": null
 				}

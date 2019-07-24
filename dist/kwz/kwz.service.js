@@ -497,18 +497,20 @@ const getCommonMenus = (callback, page) => {
 }
 
 /**
- * from kwz.uniapp.js
- * @param {array} comonProductsTree 
- * @param {array} userReadPro 
+ * 判断工作区以完成的权限
+ * @param {array} comonProductsTree 整个产品的功能应用id menus.children
+ * @param {array} userReadPro 角色拥有的权限 commonMenus.readPro
  */
 const hasFunc = (comonProductsTree = [], userReadPro = []) => {
     let commonMenu = []
     if (comonProductsTree.length > 0) {
-        let productConfig = consts.getProductConfig()
-        let workspace = productConfig.workspace
+        // products.js里的json数据
+        // let productConfig = consts.getProductConfig()
+        let workspace = consts.getProductConfig().workspace
         if (typeof userReadPro === 'string') {
             userReadPro = userReadPro.split(',')
         }
+        
         for (let i = 0; i < comonProductsTree.length; i++) {
             for (let j = 0; j < workspace.length; j++) {
                 if (comonProductsTree[i].PRO_ID === workspace[j].proId) {

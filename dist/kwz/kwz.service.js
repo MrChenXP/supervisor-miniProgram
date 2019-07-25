@@ -671,7 +671,18 @@ const formatImg = (html) => {
         })
         html = html.replace(img, classImg)
     }
+    return html
+}
 
+/**
+ * 刷选html字符串 
+ * @param {String} html 要更改的html字符串
+ */
+const deleteImg = (html) => {
+    if(html){
+        let img = /<img.*?(?:>|\/>)/gi
+        html = html.replace(img, '')
+    }
     return html
 }
 
@@ -765,6 +776,7 @@ export default {
     hasAuth,
     formatDate,
     formatImg,
+    deleteImg,
     dateImpose,
     getLimdat,
     uniq

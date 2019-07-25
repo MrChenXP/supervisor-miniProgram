@@ -55,10 +55,8 @@
               <kw-tag type="border" color="blue" wx:if="{{hasShAuth}}" circle="{{true}}">审核</kw-tag>
             </view>
             <view class="fr ys" wx:else>
-              <kw-tag type="border" color="blue" wx:if="{{hasShAuth}}" circle="{{true}}" wx:if="{{item.CLZTDM < 6 && !(item.SFSH && item.CLZTDM === '1') && hasClAuth}}"
-                 catchtap='toZgxs' data-id='{{item.ZGXSID}}' data-status="xx">处理</kw-tag>
-              <kw-tag type="border" color="blue" wx:if="{{hasShAuth}}" circle="{{true}}" wx:if="{{item.CLZTDM < 6 && hasYsAuth}}"
-                 catchtap='toZgxs' data-id='{{item.ZGXSID}}' data-status="dx">验收</kw-tag>
+              <kw-tag type="border" color="blue" wx:if="{{hasShAuth}}" circle="{{true}}" wx:if="{{item.CLZTDM < 6 && !(item.SFSH && item.CLZTDM === '1') && hasClAuth}}" catchtap='toZgxs' data-id='{{item.ZGXSID}}' data-status="xx">处理</kw-tag>
+              <kw-tag type="border" color="blue" wx:if="{{hasShAuth}}" circle="{{true}}" wx:if="{{item.CLZTDM < 6 && hasYsAuth}}" catchtap='toZgxs' data-id='{{item.ZGXSID}}' data-status="dx">验收</kw-tag>
             </view>
           </view>
         </view>

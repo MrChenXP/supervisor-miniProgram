@@ -39,7 +39,7 @@
             <view class="fr">{{item.DDSD}}</view>
           </view>
           <view class="clearfix time">
-            <text class="color-999">{{item.TXT || "未填写"}}</text>
+            <rich-text class="color-999" nodes="{{item.TXT || '未填写'}}"></rich-text>
           </view>
           <view class="clearfix status">
             <view class="fl clyj" wx:if="{{!!item.BZMC}}">

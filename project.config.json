@@ -13,7 +13,7 @@
 		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.7.0",
+	"libVersion": "2.6.0",
 	"appid": "wx68d34bd321ef986c",
 	"projectname": "kwm-mp",
 	"debugOptions": {
@@ -40,20 +40,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": -1,
 			"list": [
 				{
 					"id": -1,
 					"name": "workspace",
 					"pathName": "pages/workspace/workspace",
 					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "qdqt",
-					"pathName": "pages/my/qdqt/qdqt",
-					"query": "id=29c5c503a232466496e6777e4c846c03",
 					"scene": null
 				},
 				{
@@ -65,8 +58,8 @@
 				},
 				{
 					"id": -1,
-					"name": "qhjg",
-					"pathName": "pages/my/qhjg/qhjg",
+					"name": "zzjgt",
+					"pathName": "pages/zzjgt/zzjgt",
 					"query": "",
 					"scene": null
 				},
@@ -79,8 +72,8 @@
 				},
 				{
 					"id": -1,
-					"name": "zzjgt",
-					"pathName": "pages/zzjgt/zzjgt",
+					"name": "gzjh",
+					"pathName": "pages/gzjh/gzjh",
 					"query": "",
 					"scene": null
 				}

@@ -4,7 +4,7 @@
     <view class="kw-gzjh-select-mask" bindtap="close"></view>
     <!-- 搜索 -->
     <view class="kw-gzjh-select-content">
-        <kw-search placeholder="请输入随行督学姓名"></kw-search>
+        <kw-search placeholder="请输入随行督学姓名" bindconfirm="keywordConfirm"></kw-search>
         <scroll-view scroll-y>
             <checkbox-group bindchange="radioChange">
                 <label wx:for='{{loadDataList}}' wx:key="index">

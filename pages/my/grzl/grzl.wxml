@@ -12,14 +12,14 @@
   <kw-list-cell title="姓名">
     <view slot="rightNote">
       <view class="list-right-input">
-        <input value="{{user.XM}}" type="number" bindinput="inputXm" placeholder="请填写姓名"/>
+        <input value="{{user.XM}}" bindinput="inputXm" placeholder="请填写姓名"/>
       </view>
     </view>
   </kw-list-cell>
   <kw-list-cell title="显示名">
     <view slot="rightNote">
       <view class="list-right-input">
-        <input value="{{user.U_USERNAME}}" type="number" bindinput="inputXsm" placeholder="请填写显示名"/>
+        <input value="{{user.U_USERNAME}}" bindinput="inputXsm" placeholder="请填写显示名"/>
       </view>
     </view>
   </kw-list-cell>
@@ -69,14 +69,14 @@
     <kw-list-cell title="职务">
       <view slot="rightNote">
         <view class="list-right-input">
-          <input value="{{user.ZW}}" type="number" bindinput="inputZw" placeholder="请填写职务"/>
+          <input value="{{user.ZW}}" bindinput="inputZw" placeholder="请填写职务"/>
         </view>
       </view>
     </kw-list-cell>
     <kw-list-cell title="工作单位">
       <view slot="rightNote">
         <view class="list-right-input">
-          <input value="{{user.WORKUNIT}}" type="number" bindinput="inputZzdw" placeholder="请填写工作单位"/>
+          <input value="{{user.WORKUNIT}}" bindinput="inputZzdw" placeholder="请填写工作单位"/>
         </view>
       </view>
     </kw-list-cell>

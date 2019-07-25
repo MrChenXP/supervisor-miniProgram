@@ -1,3 +1,6 @@
+.gn {
+    top:195rpx;
+  }
 .lists .fs .kw-tag {
   background-color: #f8dad9;
   border-color: #f8dad9;

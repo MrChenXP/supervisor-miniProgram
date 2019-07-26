@@ -387,7 +387,9 @@ const cacheAttach = (option) => {
     attachOption.success = (filepath) => {
         util.cfp(option.success, option.page || (option.vue || this), [filepath])
     }
-
+    attachOption.fail = (filepath) => {
+        util.cfp(option.fail, option.page || (option.vue || this), [filepath])
+    }
     weixin.requestAttach(attachOption)
 }
 

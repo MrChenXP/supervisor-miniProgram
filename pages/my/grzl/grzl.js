@@ -44,18 +44,25 @@ Page({
     },
     onLoad() {
         app.$kwz.loadDms('DM_XD,DM_MZ,DM_XB,DM_XK,DM_ZW,DM_XLCC,DM_SFZJLX,DM_ZYJSDJ,DM_DD_DXLX,DM_XWCC', dms => {
-            for (let i in dms) {
-                let dm = dms[i]
-                for (let j in dm) {
-                    dm[j].label = dm[j].DMMX_MC
-                    dm[j].value = dm[j].DMMX_CODE
-                }
-            }
-            this.data.dms = app.$kwz.copyJson(dms) || {}
-            this.setData({
-                dms: this.data.dms
-            })
+            this.setDms(dms)
             this.init()
+        })
+    },
+    // 加载设置各选择器
+    setDms(dms){
+        this.data.dms = app.$kwz.copyJson(dms) || {}
+        for (let i in this.data.dms) {
+            let dm = this.data.dms[i]
+            dm.unshift({
+                DMMX_CODE: "", DMMX_MC: "请选择"
+            })
+            for (let j in dm) {
+                dm[j].label = dm[j].DMMX_MC
+                dm[j].value = dm[j].DMMX_CODE
+            }
+        }
+        this.setData({
+            dms: this.data.dms
         })
     },
     // 加载数据
@@ -113,8 +120,8 @@ Page({
             return false
         }
         // 没修改过年龄直接保存，是number类型
-        this.data.user.AGE = String(this.data.user.AGE)
-        if (this.data.user.AGE.search(/^[1-9][0-9]?[0-9]$/)) {
+        let age = String(this.data.user.AGE)
+        if (age.search(/^[1-9][0-9]?[0-9]$/) && age !='null' && age) {
             app.$kwz.alert('年龄输入有误')
             return false
         }
@@ -126,21 +133,21 @@ Page({
             url: 'dd_dxgl/doUpdateGrzl',
             type: 'POST',
             data: {
-                "MZM": this.data.user.MZM, // 民族码
-                "XBM": this.data.user.XBM, // 性别码
+                "MZM": this.data.user.MZM || "", // 民族码
+                "XBM": this.data.user.XBM || "", // 性别码
                 "JL": this.data.user.JL, // 简介
                 "DH": this.data.user.DH, // 电话
-                "ZYJSZC": this.data.user.ZYJSZC, // 专业技术职称
+                "ZYJSZC": this.data.user.ZYJSZC || "", // 专业技术职称
                 "U_ID": this.data.user.uid, // 当前用户id
                 "DXID": this.data.user.DXID, //督学di,用户不一定是督学,顾要传督学id
-                "SFZJLXM": this.data.user.SFZJLXM, // 身份证件类型码
+                "SFZJLXM": this.data.user.SFZJLXM || "", // 身份证件类型码
                 "IMAGE": this.data.user.IMAGE, // 图像uid
-                "XL": this.data.user.XL, // 学历
+                "XL": this.data.user.XL || "", // 学历
                 "XM": this.data.user.XM, // 姓名
                 "U_USERNAME": this.data.user.U_USERNAME, // 显示名
                 "SFZJH": this.data.user.SFZJH, // 身份证件号
                 "SJ": "", // 数据库无介绍 传空
-                "BIRTH": this.data.user.BIRTH, // 出生年月
+                "BIRTH": this.data.user.BIRTH || "", // 出生年月
                 "ZW": this.data.user.ZW, // 职务
                 "WORKUNIT": this.data.user.WORKUNIT, // 工作单位
                 "AGE": this.data.user.AGE // 年龄
@@ -161,7 +168,6 @@ Page({
             for (let i = 0; i < dms.length; i++) {
                 if (dms[i].value == value) {
                     this.data.mc[dmMcKey] = dms[i].label
-
                 }
             }
             this.setData({
@@ -195,80 +201,60 @@ Page({
     },
     // 更改 姓名 显示名  年龄 联系电话 身份证件号 职务 工作单位
     inputXm({detail}) {
-        console.log(this.data.user.XM)
         this.data.user.XM = detail.value
-        
         this.setData({
             user: this.data.user
         })
     },
-    inputXsm({
-        detail
-    }) {
+    inputXsm({detail}) {
         this.data.user.U_USERNAME = detail.value
         this.setData({
             user: this.data.user
         })
     },
-    inputNl({
-        detail
-    }) {
+    inputNl({detail}) {
         this.data.user.AGE = detail.value
         this.setData({
             user: this.data.user
         })
     },
-    inputDh({
-        detail
-    }) {
+    inputDh({detail}) {
         this.data.user.DH = detail.value
         this.setData({
             user: this.data.user
         })
     },
-    inputSfzjh({
-        detail
-    }) {
+    inputSfzjh({detail}) {
         this.data.user.SFZJH = detail.value
         this.setData({
             user: this.data.user
         })
     },
-    inputZw({
-        detail
-    }) {
+    inputZw({detail}) {
         this.data.user.ZW = detail.value
         this.setData({
             user: this.data.user
         })
     },
-    inputZzdw({
-        detail
-    }) {
+    inputZzdw({detail}) {
         this.data.user.WORKUNIT = detail.value
         this.setData({
             user: this.data.user
         })
     },
     // 更改 个人简介
-    changeGrjj({
-        detail
-    }) {
+    changeGrjj({detail}) {
         this.data.user.JL = detail.value
     },
     // 更改出生年月
-    changeBIRTH({
-        detail
-    }) {
+    changeBIRTH({detail}) {
         this.data.user.BIRTH = detail.value
         this.setData({
             user: this.data.user
         })
     },
     // 更改 性别 身份证件类型 民族 学历 专业技术职称
-    changeXb({
-        detail
-    }) {
+    changeXb({detail}) {
         let checkedOption = this.data.dms.DM_XB[detail.value]
         this.data.user.XBM = checkedOption.DMMX_CODE
         this.data.mc.xbMc = checkedOption.DMMX_MC
@@ -276,9 +262,7 @@ Page({
             mc: this.data.mc
         })
     },
-    changeSfzjlx({
-        detail
-    }) {
+    changeSfzjlx({detail}) {
         let checkedOption = this.data.dms.DM_SFZJLX[detail.value]
         this.data.user.SFZJLXM = checkedOption.DMMX_CODE
         this.data.mc.sfzjlxMc = checkedOption.DMMX_MC
@@ -286,9 +270,7 @@ Page({
             mc: this.data.mc
         })
     },
-    changeMz({
-        detail
-    }) {
+    changeMz({detail}) {
         let checkedOption = this.data.dms.DM_MZ[detail.value]
         this.data.user.MZM = checkedOption.DMMX_CODE
         this.data.mc.mzMc = checkedOption.DMMX_MC
@@ -296,9 +278,7 @@ Page({
             mc: this.data.mc
         })
     },
-    changeXl({
-        detail
-    }) {
+    changeXl({detail}) {
         let checkedOption = this.data.dms.DM_XLCC[detail.value]
         this.data.user.XL = checkedOption.DMMX_CODE
         this.data.mc.xlMc = checkedOption.DMMX_MC
@@ -306,9 +286,7 @@ Page({
             mc: this.data.mc
         })
     },
-    changeZyjszc({
-        detail
-    }) {
+    changeZyjszc({detail}) {
         let checkedOption = this.data.dms.DM_ZYJSDJ[detail.value]
         this.data.user.ZYJSZC = checkedOption.DMMX_CODE
         this.data.mc.zyjszcMc = checkedOption.DMMX_MC

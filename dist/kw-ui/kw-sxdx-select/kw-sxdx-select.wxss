@@ -45,9 +45,9 @@
   border-radius: 10rpx;
 }
 .kw-gzjh-select-radio-label {
-  text-align: right;
+  text-align: left;
   position: absolute;
-  right: 20rpx;
+  left: 100rpx;
   top: 20rpx;
 }
 .xcddSelectGzjBorderBottom::after {

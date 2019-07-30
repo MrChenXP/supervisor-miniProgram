@@ -12,6 +12,6 @@
   .radio-label{
     text-align: right;
     position: absolute;
-    right: 20rpx;
+    left: 100rpx;
     top:20rpx;
   }

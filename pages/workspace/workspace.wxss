@@ -61,3 +61,6 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
+.wddb-list{
+    margin: 15rpx 0;
+}

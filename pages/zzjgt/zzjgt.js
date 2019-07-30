@@ -36,4 +36,5 @@ Page({
             })
         }
     },
+    catchtouchmove(){}
 })

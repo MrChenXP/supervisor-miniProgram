@@ -1,12 +1,12 @@
 // kwz常量配置
 
 // 请求路径
-// const BASE_URL = 'http://www.dd.com:8080'
-const BASE_URL = 'https://app.qgjydd.cn' // 高新网
+const BASE_URL = 'http://www.dd.com:8080'
+// const BASE_URL = 'https://app.qgjydd.cn' // 高新网
 
 // session的cookie名称
-// const SESSION_NAME = 'JSESSIONID' // 本地
-const SESSION_NAME = 'KSESSIONID1' // 高新
+const SESSION_NAME = 'JSESSIONID' // 本地
+// const SESSION_NAME = 'KSESSIONID1' // 高新
 
 // 是否开发者模式
 const DEV = true

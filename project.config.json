@@ -13,7 +13,7 @@
 		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.0",
+	"libVersion": "2.7.0",
 	"appid": "wx68d34bd321ef986c",
 	"projectname": "kwm-mp",
 	"debugOptions": {
@@ -78,9 +78,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "grzl",
-					"pathName": "pages/my/grzl/grzl",
+					"id": 5,
+					"name": "zzjgt",
+					"pathName": "pages/zzjgt/zzjgt",
 					"query": "",
 					"scene": null
 				}

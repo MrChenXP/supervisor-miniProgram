@@ -80,9 +80,7 @@ Page({
                     app.$kwz.cacheAttach({
                         url: 'jc_file/doDownload?F_ID=' + datas.IMAGE,
                         page: this,
-                        success({
-                            tempFilePath
-                        }) {
+                        success({tempFilePath}) {
                             this.setData({
                                 imageUrl: tempFilePath
                             })
@@ -186,9 +184,7 @@ Page({
                 app.$kwz.cacheAttach({
                     url: 'jc_file/doDownload?F_ID=' + fId,
                     page: this,
-                    success({
-                        tempFilePath
-                    }) {
+                    success({tempFilePath}) {
                         this.data.user.IMAGE = fId
                         this.setData({
                             imageUrl: tempFilePath,

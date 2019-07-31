@@ -43,8 +43,8 @@
             <text class='color-red'>({{tips.zggz}})</text>
         </view>
         <view class='wddb-list' wx:if="{{tips.xcdd}}" bindtap='toXcdd'>
-            现场督导
-            <text class='color-red'>({{tips.xcdd}})</text>
+            督导纪实
+            <text class='color-red'>({{tips.ddjs}})</text>
         </view>
         <view class='wddb-list' wx:if="{{tips.gzjh}}" bindtap='toGzjh'>
             工作计划

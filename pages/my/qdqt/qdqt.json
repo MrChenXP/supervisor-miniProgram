@@ -1,5 +1,6 @@
 {
   "usingComponents": {
     "i-load-more": "/dist/iview/load-more/index"
-  }
+  },
+  "navigationBarTitleText": "签到签退"
 }

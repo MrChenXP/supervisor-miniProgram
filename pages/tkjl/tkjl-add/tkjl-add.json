@@ -5,5 +5,6 @@
     "kw-editor": "/dist/kw-ui/kw-editor/kw-editor",
     "i-icon": "/dist/iview/icon/index",
     "i-rate": "/dist/iview/rate/index"
-  }
+  },
+  "navigationBarTitleText": "听课记录"
 }

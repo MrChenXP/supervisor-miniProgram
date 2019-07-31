@@ -8,5 +8,6 @@
     "xcdd-hxclyj": "/dist/kw-ui/xcdd-hxclyj/xcdd-hxclyj",    
     "i-input-number": "/dist/iview/input-number/index",
     "i-icon": "/dist/iview/icon/index"
-  }
+  },
+  "navigationBarTitleText": "督导纪实"
 }

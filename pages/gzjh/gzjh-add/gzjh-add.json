@@ -6,5 +6,6 @@
     "kw-school-select": "/dist/kw-ui/kw-school-select/kw-school-select",
     "kw-sxdx-select": "/dist/kw-ui/kw-sxdx-select/kw-sxdx-select",
     "i-icon": "/dist/iview/icon/index"
-  }
+  },
+  "navigationBarTitleText": "工作计划"
 }

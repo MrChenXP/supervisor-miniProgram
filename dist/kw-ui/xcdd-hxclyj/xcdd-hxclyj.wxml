@@ -3,11 +3,11 @@
 	  <kw-list-cell title="后续处理意见" borderBottom="{{false}}" right-note="{{status_mc}}"></kw-list-cell>
   </picker>
 
-  <view hidden="{{!hxclyjShow}}" class="xcdd-hxclyj-body">
+  <view hidden="{{!hxclyjShow}}" class="xcdd-hxclyj-body" catchtouchmove="catchtouchmove">
     <!-- 蒙版 -->
-    <view class="xcdd-hxclyj-mask" catchtap='close'></view>
+    <view class="xcdd-hxclyj-mask" catchtap='close' catchtouchmove="catchtouchmove"></view>
     <!-- 内容 -->
-    <view class="xcdd-hxclyj-content">
+    <view class="xcdd-hxclyj-content" catchtouchmove="catchtouchmove">
       <!-- 小问题 -->
       <view hidden="{{!(status === '4')}}" class="xcdd-hxclyj-xwt">
         <textarea value="{{zgxsyj}}" maxlength="4000" bindinput="inputZgxsyj"></textarea>

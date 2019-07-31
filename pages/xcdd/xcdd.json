@@ -4,5 +4,6 @@
     "kw-search": "../../dist/kw-ui/kw-search/kw-search",
     "kw-tag": "../../dist/kw-ui/kw-tag/kw-tag",
     "i-load-more": "../../dist/iview/load-more/index"
-  }
+  },
+  "navigationBarTitleText": "督导纪实"
 }

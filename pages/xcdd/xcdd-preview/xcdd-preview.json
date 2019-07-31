@@ -3,5 +3,6 @@
     "kw-list-cell": "/dist/kw-ui/kw-list-cell/kw-list-cell",
     "kw-editor": "/dist/kw-ui/kw-editor/kw-editor",
     "i-icon": "/dist/iview/icon/index"
-  }
+  },
+  "navigationBarTitleText": "督导纪实"
 }

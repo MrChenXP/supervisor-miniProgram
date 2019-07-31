@@ -53,7 +53,7 @@ Page({
                     // 上面的看板数据
                     this.data.tips = {
                         zggz: datas['3758a16aa4e14b3d87bb1f9c7e2fc509'] || 0,
-                        xcdd: datas['ebc60e699bc642a1871f1e017b979483'] || 0,
+                        ddjs: datas['ebc60e699bc642a1871f1e017b979483'] || 0,
                         gzjh: datas['b892eba5fae9493189ac81a510bbbd73'] || 0,
                         wddb,
                         cxcs: datas['SJDDJLSJDDJLSJDDJLSJDDJLSJDDJLa1'] || 0,
@@ -69,28 +69,28 @@ Page({
         })
     },
     // 去我的待办 现场督导 整改工作 工作计划 只有一项数据时，直接跳转
-    toDb(){
-        let xcdd = this.data.tips.xcdd
+    toDb() {
+        let ddjs = this.data.tips.ddjs
         let gzjh = this.data.tips.gzjh
         let zggz = this.data.tips.zggz
-        if (xcdd || gzjh || zggz){
-            if(xcdd && !gzjh && !zggz){
+        if (ddjs || gzjh || zggz) {
+            if (ddjs && !gzjh && !zggz) {
                 this.toXcdd()
-            } else if (!xcdd && gzjh && !zggz) {
+            } else if (!ddjs && gzjh && !zggz) {
                 wx.navigateTo({
                     url: "/pages/gzjh/gzjh"
                 })
-            } else if (!xcdd && !gzjh && zggz) {
+            } else if (!ddjs && !gzjh && zggz) {
                 wx.navigateTo({
                     url: "/pages/zggz/zggz"
                 })
-            } else{
+            } else {
                 this.wddbShow()
             }
-        } 
+        }
     },
     // 我的待办弹框显示隐藏
-    wddbShow(){
+    wddbShow() {
         this.setData({
             wddbShow: !this.data.wddbShow,
         })
@@ -111,9 +111,9 @@ Page({
             url: "/pages/zggz/zggz"
         })
     },
-    toTkjl(){
+    toTkjl() {
         wx.navigateTo({
-            url:"/pages/tkjl/tkjl"
+            url: "/pages/tkjl/tkjl"
         })
     }
 })

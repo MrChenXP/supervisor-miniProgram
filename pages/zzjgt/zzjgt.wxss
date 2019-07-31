@@ -41,18 +41,21 @@
     top: 0;
 }
 .ckdx .ckdx-body {
+    display: flex;
     position: relative;
     background: white;
     z-index: 1001;
     padding: 20rpx;
     width: 80%;
     border-radius: 10rpx;
-    max-height: 30vh;
+    max-height: 80vh;
     overflow: auto;
 }
 .ckdx .ckdx-close{
     position: absolute;
-    right: 0;
+    right: 10rpx;
+    top: 10rpx;
+    z-index: 1001;
 }
 .ckdx .ckdx-dx{
     display: flex;

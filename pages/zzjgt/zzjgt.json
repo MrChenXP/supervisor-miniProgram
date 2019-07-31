@@ -1,5 +1,6 @@
 {
   "usingComponents": {
     "i-icon": "/dist/iview/icon/index"
-  }
+  },
+"navigationBarTitleText": "组织架构图"
 }

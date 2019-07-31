@@ -28,9 +28,7 @@ Page({
                 CONTENTID: this.data.contentId
             },
             then(data) {
-                // console.log(data.datas.TXT)
                 data.datas.TXT = app.$kwz.formatImg(data.datas.TXT)
-                // console.log(data.datas.TXT)
                 this.data.news = data.datas
                 this.data.news.LY = this.data.news.LY || '本站原创'
                 // 若new.TXT为null rict-text组件会报错

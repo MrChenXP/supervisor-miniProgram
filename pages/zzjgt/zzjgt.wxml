@@ -39,11 +39,11 @@
     <!-- 查看 督学 学校 -->
     <view hidden="{{!(ckdxShow)}}" class="ckdx" catchtouchmove='catchtouchmove'>
         <view class="ckdx-mask" catchtap='oneCkdx'></view>
-        <scroll-view scroll-y class="ckdx-body">
+        <view class="ckdx-body">
             <view class='ckdx-close' catchtap='oneCkdx'>
                     <i-icon type='close'></i-icon>
             </view>
-            <view>
+            <scroll-view scroll-y>
                 <view wx:key="key" wx:for="{{dxxxData}}" wx:for-index="key" wx:for-item="item" class="ckdx-bodys">
                     <view wx:if="{{!item.ORG_MC}}" class='ckdx-dx'>
                         <view class='ckdx-role-mc'>{{item.ROLE_MC}} :</view>
@@ -53,7 +53,7 @@
                     </view>
                     <view wx:else class="ckdx-xx">{{item.ORG_MC}}</view>
                 </view>
-            </view>
-        </scroll-view>
+            </scroll-view>
+        </view>
     </view>
 </view>

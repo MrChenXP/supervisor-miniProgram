@@ -4,5 +4,6 @@
     "kw-editor": "/dist/kw-ui/kw-editor/kw-editor",
     "i-icon": "/dist/iview/icon/index"
 
-  }
+  },
+"navigationBarTitleText": "整改工作"
 }

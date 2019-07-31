@@ -3,5 +3,6 @@
     "kw-list-cell": "/dist/kw-ui/kw-list-cell/kw-list-cell",
     "i-icon": "/dist/iview/icon/index",
     "i-rate": "/dist/iview/rate/index"
-  }
+  },
+  "navigationBarTitleText": "听课记录"
 }

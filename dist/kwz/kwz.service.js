@@ -668,7 +668,6 @@ const formatImg = (html) => {
             let srcI = imgs.indexOf('src') + 5
             let imgBefore = imgs.substr(0, srcI) + src
             let imgAfter = imgs.substring(srcI)
-            console.log()
             return imgBefore + imgAfter
         })
         html = html.replace(img, classImg)

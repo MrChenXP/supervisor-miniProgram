@@ -1,15 +1,18 @@
 <view class='content'>
 	<!-- 搜索 -->
-  <kw-search bindconfirm="searchList">
-    <view>
-      <picker range="{{searchCondition.DM_XD}}" range-key="DMMX_MC" bindchange="changeXd">
-				<kw-list-cell title="学段" right-note="{{pageParam.xdMc}}"></kw-list-cell>
-			</picker>
-      <picker range="{{searchCondition.DM_XQ}}" range-key="DMMX_MC" bindchange="changeXq">
-				<kw-list-cell title="学期" right-note="{{pageParam.xqMc}}"></kw-list-cell>
-			</picker>
+    <view class="kw-searchs">
+        <kw-search bindconfirm="searchList">
+            <view>
+            <picker range="{{searchCondition.DM_XD}}" range-key="DMMX_MC" bindchange="changeXd">
+                        <kw-list-cell title="学段" right-note="{{pageParam.xdMc}}"></kw-list-cell>
+                    </picker>
+            <picker range="{{searchCondition.DM_XQ}}" range-key="DMMX_MC" bindchange="changeXq">
+                        <kw-list-cell title="学期" right-note="{{pageParam.xqMc}}"></kw-list-cell>
+                    </picker>
+            </view>
+        </kw-search>
     </view>
-  </kw-search>
+  
   <!-- 功能(新增删除) -->
   <view class="gn">
     <view class="check fl" wx:if="{{!deleteShow}}" bindtap='checkAll'>

@@ -1,30 +1,33 @@
 <view class='content'>
   <!-- 搜索 -->
-  <kw-search bindconfirm="searchList" placeholder="请输入账号">
-    <view>
-      <kw-list-cell title="姓名">
-        <view slot="rightNote">
-          <view class="list-right-input"><input value="{{pageParam.XM}}" placeholder="请输入姓名" bindinput="inputXm"/></view>
-        </view>
-      </kw-list-cell>
-      <kw-list-cell title="电话">
-        <view slot="rightNote">
-          <view class="list-right-input"><input value="{{pageParam.DH}}" placeholder="请输入电话" bindinput="inputDh"/></view>
-        </view>
-      </kw-list-cell>
-      <kw-list-cell title="编号">
-        <view slot="rightNote">
-          <view class="list-right-input"><input value="{{pageParam.BH}}" placeholder="请输入编号" bindinput="inputBh"/></view>
-        </view>
-      </kw-list-cell>
-      <picker range="{{searchCondition.DM_DD_DXLX}}" range-key="DMMX_MC" bindchange="changeDxlx">
-				<kw-list-cell title="督学类型" right-note="{{pageParam.DXLX}}"></kw-list-cell>
-			</picker>
-      <picker range="{{searchCondition.YXZTList}}" range-key="DMMX_MC" bindchange="changeZt">
-      	<kw-list-cell title="状态" right-note="{{pageParam.YXZTMC}}"></kw-list-cell>
-      </picker>
+    <view class="kw-searchs">
+        <kw-search bindconfirm="searchList" placeholder="请输入账号">
+            <view>
+            <kw-list-cell title="姓名">
+                <view slot="rightNote">
+                <view class="list-right-input"><input value="{{pageParam.XM}}" placeholder="请输入姓名" bindinput="inputXm"/></view>
+                </view>
+            </kw-list-cell>
+            <kw-list-cell title="电话">
+                <view slot="rightNote">
+                <view class="list-right-input"><input value="{{pageParam.DH}}" placeholder="请输入电话" bindinput="inputDh"/></view>
+                </view>
+            </kw-list-cell>
+            <kw-list-cell title="编号">
+                <view slot="rightNote">
+                <view class="list-right-input"><input value="{{pageParam.BH}}" placeholder="请输入编号" bindinput="inputBh"/></view>
+                </view>
+            </kw-list-cell>
+            <picker range="{{searchCondition.DM_DD_DXLX}}" range-key="DMMX_MC" bindchange="changeDxlx">
+                        <kw-list-cell title="督学类型" right-note="{{pageParam.DXLX}}"></kw-list-cell>
+                    </picker>
+            <picker range="{{searchCondition.YXZTList}}" range-key="DMMX_MC" bindchange="changeZt">
+                <kw-list-cell title="状态" right-note="{{pageParam.YXZTMC}}"></kw-list-cell>
+            </picker>
+            </view>
+        </kw-search>
     </view>
-  </kw-search>
+  
   
   <checkbox-group class="lists">
     <view>

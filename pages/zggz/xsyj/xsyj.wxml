@@ -1,21 +1,25 @@
 <view class='content'>
     <!-- 搜索 -->
-    <kw-search bindconfirm="searchList">
-        <view>
-            <picker range="{{searchCondition.DM_XD}}" range-key="DMMX_MC" bindchange="changeXd">
-                <kw-list-cell title="学段" right-note="{{pageParam.xdMc}}"></kw-list-cell>
-            </picker>
-            <picker range="{{searchCondition.ksList}}" range-key="name" bindchange="changeKs">
-                <kw-list-cell title="科室" right-note="{{pageParam.ksMc}}"></kw-list-cell>
-            </picker>
-            <picker range="{{searchCondition.DM_DD_ZGXSLY}}" range-key="DMMX_MC" bindchange="changeZglx">
-                <kw-list-cell title="整改类型" right-note="{{pageParam.zglxMc}}"></kw-list-cell>
-            </picker>
-            <picker range="{{searchCondition.DM_DD_CLZT}}" range-key="DMMX_MC" bindchange="changeZt">
-                <kw-list-cell title="状态" right-note="{{pageParam.ztMc}}"></kw-list-cell>
-            </picker>
-        </view>
-    </kw-search>
+    <view class="kw-searchs">
+        <kw-search bindconfirm="searchList">
+            <view>
+                <picker range="{{searchCondition.DM_XD}}" range-key="DMMX_MC" bindchange="changeXd">
+                    <kw-list-cell title="学段" right-note="{{pageParam.xdMc}}"></kw-list-cell>
+                </picker>
+                <picker range="{{searchCondition.ksList}}" range-key="name" bindchange="changeKs">
+                    <kw-list-cell title="科室" right-note="{{pageParam.ksMc}}"></kw-list-cell>
+                </picker>
+                <picker range="{{searchCondition.DM_DD_ZGXSLY}}" range-key="DMMX_MC" bindchange="changeZglx">
+                    <kw-list-cell title="整改类型" right-note="{{pageParam.zglxMc}}"></kw-list-cell>
+                </picker>
+                <picker range="{{searchCondition.DM_DD_CLZT}}" range-key="DMMX_MC" bindchange="changeZt">
+                    <kw-list-cell title="状态" right-note="{{pageParam.ztMc}}"></kw-list-cell>
+                </picker>
+            </view>
+        </kw-search>
+    </view>
+
+
 
     <!-- 分页 -->
     <view class="pager">

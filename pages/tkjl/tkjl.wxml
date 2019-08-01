@@ -1,15 +1,18 @@
 <view class='content'>
-	<!-- 搜索 -->
-  <kw-search bindconfirm="searchList">
-    <view>
-      <picker mode="date" value="{{pageParam.startTime}}" bindchange="changeStart">
-        <kw-list-cell title="开始时间" right-note="{{pageParam.startTime}}"></kw-list-cell>
-      </picker>
-      <picker mode="date" value="{{pageParam.endTime}}" bindchange="changeEnd">
-        <kw-list-cell title="结束时间" right-note="{{pageParam.endTime}}"></kw-list-cell>
-      </picker>
+    <!-- 搜索 -->
+    <view class="kw-searchs">
+        <kw-search bindconfirm="searchList">
+            <view>
+            <picker mode="date" value="{{pageParam.startTime}}" bindchange="changeStart">
+                <kw-list-cell title="开始时间" right-note="{{pageParam.startTime}}"></kw-list-cell>
+            </picker>
+            <picker mode="date" value="{{pageParam.endTime}}" bindchange="changeEnd">
+                <kw-list-cell title="结束时间" right-note="{{pageParam.endTime}}"></kw-list-cell>
+            </picker>
+            </view>
+        </kw-search>
     </view>
-  </kw-search>
+  
   <!-- 功能(新增删除) -->
   <view class="gn">
     <view class="check fl" wx:if="{{!deleteShow}}" bindtap='checkAll'>

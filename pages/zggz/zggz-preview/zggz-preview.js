@@ -53,8 +53,9 @@ Page({
             // 处理结果按钮
             this.data.resultShow = true
           }
-          // 是督学且状态是整改完成
-          if (this.data.SF === 'dx' || datas.CLZTDM === '6') {
+          // 是督学
+        //   if (this.data.SF === 'dx' || datas.CLZTDM === '6') { 是督学且状态是整改完成(老逻辑)
+            if (this.data.SF === 'dx' ) {
             // 处理结果的展示
             this.data.detailShow = true
           }
@@ -68,7 +69,7 @@ Page({
             this.changeStatue('5')
           }
         } else { // 否则就是新增进来的
-          this.detailShow = true
+          this.data.detailShow = true
         }
         this.setData({
           data: this.data.data,

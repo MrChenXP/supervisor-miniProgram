@@ -31,7 +31,7 @@
          <kw-editor value="{{data.CLBG}}" bindinput="cljgInput"></kw-editor>
         </view>
         <view wx:if="{{detailShow}}">
-          <rich-text nodes="{{data.CLBG}}"></rich-text>
+          <rich-text decode nodes="{{data.CLBG}}"></rich-text>
         </view>
       </view>
     </view>

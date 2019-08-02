@@ -48,8 +48,9 @@ Page({
             // 处理结果按钮
             this.data.resultShow = true
           }
-          // 是督学且状态是整改完成
-          if (this.data.SF === 'dx' || datas.CLZTDM === '26') {
+          // 是督学
+            if (this.data.SF === 'dx') { 
+            //   if (this.data.SF === 'dx' || datas.CLZTDM === '26') { 是督学且状态是整改完成(老逻辑)
             // 处理结果的展示
             this.data.detailShow = true
           }

@@ -42,7 +42,7 @@
             整改工作
             <text class='color-red'>({{tips.zggz}})</text>
         </view>
-        <view class='wddb-list' wx:if="{{tips.xcdd}}" bindtap='toXcdd'>
+        <view class='wddb-list' wx:if="{{tips.ddjs}}" bindtap='toXcdd'>
             督导纪实
             <text class='color-red'>({{tips.ddjs}})</text>
         </view>

@@ -19,6 +19,8 @@ Page({
             xq: '',
             xdMc: '',
             xqMc: '',
+            sjly:"",
+            sjlyMC:"",
             // 页码
             page: 1,
             // 关键字
@@ -30,7 +32,21 @@ Page({
             // 学段选择列表
             DM_XD: [],
             // 整改类型选择列表
-            DM_XQ: []
+            DM_XQ: [],
+            // 数据来源选择列表
+            SJLY: [{
+                    DMMX_CODE: "",
+                    DMMX_MC: "全部"
+                },
+                {
+                    DMMX_CODE: "0",
+                    DMMX_MC: "工作安排"
+                },
+                {
+                    DMMX_CODE: "1",
+                    DMMX_MC: "工作计划"
+                }
+            ]
         },
         // 删除参数
         deleteParam: {
@@ -67,7 +83,8 @@ Page({
     // 初始化页面
     initData() {
         app.$kwz.loadDms('DM_XD', dms => {
-            this.data.searchCondition = app.$kwz.copyJson(dms) || {}
+            this.data.searchCondition.DM_XD = app.$kwz.copyJson(dms.DM_XD) || {}
+
             // 给选项加“全部”。其实就是显示全部，实际为空值，后台判断空为全部
             this.data.searchCondition.DM_XD.unshift({
                 DMMX_CODE: "",
@@ -128,7 +145,8 @@ Page({
                 page: this.data.pageParam.page,
                 XD: this.data.pageParam.xd,
                 ORG_ID_TARGET: this.data.pageParam.keyword,
-                XQID: this.data.pageParam.xq
+                XQID: this.data.pageParam.xq,
+                DD_SOURCE: this.data.pageParam.sjly
             },
             then(data) {
                 let datas = data.datas
@@ -209,7 +227,7 @@ Page({
             }) : ""
         })
     },
-    // 选择搜索条件 => 学段 学期
+    // 选择搜索条件 => 学段 学期 数据来源
     changeXd(e) {
         let checkedOption = this.data.searchCondition.DM_XD[e.detail.value]
         this.data.pageParam.xd = checkedOption.DMMX_CODE
@@ -222,6 +240,14 @@ Page({
         let checkedOption = this.data.searchCondition.DM_XQ[e.detail.value]
         this.data.pageParam.xq = checkedOption.DMMX_CODE
         this.data.pageParam.xqMc = checkedOption.DMMX_MC
+        this.setData({
+            pageParam: this.data.pageParam
+        })
+    },
+    changeSjly(e) {
+        let checkedOption = this.data.searchCondition.SJLY[e.detail.value]
+        this.data.pageParam.sjly = checkedOption.DMMX_CODE
+        this.data.pageParam.sjlyMc = checkedOption.DMMX_MC
         this.setData({
             pageParam: this.data.pageParam
         })

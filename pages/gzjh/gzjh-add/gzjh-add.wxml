@@ -7,9 +7,6 @@
   <picker range="{{sdList}}" value="{{sdValue.index}}" range-key="DMMX_MC" bindchange="changeSd" >
     <kw-list-cell title="时段" rightNote="{{sdValue.name}}" ></kw-list-cell>
   </picker>
-  <picker range="{{pjList}}" bindchange="changePj" range-key="name" value="{{pjValue.index}}" >
-    <kw-list-cell title="规定任务评价" rightNote="{{pjValue.name}}"></kw-list-cell>
-  </picker>
   <kw-list-cell isArrow="{{false}}" >
   	<view>
   		<view class="ddjs-head clearfix" bindtap="ddsxShow">
@@ -26,6 +23,15 @@
   		</view>
   	</view>
   </kw-list-cell>
+  <picker wx:if="{{ (contentId && zbValue.PID) || !contentId}}" disabled="{{!contentId}}" range="{{zbList}}" bindchange="changeZb" range-key="CONTENT" value="{{zbValue.index}}" >
+    <kw-list-cell title="指标体系" rightNote="{{zbValue.CONTENT}}"></kw-list-cell>
+  </picker>
+  <picker wx:if="{{zbValue.PID}}" mode="date" value="{{start_time}}" bindchange="changeStart_time" >
+	  <kw-list-cell title="开始时间" right-note="{{start_time}}"></kw-list-cell>
+  </picker>
+  <picker wx:if="{{zbValue.PID}}" mode="date" value="{{end_time}}" bindchange="changeEnd_time" >
+	  <kw-list-cell title="结束时间" right-note="{{end_time}}"></kw-list-cell>
+  </picker>
   <view class="save">
     <button bindtap="saveGzjh">保存</button>
   </view>

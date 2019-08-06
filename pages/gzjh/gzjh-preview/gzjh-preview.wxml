@@ -3,7 +3,7 @@
   <kw-list-cell title="督导时段" rightNote="{{SDMC}}"></kw-list-cell>
   <kw-list-cell title="小组成员" rightNote="{{SXDXMC}}"></kw-list-cell>
   <kw-list-cell title="确认参加成员" rightNote="{{QRSXDXMC}}"></kw-list-cell>
-  <kw-list-cell wx:if="{{pgmcShow}}" title="规定任务评价" rightNote="{{PGMC}}"></kw-list-cell>
+  <kw-list-cell wx:if="{{CONTENT}}" title="指标体系" rightNote="{{CONTENT}}"></kw-list-cell>
   <kw-list-cell isArrow="{{false}}" >
   	<view>
   		<view class="ddjs-head clearfix" bindtap="ddsxShow">

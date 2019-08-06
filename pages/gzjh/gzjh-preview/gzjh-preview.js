@@ -9,10 +9,8 @@ Page({
         PGMC: '',
         // 督导事项显示隐藏
         ddsxShow: false,
-        pgmcShow: false,
         DDSX: {},
         sdList: [],
-        pjList:""
     },
     onLoad(param) {
         if (param && param.CONTENT_ID) {
@@ -39,8 +37,7 @@ Page({
                     let map = datas.map
                     this.data.XXMC = map.ORG_ID_TARGET_MC
                     let sdmc = map.YWSJ
-
-                    sdmc = sdmc.length > 10 ? sdmc.substr(0, 9) : sdmc
+                    sdmc = sdmc.length > 10 ? sdmc.substr(0, 10) : sdmc
                     for (let i = 0; i < this.data.sdList.length; i++) {
                         if (this.data.sdList[i].DMMX_CODE == map.SD) {
                             sdmc += ' ' + this.data.sdList[i].DMMX_MC
@@ -52,15 +49,7 @@ Page({
                     this.data.SXDXMC = map.JGID_MC
                     this.data.QRSXDXMC = map.CJID_MC
                     this.data.DDSX = app.$kwz.formatImg(map.TXT)
-                    if (map.BZID) {
-                        for (let i = 0; i < this.data.pjList.length; i++) {
-                            if (this.data.pjList[i].value == map.BZID) {
-                                this.data.PGMC = this.data.pjList[i].name
-                                break
-                            }
-                        }
-                        this.data.pgmcShow = true
-                    }
+                    this.data.CONTENT = map.CONTENT
                 }
                 this.setData({
                     XXMC: this.data.XXMC,
@@ -68,8 +57,7 @@ Page({
                     SXDXMC: this.data.SXDXMC,
                     QRSXDXMC: this.data.QRSXDXMC,
                     DDSX: this.data.DDSX,
-                    PGMC: this.data.PGMC,
-                    pgmcShow: this.data.pgmcShow,
+                    CONTENT: this.data.CONTENT,
                 })
             }
         })

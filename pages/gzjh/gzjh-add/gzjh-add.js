@@ -292,7 +292,7 @@ Page({
         }
     },
     showSxdx(e) {
-        if (!this.data.contentId) {
+        if (!(this.data.contentId && this.data.zbValue.PID)){
             this.setData({sxdxShow: !this.data.sxdxShow})
         }
     },

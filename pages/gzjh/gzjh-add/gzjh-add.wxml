@@ -23,7 +23,7 @@
   		</view>
   	</view>
   </kw-list-cell>
-  <picker wx:if="{{ (contentId && zbValue.PID) || !contentId}}" disabled="{{!contentId}}" range="{{zbList}}" bindchange="changeZb" range-key="CONTENT" value="{{zbValue.index}}" >
+  <picker wx:if="{{ (contentId && zbValue.PID) || !contentId}}" disabled="{{contentId}}" range="{{zbList}}" bindchange="changeZb" range-key="CONTENT" value="{{zbValue.index}}" >
     <kw-list-cell title="指标体系" rightNote="{{zbValue.CONTENT}}"></kw-list-cell>
   </picker>
   <picker wx:if="{{zbValue.PID}}" mode="date" value="{{start_time}}" bindchange="changeStart_time" >

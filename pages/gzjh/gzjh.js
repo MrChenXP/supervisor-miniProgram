@@ -9,8 +9,9 @@ Page({
         hasClAuth: false,
         hasDdAuth: false,
         hasBcjAuth: false,
-        // 删除显示隐藏
+        // 删除 采集明细 显示隐藏
         deleteShow: true,
+        cjmxShow: false,
         // 搜索以及分页参数
         pageParam: {
             // 学段
@@ -66,7 +67,25 @@ Page({
         loadMore: {
             text: "正在加载",
             show: true
-        }
+        },
+        // 采集页面初始化数据
+        cjym:{},
+        // 采集项数据
+        cjmxList:[],
+        // 采集明细按钮
+        cjmxButton: [{
+            name: '返回'
+            },
+            {
+                name: '保存草稿',
+                color: '#04a8e5'
+            },
+            {
+                name: '保存并上报',
+                color: '#f1a325'
+            }],
+        // 用户数据
+        user:{}
     },
     onLoad() {
         this.has()
@@ -84,7 +103,6 @@ Page({
     initData() {
         app.$kwz.loadDms('DM_XD', dms => {
             this.data.searchCondition.DM_XD = app.$kwz.copyJson(dms.DM_XD) || {}
-
             // 给选项加“全部”。其实就是显示全部，实际为空值，后台判断空为全部
             this.data.searchCondition.DM_XD.unshift({
                 DMMX_CODE: "",
@@ -130,6 +148,9 @@ Page({
                     })
                 }
             })
+            app.$kwz.getLoginUser((user) => {
+                this.setData({user})
+            }, this)
         })
     },
     // 加载列表 type=>true（覆盖式）/false（增量式）
@@ -197,34 +218,22 @@ Page({
     // 按钮权限判断
     has() {
         app.$kwz.hasAuth('dd_gzap/toAdd', (auth) => {
-            auth ? this.setData({
-                hasXzAuth: auth
-            }) : ""
+            auth ? this.setData({hasXzAuth: auth}) : ""
         })
         app.$kwz.hasAuth('dd_gzap/toUpdate', (auth) => {
-            auth ? this.setData({
-                hasXgAuth: auth
-            }) : ""
+            auth ? this.setData({hasXgAuth: auth}) : ""
         })
         app.$kwz.hasAuth('dd_gzap/doDelete', (auth) => {
-            auth ? this.setData({
-                hasScAuth: auth
-            }) : ""
+            auth ? this.setData({hasScAuth: auth}) : ""
         })
         app.$kwz.hasAuth('dd_gzap/doDeal', (auth) => {
-            auth ? this.setData({
-                hasClAuth: auth
-            }) : ""
+            auth ? this.setData({hasClAuth: auth}) : ""
         })
         app.$kwz.hasAuth('dd_gzap/doSelectDdjlByGzapid', (auth) => {
-            auth ? this.setData({
-                hasDdAuth: auth
-            }) : ""
+            auth ? this.setData({hasDdAuth: auth}) : ""
         })
         app.$kwz.hasAuth('dd_gzap/toQs', (auth) => {
-            auth ? this.setData({
-                hasBcjAuth: auth
-            }) : ""
+            auth ? this.setData({hasBcjAuth: auth}) : ""
         })
     },
     // 选择搜索条件 => 学段 学期 数据来源
@@ -310,36 +319,7 @@ Page({
             deleteShow: true
         })
     },
-    // 去 新增、编辑  去预览 去督导
-    goAdd(e) {
-        let id = e.currentTarget.dataset.id
-        if (id) {
-            wx.navigateTo({
-                url: '/pages/gzjh/gzjh-add/gzjh-add?CONTENT_ID=' + id
-            })
-        } else {
-            wx.navigateTo({
-                url: '/pages/gzjh/gzjh-add/gzjh-add'
-            })
-        }
-    },
-    toPreview(e) {
-        let id = e.currentTarget.dataset.id
-        if (id) {
-            wx.navigateTo({
-                url: '/pages/gzjh/gzjh-preview/gzjh-preview?CONTENT_ID=' + id
-            })
-        }
-    },
-    toDD(e) {
-        let id = e.currentTarget.dataset.id
-        if (id) {
-            wx.navigateTo({
-                url: '/pages/xcdd/xcdd-add/xcdd-add?workplanId=' + id
-            })
-        }
-    },
-    // 处理 不参加
+    // 处理
     doDispose(e) {
         let id = e.currentTarget.dataset.id
         if (id) {
@@ -375,5 +355,156 @@ Page({
                 }
             })
         }
+    },
+    // 自评按钮
+    doZp(e){
+        let bzid = e.currentTarget.dataset.bzid
+        let mb_org_id = e.currentTarget.dataset.mb_org_id
+        // 获取初始化采集页面数据
+        app.$kwz.ajax.ajaxUrl({
+            url: 'dz_cjpc/doSelectCjmb',
+            type: 'POST',
+            data: {
+                PCID: bzid, 
+                MB_ORG_ID: mb_org_id
+            },
+            page: this,
+            then(response) {
+                if(response.datas){ // 有时会返回null 这样就没有目标机构id了
+                    this.data.cjym = response.datas
+                } else{
+                    this.data.cjym.MBORGID = mb_org_id
+                }
+                this.data.cjym.bzid = bzid
+                if (this.data.cjym.SFSB == 0){
+                    this.getCjx(this.data.cjym)
+                    this.cjmxShow()
+                } else{
+                    this.toPg()
+                }
+            }
+        })
+    },
+    // 获取采集项数据 cjmxButton
+    getCjx(cjym){
+        app.$kwz.ajax.ajaxUrl({
+            url: 'dz_cjtb/doDetail',
+            type: 'POST',
+            data: {
+                MBID: cjym.MBID,
+                TBDX: 'shixian'
+            },
+            page: this,
+            then(response) {
+                this.setData({ cjmxList: response.datas})
+            }
+        })
+    },
+    // 点击采集明细按钮
+    cjmxTap({detail}){
+        let i = detail.index,
+            GROUP_ARR = [],
+            data = {}
+        if (i == 0) {
+            this.cjmxShow()
+            return
+        }
+        for(let g in this.data.cjmxList){
+            GROUP_ARR.push({
+                XMID: this.data.cjmxList[g].XMID,
+                VALUE_SOURCE: this.data.cjmxList[g].VALUE_SOURCE ? this.data.cjmxList[g].VALUE_SOURCE: "",
+                FID: this.data.cjmxList[g].FID ? this.data.cjmxList[g].FID : "",
+                VID: this.data.cjmxList[g].VID ? this.data.cjmxList[g].VID : ""
+            })
+            data["XMID_"+g] = this.data.cjmxList[g].XMID
+            data["VID_" + g]=this.data.cjmxList[g].VID ? this.data.cjmxList[g].VID : ""
+            data["VALUE_" + g] = this.data.cjmxList[g].VALUE_SOURCE ? this.data.cjmxList[g].VALUE_SOURCE : ""
+        }
+        data.GROUP_ARR = JSON.stringify(GROUP_ARR)
+        data.MBID = this.data.cjym.MBID
+        data.MBORGID = this.data.cjym.MBORGID
+        data.YEAR = this.data.cjym.YEAR
+        if(i==1){
+            app.$kwz.ajax.ajaxUrl({
+                url: 'dz_cjtb/doSave',
+                type: 'POST',
+                data:data,
+                page: this,
+                then(response) {
+                    this.cjmxShow()
+                    app.$kwz.alert("保存成功")
+                }
+            })
+        } else{
+            app.$kwz.ajax.ajaxUrl({
+                url: 'dz_cjtb/doSb/' + this.data.cjym.YWLX,
+                type: 'POST',
+                data: data,
+                page: this,
+                then(response) {
+                    this.cjmxShow()
+                    app.$kwz.alert("保存成功")
+                    this.toPg()
+                }
+            })
+        }
+    },
+    // 采集明细 显示隐藏
+    cjmxShow(){
+        this.setData({ cjmxShow: !this.data.cjmxShow})
+    },
+    // 修改采集箱数据
+    changeCjx(e){
+        let index = e.currentTarget.dataset.index
+        let item = e.currentTarget.dataset.item
+        let val = e.detail.value
+        this.data.cjmxList[index].VALUE_SOURCE = val
+    },
+    // 去 新增、编辑  去预览 去督导 去评估
+    goAdd(e) {
+        let id = e.currentTarget.dataset.id
+        if (id) {
+            wx.navigateTo({
+                url: '/pages/gzjh/gzjh-add/gzjh-add?CONTENT_ID=' + id
+            })
+        } else {
+            wx.navigateTo({
+                url: '/pages/gzjh/gzjh-add/gzjh-add'
+            })
+        }
+    },
+    toPreview(e) {
+        let id = e.currentTarget.dataset.id
+        if (id) {
+            wx.navigateTo({
+                url: '/pages/gzjh/gzjh-preview/gzjh-preview?CONTENT_ID=' + id
+            })
+        }
+    },
+    toDD(e) {
+        let id = e.currentTarget.dataset.id
+        if (id) {
+            wx.navigateTo({
+                url: '/pages/xcdd/xcdd-add/xcdd-add?workplanId=' + id
+            })
+        }
+    },
+    toPg() {
+        app.$kwz.ajax.ajaxUrl({
+            url: 'ddpg_mb/doSelectPgmb',
+            type: 'POST',
+            data: {
+                PCID: this.data.cjym.bzid,
+                MB_ORG_ID: this.data.cjym.MBORGID
+            },
+            page: this,
+            then(response) {
+                let data = response.datas
+                let url = `PID=${data.PID}&MBID=${data.MBID}&PCMC=${data.PCMC}&STATU=${data.STATU}&PCID=${data.PCID}&YWLX=${data.YWLX}&PGMC=${data.PGMC}`
+                wx.navigateTo({
+                    url: `/pages/pg/pg-zp/pg-zp?`+url
+                })
+            }
+        })
     },
 })

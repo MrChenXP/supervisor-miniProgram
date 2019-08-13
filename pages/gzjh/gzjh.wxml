@@ -45,14 +45,14 @@
                         <view class="fr">{{item.DDSD}}</view>
                     </view>
                     <view class="clearfix time">
-                        <rich-text class="color-999" nodes="{{item.TXT || '未填写'}}"></rich-text>
+                        <rich-text class="color-999" nodes="{{item.TXT || ''}}"></rich-text>
                     </view>
                     <view class="clearfix time">
                         {{item.CONTENT || ""}}
                     </view>
                     <view class="clearfix status">
-                        <view class="fl clyj" wx:if="{{!!item.BZMC}}">
-                            <kw-tag color="blue" circle="{{true}}">{{item.BZMC || '未填写'}}</kw-tag>
+                        <view class="fr" wx:if="{{item.BZID && (item.PGLX=='1'||item.PGLX=='3') && item.MB_ORG_ID==user.orgid}}" catchtap='doZp' data-bzid='{{item.BZID}}' data-mb_org_id='{{item.MB_ORG_ID}}'>
+                            <kw-tag type="border" color="blue" circle="{{true}}">自评</kw-tag>
                         </view>
                         <view class="fr" wx:if="{{item.STATUS == '1'}}" catchtap='doDispose' data-id='{{item.CONTENT_ID}}'>
                             <kw-tag type="border" color="blue" wx:if="{{hasClAuth}}" circle="{{true}}">处理</kw-tag>
@@ -72,4 +72,16 @@
             <i-load-more tip="{{loadMore.text}}" loading="{{ loadMore.show }}" />
         </view>
     </checkbox-group>
+
+    <i-modal title="纵采集明细（该次评估有设置采集项目，需填写并上报数据后才能进行自评）向排列的按钮" visible="{{cjmxShow}}"  ction-mode="{{ vertical }}" class="cjmx" actions="{{cjmxButton}}" bind:click="cjmxTap">
+        <view wx:for="{{cjmxList}}" wx:key="index">
+            <view>
+                {{item.XMMC}}
+                <input wx:if="{{item.TBLX==1}}" type="number" value="{{item.VALUE_SOURCE}}" bindinput="changeCjx" data-index="{{index}}" data-item="{{item}}" maxlength="10"/>
+                <text wx:else>该采集项请于pc端填写</text>
+                {{item.CJDWMC}}
+                <view class="col-red">{{item.REMARK||""}}</view>
+            </view>
+        </view>
+    </i-modal>
 </view>

@@ -1,1 +1,9 @@
 /* pages/xcdd/xcdd-add/xcdd-add.wxss */
+.ddjs-head .qpg{
+    height: 55rpx;
+}
+.ddjs-head button[size=mini]{
+    line-height: 2.1;
+    background: #04a8e5;
+
+}

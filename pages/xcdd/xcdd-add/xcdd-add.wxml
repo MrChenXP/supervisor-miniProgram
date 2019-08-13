@@ -1,72 +1,107 @@
 <!--pages/xcdd/xcdd-add/xcdd-add.wxml-->
 <view class='content'>
-	<kw-list-cell title="工作计划" right-note="{{data.gzjhName}}" bindtap="showGzjh"></kw-list-cell>
-	<kw-list-cell title="学校（校园）" right-note="{{data.schoolName}}" bindtap="showSchool"></kw-list-cell>
-	<kw-list-cell title="随行督学" right-note="{{data.sxdxName}}" bindtap="showSxdx"></kw-list-cell>
-  <picker mode="date" value="{{data.ywsj}}" bindchange="changeYwsj">
-	  <kw-list-cell title="时间" right-note="{{data.ywsj}}"></kw-list-cell>
-  </picker>
-	<kw-list-cell isArrow="{{false}}">
-    <view>
-      <view class="ddjs-head clearfix" bindtap='changeDdjsShow'>
-        <text class="fl">督导纪实</text>
-        <view class="fr" hidden="{{!ddjsShow}}"><i-icon type="unfold" color="#c7c7c7" size="20"></i-icon></view>
-        <view class="fr" hidden="{{ddjsShow}}"><i-icon type="packup" color="#c7c7c7" size="20"></i-icon></view>
-      </view>
-      <view hidden="{{ddjsShow}}" class="ddjs-body">
-        <kw-editor value="{{data.ddjs}}" bindinput="ddjsInput"></kw-editor>
-      </view>
-    </view>
-  </kw-list-cell>
-	<kw-list-cell isArrow="{{false}}">
-    <view>
-      <view class="ddjs-head clearfix" bindtap='changeZlcjShow'>
-        <text class="fl">资料采集</text>
-        <view class="fr" hidden="{{!zlcjShow}}"><i-icon type="unfold" color="#c7c7c7" size="20"></i-icon></view>
-        <view class="fr" hidden="{{zlcjShow}}"><i-icon type="packup" color="#c7c7c7" size="20"></i-icon></view>
-      </view>
-      <view class="ddjs-body" hidden="{{zlcjShow}}">
-        <view>查阅资料 <i-input-number value="{{data.cyzl}}" min="0" max="1000" bindchange="changeCyzl"></i-input-number> 份</view>
-        <view>列席会议 <i-input-number value="{{data.lxhy}}" min="0" max="1000" bindchange="changeLxhy"></i-input-number> 次</view>
-        <view>座谈走访 <i-input-number value="{{data.ztzf}}" min="0" max="1000" bindchange="changeZtzf"></i-input-number> 次</view>
-        <view>问卷调查 <i-input-number value="{{data.wjdc}}" min="0" max="1000" bindchange="changeWjdc"></i-input-number> 次</view>
-        <view>校园巡视 <i-input-number value="{{data.xyxs}}" min="0" max="1000" bindchange="changeXyxs"></i-input-number> 次</view>
-      </view>
-    </view>
-  </kw-list-cell>
-	<kw-list-cell isArrow="{{false}}">
-    <view>
-        <view class="ddjs-head clearfix" bindtap='changeJyzfShow'>
-          <text class="fl">典型经验和做法</text>
-          <view class="fr" hidden="{{!jyzfShow}}"><i-icon type="unfold" color="#c7c7c7" size="20"></i-icon></view>
-          <view class="fr" hidden="{{jyzfShow}}"><i-icon type="packup" color="#c7c7c7" size="20"></i-icon></view>
+    <kw-list-cell title="工作计划" right-note="{{data.gzjhName}}" bindtap="showGzjh"></kw-list-cell>
+    <kw-list-cell title="学校（校园）" right-note="{{data.schoolName}}" bindtap="showSchool"></kw-list-cell>
+    <kw-list-cell title="随行督学" right-note="{{data.sxdxName}}" bindtap="showSxdx"></kw-list-cell>
+    <picker mode="date" value="{{data.ywsj}}" bindchange="changeYwsj">
+        <kw-list-cell title="时间" right-note="{{data.ywsj}}"></kw-list-cell>
+    </picker>
+    <kw-list-cell isArrow="{{false}}">
+        <view>
+            <view class="ddjs-head clearfix" bindtap='changeDdjsShow'>
+                <text class="fl">督导纪实</text>
+                <view class="fr" hidden="{{!ddjsShow}}">
+                    <i-icon type="unfold" color="#c7c7c7" size="20"></i-icon>
+                </view>
+                <view class="fr" hidden="{{ddjsShow}}">
+                    <i-icon type="packup" color="#c7c7c7" size="20"></i-icon>
+                </view>
+            </view>
+            <view hidden="{{ddjsShow}}" class="ddjs-body">
+                <kw-editor value="{{data.ddjs}}" bindinput="ddjsInput"></kw-editor>
+            </view>
         </view>
-        <view class="ddjs-body" hidden="{{jyzfShow}}">
-          <textarea value="{{data.dxjyzf}}" maxlength="4000" bindinput="inputDxjyzf"></textarea>
+    </kw-list-cell>
+    <kw-list-cell isArrow="{{false}}" wx:if="{{qpgShow}}">
+        <view>
+            <view class="ddjs-head clearfix" >
+                <text class="fl">指标体系</text>
+                <view class="fr qpg" bindtap='toPgdp'>
+                    <button size="mini" type="primary">去评估</button>
+                </view>
+            </view>
         </view>
+    </kw-list-cell>
+    <kw-list-cell isArrow="{{false}}">
+        <view>
+            <view class="ddjs-head clearfix" bindtap='changeZlcjShow'>
+                <text class="fl">资料采集</text>
+                <view class="fr" hidden="{{!zlcjShow}}">
+                    <i-icon type="unfold" color="#c7c7c7" size="20"></i-icon>
+                </view>
+                <view class="fr" hidden="{{zlcjShow}}">
+                    <i-icon type="packup" color="#c7c7c7" size="20"></i-icon>
+                </view>
+            </view>
+            <view class="ddjs-body" hidden="{{zlcjShow}}">
+                <view>查阅资料
+                    <i-input-number value="{{data.cyzl}}" min="0" max="1000" bindchange="changeCyzl"></i-input-number> 份</view>
+                <view>列席会议
+                    <i-input-number value="{{data.lxhy}}" min="0" max="1000" bindchange="changeLxhy"></i-input-number> 次</view>
+                <view>座谈走访
+                    <i-input-number value="{{data.ztzf}}" min="0" max="1000" bindchange="changeZtzf"></i-input-number> 次</view>
+                <view>问卷调查
+                    <i-input-number value="{{data.wjdc}}" min="0" max="1000" bindchange="changeWjdc"></i-input-number> 次</view>
+                <view>校园巡视
+                    <i-input-number value="{{data.xyxs}}" min="0" max="1000" bindchange="changeXyxs"></i-input-number> 次</view>
+            </view>
+        </view>
+    </kw-list-cell>
+    <kw-list-cell isArrow="{{false}}">
+        <view>
+            <view class="ddjs-head clearfix" bindtap='changeJyzfShow'>
+                <text class="fl">典型经验和做法</text>
+                <view class="fr" hidden="{{!jyzfShow}}">
+                    <i-icon type="unfold" color="#c7c7c7" size="20"></i-icon>
+                </view>
+                <view class="fr" hidden="{{jyzfShow}}">
+                    <i-icon type="packup" color="#c7c7c7" size="20"></i-icon>
+                </view>
+            </view>
+            <view class="ddjs-body" hidden="{{jyzfShow}}">
+                <textarea value="{{data.dxjyzf}}" maxlength="4000" bindinput="inputDxjyzf"></textarea>
+            </view>
+        </view>
+    </kw-list-cell>
+    <kw-list-cell isArrow="{{false}}">
+        <view>
+            <view class="ddjs-head clearfix" bindtap='changeCzwtShow'>
+                <text class="fl">存在问题</text>
+                <view class="fr" hidden="{{!czwtShow}}">
+                    <i-icon type="unfold" color="#c7c7c7" size="20"></i-icon>
+                </view>
+                <view class="fr" hidden="{{czwtShow}}">
+                    <i-icon type="packup" color="#c7c7c7" size="20"></i-icon>
+                </view>
+            </view>
+            <view class="ddjs-body" hidden="{{czwtShow}}">
+                <textarea value="{{data.czwt}}" maxlength="4000" bindinput="inputCzwt"></textarea>
+            </view>
+        </view>
+    </kw-list-cell>
+    <xcdd-hxclyj class="xcdd-hxclyj" status="{{data.status}}" status_mc="{{data.status_mc}}" schoolName="{{data.schoolName}}" ywsj="{{data.ywsj}}" zgxsid="{{data.zgxsid}}" zgxsBh="{{data.zgxsBh}}" schoolId="{{data.schoolId}}" contentId="{{data.contentId}}" zgxsyj="{{data.zgxsyj}}" clqx="{{data.clqx}}" ksid="{{data.ksid}}" ksName="{{data.ksName}}" bindconfirm="hxclyjConfirm"></xcdd-hxclyj>
+    <view class="save" wx:if="{{hasXzAuth}}">
+        <button bindtap="saveXcdd">保存</button>
     </view>
-  </kw-list-cell>
-	<kw-list-cell isArrow="{{false}}">
-    <view>
-      <view class="ddjs-head clearfix" bindtap='changeCzwtShow'>
-        <text class="fl">存在问题</text>
-        <view class="fr" hidden="{{!czwtShow}}"><i-icon type="unfold" color="#c7c7c7" size="20"></i-icon></view>
-        <view class="fr" hidden="{{czwtShow}}"><i-icon type="packup" color="#c7c7c7" size="20"></i-icon></view>
-      </view>
-      <view class="ddjs-body" hidden="{{czwtShow}}">
-        <textarea value="{{data.czwt}}" maxlength="4000" bindinput="inputCzwt"></textarea>
-      </view>
-    </view>
-  </kw-list-cell>
-  <xcdd-hxclyj class="xcdd-hxclyj" status="{{data.status}}" status_mc="{{data.status_mc}}" schoolName="{{data.schoolName}}" ywsj="{{data.ywsj}}" zgxsid="{{data.zgxsid}}" zgxsBh="{{data.zgxsBh}}" schoolId="{{data.schoolId}}" contentId="{{data.contentId}}" zgxsyj="{{data.zgxsyj}}" clqx="{{data.clqx}}" ksid="{{data.ksid}}" ksName="{{data.ksName}}" bindconfirm="hxclyjConfirm"></xcdd-hxclyj>
-  <view class="save" wx:if="{{hasXzAuth}}">
-    <button bindtap="saveXcdd">保存</button>
-  </view>
-  <!-- 选择工作计划 学校 随行督学-->
-  <block>
-    <kw-gzjh-select hidden="{{gzjhShow}}" bindclose="showGzjh" bindconfirm="confirmGzjh"></kw-gzjh-select>
-    <kw-school-select hidden="{{schoolShow}}" bindclose="showSchool" bindconfirm="confirmSchool">></kw-school-select>
-    <kw-sxdx-select hidden="{{sxdxShow}}" bindclose="showSxdx" bindconfirm="sxdxConfirm"></kw-sxdx-select>
-    <xcdd-hxclyj wx:if="{{hxclyjShow}}" bindclose="showHxclyj"></xcdd-hxclyj>
-  </block>
+
+    <!-- 去评估页面 -->
+    <pg wx:if="{{pgShow}}"  bindclose="showPg"></pg>
+
+    <!-- 选择工作计划 学校 随行督学-->
+    <block>
+        <kw-gzjh-select hidden="{{gzjhShow}}" bindclose="showGzjh" bindconfirm="confirmGzjh"></kw-gzjh-select>
+        <kw-school-select hidden="{{schoolShow}}" bindclose="showSchool" bindconfirm="confirmSchool">></kw-school-select>
+        <kw-sxdx-select hidden="{{sxdxShow}}" bindclose="showSxdx" bindconfirm="sxdxConfirm"></kw-sxdx-select>
+        <xcdd-hxclyj wx:if="{{hxclyjShow}}" bindclose="showHxclyj"></xcdd-hxclyj>
+    </block>
 </view>

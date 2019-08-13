@@ -4,3 +4,8 @@
 .lists .list .info .time {
   max-height:100rpx;
 }
+.cjmx input{
+    display: inline-block;
+    max-width: 100rpx;
+    border-bottom:1rpx #999999 solid;
+}

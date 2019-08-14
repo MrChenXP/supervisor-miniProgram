@@ -1,6 +1,7 @@
 {
   "component": true,
   "usingComponents": {
-    "kw-search": "/dist/kw-ui/kw-search/kw-search"
+    "kw-search": "/dist/kw-ui/kw-search/kw-search",
+    "kw-list-cell": "/dist/kw-ui/kw-list-cell/kw-list-cell"
   }
 }

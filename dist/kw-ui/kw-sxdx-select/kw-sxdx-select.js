@@ -18,6 +18,20 @@ Component({
     data: {
         // 搜索学校用的关键字
         searchKeyword: "",
+        // 搜索参数
+        searchCondition: {
+            // 是否只查下级
+            isZcxj: [{
+                    DMMX_CODE: "0", DMMX_MC: "否"
+                },{
+                    DMMX_CODE: "1", DMMX_MC: "是"
+            }],
+        },
+        // 搜索以及分页参数
+        pageParam: {
+            isZcxj: '是',
+            isZcxjFlag:"1"
+        },
         page: 1,
         // 学校列表
         loadDataList: [],
@@ -40,12 +54,12 @@ Component({
                     DXLXM: '',
                     U_USERNAME: this.data.searchKeyword,
                     ORG_MC: '',
-                    EXCEPT: '3'
+                    EXCEPT: '3',
+                    flag: this.data.pageParam.isZcxjFlag,
                 },
                 page: this,
                 success(data) {
                     let datas = data.datas
-                    console.log(data)
                     this.data.page++
                         if (datas && datas.length > 0) {
                             let loadDataList = []
@@ -105,6 +119,15 @@ Component({
         confirm() {
             this.triggerEvent("confirm", {
                 data: this.getRadioValue(this.data.checkRadio),
+            })
+        },
+        // 选择搜索条件 查看下级
+        changeZcxj(e) {
+            let checkedOption = this.data.searchCondition.isZcxj[e.detail.value]
+            this.data.pageParam.isZcxjFlag = checkedOption.DMMX_CODE
+            this.data.pageParam.isZcxj = checkedOption.DMMX_MC
+            this.setData({
+                pageParam: this.data.pageParam
             })
         },
         // 阻止滑动穿透

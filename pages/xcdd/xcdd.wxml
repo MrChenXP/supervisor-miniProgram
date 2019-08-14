@@ -4,11 +4,11 @@
         <kw-search bindconfirm="searchList">
             <view>
             <picker range="{{searchCondition.DM_XD}}" range-key="DMMX_MC" bindchange="changeXd">
-                        <kw-list-cell title="学段" right-note="{{pageParam.xdMc}}"></kw-list-cell>
-                    </picker>
+                <kw-list-cell title="学段" right-note="{{pageParam.xdMc}}"></kw-list-cell>
+            </picker>
             <picker range="{{searchCondition.DM_XQ}}" range-key="DMMX_MC" bindchange="changeXq">
-                        <kw-list-cell title="学期" right-note="{{pageParam.xqMc}}"></kw-list-cell>
-                    </picker>
+                <kw-list-cell title="学期" right-note="{{pageParam.xqMc}}"></kw-list-cell>
+            </picker>
             </view>
         </kw-search>
     </view>

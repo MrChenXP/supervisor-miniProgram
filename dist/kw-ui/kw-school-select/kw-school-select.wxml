@@ -4,7 +4,11 @@
   <view class="kw-gzjh-select-mask" bindtap="close" ></view>
   <!-- 搜索 -->
   <view class="kw-gzjh-select-content">
-    <kw-search placeholder="请输入学校名称" bindconfirm="keywordConfirm"></kw-search>
+    <kw-search placeholder="请输入学校名称" bindconfirm="keywordConfirm">
+        <picker range="{{searchCondition.isZcxj}}" range-key="DMMX_MC" bindchange="changeZcxj">
+            <kw-list-cell title="只查下级" right-note="{{pageParam.isZcxj}}"></kw-list-cell>
+        </picker>
+    </kw-search>
     <scroll-view scroll-y>
         <radio-group bindchange="radioChange">
             <label wx:for='{{loadDataList}}' wx:key="index">

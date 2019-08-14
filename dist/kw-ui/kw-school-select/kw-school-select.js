@@ -18,20 +18,8 @@ Component({
     data: {
         // 搜索学校用的关键字
         ORG_MC: "",
-        // 搜索参数
-        searchCondition: {
-            // 是否只查下级
-            isZcxj: [{
-                DMMX_CODE: "0", DMMX_MC: "否"
-            }, {
-                DMMX_CODE: "1", DMMX_MC: "是"
-            }],
-        },
-        // 搜索以及分页参数
-        pageParam: {
-            isZcxj: '是',
-            isZcxjFlag: "1"
-        },
+        // 是否只查下级
+        flag: true,
         page: 1,
         // 学校列表
         loadDataList: [],
@@ -52,7 +40,7 @@ Component({
                     DDJL: '',
                     page: this.data.page,
                     ORG_MC: this.data.ORG_MC,
-                    flag: this.data.pageParam.isZcxjFlag
+                    flag: this.data.flag ? 1 : 0,
                 },
                 page: this,
                 success(data) {
@@ -114,12 +102,10 @@ Component({
         },
         // 选择搜索条件 查看下级
         changeZcxj(e) {
-            let checkedOption = this.data.searchCondition.isZcxj[e.detail.value]
-            this.data.pageParam.isZcxjFlag = checkedOption.DMMX_CODE
-            this.data.pageParam.isZcxj = checkedOption.DMMX_MC
             this.setData({
-                pageParam: this.data.pageParam
+                flag: !this.data.flag
             })
+            this.loadSchool(true)
         },
         // 阻止滑动穿透
         catchtouchmove() {},

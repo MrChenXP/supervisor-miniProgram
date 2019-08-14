@@ -44,6 +44,9 @@
   padding-bottom: 20rpx;
   border-radius: 10rpx;
 }
+.kw-gzjh-select-zcxj{
+    text-align: right;
+}
 .kw-gzjh-select-radio-label {
   text-align: left;
   position: absolute;

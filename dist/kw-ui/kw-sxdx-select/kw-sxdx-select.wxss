@@ -10,6 +10,7 @@
   top: 0;
   animation: show 750ms;
 }
+
 .kw-gzjh-select label {
     display: inline-block;
     background: white;
@@ -43,6 +44,10 @@
           box-shadow: 0 0 15rpx 5rpx darkgray;
   padding-bottom: 20rpx;
   border-radius: 10rpx;
+  position: relative;
+}
+.kw-gzjh-select-zcxj{
+    text-align: right;
 }
 .kw-gzjh-select-radio-label {
   text-align: left;

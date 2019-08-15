@@ -37,7 +37,7 @@
         <view>
             <view class="text-bold pg-body-title">评估</view>
             <view class="pg-yjbt" wx:if="{{xmpg.children}}" wx:for="{{xmpg.children}}" wx:for-item="yjItem" wx:for-index="yjIndex" wx:key="yjIndex">
-                {{yjItem.CONTENT}}
+                <text class="text-bold">{{yjItem.CONTENT}}</text>
                 <text class="color-red">（总分{{yjItem.ZBFZ }}分）</text>
 
                 <!--二级观测 -->
@@ -110,7 +110,7 @@
     <!-- 上报返回 按钮 -->
     <view class="pg-sbfh">
         <button size="mini" bindtap="back">返回</button>
-        <button size="mini" type="primary" bindtap="saveBg" wx:if="{{param.STATU!=2}}">上报</button>
+        <button size="mini" type="primary" bindtap="savePg" wx:if="{{param.STATU!=2}}">上报</button>
     </view>
 
     <!-- 自评报告 -->

@@ -94,14 +94,12 @@
         <button bindtap="saveXcdd">保存</button>
     </view>
 
-    <!-- 去评估页面 -->
-    <pg wx:if="{{pgShow}}"  bindclose="showPg"></pg>
-
-    <!-- 选择工作计划 学校 随行督学-->
+    <!-- 选择工作计划 学校 随行督学 后续处理意见 去评估-->
     <block>
         <kw-gzjh-select hidden="{{gzjhShow}}" bindclose="showGzjh" bindconfirm="confirmGzjh"></kw-gzjh-select>
         <kw-school-select hidden="{{schoolShow}}" bindclose="showSchool" bindconfirm="confirmSchool">></kw-school-select>
         <kw-sxdx-select hidden="{{sxdxShow}}" bindclose="showSxdx" bindconfirm="sxdxConfirm"></kw-sxdx-select>
         <xcdd-hxclyj wx:if="{{hxclyjShow}}" bindclose="showHxclyj"></xcdd-hxclyj>
+        <pg wx:if="{{qpgShow}}"  bindclose="showPg"></pg>
     </block>
 </view>

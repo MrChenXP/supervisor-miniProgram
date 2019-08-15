@@ -41,7 +41,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -52,9 +52,9 @@
 				},
 				{
 					"id": 1,
-					"name": "zp",
-					"pathName": "pages/pg/pg-zp/pg-zp",
-					"query": "PID=8F99384CB6411EE7E0530100007F6473&MBID=f6857cf6b31942e3a661c01428b7195e&PCMC=测试20190808&STATU=0&PCID=8F99384CB6461EE7E0530100007F6473&YWLX=DDGZAP&PGMC=自评",
+					"name": "dp",
+					"pathName": "pages/pg/pg-dp/pg-dp",
+					"query": "PID=881F0C0A36E03EA1E0530100007F8C0D&MBID=b8bf6985e6b743c4bb10f7daa03211bb&PCMC=龙岗区2019年春季学校开学工作督导检查99&STATU=0&PCID=8FFAF93286E35024E0530100007F1F6E&YWLX=DDGZAP&PGMC=他评&MB_ORG_ID=078988715443472bb27fb4a425f8db9c&MB_ORG_MC=白云区&XH=2&PGR_ID=8FFAF93286EA5024E0530100007F1F6E",
 					"scene": null
 				},
 				{
@@ -68,7 +68,7 @@
 					"id": 3,
 					"name": "xcdd-add",
 					"pathName": "pages/xcdd/xcdd-add/xcdd-add",
-					"query": "workplanId=8C21B11AF78D2FD7E0530100007F9DF2",
+					"query": "workplanId=901EC77DFD9230F3E0530100007FF1F9",
 					"scene": null
 				},
 				{

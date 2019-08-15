@@ -101,7 +101,7 @@ Page({
         })
     },
     // 保存整个评估
-    saveBg() {
+    savePg() {
         app.$kwz.ajax.ajaxUrl({
             url: 'dd_pgmx/doSave/2',
             type: 'POST',

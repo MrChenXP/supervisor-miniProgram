@@ -48,6 +48,8 @@ Page({
             minDate: "", // 最小时间限制
             maxDate: "", // 最大时间限制
         },
+        // 工作计划数据
+        gzjh:{},
         // 登录用户数据
         loginUser: {},
     },
@@ -87,6 +89,7 @@ Page({
                 page: this,
                 then(response) {
                     let datas = response.datas
+
                     if (datas && datas.CONTENT_ID) {
                         this.data.data.schoolId = datas.ORG_ID
                         this.data.data.schoolName = datas.XXMC
@@ -151,10 +154,14 @@ Page({
                                     let workPlanName = datas.ORG_ID_TARGET_MC + '/' + datas.YWSJ + '/' +
                                         (datas.SD === '1' ? "上午" : "下午") + '/' + datas.AUTHOR
                                     this.data.data.gzjhName = workPlanName
+                                    if (datas.BZID) {
+                                        this.loadDdGzjh()
+                                    }
                                     this.setData({
-                                        data: this.data.data
+                                        data: this.data.data,
+                                        qpgShow: datas.BZID
                                     })
-                                    // 先不用获取标准
+                                    
                                 }
                             })
                         }
@@ -177,10 +184,14 @@ Page({
             let gzjhMc = `${this.data.data.schoolName}/${this.data.data.sxdxName}/${this.data.data.ywsj}`
             this.data.data.gzjhName = gzjhMc.length > 20 ? (gzjhMc.substr(0, 19) + '...') : gzjhMc
             // 下面还有个获取标准
+            if (gzjh.data.BZID){
+                this.loadDdGzjh()
+            }
         }
         this.setData({
             gzjhShow: !this.data.gzjhShow,
-            data: this.data.data
+            data: this.data.data,
+            qpgShow: gzjh && gzjh.data.BZID
         })
     },
     // 保存督导
@@ -271,11 +282,12 @@ Page({
                     this.data.data.ywsj = gzjh.YWSJ && gzjh.YWSJ.length > 10 ? gzjh.YWSJ.substr(0, 10) : app.$kwz.formatDate('yyyy-MM-dd')
                     let gzjhMc = `${this.data.data.schoolName}/${this.data.data.sxdxName}/${this.data.data.ywsj}`
                     this.data.data.gzjhName = gzjhMc.length > 25 ? (gzjhMc.substr(0, 24) + '...') : gzjhMc,
-                        this.setData({
-                            data: this.data.data
-                        })
+                    this.setData({
+                        data: this.data.data,
+                    })
                     // 判断是否有评估权限 有批次id(BZID) 是随行督学
                     if (gzjh.BZID && gzjh.CJID.indexOf(this.data.loginUser.uid) >-1){
+                        this.data.gzjh = gzjh
                         this.setData({ qpgShow: true})
                     }
                 }
@@ -318,7 +330,7 @@ Page({
     },
     // 打开关闭 工作计划 学校 随行督学
     showGzjh(e) {
-        if (!this.data.data.contentId) {
+        if (!this.data.data.contentId && !this.data.data.gzjhId) {
             this.setData({gzjhShow: !this.data.gzjhShow})
         }
     },
@@ -403,27 +415,21 @@ Page({
     },
     // 去督评
     toPgdp() {
-        
-        // app.$kwz.ajax.ajaxUrl({
-        //     url: 'ddpg_mb/doSelectPgmb',
-        //     type: 'POST',
-        //     data: {
-        //         PCID: this.data.cjym.bzid,
-        //         MB_ORG_ID: this.data.cjym.MBORGID
-        //     },
-        //     page: this,
-        //     then(response) {
-        //         let data = response.datas
-        //         let url = `PID=${data.PID}&MBID=${data.MBID}&PCMC=${data.PCMC}&STATU=${data.STATU}&PCID=${data.PCID}&YWLX=${data.YWLX}&PGMC=${data.PGMC}`
-        //         wx.navigateTo({
-        //             url: `/pages/pg/pg-zp/pg-zp?` + url
-        //         })
-        //     }
-        // })
-
-
-        // wx.navigateTo({
-        //     url: `/pages/pg/pg-dp/pg-dp`
-        // })
+        app.$kwz.ajax.ajaxUrl({
+            url: 'ddpg_mb/selectListDp',
+            type: 'POST',
+            data: {
+                PCID: this.data.gzjh.BZID,
+                MB_ORG_ID: this.data.gzjh.ORG_ID
+            },
+            page: this,
+            then(response) {
+                let data = response.datas
+                let url = `PID=${data.PID}&MBID=${data.MBID}&PCMC=${data.PCMC}&STATU=${data.STATU}&PCID=${data.PCID}&YWLX=${data.YWLX}&PGMC=${data.PGMC}&MB_ORG_ID=${data.MB_ORG_ID}&MB_ORG_MC=${data.MB_ORG_MC}&XH=${data.XH}&PGR_ID=${data.PGR_ID}`
+                wx.navigateTo({
+                    url: `/pages/pg/pg-dp/pg-dp?` + url
+                })
+            }
+        })
     },
 })

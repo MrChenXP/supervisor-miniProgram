@@ -10,6 +10,9 @@ Page({
         tbbg: {},
         // 下面的评估数据
         xmpg: {},
+        // 他评报告详情的下标和数据
+        tpbgI:0,
+        tpbgData:{},
         // 指标观测点点击的下标和数据
         zbgcdIdex: [0, 0],
         zbgcdData: {},
@@ -22,7 +25,7 @@ Page({
         app.$kwz.getLoginUser((user) => {
             this.setData({ user })
         }, this)
-        if (param.PID) {
+        if (param.PID && param.MBID && param.PCID && param.XH) {
             this.init()
         }
     },
@@ -33,68 +36,68 @@ Page({
             url: 'dd_pgmx/selectPgjgList',
             type: 'POST',
             data: {
-                MBID: this.data.param.MBID,
-                XH: "1"
+                MB_ORG_ID: this.data.param.MB_ORG_ID,
+                XH: this.data.param.XH,
+                PCID: this.data.param.PCID,
+                "ISDP": '1'
             },
             page: this,
             then(response) {
-                this.setData({ tbbg: response.datas.list[0] })
-                console.log(this.data.tbbg)
+                this.setData({ tbbg: response.datas.list })
             }
         })
-        console.log(this.data.param)
-
         // 获取下方评估列表及观测点数据
         app.$kwz.ajax.ajaxUrl({
-            url: 'dd_pgmx/doGetPointTableList/' + this.data.param.YWLX,
+            url: 'dd_pgmx/doGetDpPointTableList',
             type: 'POST',
             data: {
                 MBID: this.data.param.MBID,
-                PID: this.data.param.PID
+                PID: this.data.param.PID,
+                MB_ORG_ID: this.data.param.MB_ORG_ID,
+                PCID: this.data.param.PCID,
+                XH: this.data.param.XH,
             },
             page: this,
             then(response) {
                 this.setData({ xmpg: response.datas[0] })
-                console.log(this.data.xmpg)
             }
         })
     },
     // 保存报告详情
     saveBg() {
         app.$kwz.ajax.ajaxUrl({
-            url: 'ddpg_mb/doSavePgjg/' + this.data.param.YWLX,
+            url: 'ddpg_mb/doSavePgrjg',
             type: 'POST',
             data: {
-                TCLD: this.data.tbbg.ZP_TCLD,
-                CZWT: this.data.tbbg.ZP_CZWT,
-                XYBGZ: this.data.tbbg.ZP_XYBGZ,
-                ZPZJ: this.data.tbbg.ZP_ZPZJ,
-                MBID: this.data.param.MBID
+                TCLD: this.data.tpbgData.TCLD,
+                CZWT: this.data.tpbgData.CZWT,
+                ZPZJ: this.data.tpbgData.ZGJY,
+                PGZJ: this.data.tpbgData.PGZJ,
+                PGR_ID: this.data.tbbg[this.data.tpbgI].PGR_ID
             },
             page: this,
             then(response) {
                 this.zpbgShow()
                 app.$kwz.alert("保存成功")
-                // this.setData({tbbg: this.data.tbbg}) 先不同步到原始页
             }
         })
     },
     // 保存自评观测点详情
     saveZpgcd() {
         app.$kwz.ajax.ajaxUrl({
-            url: 'dd_pgmx/doSave/1',
+            url: 'dd_pgmx/doDp/1',
             type: 'POST',
             data: {
                 MXID_0: this.data.zbgcdData.MXID,
                 PID_0: this.data.zbgcdData.PID,
                 PCID: this.data.zbgcdData.PCID,
                 MBID: this.data.zbgcdData.MXID,
-                STATUS: this.data.zbgcdData.STATUS,
-                FZ_0: this.data.zbgcdData.P_FZ,//分值
-                LEVEL_0: this.data.zbgcdData.P_LEVEL ? this.data.zbgcdData.P_LEVEL : "",//等级
-                ZPYJ_0: this.data.zbgcdData.PGYJ,//评估意见
+                MB_STATUS: this.data.zbgcdData.STATUS,
+                PFZ_0: this.data.zbgcdData.P_FZ,//分值
+                PLEVEL_0: this.data.zbgcdData.P_LEVEL ? this.data.zbgcdData.P_LEVEL : "",//等级
+                PGYJ_0: this.data.zbgcdData.PGYJ,//评估意见
                 CZWT_0: this.data.zbgcdData.CZWT,//存在问题
-                DLSJ_0: ''//数据详情 后端也不知道要不要先防空
+                PGR_ID: this.data.zbgcdData.PGR_ID,//评估人id
             },
             page: this,
             then(response) {
@@ -104,15 +107,17 @@ Page({
         })
     },
     // 保存整个评估
-    saveBg() {
-        console.log(this.data.param)
+    savePg() {
         app.$kwz.ajax.ajaxUrl({
-            url: 'dd_pgmx/doSave/2',
+            url: 'dd_pgmx/doDp/2',
             type: 'POST',
             data: {
-                PCID: this.data.param.PCID,
+                PGR_ID: this.data.param.PGR_ID,
                 MBID: this.data.param.MBID,
-                MB_STATUS: this.data.param.STATU
+                MB_ORG_ID: this.data.param.MB_ORG_ID,
+                PCID: this.data.param.PCID,
+                MB_STATUS: this.data.param.STATU,
+                XH: this.data.param.XH,
             },
             page: this,
             then(response) {
@@ -121,18 +126,18 @@ Page({
             }
         })
     },
-    // 更改 报告-自评报告 报告-突出亮点  报告-存在问题 报告-下一步工作计划
+    // 更改 报告-他评报告、突出亮点、存在问题 整改建议
     inputZpzj({ detail }) {
-        this.data.tbbg.ZP_ZPZJ = detail.data
+        this.data.tpbgData.PGZJ = detail.data
     },
     inputTcld({ detail }) {
-        this.data.tbbg.ZP_TCLD = detail.value
+        this.data.tpbgData.TCLD = detail.value
     },
     inputCzwt({ detail }) {
-        this.data.tbbg.ZP_CZWT = detail.value
+        this.data.tpbgData.CZWT = detail.value
     },
     inputXybgzjh({ detail }) {
-        this.data.tbbg.ZP_XYBGZ = detail.value
+        this.data.tpbgData.ZGJY = detail.value
     },
     // 更改 自评观测点-赋分-加减方式
     changeFfjj({ detail }) {
@@ -143,14 +148,13 @@ Page({
     },
     // 更改 自评观测点-赋分-选择器方式
     changeFfxzq(e) {
-
         let zbgcdData = this.data.zbgcdData.exps[e.detail.value]
         this.data.zbgcdData.P_FZ = zbgcdData.xzqz
         this.setData({
             zbgcdData: this.data.zbgcdData
         })
     },
-    // 更改 自评观测点-指标评价说说明 自评观测点-存在问题
+    // 更改 他评观测点-指标评价说说明 他评观测点-存在问题
     inputGcdPjsm({ detail }) {
         this.data.zbgcdData.PGYJ = detail.value
     },
@@ -158,17 +162,34 @@ Page({
         this.data.zbgcdData.CZWT = detail.value
     },
 
-    // 自评报告 指标观测点 显示隐藏
-    zpbgShow() {
+    // 他评报告 指标观测点 显示隐藏
+    zpbgShow(e) {
         this.setData({ zpbgShow: !this.data.zpbgShow })
+        if (e && e.currentTarget.dataset.index) {
+            let i = e.currentTarget.dataset.index
+            app.$kwz.ajax.ajaxUrl({
+                url: 'ddpg_mb/doSelectPgrByPrimaryKey',
+                type: 'POST',
+                data: {
+                    PGR_ID: this.data.tbbg[i].PGR_ID,
+                },
+                page: this,
+                then(response) {
+                    this.setData({
+                        tpbgData: response.datas,
+                        tpbgI: i,
+                    })
+                }
+            })
+        }
     },
     zbgcdShow(e) {
         this.setData({ zbgcdShow: !this.data.zbgcdShow })
         if (e && e.currentTarget.dataset.index) {
             let i = e.currentTarget.dataset.index
             this.setData({ zbgcdIdex: i })
-            if (i.length == 2) {
-                let zbgcdData = this.data.xmpg.children[i[0]].children[i[1]]
+            if (i.length == 3) {
+                let zbgcdData = this.data.xmpg.children[i[0]].children[i[1]].PG_LIST[i[2]]
                 zbgcdData.exps = []
                 zbgcdData.EXPRESSION = typeof zbgcdData.EXPRESSION == 'string' ? JSON.parse(zbgcdData.EXPRESSION) : zbgcdData.EXPRESSION
                 for (let zi in zbgcdData.EXPRESSION) {
@@ -181,7 +202,7 @@ Page({
                     zbgcdData: zbgcdData
                 })
             } else {
-                let zbgcdData = this.data.xmpg.children[i[0]].children[i[1]].children[i[2]]
+                let zbgcdData = this.data.xmpg.children[i[0]].children[i[1]].children[i[2]].PG_LIST[i[2]]
                 zbgcdData.EXPRESSION = typeof zbgcdData.EXPRESSION == 'string' ? JSON.parse(zbgcdData.EXPRESSION) : zbgcdData.EXPRESSION
                 for (let zi in zbgcdData.EXPRESSION) {
                     zbgcdData.exps.push({

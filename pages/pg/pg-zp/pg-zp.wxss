@@ -10,6 +10,7 @@
     align-items: center;
     justify-content: center;
     font-size: 32rpx;
+
 }
 /* 评估 */
 .pg-body{
@@ -18,9 +19,15 @@
 .pg-body-title{
     text-align: center;
     font-size: 30rpx;
+    margin-top: 20rpx;
+
 }
 .pg-body button{
     background: #1dc1fc;
+}
+.pg-yjbt {
+    font-size: 30rpx;
+    margin-top: 10rpx;
 }
 .pg-ejbt{
    margin: 10rpx

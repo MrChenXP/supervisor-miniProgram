@@ -6,7 +6,7 @@
                 <kw-list-cell title="学校代码">
                     <view slot="rightNote">
                         <view class="list-right-input">
-                            <input value="{{pageParam.ORG_DM}}" placeholder="请输入学校代码" bindinput="inputXm" />
+                            <input value="{{pageParam.ORG_DM}}" placeholder="请输入学校代码" bindinput="inputXxdm" />
                         </view>
                     </view>
                 </kw-list-cell>

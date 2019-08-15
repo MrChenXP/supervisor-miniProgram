@@ -506,13 +506,11 @@ const getCommonMenus = (callback, page) => {
 const hasFunc = (comonProductsTree = [], userReadPro = []) => {
     let commonMenu = []
     if (comonProductsTree.length > 0) {
-        // products.js里的json数据
-        // let productConfig = consts.getProductConfig()
-        let workspace = consts.getProductConfig().workspace
+        let productConfig = consts.getProductConfig()
+        let workspace = productConfig.workspace
         if (typeof userReadPro === 'string') {
             userReadPro = userReadPro.split(',')
         }
-        
         for (let i = 0; i < comonProductsTree.length; i++) {
             for (let j = 0; j < workspace.length; j++) {
                 if (comonProductsTree[i].PRO_ID === workspace[j].proId) {
@@ -520,7 +518,9 @@ const hasFunc = (comonProductsTree = [], userReadPro = []) => {
                     let comonChildrenFun = comonProductsTree[i].children
                     for (let m = 0; m < childrenFun.length; m++) {
                         for (let n = 0; n < comonChildrenFun.length; n++) {
-                            if (childrenFun[m].funId === comonChildrenFun[n].FUN_ID &&
+                            // if (childrenFun[m].funId === comonChildrenFun[n].FUN_ID &&
+                            // 这里改成proid判断，因为会有相同的funId（功能复用导致的）
+                            if (childrenFun[m].proId === comonChildrenFun[n].PRO_ID &&
                                 userReadPro.length > 0) {
                                 for (let k = 0; k < userReadPro.length; k++) {
                                     if (userReadPro[k] === comonChildrenFun[n].PRO_ID) {

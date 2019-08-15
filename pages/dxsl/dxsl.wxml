@@ -1,0 +1,45 @@
+<!--pages/dxsl/dxsl.wxml-->
+<view class='content'>
+    <!-- 搜索 -->
+    <view class="kw-searchs">
+        <kw-search bindconfirm="searchList">
+            <view>
+                <kw-list-cell title="作者">
+                    <view slot="rightNote">
+                        <view class="list-right-input">
+                            <input value="{{pageParam.AUTHOR}}" placeholder="请输入作者" bindinput="inputZz" />
+                        </view>
+                    </view>
+                </kw-list-cell>
+                <picker range="{{searchCondition.JGLB}}" range-key="DMMX_MC" bindchange="changeJg">
+                    <kw-list-cell title="机构" right-note="{{pageParam.ORG_MC}}"></kw-list-cell>
+                </picker>
+            </view>
+        </kw-search>
+    </view>
+    
+    <checkbox-group class="lists">
+        <view>
+            <!-- 单项列表 -->
+            <view class="list" wx:for="{{dataList}}" wx:key="index" bindtap='toPreview' data-id='{{item.CONTENT_ID}}'>
+                <view class="info">
+                    <view>
+                        {{item.SHORT_TITLE}}
+                    </view>
+                    <view class="clearfix time">
+                        <view class="fl">{{item.AUTHOR}}</view>
+                        <view class="fr">排序时间：{{item.SORT_DATE || "未填写"}}</view>
+                    </view>
+                    <view class="clearfix time">
+                        <view class="fl">业务时间：{{item.YWSJ || "未填写"}}</view>
+                        <view class="fr">归属机构：{{item.ORG_MC || "未填写"}}</view>
+                    </view>
+                    <view class="clearfix time">
+                        <view class="fl">置顶截止日期：{{item.TOP_LEVELDATE || "未填写"}}</view>
+                    </view>
+                </view>
+            </view>
+            <i-load-more tip="{{loadMore.text}}" loading="{{ loadMore.show }}" />
+        </view>
+    </checkbox-group>
+</view>

@@ -37,6 +37,7 @@
         <kw-list-cell wx:for="{{products}}" wx:key="index" title="{{item.PRO_MC}}" note="{{item.PRO_DESC}}" red-dot="{{redDot[item.PRO_ID]}}" thumb="{{item.THUMB}}" link="{{item.LINK}}" borderBottom="{{index != products.length-1}}"></kw-list-cell>
     </view>
 
+    <!-- 待办弹出选择框 -->
     <i-modal title="我的待办" visible="{{wddbShow}}" action-mode="{{vertical}}" show-ok="{{false}}" bind:cancel="wddbShow">
         <view class='wddb-list' wx:if="{{tips.zggz}}" bindtap='toZggz'>
             整改工作

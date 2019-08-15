@@ -30,7 +30,9 @@
         "pages/my/qhjg/qhjg",
         "pages/my/xgmm/xgmm",
         "pages/pg/pg-zp/pg-zp",
-        "pages/pg/pg-dp/pg-dp"
+        "pages/pg/pg-dp/pg-dp",
+        "pages/dxsl/dxsl",
+        "pages/dxsl/dxsl-preview/dxsl-preview"
     ],
     "window": {
         "navigationBarTextStyle": "white",

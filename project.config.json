@@ -41,20 +41,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
 					"name": "workspace",
 					"pathName": "pages/workspace/workspace",
 					"query": "",
-					"scene": null
-				},
-				{
-					"id": 1,
-					"name": "dp",
-					"pathName": "pages/pg/pg-dp/pg-dp",
-					"query": "PID=881F0C0A36E03EA1E0530100007F8C0D&MBID=b8bf6985e6b743c4bb10f7daa03211bb&PCMC=龙岗区2019年春季学校开学工作督导检查99&STATU=0&PCID=8FFAF93286E35024E0530100007F1F6E&YWLX=DDGZAP&PGMC=他评&MB_ORG_ID=078988715443472bb27fb4a425f8db9c&MB_ORG_MC=白云区&XH=2&PGR_ID=8FFAF93286EA5024E0530100007F1F6E",
 					"scene": null
 				},
 				{
@@ -76,6 +69,13 @@
 					"name": "dxsl",
 					"pathName": "pages/dxsl/dxsl",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "dxsl-preview",
+					"pathName": "pages/dxsl/dxsl-preview/dxsl-preview",
+					"query": "CONTENT_ID=79F7D16DB01A700DE0530100007F5265&IS_RECORD=",
 					"scene": null
 				}
 			]

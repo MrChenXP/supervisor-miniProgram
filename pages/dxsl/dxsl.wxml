@@ -21,7 +21,7 @@
     <checkbox-group class="lists">
         <view>
             <!-- 单项列表 -->
-            <view class="list" wx:for="{{dataList}}" wx:key="index" bindtap='toPreview' data-id='{{item.CONTENT_ID}}'>
+            <view class="list" wx:for="{{dataList}}" wx:key="index" bindtap='toPreview' data-id='{{item.CONTENT_ID}}' data-isrecord="{{item.IS_RECORD}}">
                 <view class="info">
                     <view>
                         {{item.SHORT_TITLE}}

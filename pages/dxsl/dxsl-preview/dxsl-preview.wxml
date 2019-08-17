@@ -1,2 +1,62 @@
-<!--pages/dxsl/dxsl-preview/dxsl-preview.wxml-->
-<text>pages/dxsl/dxsl-preview/dxsl-preview.wxml</text>
+<view class='content dxsl-preview'>
+    <!-- 头部信息 -->
+    <view class="head">
+        <view class="title">{{data.TITLE}}</view>
+        <view class="time">
+            <text class="time-title">作者：{{data.AUTHOR || ""}}</text>
+            <text class="time-title">来源：{{data.LY || "本站原创"}}</text>
+            <!-- <text class="time-title">浏览次数：{{data.DJS}}</text> -->
+        </view>
+        <view class="time">
+            <text class="time-title">时间：{{data.YWSJ || ""}}</text>
+        </view>
+        <view class="time">
+            <text class="time-title">摘要：{{data.SHORT_DESC || ""}}</text>
+        </view>
+    </view>
+    <!-- 正文 -->
+    <view class="main-text">
+        <rich-text nodes="{{data.TXT}}"></rich-text>
+        <view class="color-999">{{data.FJMC || ""}}</view>
+    </view>
+
+    <!-- 添加评论按钮 -->
+    <button class="dxsl-preview-tjpl" type="primary" size="mini" bindtap="tjpl">
+        <i-icon type="message" size="20" />
+        添加评论
+    </button>
+
+    <!-- 评论列表 -->
+    <view class="lists">
+        <view class="list" wx:for="{{dataList}}" wx:key="index">
+            <view class="color-blue text-bold">{{item.REPLAY_USER_NAME}}</view>
+            <view class="color-999">{{item.REPLY_TIME}}</view>
+            <rich-text nodes="{{item.REPLY_CONTENT}}"></rich-text>
+            <view wx:if="{{item.TO_REPLY_ID}}" class="bhfnr">
+                <text class="color-blue">@{{item.REPLAY_USER_NAME2}}：</text>
+                <rich-text nodes="{{item.REPLY_CONTENT2}}"></rich-text>
+            </view>
+            <view class="hfzc">
+                <button bindtap="hf" bindtap="hf" data-i="{{index}}">回复</button>
+                <button bindtap="zan" data-id="{{item.REPLY_ID}}" data-i="{{index}}">
+                    <kw-icon type="kw-zan" size="20" color="black"></kw-icon>赞({{item.UPS || "0"}})
+                </button>
+                <button bindtap="cai" data-id="{{item.REPLY_ID}}"  data-i="{{index}}">
+                    <kw-icon type="kw-cai" size="14" color="black"></kw-icon>踩({{item.DOWNS || "0"}})
+                </button>
+            </view>
+        </view>
+        <i-load-more tip="{{loadMore.text}}"  loading="{{ loadMore.show }}" />
+    </view>
+
+    <!-- 富文本弹框 -->
+    <view class='fwb' hidden="{{fwbShow}}">
+        <view class="fwb-mask" catchtap='fwbShow' ></view>
+        <view class="fwb-content">
+            <kw-editor value="{{fwbValue}}"  bindinput="fwbInput"></kw-editor>
+            <view class="tj">
+                <button bindtap="tj">提交</button>
+            </view>
+        </view>
+    </view>
+</view>

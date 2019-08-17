@@ -2,6 +2,8 @@
 const app = getApp()
 Page({
     data: {
+        // 预览权限
+        hasYlAuth: false,
         // 搜索参数
         searchCondition:{
             // 机构列表
@@ -30,6 +32,7 @@ Page({
     },
     onLoad() {
         this.initData()
+        this.has()
     },
     onReachBottom() {
         this.data.loadMore.show = true
@@ -101,8 +104,14 @@ Page({
                     dataList: this.data.dataList,
                     loadMore: this.data.loadMore,
                 })
-                console.log(this.data.dataList)
             }
+        })
+    },
+    has(){
+        app.$kwz.hasAuth('jc_content/doSelectByPrimary/DXSL', (auth) => {
+            auth ? this.setData({
+                hasYlAuth: auth
+            }) : ""
         })
     },
     // 修改 作者
@@ -126,10 +135,14 @@ Page({
     },
     // 去预览
     toPreview(e) {
+        if(!this.data.hasYlAuth){
+            return
+        }
         let id = e.currentTarget.dataset.id
+        let IS_RECORD = e.currentTarget.dataset.isrecord || ""
         if (id) {
             wx.navigateTo({
-                url: '/pages/dxsl/dxsl-preview/dxsl-preview?CONTENT_ID=' + id
+                url: '/pages/dxsl/dxsl-preview/dxsl-preview?CONTENT_ID=' + id + "&IS_RECORD=" + IS_RECORD
             })
         }
     },

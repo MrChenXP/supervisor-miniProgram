@@ -1,3 +1,9 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+      "i-icon": "/dist/iview/icon/index",
+      "i-load-more": "/dist/iview/load-more/index",
+      "kw-icon": "/dist/kw-ui/kw-icon/kw-icon",
+      "kw-editor": "/dist/kw-ui/kw-editor/kw-editor"
+
+  }
 }

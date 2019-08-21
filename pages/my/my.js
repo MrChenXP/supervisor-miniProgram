@@ -110,12 +110,12 @@ Page({
             type: 'POST',
             page: this,
             data: {
-                CONTENT_ID: res.CONTENT_ID,
-                SIGNAL: res.SIGNAL,
-                TIME: TIME,
-                U_ID: this.data.user.uid,
-                STARTTIME: res.STARTTIME,
-                ENDTIME: res.ENDTIME,
+                dxPxId: res.dxPxId,
+                signal: res.signal,
+                endTime: res.endTime,
+                startTime: res.startTime,
+                userId: this.data.user.uid,
+                time:TIME
             },
             then(response) {
                 let data = response.datas

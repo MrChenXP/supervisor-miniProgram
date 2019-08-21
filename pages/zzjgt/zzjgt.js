@@ -27,7 +27,6 @@ Page({
     },
     // 查看督学/学校 关闭打开
     oneCkdx({target}) {
-        console.log(target)
         this.setData({
             ckdxShow: !this.data.ckdxShow,
         })

@@ -1,10 +1,17 @@
 // kwz常量配置
 
+import productConfig from './products'
+
 // 请求路径
 const BASE_URL = 'http://www.dd.com:8080'
 // const BASE_URL = 'https://app.qgjydd.cn' // 高新网 龙岗
 
-// session的cookie名称
+//访问的后缀
+// const BASE_VISIT = ''  //  高新
+const BASE_VISIT = '/visittest' // 测试
+// const BASE_VISIT = '/visitlg'  //  龙岗
+
+// session的cookie名称 部署前要看下session名字(visit.jsp看)。因为运维会经常换session名字
 const SESSION_NAME = 'JSESSIONID' // 本地
 // const SESSION_NAME = 'KSESSIONID1' // 高新 龙岗
 
@@ -27,6 +34,13 @@ const DEFAULT_REQUEST_HEADER = {
  */
 const getBaseUrl = () => {
     return BASE_URL
+}
+
+/**
+ * 获取请求的域名后缀
+ */
+const getBaseVisit = () => {
+    return BASE_VISIT
 }
 
 /**
@@ -64,8 +78,6 @@ const getDefaultRequestHeader = () => {
     return JSON.parse(JSON.stringify(DEFAULT_REQUEST_HEADER))
 }
 
-import productConfig from './products'
-
 /**
  * 获取产品配置信息
  */
@@ -83,5 +95,5 @@ const getUploadImgUrl = () => {
 }
 
 export default {
-    getBaseUrl, isDev, isProxy, getProxyTag, getSessionName, getDefaultRequestHeader, getProductConfig, getUploadImgUrl
+    getBaseUrl, getBaseVisit, isDev, isProxy, getProxyTag, getSessionName, getDefaultRequestHeader, getProductConfig, getUploadImgUrl
 }

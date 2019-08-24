@@ -329,9 +329,10 @@ const setSession = (response) => {
  * @param {object} page
  */
 const initVisit = (callback, page) => {
+    let url = consts.getBaseVisit() || '/visit.jsp';
     _ajaxinited = false
     weixin.request({
-        url: '/visit.jsp',
+        url: url,
         success(data) {
             setSession(data)
             initToken(callback, page)

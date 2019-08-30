@@ -78,3 +78,59 @@ swiper {
 .changeBoder::after{
   border-bottom: #d5d4d4 dashed 2rpx;
 } 
+
+/* 选择地区 */
+.xzdq {
+  position: fixed;
+  left: 0;
+  width: 750rpx;
+  padding: 80rpx 30rpx;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.2);
+  height: 100vh;
+  top: 0;
+}
+.xzdq-mask {
+  z-index: 1000;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  height: 100vh;
+  top: 0;
+}
+
+.xzdq-content {
+  position: relative;
+  z-index: 1001;
+  margin: auto;
+  width: 100%;
+  background: white;
+  -webkit-box-shadow: 0 0 15rpx 5rpx darkgray;
+          box-shadow: 0 0 15rpx 5rpx darkgray;
+  border-radius: 10rpx;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  overflow: auto;
+}
+.xzdq-title{
+    text-align: center;
+    padding: 20rpx;
+    position: sticky;
+    top: 0;
+    width: 690rpx;
+}
+.xzdq-dq{
+    width: 230rpx;
+    height: 230rpx;
+    padding: 20rpx;
+    text-align: center;
+    line-height: 190rpx;
+}
+.xzdq-content .save{
+    position: sticky;
+    bottom: 0;
+    margin-bottom: 0;
+    width: 690rpx;
+
+}

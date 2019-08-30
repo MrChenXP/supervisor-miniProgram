@@ -17,7 +17,12 @@ Component({
         isInput: {
             type: Boolean,
             value: true
-        }
+        },
+        // 是否禁用搜索
+        disabled: {
+            type: Boolean,
+            value: false
+        },
     },
     data: {
         ifFocus: false, // 是否点击输入框
@@ -26,6 +31,9 @@ Component({
     methods: {
         //点击输入框
         tapFocus() {
+            if(this.data.disabled){
+                return
+            }
             this.setData({
                 ifFocus: true,
             })

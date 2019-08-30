@@ -48,6 +48,7 @@
 }
 .kw-gzjh-select-zcxj{
     text-align: right;
+    width: auto !important;
 }
 .kw-gzjh-select-radio-label {
   text-align: left;

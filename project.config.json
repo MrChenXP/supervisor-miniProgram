@@ -15,7 +15,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.7.0",
-	"appid": "wx68d34bd321ef986c",
+	"appid": "wx024df8615282267c",
 	"projectname": "kwm-mp",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -41,7 +41,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 7,
 			"list": [
 				{
 					"id": -1,
@@ -65,17 +65,38 @@
 					"scene": null
 				},
 				{
-					"id": 4,
-					"name": "dxsl",
-					"pathName": "pages/dxsl/dxsl",
+					"id": 3,
+					"name": "pgzb",
+					"pathName": "pages/pgzb/pgzb",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 4,
-					"name": "dxsl-preview",
-					"pathName": "pages/dxsl/dxsl-preview/dxsl-preview",
-					"query": "CONTENT_ID=79F7D16DB01A700DE0530100007F5265&IS_RECORD=",
+					"name": "pgtb",
+					"pathName": "pages/pgzb/pgtb/pgtb",
+					"query": "pgId=72cc152f2ee74ce48c1f07245037e072&pId=",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pgqk",
+					"pathName": "pages/pgzb/pgqk/pgqk",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "gzjh-add",
+					"pathName": "pages/gzjh/gzjh-add/gzjh-add",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "xcdd-add",
+					"pathName": "pages/xcdd/xcdd-add/xcdd-add",
+					"query": "",
 					"scene": null
 				}
 			]

@@ -4,18 +4,29 @@
     <view class="kw-gzjh-select-mask" bindtap="close"></view>
     <!-- 搜索 -->
     <view class="kw-gzjh-select-content">
-        <kw-search placeholder="请输入随行督学姓名" bindconfirm="keywordConfirm"></kw-search>
+        <kw-search placeholder="请输入随行督学姓名" bindconfirm="keywordConfirm" disabled="{{ckyxShow}}"></kw-search>
         <scroll-view scroll-y>
-            <label class="kw-gzjh-select-zcxj"><checkbox checked="{{flag}}" bindtap="changeZcxj"></checkbox>只查下级</label>
-            <checkbox-group bindchange="radioChange">
+            <view class="clearfix">
+                <label class="kw-gzjh-select-zcxj fl color-blue" bindtap="ckyxShow"><checkbox checkid="{{ckyxShow}}" ></checkbox>查看已选</label>
+                <label class="kw-gzjh-select-zcxj fr color-blue" bindtap="changeZcxj"><checkbox checked="{{flag}}" disabled="{{ckyxShow}}"></checkbox>只查下级</label>
+            </view>
+            <!-- 所有督学列表 -->
+            <checkbox-group bindchange="radioChange" hidden="{{ckyxShow}}" data-type="">
                 <label wx:for='{{loadDataList}}' wx:key="index">
-                    <checkbox value="{{item.value}}" />
+                    <checkbox value="{{item.value}}" checked="{{item.checked}}"/>
+                    <view class="kw-gzjh-select-radio-label">{{item.name}}</view>
+                </label>
+            </checkbox-group>
+            <!-- 查看已选列表 -->
+            <checkbox-group bindchange="radioChange" hidden="{{!ckyxShow}}" data-type="ckyx">
+                <label wx:for='{{yxList}}' wx:key="index">
+                    <checkbox value="{{item.value}}" checked="{{item.checked}}"/>
                     <view class="kw-gzjh-select-radio-label">{{item.name}}</view>
                 </label>
             </checkbox-group>
         </scroll-view>
         <view class="save">
-            <button class="fl" bindtap='loadSxdx' disabled="{{!moreName}}">{{moreName ? "点击加载更多":"已无更多数据"}}</button>
+            <button class="fl" bindtap='loadSxdx' disabled="{{!moreName || ckyxShow}}">{{moreName ? "点击加载更多":"已无更多数据"}}</button>
             <button bindtap="confirm" class="fr">确定</button>
         </view>
     </view>

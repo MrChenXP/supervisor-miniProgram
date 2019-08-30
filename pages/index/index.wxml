@@ -30,7 +30,7 @@
     </view>
 
     <!-- 选择地区 -->
-    <view class="xzdq" wx:if="{{xzdqShow}}">
+    <view class="xzdq" wx:if="{{xzdqShow}}" catchtouchmove="catchtouchmove">
         <view class="xzdq-mask" catchtap='xzdqClose' ></view>
         <view class="xzdq-content">
             <view class="xzdq-title color-blue"><text>选择地区</text></view>

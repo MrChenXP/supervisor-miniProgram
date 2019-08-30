@@ -139,5 +139,6 @@ Page({
     //  选择地区显示隐藏
     xzdqClose(){
         this.setData({xzdqShow: !this.data.xzdqShow})
-    } 
+    },
+    catchtouchmove(){}
 })

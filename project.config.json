@@ -41,27 +41,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 7,
+			"current": 6,
 			"list": [
 				{
 					"id": -1,
 					"name": "workspace",
 					"pathName": "pages/workspace/workspace",
 					"query": "",
-					"scene": null
-				},
-				{
-					"id": 2,
-					"name": "xcdd",
-					"pathName": "pages/xcdd/xcdd",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 3,
-					"name": "xcdd-add",
-					"pathName": "pages/xcdd/xcdd-add/xcdd-add",
-					"query": "workplanId=901EC77DFD9230F3E0530100007FF1F9",
 					"scene": null
 				},
 				{
@@ -86,7 +72,7 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 4,
 					"name": "gzjh-add",
 					"pathName": "pages/gzjh/gzjh-add/gzjh-add",
 					"query": "",
@@ -94,9 +80,16 @@
 				},
 				{
 					"id": -1,
+					"name": "gzjh",
+					"pathName": "pages/gzjh/gzjh",
+					"query": "pgId=72cc152f2ee74ce48c1f07245037e072&pId=",
+					"scene": null
+				},
+				{
+					"id": -1,
 					"name": "xcdd-add",
 					"pathName": "pages/xcdd/xcdd-add/xcdd-add",
-					"query": "",
+					"query": "pgId=72cc152f2ee74ce48c1f07245037e072&pId=",
 					"scene": null
 				}
 			]

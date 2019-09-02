@@ -1,44 +1,52 @@
 <view class="content">
-  <kw-list-cell title="学校" rightNote="{{xx.name}}" bindtap="showSchool"></kw-list-cell>
-  <kw-list-cell title="随行督学" rightNote="{{sxdx.name}}" bindtap="showSxdx"></kw-list-cell>
-  <picker mode="date" value="{{ywsj}}" bindchange="changeYwsj"  start="{{startDate}}" end="{{endDate}}">
-	  <kw-list-cell title="时间" right-note="{{ywsj}}"></kw-list-cell>
-  </picker>
-  <picker range="{{sdList}}" value="{{sdValue.index}}" range-key="DMMX_MC" bindchange="changeSd" >
-    <kw-list-cell title="时段" rightNote="{{sdValue.name}}" ></kw-list-cell>
-  </picker>
-  <kw-list-cell isArrow="{{false}}" >
-  	<view>
-  		<view class="ddjs-head clearfix" bindtap="ddsxShow">
-  			<text class="fl">督导事项</text>
-  			<view class="fr" hidden="{{ddsxShow}}">
-  				<i-icon type="unfold" color="#c7c7c7" size="20"></i-icon>
-  			</view>
-  			<view class="fr" hidden="{{!ddsxShow}}">
-  				<i-icon type="packup" color="#c7c7c7" size="20"></i-icon>
-  			</view>
-  		</view>
-  		<view hidden="{{!ddsxShow}}" class="ddjs-body">
-        <kw-editor value="{{formData.ddsxTxt}}" bindinput="ddsxInput"></kw-editor>
-  		</view>
-  	</view>
-  </kw-list-cell>
-  <picker wx:if="{{ (contentId && zbValue.PID) || !contentId}}" disabled="{{contentId}}" range="{{zbList}}" bindchange="changeZb" range-key="CONTENT" value="{{zbValue.index}}" >
-    <kw-list-cell title="指标体系" rightNote="{{zbValue.CONTENT}}"></kw-list-cell>
-  </picker>
-  <picker wx:if="{{zbValue.PID}}" mode="date" value="{{start_time}}" bindchange="changeStart_time" >
-	  <kw-list-cell title="开始时间" right-note="{{start_time}}"></kw-list-cell>
-  </picker>
-  <picker wx:if="{{zbValue.PID}}" mode="date" value="{{end_time}}" bindchange="changeEnd_time" >
-	  <kw-list-cell title="结束时间" right-note="{{end_time}}"></kw-list-cell>
-  </picker>
-  <view class="save">
-    <button bindtap="saveGzjh">保存</button>
-  </view>
-  
-  <!-- 选择工作计划 学校 随行督学-->
-  <block>
-    <kw-school-select hidden="{{schoolShow}}" bindclose="showSchool" bindconfirm="confirmSchool">></kw-school-select>
-    <kw-sxdx-select hidden="{{sxdxShow}}" bindclose="showSxdx" bindconfirm="sxdxConfirm"></kw-sxdx-select>
-  </block>
+    <kw-list-cell title="学校" rightNote="{{xx.name}}" bindtap="showSchool"></kw-list-cell>
+    <kw-list-cell title="随行督学" rightNote="{{sxdx.name}}" bindtap="showSxdx"></kw-list-cell>
+    <picker mode="date" value="{{ywsj}}" bindchange="changeYwsj" start="{{startDate}}" end="{{endDate}}">
+        <kw-list-cell title="时间" right-note="{{ywsj}}"></kw-list-cell>
+    </picker>
+    <picker range="{{sdList}}" value="{{sdValue.index}}" range-key="DMMX_MC" bindchange="changeSd">
+        <kw-list-cell title="时段" rightNote="{{sdValue.name}}"></kw-list-cell>
+    </picker>
+    <kw-list-cell isArrow="{{false}}">
+        <view>
+            <view class="ddjs-head clearfix" bindtap="ddsxShow">
+                <text class="fl">督导事项</text>
+                <view class="fr" hidden="{{ddsxShow}}">
+                    <i-icon type="unfold" color="#c7c7c7" size="20"></i-icon>
+                </view>
+                <view class="fr" hidden="{{!ddsxShow}}">
+                    <i-icon type="packup" color="#c7c7c7" size="20"></i-icon>
+                </view>
+            </view>
+            <view hidden="{{!ddsxShow}}" class="ddjs-body">
+                <kw-editor value="{{formData.ddsxTxt}}" bindinput="ddsxInput"></kw-editor>
+            </view>
+        </view>
+    </kw-list-cell>
+    <!-- 指标体系 -->
+    <picker wx:if="{{ (contentId && zbValue.pId) || !contentId}}" disabled="{{contentId}}" range="{{zbList}}" bindchange="changeZb" range-key="content" value="{{zbValue.index}}">
+        <kw-list-cell title="指标体系" rightNote="{{zbValue.content}}"></kw-list-cell>
+    </picker>
+    <picker wx:if="{{zbValue.pId}}" mode="date" value="{{start_time}}" bindchange="changeStart_time">
+        <kw-list-cell title="开始时间" right-note="{{start_time}}"></kw-list-cell>
+    </picker>
+    <picker wx:if="{{zbValue.pId}}" mode="date" value="{{end_time}}" bindchange="changeEnd_time">
+        <kw-list-cell title="结束时间" right-note="{{end_time}}"></kw-list-cell>
+    </picker>
+    <picker wx:if="{{zbValue.pId && !contentId}}" range="{{pglxList}}" bindchange="changePglx" range-key="DMMX_MC" value="{{pglxValue.index}}">
+        <kw-list-cell title="评估类型" rightNote="{{pglxValue.name}}"></kw-list-cell>
+    </picker>
+    <picker wx:if="{{pglxValue.value == 10 }}"  range="{{zpryList}}" bindchange="changeZptb" range-key="uUsername" value="{{zpryValue.index}}">
+        <kw-list-cell title="自评填报:{{xx.name}}" rightNote="{{zpryValue.name}}"></kw-list-cell>
+    </picker>
+
+    <view class="save">
+        <button bindtap="saveGzjh">保存</button>
+    </view>
+
+    <!-- 选择工作计划 学校 随行督学-->
+    <block>
+        <kw-school-select hidden="{{schoolShow}}" bindclose="showSchool" bindconfirm="confirmSchool">></kw-school-select>
+        <kw-sxdx-select hidden="{{sxdxShow}}" bindclose="showSxdx" bindconfirm="sxdxConfirm"></kw-sxdx-select>
+    </block>
 </view>

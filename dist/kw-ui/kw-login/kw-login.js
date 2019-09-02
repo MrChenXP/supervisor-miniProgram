@@ -8,7 +8,7 @@ Component({
     // 登录账号
     userName: 'yinfang',
     // 登录密码 
-    passWord: 'a1234567',
+    passWord: '1234qwer',
     // 验证码输入框的值
     vcode: '',
     // 验证码图片地址

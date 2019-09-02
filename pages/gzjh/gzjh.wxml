@@ -51,9 +51,9 @@
                         {{item.CONTENT || ""}}
                     </view>
                     <view class="clearfix status">
-                        <view class="fr" wx:if="{{item.BZID && (item.PGLX=='1'||item.PGLX=='3') && item.MB_ORG_ID==user.orgid}}" catchtap='doZp' data-bzid='{{item.BZID}}' data-mb_org_id='{{item.MB_ORG_ID}}'>
+                        <!-- <view class="fr" wx:if="{{item.BZID && (item.PGLX=='1'||item.PGLX=='3') && item.MB_ORG_ID==user.orgid}}" catchtap='doZp' data-bzid='{{item.BZID}}' data-mb_org_id='{{item.MB_ORG_ID}}'>
                             <kw-tag type="border" color="blue" circle="{{true}}">自评</kw-tag>
-                        </view>
+                        </view> -->
                         <view class="fr" wx:if="{{item.STATUS == '1'}}" catchtap='doDispose' data-id='{{item.CONTENT_ID}}'>
                             <kw-tag type="border" color="blue" wx:if="{{hasClAuth}}" circle="{{true}}">处理</kw-tag>
                         </view>

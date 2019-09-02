@@ -11,7 +11,7 @@ Page({
             size: '16'
         },
         // 选择地区显示隐藏
-        xzdqShow: true,
+        xzdqShow: false,
         // 轮播图图片路径
         newsImaUrl: [],
         // 标题栏文字

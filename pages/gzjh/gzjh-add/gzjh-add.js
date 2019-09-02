@@ -30,25 +30,18 @@ Page({
         // 时段列表
         sdList: [],
         // 时段值
-        sdValue: {
-            name: '',
-            value: '',
-            index: 0
-        },
+        sdValue: {name: '',value: '',index: 0},
         // 随行督学
-        sxdx: {
-            name: '',
-            value: '',
-            index: 0
-        },
-        // 评估标准名字列表 规定任务评价
-        zbList: [{ CONTENT: '选择指标体系', PID: ''}],
-        // 评估标准值
-        zbValue: {
-            CONTENT: '选择指标体系',
-            PID: '',
-            index: 0
-        },
+        sxdx: {name: '',value: '',index: 0},
+        // 评估标准名字列表  值
+        zbList: [{ content: '选择指标体系', pId: ''}],
+        zbValue: {content: '选择指标体系',pId: '',index: 0},
+        // 评估类型 列表 值
+        pglxList: [{ DMMX_CODE: "2", DMMX_MC: "督评" }, { DMMX_CODE: "10", DMMX_MC: "自评/督评"}],
+        pglxValue: { name: '', value: '', index: 0 },
+        // 自评人员列表 值
+        zpryList:[],
+        zpryValue: { name: '', value: '', index: 0 },
         // 批次id 后台取名为BZID
         BZID:"",
         // 督导事项显示隐藏
@@ -111,11 +104,8 @@ Page({
             this.setData({sdList: app.$kwz.copyJson(dms.DM_SD) || {}})
             // 指标体系列表
             app.$kwz.ajax.ajaxUrl({
-                url: 'dd_pgpc/doSelectPoint/DDGZAP',
+                url: 'dd/ddGp_batch_manage/selectAllViewPoint',
                 type: 'POST',
-                data: {
-                    'YWLX': 'DDGZAP',
-                },
                 page: this,
                 then(response) {
                     let datas = response.datas
@@ -123,8 +113,8 @@ Page({
                     if (datas && datas.length > 0) {
                         for (let i = 0; i < datas.length; i++) {
                             zbList.push({
-                                CONTENT: datas[i].CONTENT,
-                                PID: datas[i].PID
+                                content: datas[i].content,
+                                pId: datas[i].pId
                             })
                         }
                     }
@@ -146,8 +136,9 @@ Page({
     },
     // 加载工作安排 和 指标体系数据
     loadData() {
+        // 工作安排
         app.$kwz.ajax.ajaxUrl({
-            url: '/dd_gzap/doSelectByPrimary/DDGZAP',
+            url: '/dd_gzap/doSelectByPrimary/DDGZAP_GP',
             type: 'POST',   
             data: {
                 CONTENT_ID: this.data.contentId
@@ -185,18 +176,20 @@ Page({
             }
         })
         app.$kwz.ajax.ajaxUrl({
-            url: 'dd_gzap/doselectContentByContentId/DDGZAP',
+            url: 'dd_gzap/doselectContentByContentId/DDGZAP_GP',
             type: 'POST',
             data: {
                 CONTENT_ID: this.data.contentId
             },
             page: this,
             then(response) {
-                let zbValue = response.datas.map
+                let zbValue = {}
+                zbValue.content = response.datas.map.CONTENT
+                zbValue.pId = response.datas.map.PID
                 this.setData({
                     zbValue,
-                    start_time: zbValue.KSSJ,
-                    end_time: zbValue.JSSJ
+                    start_time: response.datas.map.KSSJ,
+                    end_time: response.datas.map.JSSJ
                 })
             }
         })
@@ -220,7 +213,7 @@ Page({
     // 新增
     doAdd() {
         app.$kwz.ajax.ajaxUrl({
-            url: '/dd_gzap/doAdd/DDGZAP',
+            url: 'dd/ddGpGzap/GzjhAdd/DDGZAP_GP',
             type: 'POST',
             data: {
                 CONTENT_TYPE: 'DDGZAP',
@@ -235,15 +228,18 @@ Page({
                     "minDate": ${this.data.minDate},
                     "maxDate": ${this.data.maxDate}
                 }]`,
-                TXT: this.data.formData.ddsxTxt,
+                TXT: this.data.formData.ddsxTxt || '',
                 REMARK: this.data.remark,
-                PID: this.data.zbValue.PID,
-                PNAME: this.data.zbValue.PID ? this.data.zbValue.CONTENT : "",
+                'newViewPointVo.pId': this.data.zbValue.pId || '', //指标id
+                PNAME: this.data.zbValue.pId ? this.data.zbValue.content : "",
+                type: this.data.pglxValue.value, // 评估类型
+                'selfBatchVo[0].selfAssessor': this.data.zpryValue.value, // 自评人员id
+                'selfBatchVo[0].orgId': this.data.xx.value, // 自评机构id
                 ORG_ID: this.data.xx.value,
                 XXMC0:this.data.xx.name,
                 AUTHOR: this.data.loginUser.name,
-                start_time: this.data.start_time, // 评估开始时间
-                end_time: this.data.end_time // 评估结束时间
+                startTime: this.data.start_time, // 评估开始时间
+                endTime: this.data.end_time // 评估结束时间
             },
             page: this,
             then(response) {
@@ -268,8 +264,8 @@ Page({
                 YWSJ: this.data.ywsj,
                 SD: this.data.sdValue.value,
                 TXT: this.data.formData.ddsxTxt,
-                PID: this.data.zbValue.PID ? this.data.zbValue.PID : "",
-                // PNAME: this.data.zbValue.PID ? this.data.zbValue.CONTENT : "",
+                PID: this.data.zbValue.pId ? this.data.zbValue.pId : "",
+                // PNAME: this.data.zbValue.pId ? this.data.zbValue.content : "",
                 minDate: this.data.minDate,
                 maxDate: this.data.maxDate,
                 start_time: this.data.start_time ? this.data.start_time : "", // 评估开始时间
@@ -292,20 +288,31 @@ Page({
         }
     },
     showSxdx(e) {
-        if (!(this.data.contentId && this.data.zbValue.PID)){
+        if (!(this.data.contentId && this.data.zbValue.pId)){
             this.setData({sxdxShow: !this.data.sxdxShow})
         }
     },
     ddsxShow() {
         this.setData({ddsxShow: !this.data.ddsxShow})
     },
-    // 学校确定
+    // 学校确定 并加载学校的用户(用于自评)
     confirmSchool(e) {
         this.data.xx.name = e.detail.data.name;
         this.data.xx.value = e.detail.data.value;
         this.setData({
             schoolShow: !this.data.schoolShow,
             xx: this.data.xx
+        })
+        app.$kwz.ajax.ajaxUrl({
+            url: 'dd/sjdd_jcuser/doList',
+            type: 'POST',
+            data: {
+                orgId: this.data.xx.value
+            },
+            page: this,
+            then(response) {
+                this.setData({zpryList: response.datas})
+            }
         })
     },
     // 随行督学确定
@@ -339,20 +346,47 @@ Page({
         let end_time = detail.value
         this.setData({end_time})
     },
-    // 选择搜索条件 => 时段 指标体系
+    // 更改 时段 指标体系 评估类型 指标填报
     changeSd(e) {
         let checkedOption = this.data.sdList[e.detail.value]
         this.data.sdValue.value = checkedOption.DMMX_CODE
         this.data.sdValue.name = checkedOption.DMMX_MC
         this.setData({sdValue: this.data.sdValue})
     },
-    // 更改评价标准
     changeZb({ detail}) {
         let index = detail.value
         this.data.zbValue.index = index
-        this.data.zbValue.CONTENT = this.data.zbList[index].CONTENT
-        this.data.zbValue.PID = this.data.zbList[index].PID
-        this.setData({ zbValue: this.data.zbValue })
+        this.data.zbValue.content = this.data.zbList[index].content
+        this.data.zbValue.pId = this.data.zbList[index].pId
+        this.data.pglxValue.name = '督导'
+        this.data.pglxValue.value = '2'
+        this.setData({ 
+            zbValue: this.data.zbValue,
+            pglxValue: this.data.pglxValue
+        })
+    },
+    changePglx({ detail }){
+        let checkedOption = this.data.pglxList[detail.value]
+        this.data.pglxValue.value = checkedOption.DMMX_CODE
+        this.data.pglxValue.name = checkedOption.DMMX_MC
+        if (this.data.pglxValue.value == 10) {
+            if (!this.data.xx.value){
+                app.$kwz.alert("未选择学校")
+            } else{
+                this.data.zpryValue.value = this.data.zpryList[0].uId
+                this.data.zpryValue.name = this.data.zpryList[0].uUsername 
+            }
+        }
+        this.setData({ 
+            pglxValue: this.data.pglxValue,
+            zpryValue: this.data.zpryValue
+        })
+    },
+    changeZptb({ detail }){
+        let checkedOption = this.data.zpryList[detail.value]
+        this.data.zpryValue.value = checkedOption.uId
+        this.data.zpryValue.name = checkedOption.uUsername
+        this.setData({ zpryValue: this.data.zpryValue })
     },
     // 督导纪实修改
     ddsxInput({detail}) {

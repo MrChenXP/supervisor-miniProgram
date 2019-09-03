@@ -32,7 +32,7 @@ Component({
     loadGzjh(type) {
       this.data.page = type == true ? 1 : this.data.page
       app.$kwz.ajax.ajaxUrl({
-        url: '/dd_gzap/doList/DDGZAP',
+        url: '/dd_gzap/doList/DDGZAP_GP',
         type: 'POST',
         data: {
           page: this.data.page,

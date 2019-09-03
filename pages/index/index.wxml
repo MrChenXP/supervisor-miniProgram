@@ -1,34 +1,45 @@
 <!--index.wxml-->
 <view class="content">
 
-  <!-- 轮播图 -->
-  <swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="3000"> 
-    <swiper-item wx:for="{{newsImaUrl}}" wx:key="index">
-      <image class='newsIma' src="{{item}}"></image>
-    </swiper-item>
-  </swiper>
-  <!-- 选项卡 -->
-  <view class="newBody">
-    <!-- 标题栏 -->
-    <scroll-view class="btList" scroll-x="{{true}}" >
-      <view wx:for="{{btList}}" wx:key="index" class="bt" bindtap="changeBt"
-        class="bt {{isActive == index ? 'active' : ''}}" data-index="{{index}}">{{item}}</view>
-    </scroll-view>
-    <!-- 列表区 -->
-    <scroll-view scroll-y="true" class="newsList">
-      <view wx:for="{{newsBtList}}" wx:key="{{i}}" hidden="{{!(i===isActive)}}" wx:for-index="i" wx:for-item="list">
-        <kw-list-cell extraIcon="{{extraIcon}}"  isArrow="{{false}}" kw-class="changeBoder" wx:for="{{list}}" wx:for-index="j" wx:for-item="news" wx:key="j" link="{{news.CONTENT_ID === '组织架构图' ?'/pages/zzjgt/zzjgt' : '/pages/news/news?CONTENT_ID=' + news.CONTENT_ID }}">
-          <view class="news">
-            <view class="newsBt">
-              {{news.TITLE}}
+    <!-- 轮播图 -->
+    <swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="3000">
+        <swiper-item wx:for="{{newsImaUrl}}" wx:key="index">
+            <image class='newsIma' src="{{item}}"></image>
+        </swiper-item>
+    </swiper>
+    <!-- 选项卡 -->
+    <view class="newBody">
+        <!-- 标题栏 -->
+        <scroll-view class="btList" scroll-x="{{true}}">
+            <view wx:for="{{btList}}" wx:key="index" class="bt" bindtap="changeBt" class="bt {{isActive == index ? 'active' : ''}}" data-index="{{index}}">{{item}}</view>
+        </scroll-view>
+        <!-- 列表区 -->
+        <scroll-view scroll-y="true" class="newsList">
+            <view wx:for="{{newsBtList}}" wx:key="{{i}}" hidden="{{!(i===isActive)}}" wx:for-index="i" wx:for-item="list">
+                <kw-list-cell extraIcon="{{extraIcon}}" isArrow="{{false}}" kw-class="changeBoder" wx:for="{{list}}" wx:for-index="j" wx:for-item="news" wx:key="j" link="{{news.CONTENT_ID === '组织架构图' ?'/pages/zzjgt/zzjgt' : '/pages/news/news?CONTENT_ID=' + news.CONTENT_ID }}">
+                    <view class="news">
+                        <view class="newsBt">
+                            {{news.TITLE}}
+                        </view>
+                        <view class="newsDate">{{news.YWSJSJ}}</view>
+                    </view>
+                </kw-list-cell>
+                <i-load-more wx:if="{{i != newsBtList.length-1}}" tip="{{loadMore[i].text}}" loading="{{ loadMore[i].show }}" />
             </view>
-            <view class="newsDate">{{news.YWSJSJ}}</view>
-          </view>
-        </kw-list-cell>
-        <i-load-more wx:if="{{i != newsBtList.length-1}}" tip="{{loadMore[i].text}}"  loading="{{ loadMore[i].show }}" />
-      </view>
-    </scroll-view>
-  </view>
+        </scroll-view>
+    </view>
 
-
+    <!-- 选择地区 -->
+    <view class="xzdq" wx:if="{{xzdqShow}}" catchtouchmove="catchtouchmove">
+        <view class="xzdq-mask" catchtap='xzdqClose' ></view>
+        <view class="xzdq-content">
+            <view class="xzdq-title color-blue"><text>选择地区</text></view>
+            <view wx:for="{{xzdqData}}" wx:key="index" class="xzdq-dq">
+                {{item}}
+            </view>
+            <view class="save" >
+                <button >确定</button>
+            </view>
+        </view>
+    </view>
 </view>

@@ -142,7 +142,7 @@ Page({
                         if (datas.GZAP_YWID) {
                             this.data.data.gzjhId = datas.GZAP_YWID
                             app.$kwz.ajax.ajaxUrl({
-                                url: '/dd_gzap/doSelectByPrimary/DDGZAP',
+                                url: '/dd_gzap/doSelectByPrimary/DDGZAP_GP',
                                 type: 'POST',
                                 data: {
                                     CONTENT_ID: datas.GZAP_YWID
@@ -265,7 +265,7 @@ Page({
     // 加载工作计划数据=>从工作计划列表点击去督导,传过来工作计划id,然后加载工作计划内容填充至督导纪实
     loadDdGzjh() {
         app.$kwz.ajax.ajaxUrl({
-            url: '/dd_gzap/doSelectByPrimary/DDGZAP',
+            url: '/dd_gzap/doselectContentByContentId/DDGZAP_GP',
             type: 'POST',
             data: {
                 CONTENT_ID: this.data.data.gzjhId
@@ -415,21 +415,24 @@ Page({
     },
     // 去督评
     toPgdp() {
-        app.$kwz.ajax.ajaxUrl({
-            url: 'ddpg_mb/selectListDp',
-            type: 'POST',
-            data: {
-                PCID: this.data.gzjh.BZID,
-                MB_ORG_ID: this.data.gzjh.ORG_ID
-            },
-            page: this,
-            then(response) {
-                let data = response.datas
-                let url = `PID=${data.PID}&MBID=${data.MBID}&PCMC=${data.PCMC}&STATU=${data.STATU}&PCID=${data.PCID}&YWLX=${data.YWLX}&PGMC=${data.PGMC}&MB_ORG_ID=${data.MB_ORG_ID}&MB_ORG_MC=${data.MB_ORG_MC}&XH=${data.XH}&PGR_ID=${data.PGR_ID}`
-                wx.navigateTo({
-                    url: `/pages/pg/pg-dp/pg-dp?` + url
-                })
-            }
+        // app.$kwz.ajax.ajaxUrl({
+        //     url: 'ddpg_mb/selectListDp',
+        //     type: 'POST',
+        //     data: {
+        //         PCID: this.data.gzjh.BZID,
+        //         MB_ORG_ID: this.data.gzjh.ORG_ID
+        //     },
+        //     page: this,
+        //     then(response) {
+        //         let data = response.datas
+        //         let url = `PID=${data.PID}&MBID=${data.MBID}&PCMC=${data.PCMC}&STATU=${data.STATU}&PCID=${data.PCID}&YWLX=${data.YWLX}&PGMC=${data.PGMC}&MB_ORG_ID=${data.MB_ORG_ID}&MB_ORG_MC=${data.MB_ORG_MC}&XH=${data.XH}&PGR_ID=${data.PGR_ID}`
+                // wx.navigateTo({
+                //     url: `/pages/pg/pg-dp/pg-dp?` + url
+                // })
+            // }
+        // })
+        wx.navigateTo({
+            url: `/pages/pgzb/pgtb/pgtb?pgId=`+this.data.gzjh.BZID
         })
     },
 })

@@ -87,7 +87,7 @@ Page({
         // 用户数据
         user:{}
     },
-    onLoad() {
+    onLoad(param) {
         this.has()
         this.initData()
     },
@@ -159,7 +159,7 @@ Page({
             this.data.pageParam.page = 1
         }
         app.$kwz.ajax.ajaxUrl({
-            url: '/dd_gzap/doPageList/DDGZAP',
+            url: '/dd_gzap/doPageList/DDGZAP_GP',
             type: 'POST',
             page: this,
             data: {

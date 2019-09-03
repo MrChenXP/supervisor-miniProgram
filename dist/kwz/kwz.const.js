@@ -3,13 +3,15 @@
 import productConfig from './products'
 
 // 请求路径
-const BASE_URL = 'http://www.dd.com:8080'
-// const BASE_URL = 'https://app.qgjydd.cn' // 高新网 龙岗
+// const BASE_URL = 'http://www.dd.com:8080'
+const BASE_URL = 'https://app.qgjydd.cn' // 高新网 龙岗 坪山
 
 //访问的后缀
-const BASE_VISIT = ''  //  空就拿visit.jsp
-// const BASE_VISIT = '/visittest' // 测试
+// const BASE_VISIT = ''  //  空就拿visit.jsp
+// const BASE_VISIT = '/visittest' // 本地测试省
 // const BASE_VISIT = '/visitlg'  //  龙岗
+const BASE_VISIT = '/visitpingshan'  //  坪山
+
 
 // session的cookie名称 部署前要看下session名字(visit.jsp看)。因为运维会经常换session名字
 const SESSION_NAME = 'JSESSIONID' // 本地

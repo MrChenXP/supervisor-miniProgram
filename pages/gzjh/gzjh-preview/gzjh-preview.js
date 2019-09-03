@@ -25,7 +25,7 @@ Page({
     // 初始化页面
     loadData() {
         app.$kwz.ajax.ajaxUrl({
-            url: '/dd_gzap/doSelectByPrimary/DDGZAP',
+            url: '/dd_gzap/doSelectByPrimary/DDGZAP_GP',
             type: 'POST',
             data: {
                 CONTENT_ID: this.data.contentId

@@ -22,7 +22,7 @@
             </view>
         </view>
     </kw-list-cell>
-    <kw-list-cell isArrow="{{false}}" wx:if="{{qpgShow}}">
+    <!-- <kw-list-cell isArrow="{{false}}" wx:if="{{qpgShow}}">
         <view>
             <view class="ddjs-head clearfix" >
                 <text class="fl">指标体系</text>
@@ -31,7 +31,7 @@
                 </view>
             </view>
         </view>
-    </kw-list-cell>
+    </kw-list-cell> -->
     <kw-list-cell isArrow="{{false}}">
         <view>
             <view class="ddjs-head clearfix" bindtap='changeZlcjShow'>

@@ -533,6 +533,10 @@ const hasFunc = (comonProductsTree = [], userReadPro = []) => {
                                         comonChildrenFun[n].THUMB = childrenFun[m].icon
                                         comonChildrenFun[n].PRO_MC = childrenFun[m].funMc || comonChildrenFun[n].PRO_MC
                                         comonChildrenFun[n].LINK = childrenFun[m].link
+                                        // 将业务类型加入LINK
+                                        if (comonChildrenFun[n].PRO_PATH_REAR) {
+                                            comonChildrenFun[n].LINK += '?YWLX=' + comonChildrenFun[n].PRO_PATH_REAR
+                                        }
                                         commonMenu.push(comonChildrenFun[n])
                                         break
                                     }

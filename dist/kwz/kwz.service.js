@@ -359,6 +359,8 @@ const initToken = (callback, page) => {
             if (response) {
                 // 存储加密等数据
                 store.setRelData(response.datas)
+                // 设置product.json
+                store.setProduct(response.datas)
                 _ajaxinited = true
                 util.cfp(callback, (option.page || (option.vue || this)), [response, option.option])
             }
@@ -507,7 +509,10 @@ const getCommonMenus = (callback, page) => {
 const hasFunc = (comonProductsTree = [], userReadPro = []) => {
     let commonMenu = []
     if (comonProductsTree.length > 0) {
-        let productConfig = consts.getProductConfig()
+        // 获取配置的产品树
+        // let productConfig = consts.getProductConfig()
+        let productConfig = store.getProduct()
+        console.log(productConfig)
         let workspace = productConfig.workspace
         if (typeof userReadPro === 'string') {
             userReadPro = userReadPro.split(',')

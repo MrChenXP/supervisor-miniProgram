@@ -14,6 +14,16 @@ const getStringFromStorage = (key, callback, app) => {
 }
 
 /**
+ * 从缓存中异步取出字符串值
+ * @param {string} key 缓存key
+ * @param {function} callback 回调函数 (data) => {...}
+ * @param {object} app 回调函数的this指向
+ */
+const getStringFromStorageSync = (key) => {
+  return weixin.getStringFromStorageSync(key)
+}
+
+/**
  * 从缓存中异步取出json对象
  * @param {string} key 缓存key
  * @param {function} callback 回调函数 (data) => {...}
@@ -65,6 +75,14 @@ const setObjectToStorageSync = (key, data) => {
   setStringToStorageSync(key, util.json2Str(data))
 }
 
+/**
+ * 将json同步取出
+ * @param {string} key 
+ */
+const getObjectFromStorageSync = (key) => {
+  return getStringFromStorageSync(key)
+}
+
 let _sessionId = ''
 
 const SESSIONID_STORAGE_KEY = 'SESSIONID'
@@ -101,6 +119,9 @@ let _jcIsencrypt = false
 // 是否登陆
 let _isLogin = true
 
+// product.json
+let _product = {}
+
 /**
  * 设置相关参数
  * @param {object} data 使用loadConfig返回的数据
@@ -112,6 +133,23 @@ const setRelData = (data) => {
     _jcIsencrypt = data.jc_isencrypt
     _isLogin = data.isLogin
   }
+}
+
+/**
+ * 设置product.json
+ * @param {object} data 
+ */
+const setProduct = (data) => {
+  _product = JSON.parse(data.product)
+
+  setObjectToStorageSync('_PRODUCT', _product)
+}
+
+const getProduct = (data) => {
+  if(!_product) {
+    _product = getObjectFromStorageSync('_PRODUCT')
+  }
+  return _product
 }
 
 /**
@@ -234,5 +272,5 @@ const getDms = (callback, app) => {
 export default {
   getStringFromStorage, getObjectFromStorage, setStringToStorage, setObjectToStorage,
   getSessionId, setSessionId, setRelData, getToken, isEncode, isEncrypt, isLogin, setLogin,
-  getLoginUser, setLoginUser, getCommonMenus, setCommonMenus, getDms, setDms
+  getLoginUser, setLoginUser, getCommonMenus, setCommonMenus, getDms, setDms, setProduct, getProduct
 }

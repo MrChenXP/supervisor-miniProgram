@@ -415,24 +415,32 @@ Page({
     },
     // 去督评
     toPgdp() {
-        // app.$kwz.ajax.ajaxUrl({
-        //     url: 'ddpg_mb/selectListDp',
-        //     type: 'POST',
-        //     data: {
-        //         PCID: this.data.gzjh.BZID,
-        //         MB_ORG_ID: this.data.gzjh.ORG_ID
-        //     },
-        //     page: this,
-        //     then(response) {
-        //         let data = response.datas
-        //         let url = `PID=${data.PID}&MBID=${data.MBID}&PCMC=${data.PCMC}&STATU=${data.STATU}&PCID=${data.PCID}&YWLX=${data.YWLX}&PGMC=${data.PGMC}&MB_ORG_ID=${data.MB_ORG_ID}&MB_ORG_MC=${data.MB_ORG_MC}&XH=${data.XH}&PGR_ID=${data.PGR_ID}`
-                // wx.navigateTo({
-                //     url: `/pages/pg/pg-dp/pg-dp?` + url
-                // })
-            // }
-        // })
-        wx.navigateTo({
-            url: `/pages/pgzb/pgtb/pgtb?pgId=`+this.data.gzjh.BZID
+        app.$kwz.ajax.ajaxUrl({
+            url: 'dd/ddGpEvaluation/doInitiateEvaluationPageList',
+            type: 'POST',
+            data: {
+                nbId: this.data.gzjh.BZID, // 批次id
+                evaluationOrgId: this.data.gzjh.ORG_ID, // 学校id
+                evaluationObjectType: "1",//被评估对象类型，默认1（机构），写死
+                type: "2",//评估类型，默认2 ，写死，督评
+                assessorId: this.data.loginUser.uid//用户ID
+            },
+            page: this,
+            then(response) {
+                let data = response.datas[0]
+                let url = `pgId=${data.pgId}&type=${data.type}&nbId=${data.nbId}&evaluationType=${data.evaluationObjectType}&evaluationOrgId=${data.evaluationOrgId}&name=${data.name}`
+                for (let i in data.assessorVoList){
+                    if (this.data.loginUser.uid == data.assessorVoList[i].assessorId){
+                        url += `&isReport=${data.assessorVoList[i].isReport}`
+                    }else{
+                        url += `&isReport=''`
+                    }
+                }
+                wx.navigateTo({
+                    url: '/pages/pgzb/pgtb/pgtb?'+url
+                })
+            }
         })
+        
     },
 })

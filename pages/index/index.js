@@ -23,12 +23,40 @@ Page({
         // 新闻的列表页数
         pageList: [],
         // 选择地区 数据
-        xzdqData: 15,
+        xzdqData: [
+            {
+                BASE_URL: 'http://www.dd.com:8080',
+                BASE_VISIT: '',
+                name: '本地主线'
+            },
+            {
+                BASE_URL: 'http://www.dd.com:8080',
+                BASE_VISIT: '/visittest',
+                name: '本地测试省'
+            },
+            {
+                BASE_URL: 'http://gd.qgjydd.cn',
+                BASE_VISIT: '/visitpingshan',
+                name: '坪山'
+            },
+            {
+                BASE_URL: 'http://gd.qgjydd.cn',
+                BASE_VISIT: '/visitpingshan',
+                name: '坪山'
+            }
+        ],
         // 加载更多的提示信息
         loadMore: []
     },
     // onLoad事件
     onLoad() {
+        if(!app.$kwz.getUrl()){
+            this.setData({
+                xzdqShow: true
+            })
+        } else{
+            app.$kwz.initVisit()
+        }
         this.loadIndexData()
     },
     // 上拉触底事件 加载下一页新闻
@@ -129,6 +157,16 @@ Page({
                 }
             }
         })
+    },
+    // 选择地区
+    xzdq(e){
+        let i =e.currentTarget.dataset.i
+        app.$kwz.setUrl({
+            BASE_URL: this.data.xzdqData[i].BASE_URL,
+            BASE_VISIT: this.data.xzdqData[i].BASE_VISIT
+        })
+        this.xzdqClose()
+        app.$kwz.initVisit()
     },
     // 更改标题栏选中值
     changeBt(e) {

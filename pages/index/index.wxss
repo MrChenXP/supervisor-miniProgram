@@ -110,7 +110,7 @@ swiper {
   border-radius: 10rpx;
   display: flex;
   flex-wrap: wrap;
-  height: 100%;
+  /* height: 100%; */
   overflow: auto;
 }
 .xzdq-title{

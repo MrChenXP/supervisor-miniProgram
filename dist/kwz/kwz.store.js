@@ -14,7 +14,7 @@ const getStringFromStorage = (key, callback, app) => {
 }
 
 /**
- * 从缓存中异步取出字符串值
+ * 从缓存中同步取出字符串值
  * @param {string} key 缓存key
  * @param {function} callback 回调函数 (data) => {...}
  * @param {object} app 回调函数的this指向
@@ -269,8 +269,25 @@ const getDms = (callback, app) => {
   }
 }
 
+/**
+ * 设置域名
+ * @param {object} url
+ */
+const setUrl = (url) =>{
+    setObjectToStorageSync('URL',url)
+}
+
+/**
+ * 获取域名
+ */
+const getUrl = () => {
+    let url =  getObjectFromStorageSync('URL')
+    return url
+}
+
 export default {
-  getStringFromStorage, getObjectFromStorage, setStringToStorage, setObjectToStorage,
-  getSessionId, setSessionId, setRelData, getToken, isEncode, isEncrypt, isLogin, setLogin,
-  getLoginUser, setLoginUser, getCommonMenus, setCommonMenus, getDms, setDms, setProduct, getProduct
+    getStringFromStorage, getObjectFromStorage, setStringToStorage, setObjectToStorage,
+    getSessionId, setSessionId, setRelData, getToken, isEncode, isEncrypt, isLogin, setLogin,
+    getLoginUser, setLoginUser, getCommonMenus, setCommonMenus, getDms, setDms, setProduct, getProduct,
+    setUrl, getUrl
 }

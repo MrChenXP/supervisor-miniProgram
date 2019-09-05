@@ -34,12 +34,12 @@
         <view class="xzdq-mask" catchtap='xzdqClose' ></view>
         <view class="xzdq-content">
             <view class="xzdq-title color-blue"><text>选择地区</text></view>
-            <view wx:for="{{xzdqData}}" wx:key="index" class="xzdq-dq">
-                {{item}}
+            <view wx:for="{{xzdqData}}" wx:key="index" class="xzdq-dq" bindtap="xzdq" data-i="{{index}}">
+                {{item.name}}
             </view>
-            <view class="save" >
+            <!-- <view class="save" >
                 <button >确定</button>
-            </view>
+            </view> -->
         </view>
     </view>
 </view>

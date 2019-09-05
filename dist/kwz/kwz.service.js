@@ -512,7 +512,6 @@ const hasFunc = (comonProductsTree = [], userReadPro = []) => {
         // 获取配置的产品树
         // let productConfig = consts.getProductConfig()
         let productConfig = store.getProduct()
-        console.log(productConfig)
         let workspace = productConfig.workspace
         if (typeof userReadPro === 'string') {
             userReadPro = userReadPro.split(',')
@@ -780,6 +779,8 @@ export default {
     cfp: util.cfp,
     getLoginUser: store.getLoginUser,
     setLoginUser: store.setLoginUser,
+    getUrl: store.getUrl,
+    setUrl: store.setUrl,
     loadDms,
     uploadImg,
     canUse: weixin.canUse,

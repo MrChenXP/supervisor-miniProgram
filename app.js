@@ -3,7 +3,9 @@ import kwz from './dist/kwz/kwz.service'
 import weixin from './dist/kwz/kwz.weixin'
 App({
   onShow: function () {
-    // kwz.initVisit()
+      if (kwz.getUrl()) {
+          kwz.initVisit()
+      }
   },
   $kwz: {...kwz, ...weixin}
 })

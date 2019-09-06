@@ -65,22 +65,17 @@ Page({
                         case '2': tmp.dataSource = '工作计划';break;
                         default: tmp.dataSource = '';break;
                     }
-                    switch(tmp.type){
-                        case '1': tmp.typeName = '自评';break;
-                        case '2': tmp.typeName = '督评';break;
-                        default: tmp.typeName = '';break;
-                    }
                     switch(tmp.isReport){
-                        case '0': tmp.isReportName = '上报';break;
+                        case '0': tmp.isReportName = '已上报';break;
                         case '1': tmp.isReportName = '未上报';break;
                         default: tmp.isReportName = '';break;
                     }
                     switch(tmp.calculationState){
-                        case '-1': tmp.isReport = '计算失败';break;
-                        case '0': tmp.isReport = '未开始计算';break;
-                        case '1': tmp.isReport = '计算中';break;
-                        case '2': tmp.isReport = '计算成功';break;
-                        default: tmp.isReport = '';break;
+                        case '-1': tmp.calculationState = '计算失败';break;
+                        case '0': tmp.calculationState = '未开始计算';break;
+                        case '1': tmp.calculationState = '计算中';break;
+                        case '2': tmp.calculationState = '计算成功';break;
+                        default: tmp.calculationState = '';break;
                     }
                 }
                 let deleteParam = {}
@@ -146,5 +141,22 @@ Page({
                 })
             // }
         // })
+    },
+    // 撤销上报
+    cxsb(e){
+        let pgid = e.currentTarget.dataset.pgid
+        app.$kwz.ajax.ajaxUrl({
+            url: 'dd/ddGpEvaluationReport/doCancel',
+            type: 'POST',
+            data: {
+                userId: this.data.loginUser.uid,
+                pgId: pgid, // 批次id
+            },
+            page: this,
+            then(response) {
+                app.$kwz.alert(response.msg)
+                this.pageList(true)
+            }
+        })
     }
 })

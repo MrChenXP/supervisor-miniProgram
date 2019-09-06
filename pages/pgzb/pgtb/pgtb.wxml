@@ -10,6 +10,7 @@
         <view class="pgtb-tx-titles">
             <view  class="pgtb-tx-title text-bold">{{gcdData.content}}</view>
             <view  class="pgtb-tx-title">评价标准：<text class="color-999">{{gcdData.quotaComment || ''}}</text></view>
+            <view  class="pgtb-tx-title">督导方式：<text class="color-999">{{gcdData.type == '1' ? '自评' : '督评'}}</text></view>
         </view>
         <kw-list-cell isArrow="{{false}}">
             <view>
@@ -54,14 +55,16 @@
             <view class="list-right-input"><input value="{{item.content || ''}}" type="number" bindinput="inputCjd" data-i="{{index}}" placeholder="请输入"/></view>
             </view>
         </kw-list-cell>
-        
     </view>
+
     <!-- 按钮组 -->
     <view class="pgtb-an">
-        <button size="mini" type="warn" bindtap="syg">上一个</button>
-        <button size="mini" type="warn" bindtap="save" data-type="up">保存并上一个观测点</button>
-        <button size="mini" type="warn" bindtap="sb">上报</button>                
-        <button size="mini" type="primary" bindtap="xyg">下一个</button>
+        <button size="mini" type="warn" bindtap="sb" wx:if="{{isReport == 0}}">上报</button>
+        <button size="mini" type="warn" bindtap="cxsb" wx:else>撤销上报</button>
+        <button size="mini" type="warn" bindtap="syg" wx:if="{{pId != onePid}}">上一个</button>
+        <!-- 叶日明说不显示。先别删代码 -->
+        <!-- <button size="mini" type="warn" bindtap="save" data-type="up">保存并上一个观测点</button> -->
         <button size="mini" type="primary" bindtap="save" data-type="down">保存并下一个观测点</button>
+        <button size="mini" type="primary" bindtap="xyg"  wx:if="{{pId != lastPid}}">下一个</button>
     </view>
 </view>

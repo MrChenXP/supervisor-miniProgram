@@ -1,1 +1,4 @@
 /* pages/xddpg/xddpg.wxss */
+.lists .kw-tag {
+  color: #109dea !important; 
+}

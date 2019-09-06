@@ -13,6 +13,10 @@ Page({
         pgId: "",
         // 用户选择的观测点ID
         pId: '',
+        // 第一个pid
+        onePid: '',
+        // 最后一个pid
+        lastPid:'',
         // 评估类型
         type: '',
         // 评分类型
@@ -42,6 +46,7 @@ Page({
         this.data.isReport = param.isReport || ''
         this.data.name = param.name || ''
         this.data.nbId = param.nbId || ''
+        this.setData({isReport: this.data.isReport})
         this.initPage()
     },
     // 初始化页面
@@ -76,11 +81,16 @@ Page({
             url: 'dd/ddGpEvaluationReport/findEnabledViewPoint',
             type: 'POST',
             data: {
-                pId: this.data.onePid
+                pId: this.data.onePid // 一定要第一个id
             },
             page: this,
             then(response) {
                 this.data.inputGcdList = response.datas
+                let i = response.datas.length - 1
+                this.setData({
+                    onePid: this.data.onePid,
+                    lastPid: this.data.inputGcdList[i].pId
+                })
             }
         })
     },
@@ -96,9 +106,11 @@ Page({
             },
             page: this,
             then(response) {
+                console.log(response.datas.type)
                 this.setData({ gcdData: response.datas })
                 this.getPflx()
                 this.data.cjxValues = this.data.gcdData.collectValueVos
+                this.setData({pId: response.datas.pid})
             }
         })
     },
@@ -211,11 +223,28 @@ Page({
             then(response) {
                 if (response.statusCode == '200') {
                     app.$kwz.alert("操作成功");
+                    this.setData({isReport: '1'})
                 } else if (response.statusCode == '300') {
                     app.$kwz.alert("操作失败");
                 } else if (response.statusCode == "315") {
                     app.$kwz.alert("请填写完全部的观测点信息")
                 }
+            }
+        })
+    },
+    // 撤销上报
+    cxsb(){
+        app.$kwz.ajax.ajaxUrl({
+            url: 'dd/ddGpEvaluationReport/doCancel',
+            type: 'POST',
+            data: {
+                pgId: this.data.pgId, //评估id
+                userId: this.data.uid, //用户id
+            },
+            page: this,
+            then(response) {
+                app.$kwz.alert(response.msg)
+                this.setData({ isReport: '0'})                
             }
         })
     },

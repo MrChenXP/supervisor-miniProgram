@@ -17,10 +17,6 @@
                     </view>
                     <view class="clearfix time">
                         <view class="fl">数据来源：{{item.dataSource || '未填写'}}</view>
-                        <view class="fr">机构名称：{{item.orgName || '未填写'}}</view>
-                    </view>
-                    <view class="clearfix time">
-                        <view class="fl">评估类型：{{item.typeName || '未填写'}}</view>
                         <view class="fr">是否上报：{{item.isReportName || '未填写'}}</view>
                     </view>
                     <view class="clearfix time">
@@ -30,6 +26,12 @@
                     <view class="clearfix time">
                         <view class="fl">开始时间：{{item.startTime || '未填写'}}</view>
                         <view class="fr">结束时间：{{item.endTime || '未填写'}}</view>
+                    </view>
+                    <view class="clearfix time">
+                        <view class="fl">机构名称：{{item.orgName || '未填写'}}</view>
+                        <view class="fr" wx:if="{{item.isReport == 1}}" catchtap='cxsb' data-pgid='{{item.pgId}}'>
+                            <kw-tag type="border" color="blue" class="cxsb" circle="{{true}}">撤销上报</kw-tag>
+                        </view>
                     </view>
                 </view>
             </view>

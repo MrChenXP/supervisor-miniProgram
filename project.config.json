@@ -9,13 +9,20 @@
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
+		"coverView": true,
 		"autoAudits": false,
 		"checkInvalidKey": true,
-		"checkSiteMap": false
+		"checkSiteMap": false,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.7.0",
-	"appid": "wx024df8615282267c",
+	"appid": "wx68d34bd321ef986c",
 	"projectname": "kwm-mp",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -41,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": 7,
 			"list": [
 				{
 					"id": -1,
@@ -58,17 +65,17 @@
 					"scene": null
 				},
 				{
-					"id": 4,
+					"id": 2,
 					"name": "pgtb",
 					"pathName": "pages/pgzb/pgtb/pgtb",
-					"query": "pgId=72cc152f2ee74ce48c1f07245037e072&pId=",
+					"query": "pgId=8cc78871ea414fad903efc8726408b91&type=2&nbId=91574f418af34b4bb7d78ed478627bb2&evaluationType=1&evaluationOrgId=ba6b52bf13e1465fab5aae7ad0676894&name=2_%E5%B0%B9%E8%8A%B32019-09-04&isReport=''",
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 3,
 					"name": "pgqk",
 					"pathName": "pages/pgzb/pgqk/pgqk",
-					"query": "",
+					"query": "pgId=8cc78871ea414fad903efc8726408b91&type=2&nbId=91574f418af34b4bb7d78ed478627bb2&evaluationType=1&evaluationOrgId=ba6b52bf13e1465fab5aae7ad0676894&name=2_%E5%B0%B9%E8%8A%B32019-09-04&isReport=''",
 					"scene": null
 				},
 				{
@@ -86,10 +93,17 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 6,
 					"name": "xcdd-add",
 					"pathName": "pages/xcdd/xcdd-add/xcdd-add",
-					"query": "pgId=72cc152f2ee74ce48c1f07245037e072&pId=",
+					"query": "CONTENT_ID=91B79FB54099573DE0530100007FC01C",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/xddpg/xddpg",
+					"pathName": "pages/xddpg/xddpg",
+					"query": "pgId=8cc78871ea414fad903efc8726408b91&type=2&nbId=91574f418af34b4bb7d78ed478627bb2&evaluationType=1&evaluationOrgId=ba6b52bf13e1465fab5aae7ad0676894&name=2_%E5%B0%B9%E8%8A%B32019-09-04&isReport=''",
 					"scene": null
 				}
 			]

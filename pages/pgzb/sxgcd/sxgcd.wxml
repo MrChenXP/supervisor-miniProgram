@@ -1,0 +1,9 @@
+<view wx:for="{{value}}" wx:key="index" class="sxgcd">
+    <view bindtap="toPgtb" data-item="{{item}}">
+        <kw-icon type="kw-circle" color="#00bdfd"></kw-icon>
+        {{item.content}}
+    </view>
+    <view wx:if="{{item && item.children && item.children.length !== 0}}" class="children">
+        <sxgcd value="{{item.children}}" pgId="{{pgId}}" type="{{type}}" evaluationType="{{evaluationType}}" evaluationOrgId="{{evaluationOrgId}}" isReport="{{isReport}}" name="{{name}}" nbId="{{nbId}}"></sxgcd>
+    </view>
+</view>

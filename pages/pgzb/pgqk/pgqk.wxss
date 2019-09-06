@@ -1,0 +1,13 @@
+.pager{
+    top: 0;
+}
+.pgzb,.pgtb,.ptqk{
+    width: 30% !important;
+}
+.pgzb{
+    border-right: 1rpx solid #cccccc;
+    border-radius: none  !important; 
+}
+.pgqk-panel{
+    padding: 10rpx;
+}

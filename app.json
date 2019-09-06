@@ -32,7 +32,11 @@
         "pages/pg/pg-zp/pg-zp",
         "pages/pg/pg-dp/pg-dp",
         "pages/dxsl/dxsl",
-        "pages/dxsl/dxsl-preview/dxsl-preview"
+        "pages/dxsl/dxsl-preview/dxsl-preview",
+        "pages/pgzb/pgzb",
+        "pages/pgzb/pgtb/pgtb",
+        "pages/pgzb/pgqk/pgqk",
+        "pages/xddpg/xddpg"
     ],
     "window": {
         "navigationBarTextStyle": "white",

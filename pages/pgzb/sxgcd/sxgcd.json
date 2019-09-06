@@ -1,0 +1,7 @@
+{
+    "component": true,
+    "usingComponents": {
+        "sxgcd": "../sxgcd/sxgcd",
+        "kw-icon": "/dist/kw-ui/kw-icon/kw-icon"
+    }
+}

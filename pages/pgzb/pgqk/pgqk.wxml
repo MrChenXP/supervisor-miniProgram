@@ -1,0 +1,87 @@
+<view class='content'>
+    <!-- 分页 -->
+    <view class="pager">
+        <view class="zg pgzb" bindtap="toPgzb">评估指标</view>
+        <view class="zg pgtb" bindtap="toPgtb">评估填报</view>
+        <view class="xs active ptqk" >评估情况</view>
+    </view>
+
+    <!-- 自评 -->
+    <view wx:if="{{!zpData.length}}">暂无自评数据</view>
+    <view wx:if="{{type==2}}" wx:for="{{zpData}}" wx:key="index">
+        <view class="text-bold pgqk-panel">学校自评</view>
+        <kw-list-cell isArrow="{{false}}">
+            <view>
+                <view class="ddjs-head clearfix" >
+                    <text class="fl">特点亮点</text>
+                </view>
+                <view class="ddjs-body" >
+                    {{item.highlight || ""}}
+                </view>
+            </view>
+        </kw-list-cell>
+        <kw-list-cell isArrow="{{false}}">
+            <view>
+                <view class="ddjs-head clearfix" >
+                    <text class="fl">问题不足</text>
+                </view>
+                <view class="ddjs-body" >
+                    {{item.problem || ""}}
+                </view>
+            </view>
+        </kw-list-cell>
+        <kw-list-cell isArrow="{{false}}">
+            <view>
+                <view class="ddjs-head clearfix" >
+                    <text class="fl">建议反馈</text>
+                </view>
+                <view class="ddjs-body" >
+                    {{item.report || ""}}
+                </view>
+            </view>
+        </kw-list-cell>
+        <kw-list-cell title="得分" rightNote="{{item.fraction}}"  isArrow="{{false}}"></kw-list-cell>
+        <kw-list-cell wx:if="{{item.resultLevel == 0 || item.resultLevel == 1}}" title="定性评价" rightNote="{{item.resultLevel?'通过':'不通过'}}"  isArrow="{{false}}"></kw-list-cell>
+        <kw-list-cell wx:for="{{item.collectValueVos}}" wx:for-item="cjdItem" wx:for-index="cjdIndex"  wx:key="cjdIndex" title="{{cjdItem.cName}}" rightNote="{{cjdItem.content || ''}}"  isArrow="{{false}}"></kw-list-cell>
+    </view>
+
+    <!-- 督学小组评估 -->
+    <view wx:if="{{!dpData.length}}">暂无督评数据</view>
+    <view wx:for="{{dpData}}" wx:key="index">
+        <view class="text-bold pgqk-panel">督学小组评估</view>
+        <kw-list-cell isArrow="{{false}}">
+            <view>
+                <view class="ddjs-head clearfix" >
+                    <text class="fl">特点亮点</text>
+                </view>
+                <view class="ddjs-body" >
+                    {{item.highlight || ""}}
+                </view>
+            </view>
+        </kw-list-cell>
+        <kw-list-cell isArrow="{{false}}">
+            <view>
+                <view class="ddjs-head clearfix" >
+                    <text class="fl">问题不足</text>
+                </view>
+                <view class="ddjs-body" >
+                    {{item.problem || ""}}
+                </view>
+            </view>
+        </kw-list-cell>
+        <kw-list-cell isArrow="{{false}}">
+            <view>
+                <view class="ddjs-head clearfix" >
+                    <text class="fl">建议反馈</text>
+                </view>
+                <view class="ddjs-body" >
+                    {{item.report || ""}}
+                </view>
+            </view>
+        </kw-list-cell>
+        <kw-list-cell title="得分" rightNote="{{item.fraction}}"  isArrow="{{false}}"></kw-list-cell>
+        <kw-list-cell wx:if="{{item.resultLevel == 0 || item.resultLevel == 1}}" title="定性评价" rightNote="{{item.resultLevel?'通过':'不通过'}}"  isArrow="{{false}}"></kw-list-cell>
+        <kw-list-cell wx:for="{{item.collectValueVos}}" wx:key="cjdIndex" wx:for-item="cjdItem" wx:for-index="cjdIndex"  title="{{cjdItem.cName}}" rightNote="{{cjdItem.content || ''}}"  isArrow="{{false}}"></kw-list-cell>
+    </view>
+
+</view>    

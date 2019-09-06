@@ -1,0 +1,67 @@
+<view class='content'>
+    <!-- 分页 -->
+    <view class="pager">
+        <view class="zg pgzb" bindtap="toPgzb">评估指标</view>
+        <view class="zg active pgtb" >评估填报</view>
+        <view class="xs ptqk" bindtap="toPgqk">评估情况</view>
+    </view>
+    <!-- 填写部分 -->
+    <view class="pgtb-tx">
+        <view class="pgtb-tx-titles">
+            <view  class="pgtb-tx-title text-bold">{{gcdData.content}}</view>
+            <view  class="pgtb-tx-title">评价标准：<text class="color-999">{{gcdData.quotaComment || ''}}</text></view>
+        </view>
+        <kw-list-cell isArrow="{{false}}">
+            <view>
+                <view class="ddjs-head clearfix" >
+                    <text class="fl">特点亮点</text>
+                </view>
+                <view class="ddjs-body" >
+                    <textarea value="{{gcdData.highlight || ''}}" maxlength="4000" bindinput="inputTdld" placeholder="请输入"></textarea>
+                </view>
+            </view>
+        </kw-list-cell>
+        <kw-list-cell isArrow="{{false}}">
+            <view>
+                <view class="ddjs-head clearfix" >
+                    <text class="fl">问题不足</text>
+                </view>
+                <view class="ddjs-body" >
+                    <textarea value="{{gcdData.problem || ''}}" maxlength="4000" bindinput="inputWtbz" placeholder="请输入"></textarea>
+                </view>
+            </view>
+        </kw-list-cell>
+        <kw-list-cell isArrow="{{false}}">
+            <view>
+                <view class="ddjs-head clearfix" >
+                    <text class="fl">建议反馈</text>
+                </view>
+                <view class="ddjs-body" >
+                    <textarea value="{{gcdData.report || ''}}" maxlength="4000" bindinput="inputJyfk" placeholder="请输入"></textarea>
+                </view>
+            </view>
+        </kw-list-cell>
+        <kw-list-cell title="评分评价" wx:if="{{pfType == 3}}">
+            <view slot="rightNote">
+            <view class="list-right-input"><input value="{{gcdData.fraction || ''}}" type="number" bindinput="inputPf" placeholder="请输入"/></view>
+            </view>
+        </kw-list-cell>
+        <picker  wx:if="{{pfType == 1}}" range="{{pfList}}" value="{{pfValue.index}}" range-key="DMMX_MC" bindchange="changeDxpj">
+            <kw-list-cell title="定性评价" rightNote="{{pfValue.name}}"></kw-list-cell>
+        </picker>
+        <kw-list-cell title="{{item.cName}}" wx:for="{{gcdData.collectValueVos}}" wx:key="index">
+            <view slot="rightNote">
+            <view class="list-right-input"><input value="{{item.content || ''}}" type="number" bindinput="inputCjd" data-i="{{index}}" placeholder="请输入"/></view>
+            </view>
+        </kw-list-cell>
+        
+    </view>
+    <!-- 按钮组 -->
+    <view class="pgtb-an">
+        <button size="mini" type="warn" bindtap="syg">上一个</button>
+        <button size="mini" type="warn" bindtap="save" data-type="up">保存并上一个观测点</button>
+        <button size="mini" type="warn" bindtap="sb">上报</button>                
+        <button size="mini" type="primary" bindtap="xyg">下一个</button>
+        <button size="mini" type="primary" bindtap="save" data-type="down">保存并下一个观测点</button>
+    </view>
+</view>

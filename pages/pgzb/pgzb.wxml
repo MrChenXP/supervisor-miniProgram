@@ -1,0 +1,11 @@
+<view class='content'>
+    <!-- 分页 -->
+    <view class="pager">
+        <view class="zg active pgzb">评估指标</view>
+        <view class="zg pgtb" bindtap="toPgtb">评估填报</view>
+        <view class="xs ptqk" bindtap="toPgqk">评估情况</view>
+    </view>
+
+    <!-- 树形菜单 -->
+    <sxgcd value="{{gcdList}}" pgId="{{pgId}}" type="{{type}}" evaluationType="{{evaluationType}}" evaluationOrgId="{{evaluationOrgId}}" isReport="{{isReport}}" name="{{name}}" nbId="{{nbId}}"></sxgcd>
+</view>

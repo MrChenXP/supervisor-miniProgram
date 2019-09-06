@@ -50,7 +50,7 @@ Page({
     // 获取帖子内容
     getBbs(){
         app.$kwz.ajax.ajaxUrl({
-            url: 'jc_content/doSelectByPrimary/DXSL',
+            url: 'jc_content/doSelectByPrimary/DDDXSL',
             type: 'POST',
             data: {
                 CONTENT_ID: this.data.contentId,

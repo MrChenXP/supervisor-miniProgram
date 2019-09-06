@@ -1,0 +1,39 @@
+<view class='content'>
+    <!-- 搜索 -->
+    <view class="kw-searchs">
+        <kw-search bindconfirm="searchList" placeholder="请输入评估名称"></kw-search>
+    </view>
+    
+    <checkbox-group class="lists">
+        <view>
+            <!-- 单项列表 -->
+            <view class="list" wx:for="{{dataList}}" wx:key="index" bindtap='toPgzb' data-item='{{item}}'>
+                <view class="info">
+                    <view>
+                        {{item.batchName || '未填写'}}
+                    </view>
+                    <view class="clearfix time">
+                        <view class="fl">{{item.name || '未填写'}}</view>
+                    </view>
+                    <view class="clearfix time">
+                        <view class="fl">数据来源：{{item.dataSource || '未填写'}}</view>
+                        <view class="fr">机构名称：{{item.orgName || '未填写'}}</view>
+                    </view>
+                    <view class="clearfix time">
+                        <view class="fl">评估类型：{{item.typeName || '未填写'}}</view>
+                        <view class="fr">是否上报：{{item.isReportName || '未填写'}}</view>
+                    </view>
+                    <view class="clearfix time">
+                        <view class="fl">分数：{{item.score || '未填写'}}</view>
+                        <view class="fr">计算结果：{{item.calculationState || '未填写'}}</view>
+                    </view>
+                    <view class="clearfix time">
+                        <view class="fl">开始时间：{{item.startTime || '未填写'}}</view>
+                        <view class="fr">结束时间：{{item.endTime || '未填写'}}</view>
+                    </view>
+                </view>
+            </view>
+            <i-load-more tip="{{loadMore.text}}" loading="{{ loadMore.show }}" />
+        </view>
+    </checkbox-group>
+</view>

@@ -329,7 +329,7 @@ const setSession = (response) => {
  * @param {object} page
  */
 const initVisit = (callback, page) => {
-    let url = consts.getBaseVisit() || '/visit.jsp';
+    let url = consts.getBaseVisit();
     _ajaxinited = false
     weixin.request({
         url: url,

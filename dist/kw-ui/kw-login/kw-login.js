@@ -6,11 +6,11 @@ Component({
     // 登录头部标题
     title: '教育创新教育云平台',
     // 登录账号
-    userName: 'yinfang',
+    userName: '',
     // 登录密码 
-    passWord: '1234qwer',
+    passWord: 'yinfang',
     // 验证码输入框的值
-    vcode: '',
+    vcode: '1234qwer',
     // 验证码图片地址
     vcodeUrl: '/static/images/loginBG.png',
     // 验证码显示隐藏

@@ -26,7 +26,7 @@ Page({
         xzdqData: [
             {
                 BASE_URL: 'http://www.dd.com:8080',
-                BASE_VISIT: '',
+                BASE_VISIT: '/visit.jsp',
                 name: '本地主线'
             },
             {
@@ -35,14 +35,14 @@ Page({
                 name: '本地测试省'
             },
             {
-                BASE_URL: 'http://gd.qgjydd.cn',
+                BASE_URL: 'https://app.qgjydd.cn',
                 BASE_VISIT: '/visitpingshan',
                 name: '坪山'
             },
             {
-                BASE_URL: 'http://gd.qgjydd.cn',
-                BASE_VISIT: '/visitpingshan',
-                name: '坪山'
+                BASE_URL: 'https://app.qgjydd.cn',
+                BASE_VISIT: '/visitshunde',
+                name: '顺德'
             }
         ],
         // 加载更多的提示信息

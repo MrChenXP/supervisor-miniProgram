@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "sxgcd": "./sxgcd/sxgcd"
+    },
+    "navigationBarTitleText": "评估指标"
+}

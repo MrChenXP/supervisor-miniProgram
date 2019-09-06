@@ -1,0 +1,6 @@
+.sxgcd{
+    padding: 20rpx 20rpx 0 20rpx ;
+}
+.children{
+    margin-left: 20rpx;
+}

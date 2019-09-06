@@ -1,0 +1,10 @@
+.pager{
+    top: 0;
+}
+.pgzb,.pgtb,.ptqk{
+    width: 30% !important;
+}
+.pgtb{
+    border-right: 1rpx solid #cccccc;
+    border-radius: none  !important; 
+}

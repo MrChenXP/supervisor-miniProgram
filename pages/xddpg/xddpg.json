@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "kw-search": "/dist/kw-ui/kw-search/kw-search",
+        "i-load-more": "/dist/iview/load-more/index"
+    }
+}

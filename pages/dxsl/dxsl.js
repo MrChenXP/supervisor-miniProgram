@@ -69,7 +69,7 @@ Page({
             this.data.pageParam.page = 1
         }
         app.$kwz.ajax.ajaxUrl({
-            url: 'jc_content/doCmsFbPageList/DXSL',
+            url: 'jc_content/doCmsFbPageList/DDDXSL',
             type: 'POST',
             page: this,
             data: {
@@ -108,7 +108,7 @@ Page({
         })
     },
     has(){
-        app.$kwz.hasAuth('jc_content/doSelectByPrimary/DXSL', (auth) => {
+        app.$kwz.hasAuth('jc_content/doSelectByPrimary/DDDXSL', (auth) => {
             auth ? this.setData({
                 hasYlAuth: auth
             }) : ""

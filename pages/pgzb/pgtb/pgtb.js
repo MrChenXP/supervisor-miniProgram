@@ -106,7 +106,6 @@ Page({
             },
             page: this,
             then(response) {
-                console.log(response.datas.type)
                 this.setData({ gcdData: response.datas })
                 this.getPflx()
                 this.data.cjxValues = this.data.gcdData.collectValueVos

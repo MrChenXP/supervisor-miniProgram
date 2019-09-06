@@ -453,8 +453,14 @@ const initLoginUser = (callback, page) => {
 const logout = (callback, app) => {
     // 登出操作
     get('/login/open/logout')
+    // 先把域名stroage存起来 不然报错
+    let url = store.getUrl()
     // 清除缓存
     weixin.clearStorage()
+    store.setUrl({
+        BASE_URL: JSON.parse(url).BASE_URL,
+        BASE_VISIT: JSON.parse(url).BASE_VISIT
+    })
     // 设置登陆false
     store.setLogin(false)
     // 重置
@@ -462,6 +468,8 @@ const logout = (callback, app) => {
         // 回调
         util.cfp(callback, app || this, [])
     })
+    
+    
 }
 
 /**

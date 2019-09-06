@@ -25,7 +25,8 @@
     <kw-list-cell title="修改密码" thumb="/static/images/icons/change.png" wx:if="{{hasXgmmAuth}}" link="/pages/my/xgmm/xgmm"></kw-list-cell>
     <kw-list-cell title="切换机构" thumb="/static/images/icons/repeat.png" wx:if="{{hasQhjgAuth}}" link="/pages/my/qhjg/qhjg"></kw-list-cell>
     <kw-list-cell title="扫码" thumb="/static/images/icons/scanCode.png" bindtap="scanCode"></kw-list-cell>
-    <kw-list-cell title="签到(签退)" thumb="/static/images/icons/position.png" wx:if="{{hasQdqtAuth}}" link="/pages/my/qdqt/qdqt"></kw-list-cell>
+    <!-- 先把权限控制删去,让所有人都能看到==叶日明。wx:if="{{hasQdqtAuth}}" -->
+    <kw-list-cell title="签到(签退)" thumb="/static/images/icons/position.png"  link="/pages/my/qdqt/qdqt"></kw-list-cell>
   </view>
 
   <!-- 退出登录 -->

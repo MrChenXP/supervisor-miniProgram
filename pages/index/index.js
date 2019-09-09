@@ -51,9 +51,7 @@ Page({
     // onLoad事件
     onLoad() {
         if(!app.$kwz.getUrl()){
-            this.setData({
-                xzdqShow: true
-            })
+            this.setData({xzdqShow: true})
         } else{
             app.$kwz.initVisit()
         }

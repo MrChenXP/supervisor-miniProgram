@@ -9,13 +9,13 @@
     <!-- 表单 -->
     <form class="kw-login-form">
       <view class="kw-login-input_bg">
-        <input type="text" value="{{userName}}" bindblur="blurUserName" placeholder="请输入用户名"/>
+        <input type="text" value="{{userName}}" bindinput="inputUserName" placeholder="请输入用户名"/>
       </view>
       <view class="kw-login-input_bg">
-        <input password value="{{passWord}}" bindblur="blurPassword" placeholder="请输入密码"/>
+        <input password value="{{passWord}}" bindinput="inputPassword" placeholder="请输入密码"/>
       </view>
       <view class="kw-login-input_bg" wx:if="{{vcodeShow}}">
-        <input class="kw-login-input_yzm" type="text" bindblur="blurVcode" value="{{vcode}}" placeholder="请输入验证码" />
+        <input class="kw-login-input_yzm" type="text" bindinput="inputVcode" value="{{vcode}}" placeholder="请输入验证码" />
         <image src="{{vcodeUrl}}" bindtap="toggerVcode" style="width: 75px;height: 33px;"></image>
       </view>
       <view class="kw-login-input_bg" >

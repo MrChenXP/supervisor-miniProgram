@@ -104,22 +104,25 @@ Component({
             }
             msg = error.data.msg || msg
           }
-          app.$kwz.alert(msg)
+            
+            setTimeout(function () {
+                app.$kwz.alert(msg)
+            }, 300)
           this.setLoadingLogin(false)
         }
       })
     },
-    blurUserName (e) {
+    inputUserName (e) {
       this.setData({
         userName: e.detail.value
       })
     },
-    blurPassword (e) {
+    inputPassword (e) {
       this.setData({
         passWord: e.detail.value
       })
     },
-    blurVcode (e) {
+    inputVcode (e) {
       this.setData({
         vcode: e.detail.value
       })

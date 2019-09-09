@@ -33,7 +33,8 @@
     <view class="xzdq" wx:if="{{xzdqShow}}" catchtouchmove="catchtouchmove">
         <view class="xzdq-mask" catchtap='xzdqClose' ></view>
         <view class="xzdq-content">
-            <view class="xzdq-title color-blue"><text>选择地区</text></view>
+            <view class="xzdq-title color-blue "><text>选择地区</text></view>
+            <view class="xzdq-info color-999"><text>“挂牌督导”小程序是辅助“责任督学挂牌督导工作平台”的移动端展现，请先选择地区后呈现对应区县的数据。</text></view>
             <view wx:for="{{xzdqData}}" wx:key="index" class="xzdq-dq" bindtap="xzdq" data-i="{{index}}">
                 {{item.name}}
             </view>

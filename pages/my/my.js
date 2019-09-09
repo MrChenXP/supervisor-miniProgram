@@ -7,9 +7,9 @@ Page({
         // 用户数据
         user: {
             IMAGE: "",
-            name: "督导督学",
-            ddlx: "责任区督学",
-            orgMc: "白云区"
+            name: "",
+            ddlx: "",
+            orgMc: ""
         },
         // 登录组件显示隐藏
         loginShow: false,

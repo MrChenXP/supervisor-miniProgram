@@ -789,6 +789,8 @@ export default {
     setLoginUser: store.setLoginUser,
     getUrl: store.getUrl,
     setUrl: store.setUrl,
+    getIsXzdq: store.getIsXzdq,
+    setIsXzdq: store.setIsXzdq,
     loadDms,
     uploadImg,
     canUse: weixin.canUse,

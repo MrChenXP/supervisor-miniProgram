@@ -1,9 +1,9 @@
 <view class='content'>
     <!-- 分页 -->
     <view class="pager">
-        <view class="zg pgzb" bindtap="toPgzb">评估指标</view>
+        <view class="zg pgzb" bindtap="lkbcTipShow" data-type='pgzb'>评估指标</view>
         <view class="zg active pgtb" >评估填报</view>
-        <view class="xs ptqk" bindtap="toPgqk">评估情况</view>
+        <view class="xs ptqk" bindtap="lkbcTipShow" data-type='pgqk'>评估情况</view>
     </view>
     <!-- 填写部分 -->
     <view class="pgtb-tx">
@@ -67,4 +67,12 @@
         <button size="mini" type="primary" bindtap="save" data-type="down">保存并下一个观测点</button>
         <button size="mini" type="primary" bindtap="xyg"  wx:if="{{pId != lastPid}}">下一个</button>
     </view>
+
+    <!-- 离开保存提示 -->
+    <i-action-sheet visible="{{lkbcTipShow}}" actions="{{lkbcTipList}}" show-cancel bind:cancel="lkbcTipShow" bind:click="lkbc">
+        <view slot="header" style="padding: 16rpx">
+            <view style="color: #444;font-size: 16px">确定吗？</view>
+            <text>离开后将会删除未保存的草稿内容</text>
+        </view>
+    </i-action-sheet>
 </view>

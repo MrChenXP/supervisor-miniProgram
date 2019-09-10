@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
@@ -68,7 +68,7 @@
 					"id": 2,
 					"name": "pgtb",
 					"pathName": "pages/pgzb/pgtb/pgtb",
-					"query": "pgId=8cc78871ea414fad903efc8726408b91&type=2&nbId=91574f418af34b4bb7d78ed478627bb2&evaluationType=1&evaluationOrgId=ba6b52bf13e1465fab5aae7ad0676894&name=2_%E5%B0%B9%E8%8A%B32019-09-04&isReport=''",
+					"query": "pgId=fd83bdb4e1544918a857610990b9a8ab&type=2&nbId=c6af1de9058341d6a3a4f030f3b54607&evaluationType=1&evaluationOrgId=e20316761cde4ed6a4e43059b1e321c4&name=%E5%AD%A6%E6%A0%A1%E5%AE%89%E5%85%A8%E5%B7%A5%E4%BD%9C%E4%B8%93%E9%A1%B9%E7%9D%A3%E5%AF%BC_%E7%99%BD%E6%96%B0%E9%A2%962019-09-09&isReport=0",
 					"scene": null
 				},
 				{
@@ -110,6 +110,7 @@
 					"id": -1,
 					"name": "pages/my/my",
 					"pathName": "pages/my/my",
+					"query": "",
 					"scene": null
 				}
 			]

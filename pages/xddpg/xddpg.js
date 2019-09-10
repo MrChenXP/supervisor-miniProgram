@@ -25,7 +25,7 @@ Page({
         this.initData()
     },
     onReachBottom: function () {
-        // 因新督导这个应用 如果page传的大于最大页数，会返回第一页数据
+        // 因'新督导'这个应用 如果page传的大于最大页数，会返回第一页数据
         // 所以不能让page到了最大页数的时候运行pageList
         if(!this.data.loadMore.isMax){
             this.data.loadMore.show = true

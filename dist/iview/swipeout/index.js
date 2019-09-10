@@ -66,12 +66,10 @@ Component({
                 */
                 //query.selectAll('.i-swipeout-button-right-item').boundingClientRect((rects)=>{
                 //     if( rects ){
-                //         console.log(rects,1111111)
                 //         rects.forEach(item => {
                 //             limitMovePosition += item.width;
                 //         });
                 //         this.data.limitMove = limitMovePosition;
-                //         console.log(limitMovePosition,111111111)
                 //     }
                 // }).exec()
             }else{

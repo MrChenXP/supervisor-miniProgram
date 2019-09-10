@@ -1,6 +1,7 @@
 {
     "usingComponents": {
-        "kw-list-cell": "/dist/kw-ui/kw-list-cell/kw-list-cell"    
+        "kw-list-cell": "/dist/kw-ui/kw-list-cell/kw-list-cell",
+        "i-action-sheet": "/dist/iview/action-sheet/index"
     },
     "navigationBarTitleText": "评估指标"
 }

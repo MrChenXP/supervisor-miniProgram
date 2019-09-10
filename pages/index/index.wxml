@@ -29,6 +29,11 @@
         </scroll-view>
     </view>
 
+    <!-- 选择地区按钮 -->
+    <view class="xzdqAn color-blue" hidden="{{xzdqShow}}" wx:if="{{!isXzdq}}" bindtap="xzdqClose">
+        <image src="/static/images/icons/earth.png" mode="aspectFit"></image>
+        <text>选择地区</text>
+    </view>
     <!-- 选择地区 -->
     <view class="xzdq" wx:if="{{xzdqShow}}" catchtouchmove="catchtouchmove">
         <view class="xzdq-mask" catchtap='xzdqClose' ></view>
@@ -38,9 +43,7 @@
             <view wx:for="{{xzdqData}}" wx:key="index" class="xzdq-dq" bindtap="xzdq" data-i="{{index}}">
                 {{item.name}}
             </view>
-            <!-- <view class="save" >
-                <button >确定</button>
-            </view> -->
+            <view class="xzdq-cancel" bindtap="xzdqClose">取消</view>
         </view>
     </view>
 </view>

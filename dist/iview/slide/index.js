@@ -6,7 +6,7 @@ Component({
     },
     methods : {
         handleTap2(){
-            console.log(event,1111111)
+            console.warn(event,1111111)
         },
         handleTap3(){
             

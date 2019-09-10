@@ -3,8 +3,8 @@
 import productConfig from './products'
 
 // 请求路径
-const BASE_URL = 'http://www.dd.com:8080'
-// const BASE_URL = 'https://app.qgjydd.cn' // 高新网 龙岗 坪山
+// const BASE_URL = 'http://www.dd.com:8080'
+const BASE_URL = 'https://app.qgjydd.cn' // 高新网 龙岗 坪山
 
 //访问的后缀
 const BASE_VISIT = ''  //  空就拿visit.jsp
@@ -16,6 +16,9 @@ const BASE_VISIT = ''  //  空就拿visit.jsp
 // session的cookie名称 部署前要看下session名字(visit.jsp看)。因为运维会经常换session名字
 const SESSION_NAME = 'JSESSIONID' // 本地
 // const SESSION_NAME = 'KSESSIONID1' // 高新 龙岗
+
+// 是否进行了选择地区
+const IS_XZDQ = false
 
 // 是否开发者模式
 const DEV = true
@@ -35,18 +38,22 @@ const DEFAULT_REQUEST_HEADER = {
  * 获取请求的域名
  */
 const getBaseUrl = () => {
-    let base_url = JSON.parse(wx.getStorageSync('URL')).BASE_URL
-    // return BASE_URL
-    return base_url
+    let base_url =''
+    if (wx.getStorageSync('URL')){
+        base_url = JSON.parse(wx.getStorageSync('URL')).BASE_URL
+    }
+    return base_url || BASE_URL
 }
 
 /**
  * 获取请求的域名后缀
  */
 const getBaseVisit = () => {
-    let base_visit = JSON.parse(wx.getStorageSync('URL')).BASE_VISIT
-    // return BASE_VISIT
-    return base_visit
+    let base_visit = ''
+    if (wx.getStorageSync('URL')) {
+        base_visit = JSON.parse(wx.getStorageSync('URL')).BASE_VISIT
+    }
+    return base_visit || BASE_VISIT
 }
 
 /**

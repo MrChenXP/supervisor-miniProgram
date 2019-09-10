@@ -80,6 +80,20 @@ swiper {
 } 
 
 /* 选择地区 */
+.xzdqAn{
+    position: fixed;
+    width: 120rpx;
+    height: 120rpx;
+    right: 20rpx;
+    bottom: 20rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.xzdqAn image{
+    width: 120rpx;
+    height: 120rpx;
+}
 .xzdq {
   position: fixed;
   left: 0;
@@ -135,10 +149,14 @@ swiper {
     text-align: center;
     line-height: 190rpx;
 }
+.xzdq-cancel{
+    position: absolute;
+    right: 20rpx;
+    bottom: 20rpx;
+}
 .xzdq-content .save{
     position: sticky;
     bottom: 0;
     margin-bottom: 0;
     width: 690rpx;
-
 }

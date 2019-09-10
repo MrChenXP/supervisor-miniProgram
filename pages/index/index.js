@@ -12,6 +12,8 @@ Page({
         },
         // 选择地区显示隐藏
         xzdqShow: false,
+        // 是否选择了地区
+        isXzdq: false,
         // 轮播图图片路径
         newsImaUrl: [],
         // 标题栏文字
@@ -24,16 +26,16 @@ Page({
         pageList: [],
         // 选择地区 数据
         xzdqData: [
-            // {
-            //     BASE_URL: 'http://www.dd.com:8080',
-            //     BASE_VISIT: '/visit.jsp',
-            //     name: '本地主线'
-            // },
-            // {
-            //     BASE_URL: 'http://www.dd.com:8080',
-            //     BASE_VISIT: '/visittest',
-            //     name: '本地测试省'
-            // },
+            {
+                BASE_URL: 'http://www.dd.com:8080',
+                BASE_VISIT: '/visit.jsp',
+                name: '本地主线'
+            },
+            {
+                BASE_URL: 'http://www.dd.com:8080',
+                BASE_VISIT: '/visittest',
+                name: '本地测试省'
+            },
             {
                 BASE_URL: 'https://app.qgjydd.cn',
                 BASE_VISIT: '/visitpingshan',
@@ -49,11 +51,14 @@ Page({
         loadMore: []
     },
     // onLoad事件
-    onLoad() {
-        if(!app.$kwz.getUrl()){
-            this.setData({xzdqShow: true})
+    onShow() {
+        this.setData({isXzdq: app.$kwz.getIsXzdq()})
+        if (this.data.isXzdq){
+            app.$kwz.initVisit(()=>{
+                this.loadIndexData()
+            })
         } else{
-            app.$kwz.initVisit()
+            this.setData({ xzdqShow: true })
         }
         this.loadIndexData()
     },
@@ -90,6 +95,12 @@ Page({
     },
     // 加载首页数据
     loadIndexData() {
+        this.data.newsImaUrl = []
+        this.data.loadMore = []
+        this.data.btList = []
+        this.data.newsBtList = []
+        this.data.ywlxList = []
+        this.data.pageList = []
         app.$kwz.ajax.ajaxUrl({
             url: '/jc_mobile/open/getYkXtsz',
             type: 'POST',
@@ -164,7 +175,11 @@ Page({
             BASE_VISIT: this.data.xzdqData[i].BASE_VISIT
         })
         this.xzdqClose()
-        app.$kwz.initVisit()
+        this.setData({ isXzdq: true })
+        app.$kwz.setIsXzdq(true)
+        app.$kwz.initVisit(() => {
+            this.loadIndexData()
+        })
     },
     // 更改标题栏选中值
     changeBt(e) {

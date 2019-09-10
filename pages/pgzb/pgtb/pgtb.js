@@ -1,6 +1,8 @@
 const app = getApp()
 Page({
     data: {
+        // 离开保存提示 显示隐藏
+        lkbcTipShow:false,
         // 当前填报观测点数据
         gcdData: [],
         // 当前指标的观测点列表
@@ -28,14 +30,14 @@ Page({
         name: '',
         nbId: '',
         // 评分列表 值 是选择器的话
-        pfValue:{
-            name: '',
-            value:'',
-            index:''
-        },
+        pfValue:{name: '',value:'',index:''},
         pfList: [{ DMMX_CODE: "", DMMX_MC: "请选择" },{ DMMX_CODE: "0", DMMX_MC: "不通过" }, { DMMX_CODE: "1", DMMX_MC: "通过" }],
         // 采集项的值
-        cjxValues:[]
+        cjxValues:[],
+        // 离开保存提示 按钮列表
+        lkbcTipList: [{name: '保存并离开',color: '#0580c2'},{name: '直接离开',color: '#ed3f14'}],
+        // 要去向哪个页面
+        toUrl:''
     },
     onLoad(param) {
         this.data.pgId = param.pgId || ''
@@ -155,7 +157,7 @@ Page({
             }
         })
     },
-    // 上一个 下一个  保存上下一个
+    // 上一个 下一个  保存(并跳转)
     syg(){
         for(let i in this.data.inputGcdList){
             if (this.data.inputGcdList[i].pId == this.data.pId){
@@ -204,8 +206,19 @@ Page({
             page: this,
             then(response) {
                 app.$kwz.alert('已保存成功')
-                let type = e.currentTarget.dataset.type
-                type == 'up' ? this.syg() : this.xyg()
+                if(e){
+                    let type = e.currentTarget.dataset.type
+                    if (type == 'up') {
+                        this.syg()
+                    } else if (type == 'down') {
+                        this.xyg()
+                    }
+                }
+                if (this.data.toUrl == 'pgzb') {
+                    this.toPgzb()
+                } else if (this.data.toUrl == 'pgqk'){
+                    this.toPgqk()
+                }
             }
         })
     },
@@ -250,13 +263,13 @@ Page({
     // 去评估指标 评估情况
     toPgzb() {
         let url = `pgId=${this.data.pgId}&pId=${this.data.pId}&type=${this.data.type}&evaluationType=${this.data.evaluationType}&evaluationOrgId=${this.data.evaluationOrgId}&isReport=${this.data.isReport}&name=${this.data.name}&nbId=${this.data.nbId}`
-        wx.navigateTo({
+        wx.redirectTo({
             url: `/pages/pgzb/pgzb?` + url
         })
     },
     toPgqk() {
         let url = `pgId=${this.data.pgId}&pId=${this.data.pId}&type=${this.data.type}&evaluationType=${this.data.evaluationType}&evaluationOrgId=${this.data.evaluationOrgId}&isReport=${this.data.isReport}&name=${this.data.name}&nbId=${this.data.nbId}`
-        wx.navigateTo({
+        wx.redirectTo({
             url: `/pages/pgzb/pgqk/pgqk?` + url
         })
     },
@@ -273,6 +286,20 @@ Page({
     inputPf({ detail }) {
         this.data.gcdData.fraction = detail.value
     },
+    // 离开保存提示 点击
+    lkbc({detail}){
+        let i = detail.index
+        this.lkbcTipShow()
+        if(i==0){
+            this.save()
+        } else {
+            if (this.data.toUrl =='pgzb') {
+                this.toPgzb()
+            } else{
+                this.toPgqk()
+            }
+        }
+    },
     // 修改 采集点
     inputCjd(e){
         let val = e.detail.value // 值
@@ -288,5 +315,13 @@ Page({
         this.setData({
             pfValue: this.data.pfValue
         })
+    },
+    // 离开提示 显示隐藏
+    lkbcTipShow(e) {
+        if(e){
+            let type = e.currentTarget.dataset.type
+            this.data.toUrl = type
+        }
+        this.setData({ lkbcTipShow: !this.data.lkbcTipShow})
     },
 })

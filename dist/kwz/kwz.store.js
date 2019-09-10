@@ -285,9 +285,24 @@ const getUrl = () => {
     return url
 }
 
+const isXzdq = false
+/**
+ * 设置是否选择了地区 同步
+ * @param {Boolean} type
+ */
+const setIsXzdq = (type) => {
+    wx.setStorageSync('IS_XZDQ', type)
+}
+/**
+ * 获取是否选择了地区 同步
+ */
+const getIsXzdq = () => {
+    return wx.getStorageSync('IS_XZDQ') || isXzdq
+}
+
 export default {
     getStringFromStorage, getObjectFromStorage, setStringToStorage, setObjectToStorage,
     getSessionId, setSessionId, setRelData, getToken, isEncode, isEncrypt, isLogin, setLogin,
     getLoginUser, setLoginUser, getCommonMenus, setCommonMenus, getDms, setDms, setProduct, getProduct,
-    setUrl, getUrl
+    setUrl, getUrl, setIsXzdq, getIsXzdq
 }

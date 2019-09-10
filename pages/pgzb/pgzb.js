@@ -65,13 +65,13 @@ Page({
     // 去评估填报 评估情况
     toPgtb(){
         let url = `pgId=${this.data.pgId}&pId=${this.data.pId}&type=${this.data.type}&evaluationType=${this.data.evaluationType}&evaluationOrgId=${this.data.evaluationOrgId}&isReport=${this.data.isReport}&name=${this.data.name}&nbId=${this.data.nbId}`
-        wx.navigateTo({
+        wx.redirectTo({
             url: `/pages/pgzb/pgtb/pgtb?` + url
         })
     },
     toPgqk(){
         let url = `pgId=${this.data.pgId}&pId=${this.data.pId}&type=${this.data.type}&evaluationType=${this.data.evaluationType}&evaluationOrgId=${this.data.evaluationOrgId}&isReport=${this.data.isReport}&name=${this.data.name}&nbId=${this.data.nbId}`
-        wx.navigateTo({
+        wx.redirectTo({
             url: `/pages/pgzb/pgqk/pgqk?` + url
         })
     }

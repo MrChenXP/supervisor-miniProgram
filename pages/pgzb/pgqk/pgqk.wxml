@@ -84,4 +84,9 @@
         <kw-list-cell wx:for="{{item.collectValueVos}}" wx:key="cjdIndex" wx:for-item="cjdItem" wx:for-index="cjdIndex"  title="{{cjdItem.cName}}" rightNote="{{cjdItem.content || ''}}"  isArrow="{{false}}"></kw-list-cell>
     </view>
 
+    <!-- 按钮组 -->
+    <view class="pgtb-an">
+        <button size="mini" type="warn" bindtap="syg" wx:if="{{pId != onePid}}">上一个</button>
+        <button size="mini" type="primary" bindtap="xyg"  wx:if="{{pId != lastPid}}">下一个</button>
+    </view>
 </view>    

@@ -26,16 +26,16 @@ Page({
         pageList: [],
         // 选择地区 数据
         xzdqData: [
-            // {
-            //     BASE_URL: 'http://www.dd.com:8080',
-            //     BASE_VISIT: '/visit.jsp',
-            //     name: '本地主线'
-            // },
-            // {
-            //     BASE_URL: 'http://www.dd.com:8080',
-            //     BASE_VISIT: '/visittest',
-            //     name: '本地测试省'
-            // },
+            {
+                BASE_URL: 'http://www.dd.com:8080',
+                BASE_VISIT: '/visit.jsp',
+                name: '本地主线'
+            },
+            {
+                BASE_URL: 'http://www.dd.com:8080',
+                BASE_VISIT: '/visittest',
+                name: '本地测试省'
+            },
             {
                 BASE_URL: 'https://app.qgjydd.cn',
                 BASE_VISIT: '/visitpingshan',

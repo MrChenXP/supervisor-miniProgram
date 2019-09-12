@@ -11,3 +11,25 @@
 .pgqk-panel{
     padding: 10rpx;
 }
+
+/* 按钮 */
+.pgtb-an{
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    background: white;
+    z-index: 10;
+    padding:10rpx 0;
+    width: 100%;
+    text-align: center;
+}
+.pgtb-an button{
+    height: 55rpx;
+    margin-left: 20rpx;
+}
+.pgtb-an button[type="warn"]{
+    background: #f1a325;
+}
+.pgtb-an button[type="primary"]{
+    background: #109dea;
+}

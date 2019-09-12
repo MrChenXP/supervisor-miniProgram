@@ -1,4 +1,5 @@
 <view class='content'>
+    <!-- 签到学校列表 -->
     <radio-group class="position-xx" wx:if="{{currentRecordShow}}" bindchange="changePostionOrg">
         <label wx:if="{{userOrgsShow}}" wx:for="{{userOrgs}}" wx:key="index" class="{{index < userOrgs.length-1? borderBottom :''}}">
             <radio value="{{item.ORG_ID}}" />
@@ -8,9 +9,16 @@
         <view class="save" wx:if="{{userOrgsShow}}">
             <button bindtap="checkPosition">签到</button>
         </view>
-        <view class="lists-dkjl">打卡记录</view>
+        <view class="xgxxwz color-blue"><text  bindtap="changeSchoolShow">未找到学校？</text></view>
+        <!-- <i-divider content="打卡记录"  color="#2d8cf0" lineColor="#2d8cf0"></i-divider> -->
+        <view class="lists-dkjl">
+            <i-icon type="coordinates" />
+            打卡记录
+            <i-icon type="unfold" />
+        </view>
     </radio-group>
 
+    <!-- 签退学校列表 -->
     <checkbox-group class="lists position-xx lists-pos" wx:else>
         <view>
             <view class="list">
@@ -25,12 +33,14 @@
             </view>
         </view>
         <view class="save">
-            <button bindtap="checkPosition">签出</button>
+            <button bindtap="checkPosition">签退</button>
         </view>
+        <view class="xgxxwz color-blue"><text  bindtap="changeSchoolShow">未找到学校？</text></view>
+        <!-- <i-divider content="打卡记录"  color="#2d8cf0" lineColor="#2d8cf0"></i-divider> -->
         <view class="lists-dkjl">打卡记录</view>
     </checkbox-group>
 
-    <!-- 列表组 -->
+    <!-- 打卡记录列表组 -->
     <checkbox-group class="lists">
         <view>
             <!-- 单项列表 -->
@@ -39,11 +49,14 @@
                     <view>{{item.inOrgMc}}</view>
                     <view class="clearfix time">
                         <view class="fl">签到时间:{{item.inTime}}</view>
-                        <view class="fr">签出时间:{{item.outTime}}</view>
+                        <view class="fr">签退时间:{{item.outTime}}</view>
                     </view>
                 </view>
             </view>
             <i-load-more tip="{{loadMore.text}}" loading="{{ loadMore.show }}" />
         </view>
     </checkbox-group>
+
+    <!-- 更改学校位置弹出框 -->
+    <change-school wx:if="{{changeSchoolShow}}" bindclose="changeSchoolShow" bindconfirm="qdXxtk" latitude="{{latitude}}" longitude="{{longitude}}"></change-school>
 </view>

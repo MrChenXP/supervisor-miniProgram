@@ -48,13 +48,15 @@ Page({
             type: 'POST',
             page: this,
             then(response) {
-                app.$kwz.cacheAttach({
-                    url: 'jc_file/doDownload?F_ID=' + response.datas.IMAGE,
-                    page: this,
-                    success({ tempFilePath }) {
-                        this.setData({ imageUrl: tempFilePath })
-                    }
-                })
+                if(response.datas && response.datas.IMAGE){
+                    app.$kwz.cacheAttach({
+                        url: 'jc_file/doDownload?F_ID=' + response.datas.IMAGE,
+                        page: this,
+                        success({ tempFilePath }) {
+                            this.setData({ imageUrl: tempFilePath })
+                        }
+                    })
+                }
             }
         })
     },

@@ -52,7 +52,7 @@
         </picker>
         <kw-list-cell title="{{item.cName}}" wx:for="{{gcdData.collectValueVos}}" wx:key="index">
             <view slot="rightNote">
-            <view class="list-right-input"><input value="{{item.content || ''}}" type="number" bindinput="inputCjd" data-i="{{index}}" placeholder="请输入"/></view>
+            <view class="list-right-input"><input value="{{item.content || ''}}" bindinput="inputCjd" data-i="{{index}}" placeholder="请输入"/></view>
             </view>
         </kw-list-cell>
     </view>

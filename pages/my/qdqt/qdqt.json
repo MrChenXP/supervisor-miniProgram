@@ -1,6 +1,9 @@
 {
   "usingComponents": {
-    "i-load-more": "/dist/iview/load-more/index"
+    "i-load-more": "/dist/iview/load-more/index",
+    "i-divider": "/dist/iview/divider/index",
+    "i-icon": "../../dist/iview/icon/index",
+    "change-school": "../change-school/change-school"
   },
   "navigationBarTitleText": "签到签退"
 }

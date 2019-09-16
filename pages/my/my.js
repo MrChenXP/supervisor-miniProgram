@@ -19,7 +19,9 @@ Page({
         hasQhjgAuth: false,
         hasQdqtAuth: false,
         // 头像路径
-        imageUrl:""
+        imageUrl:"",
+        // 是否正在'退出登录'
+        isLogout:false,
     },
     onShow() {
         if (!app.$kwz.isLogin()) {
@@ -63,14 +65,18 @@ Page({
     // 登陆成功
     loginSuccess() {
         this.initUser()
+        app.$kwz.setIsXzdq(true)
     },
     // 退出
     logout() {
-        app.$kwz.logout(() => {
-            this.setData({
-                loginShow: true
-            })
-        }, this)
+        if (!this.data.isLogout){
+            app.$kwz.logout(() => {
+                this.data.isLogout = false
+                this.setData({
+                    loginShow: true
+                })
+            }, this)
+        }
     },
     // 获取权限 dd_dxgl/toGrzl
     has(){

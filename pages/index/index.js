@@ -26,16 +26,16 @@ Page({
         pageList: [],
         // 选择地区 数据
         xzdqData: [
-            {
-                BASE_URL: 'http://www.dd.com:8080',
-                BASE_VISIT: '/visit.jsp',
-                name: '本地主线'
-            },
-            {
-                BASE_URL: 'http://www.dd.com:8080',
-                BASE_VISIT: '/visittest',
-                name: '本地测试省'
-            },
+            // {
+            //     BASE_URL: 'http://www.dd.com:8080',
+            //     BASE_VISIT: '/visit.jsp',
+            //     name: '本地主线'
+            // },
+            // {
+            //     BASE_URL: 'http://www.dd.com:8080',
+            //     BASE_VISIT: '/visittest',
+            //     name: '本地测试省'
+            // },
             {
                 BASE_URL: 'https://app.qgjydd.cn',
                 BASE_VISIT: '/visitpingshan',
@@ -48,12 +48,30 @@ Page({
             }
         ],
         // 加载更多的提示信息
-        loadMore: []
+        loadMore: [],
     },
-    // onLoad事件
+    onLoad(query){
+        if (query && query.q) {
+            // 传过来的url
+            let url = decodeURIComponent(query.q)
+            if (url.indexOf('https://app.qgjydd.cn/') > -1) {
+                let first = url.indexOf('https://app.qgjydd.cn/')+22
+                let BASE_VISIT = url.slice(first)
+                // 设置域名
+                if (BASE_VISIT){
+                    app.$kwz.setUrl({
+                        BASE_URL: 'https://app.qgjydd.cn',
+                        BASE_VISIT: '/' + BASE_VISIT
+                    })
+                }
+                app.$kwz.setIsXzdq(true)
+            }
+        }
+    },
     onShow() {
         this.setData({isXzdq: app.$kwz.getIsXzdq()})
         if (this.data.isXzdq){
+            this.setData({ xzdqShow: false })
             app.$kwz.initVisit(()=>{
                 this.loadIndexData()
             })

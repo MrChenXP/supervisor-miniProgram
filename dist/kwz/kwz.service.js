@@ -457,10 +457,12 @@ const logout = (callback, app) => {
     let url = store.getUrl()
     // 清除缓存
     weixin.clearStorage()
-    store.setUrl({
-        BASE_URL: JSON.parse(url).BASE_URL,
-        BASE_VISIT: JSON.parse(url).BASE_VISIT
-    })
+    if(url){ // 如果没有选择地区，就是没有url，就不用设置
+        store.setUrl({
+            BASE_URL: JSON.parse(url).BASE_URL,
+            BASE_VISIT: JSON.parse(url).BASE_VISIT
+        })
+    }
     // 设置登陆false
     store.setLogin(false)
     // 重置

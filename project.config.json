@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 25,
 			"list": [
 				{
 					"id": -1,
@@ -111,6 +111,125 @@
 					"name": "pages/my/qdqt/qdqt",
 					"pathName": "pages/my/qdqt/qdqt",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "BASE_VISIT=visitpingshan",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "p='https://app.qgjydd.cn/visit?BASE_VISIT=visitpingshan'",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "q='https://app.qgjydd.cn/visit?BASE_VISIT=visitpingshan'",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "q=https://app.qgjydd.cn/visit?BASE_VISIT=visitpingshan",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "q=https://app.qgjydd.cn/visit?BASE_VISIT\\=visitpingshan",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "q=https://app.qgjydd.cn/visit?BASE_VISIT/=visitpingshan",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "q=https://app.qgjydd.cn/visit?BASE_VISIT=visitpingshan",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "q=https%3A%2F%2Fapp.qgjydd.cn%2Fvisit%3FBASE_VISIT",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "q= https://app.qgjydd.cn/visit?BASE_VISIT=visitpingshan",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "q='https://app.qgjydd.cn/visit?BASE_VISIT=visitpingshan'",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "q=https%3A%2F%2Fapp.qgjydd.cn%2Fvisit%3FBASE_VISITD%visitpingshan",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "q= https%3A%2F%2Fapp.qgjydd.cn%2Fvisit%3FBASE_VISIT%3Dvisitpingshan",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "q= https%3A%2F%2Fapp.qgjydd.cn%2Fvisit%3FBASE_VISIT%3Dvisitshunde",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/my/my",
+					"pathName": "pages/my/my",
+					"query": "q= https%3A%2F%2Fapp.qgjydd.cn%2Fvisit%3FBASE_VISIT%3Dvisitshunde",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "q= https%3A%2F%2Fapp.qgjydd.cn%2Fvisit%3FBASE_VISIT%3Dvisitshunde",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "q= https%3A%2F%2Fapp.qgjydd.cn%2Fvisit%3FBASE_VISIT%3Dvisitpingshan",
 					"scene": null
 				}
 			]

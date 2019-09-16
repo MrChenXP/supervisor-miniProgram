@@ -136,7 +136,7 @@ swiper {
     background: #b1e6ff;
 }
 .xzdq-info{
-    text-align: center;
+    margin-top: 20rpx;
     padding: 20rpx;
     position: sticky;
     top: 0;

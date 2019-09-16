@@ -43,7 +43,7 @@
             <view wx:for="{{xzdqData}}" wx:key="index" class="xzdq-dq" bindtap="xzdq" data-i="{{index}}">
                 {{item.name}}
             </view>
-            <view class="xzdq-cancel" bindtap="xzdqClose">取消</view>
+            <view class="xzdq-cancel color-999" bindtap="xzdqClose">取消</view>
         </view>
     </view>
 </view>

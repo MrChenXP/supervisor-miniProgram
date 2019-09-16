@@ -39,7 +39,8 @@ Component({
                 type: 'POST',
                 data: {
                     page: this.data.page,
-                    ORG_MC: this.data.ORG_MC
+                    ORG_MC: this.data.ORG_MC,
+                    ORG_DJ: 80
                 },
                 page: this,
                 success(data) {

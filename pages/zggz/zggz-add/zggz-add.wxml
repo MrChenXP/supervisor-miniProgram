@@ -1,39 +1,41 @@
 <view class='content'>
-  <kw-list-cell title="编号">
-    <view slot="rightNote">
-      <view class="list-right-input"><input value="{{data.BH}}" type="number" disabled="{{data.ZGXSID}}" bindinput="inputBh"/></view>
-    </view>
-  </kw-list-cell>
-  <kw-list-cell title="学校/单位" rightNote="{{data.XXMC}}" bindtap="showSchool"></kw-list-cell>
-  <picker value="{{data.YWSJ}}" mode="date" bindchange="changeYwsj" disabled="{{data.ZGXSID}}" start="{{startDate}}" end="{{endDate}}">
-    <kw-list-cell title="时间" rightNote="{{data.YWSJ}}"></kw-list-cell>
-  </picker>
-  <kw-list-cell title="督学" rightNote="{{loginUser.name}}" isArrow="{{false}}"></kw-list-cell>
-	<kw-list-cell isArrow="{{false}}">
-    <view>
-      <view class="ddjs-body">
-        <view>
-          <view>经挂牌督导，你单位存在以下问题:</view>
-          <textarea maxlength="4000" value="{{data.XSNR}}" bindinput="changeCzwt"></textarea>
-          <view>
-            对以上问题要高度重视，采取措施，立即整改。整改报告于本通知下发
-            <i-input-number value="{{data.CLQX}}" min="0" max="1000" bindchange="changeClqx"></i-input-number>
-            日内书面报责任督学，责任督学于接到报告的3日内上报人民政府教育督导室督管员备案。
-          </view>
+    <kw-list-cell title="编号">
+        <view slot="rightNote">
+            <view class="list-right-input"><input value="{{data.BH}}" type="number" disabled="{{data.ZGXSID}}"
+                    bindinput="inputBh" /></view>
         </view>
-      </view>
+    </kw-list-cell>
+    <kw-list-cell title="学校/单位" rightNote="{{data.XXMC}}" bindtap="showSchool"></kw-list-cell>
+    <picker value="{{data.YWSJ}}" mode="date" bindchange="changeYwsj" disabled="{{data.ZGXSID}}" start="{{startDate}}"
+        end="{{endDate}}">
+        <kw-list-cell title="时间" rightNote="{{data.YWSJ}}"></kw-list-cell>
+    </picker>
+    <kw-list-cell title="督学" rightNote="{{loginUser.name}}" isArrow="{{false}}"></kw-list-cell>
+    <kw-list-cell isArrow="{{false}}">
+        <view>
+            <view class="ddjs-body">
+                <view>
+                    <view>经挂牌督导，你单位存在以下问题:</view>
+                    <textarea maxlength="4000" value="{{data.XSNR}}" bindinput="changeCzwt"></textarea>
+                    <view>
+                        对以上问题要高度重视，采取措施，立即整改。整改报告于本通知下发
+                        <i-input-number value="{{data.CLQX}}" min="0" max="1000" bindchange="changeClqx"></i-input-number>
+                        日内书面报责任督学，责任督学于接到报告的3日内上报人民政府教育督导室督管员备案。
+                    </view>
+                </view>
+            </view>
+        </view>
+    </kw-list-cell>
+
+    <view class="save">
+        <button bindtap="sendZg">
+            <text wx:if="{{data.ZGXSID && hasShAuth}}">审核</text>
+            <text wx:if="{{!data.ZGXSID && hasFsAuth}}">发送</text>
+        </button>
     </view>
-  </kw-list-cell>
-  
-  <view class="save">
-    <button bindtap="sendZg">
-      <text wx:if="{{data.ZGXSID && hasShAuth}}">审核</text>
-      <text wx:if="{{!data.ZGXSID && hasFsAuth}}">发送</text>
-    </button>
-  </view>
-  
-  <!-- 选择 学校-->
-  <block>
-    <kw-school-select hidden="{{schoolShow}}" bindclose="showSchool" bindconfirm="confirmSchool">></kw-school-select>
-  </block>
+
+    <!-- 选择 学校-->
+    <block>
+        <kw-school-select hidden="{{schoolShow}}" bindclose="showSchool" bindconfirm="confirmSchool">></kw-school-select>
+    </block>
 </view>

@@ -3,6 +3,8 @@
 kwm项目微信小程序版。项目采用[原生小程序](<https://developers.weixin.qq.com/miniprogram/dev/>)开发。2.7基础库。界面ui使用[iview-webapp](<https://weapp.iviewui.com/docs/guide/start>)，组件在 *dist/iview/* 里。和kwm后端交互的支持在 *dist/kwz/kwz.mp.js* 中。文档在 *doc/* 下
 
 ### 更新日志
+#### 2.2.1
+    增加公众号跳转测试代码
 #### 2.2.0
   增加对扫码进来的url参数域名判断。gps打卡添加参数修复机构问题，选择地区ui修改.默认域名退出登录bug。已部署到挂牌督导
 ##### 2.1.0

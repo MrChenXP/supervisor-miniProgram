@@ -51,6 +51,7 @@ Page({
         loadMore: [],
     },
     onLoad(query){
+        // 判断是否小程序扫码进来
         if (query && query.q) {
             // 传过来的url
             let url = decodeURIComponent(query.q)
@@ -66,6 +67,18 @@ Page({
                 }
                 app.$kwz.setIsXzdq(true)
             }
+        }
+        // 判断是否公众号进来 {'appid':'','url':''}
+        if (query && query.url) {
+            let BASE_VISIT = query.url
+            // 设置域名
+            if (BASE_VISIT) {
+                app.$kwz.setUrl({
+                    BASE_URL: 'https://app.qgjydd.cn',
+                    BASE_VISIT: '/' + BASE_VISIT
+                })
+            }
+            app.$kwz.setIsXzdq(true)
         }
     },
     onShow() {

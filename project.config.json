@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 25,
+			"current": 26,
 			"list": [
 				{
 					"id": -1,
@@ -230,6 +230,13 @@
 					"name": "pages/index/index",
 					"pathName": "pages/index/index",
 					"query": "q= https%3A%2F%2Fapp.qgjydd.cn%2Fvisit%3FBASE_VISIT%3Dvisitpingshan",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "url=visitpingshan",
 					"scene": null
 				}
 			]

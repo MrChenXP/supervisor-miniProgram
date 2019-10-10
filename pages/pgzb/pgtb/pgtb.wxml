@@ -17,8 +17,11 @@
                 <view class="ddjs-head clearfix" >
                     <text class="fl">特点亮点</text>
                 </view>
-                <view class="ddjs-body" >
-                    <textarea value="{{gcdData.highlight || ''}}" maxlength="4000" bindinput="inputTdld" placeholder="请输入"></textarea>
+                <view class="ddjs-body">
+                    <textarea class="{{css1}}" bindfocus="textareafocus" bindblur="textareablur" wx:if="{{!lkbcTipShow}}" value="{{gcdData.highlight || ''}}" maxlength="4000" bindinput="inputTdld" placeholder="请输入"></textarea>
+                    <view class='rich-text' wx:else>
+                      <rich-text nodes="{{realHighlight}}"></rich-text>
+                    </view>
                 </view>
             </view>
         </kw-list-cell>
@@ -28,7 +31,10 @@
                     <text class="fl">问题不足</text>
                 </view>
                 <view class="ddjs-body" >
-                    <textarea value="{{gcdData.problem || ''}}" maxlength="4000" bindinput="inputWtbz" placeholder="请输入"></textarea>
+                    <textarea class="{{css2}}" bindfocus="textareafocus1" bindblur="textareablur1" wx:if="{{!lkbcTipShow}}" value="{{gcdData.problem || ''}}" maxlength="4000" bindinput="inputWtbz" placeholder="请输入"></textarea>
+                    <view class='rich-text' wx:else>
+                      <rich-text nodes="{{realProblem}}"></rich-text>
+                    </view>
                 </view>
             </view>
         </kw-list-cell>
@@ -38,7 +44,10 @@
                     <text class="fl">建议反馈</text>
                 </view>
                 <view class="ddjs-body" >
-                    <textarea value="{{gcdData.report || ''}}" maxlength="4000" bindinput="inputJyfk" placeholder="请输入"></textarea>
+                    <textarea class="{{css3}}" auto-height="" bindfocus="textareafocus2" bindblur="textareablur2" wx:if="{{!lkbcTipShow}}" value="{{gcdData.report || ''}}" maxlength="4000" bindinput="inputJyfk" placeholder="请输入"></textarea>
+                    <view class='rich-text' wx:else>
+                      <rich-text nodes="{{realReport}}"></rich-text>
+                    </view>
                 </view>
             </view>
         </kw-list-cell>

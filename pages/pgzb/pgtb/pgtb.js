@@ -29,9 +29,12 @@ Page({
         isReport: '',
         name: '',
         nbId: '',
+        css1: 'textareablur',
+        css2: 'textareablur',
+        css3: 'textareablur',
         // 评分列表 值 是选择器的话
         pfValue:{name: '',value:'',index:''},
-        pfList: [{ DMMX_CODE: "", DMMX_MC: "请选择" },{ DMMX_CODE: "0", DMMX_MC: "不通过" }, { DMMX_CODE: "1", DMMX_MC: "通过" }],
+        pfList: [{ DMMX_CODE: "", DMMX_MC: "请选择" },{ DMMX_CODE: "0", DMMX_MC: "否" }, { DMMX_CODE: "1", DMMX_MC: "是" }],
         // 采集项的值
         cjxValues:[],
         // 离开保存提示 按钮列表
@@ -138,11 +141,11 @@ Page({
                         then(response) {
                             let resultLevel = response.datas.resultLevel
                             if (resultLevel == 0){
-                                this.data.pfValue.name = '不通过'
+                                this.data.pfValue.name = '否'
                                 this.data.pfValue.index = 0
                                 this.data.pfValue.value = 0
                             } else if (resultLevel == 1){
-                                this.data.pfValue.name = '通过'
+                                this.data.pfValue.name = '是'
                                 this.data.pfValue.index = 1
                                 this.data.pfValue.value = 1
                             } else{
@@ -196,8 +199,8 @@ Page({
         data.resultLevel = this.data.pfValue.value || ""
         data.type= this.data.type
         for(let i in this.data.cjxValues){
-            data['collectBars[' + i +'].cId'] = this.data.cjxValues[i].cId
-            data['collectBars[' + i + '].content'] = this.data.cjxValues[i].content
+          data['collectBars[' + i +'].cId'] = this.data.cjxValues[i].cId
+          data['collectBars[' + i + '].content'] = (this.data.cjxValues[i].content == null ? '' : this.data.cjxValues[i].content)
         }
         app.$kwz.ajax.ajaxUrl({
             url: 'dd/ddGpEvaluationReport/saveNext',
@@ -321,7 +324,48 @@ Page({
         if(e){
             let type = e.currentTarget.dataset.type
             this.data.toUrl = type
+            const realHighlight = (this.data.gcdData.highlight == null ? '' : this.data.gcdData.highlight.replace(/\n/g, '<br/>'))
+            const realProblem = (this.data.gcdData.problem == null ? '' : this.data.gcdData.problem.replace(/\n/g, '<br/>'))
+            const realReport = (this.data.gcdData.report == null ? '' : this.data.gcdData.report.replace(/\n/g, '<br/>'))
+            this.setData({
+              realHighlight: realHighlight,
+              realProblem: realProblem,
+              realReport: realReport,
+              ['gcdData.highlight']: this.data.gcdData.highlight,
+              ['gcdData.problem']: this.data.gcdData.problem,
+              ['gcdData.report']: this.data.gcdData.report
+            })
         }
         this.setData({ lkbcTipShow: !this.data.lkbcTipShow})
     },
+  textareafocus: function(e){
+    this.setData({
+      css1: 'textareafocus'
+    })
+  },
+  textareablur: function(e){
+    this.setData({
+      css1: 'textareablur'
+    })
+  },
+  textareafocus1: function (e) {
+    this.setData({
+      css2: 'textareafocus'
+    })
+  },
+  textareablur1: function (e) {
+    this.setData({
+      css2: 'textareablur'
+    })
+  },
+  textareafocus2: function(e){
+    this.setData({
+      css3: 'textareafocus'
+    })
+  },
+  textareablur2: function(e){
+    this.setData({
+      css3: 'textareablur'
+    })
+  }
 })

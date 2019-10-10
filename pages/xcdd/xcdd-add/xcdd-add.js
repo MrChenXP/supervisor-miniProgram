@@ -196,26 +196,63 @@ Page({
     },
     // 保存督导
     saveXcdd(sfXq) {
+        var that = this
         if (!this.data.data.schoolName || !this.data.data.ywsj || !this.data.data.ddjs) {
             app.$kwz.alert('学校、时间、督导纪实为必填项')
             return
         }
-        // 如果没有选择工作计划,则学期id会为空,那么默认取当前学期
-        if (!this.data.data.xqid) {
-            app.$kwz.ajax.ajaxUrl({
-                url: '/jc_xq/getCurXq',
-                type: 'POST',
-                page: this,
-                then(response) {
-                    let datas = response.datas
-                    if (datas && datas.curXq && datas.curXq.XQ_ID) {
-                        this.data.data.xqid = datas.curXq.XQ_ID
-                        this.sendSaveXcdd()
-                    }
+        if (this.data.data.ddjs.length < 50 || this.data.data.dxjyzf < 50 || this.data.data.czwt < 50) {
+            var content = '';
+            if (this.data.data.ddjs.length < 50) {content = content + '督导纪实  '}
+            if (this.data.data.dxjyzf.length < 50) {content = content + '典型经验  '}
+            if (this.data.data.czwt.length < 50) {content = content + '存在问题  '}
+            wx.showModal({
+              title: '督导纪实',
+              content: '您填写的督导纪实('+content+')内容过于简单，不利于后期数据分析工作，建议字数50字以上。是否继续提交?',
+              showCancel: true,
+              cancelText: '否',
+              confirmText: '是',
+              success: function(res) {
+                if (res.confirm) {
+                  if (!that.data.data.xqid) {
+                    app.$kwz.ajax.ajaxUrl({
+                      url: '/jc_xq/getCurXq',
+                      type: 'POST',
+                      page: that,
+                      then(response) {
+                        let datas = response.datas
+                        if (datas && datas.curXq && datas.curXq.XQ_ID) {
+                          that.data.data.xqid = datas.curXq.XQ_ID
+                          that.sendSaveXcdd()
+                        }
+                      }
+                    })
+                  } else {
+                    this.sendSaveXcdd()
+                  }
+                } else if (res.cancel) {
+                  return
                 }
+              }
             })
         } else {
-            this.sendSaveXcdd()
+          // 如果没有选择工作计划,则学期id会为空,那么默认取当前学期
+          if (!this.data.data.xqid) {
+              app.$kwz.ajax.ajaxUrl({
+                  url: '/jc_xq/getCurXq',
+                  type: 'POST',
+                  page: this,
+                  then(response) {
+                      let datas = response.datas
+                      if (datas && datas.curXq && datas.curXq.XQ_ID) {
+                          this.data.data.xqid = datas.curXq.XQ_ID
+                          this.sendSaveXcdd()
+                      }
+                  }
+              })
+          } else {
+              this.sendSaveXcdd()
+          }
         }
     },
     // 保存督导的ajax

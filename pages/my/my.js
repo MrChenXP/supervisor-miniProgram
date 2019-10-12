@@ -126,15 +126,7 @@ Page({
                 time:TIME
             },
             then(response) {
-                let data = response.datas
-                if (data.code < "1005") {
-                    setTimeout(function() {
-                        app.$kwz.alert(data.info, 2000)
-                    }, 500)
-
-                } else {
-                    console.error(data.info)
-                }
+                app.$kwz.alert(response.msg, 2000)
             }
         })
     }

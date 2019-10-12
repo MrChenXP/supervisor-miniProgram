@@ -71,3 +71,7 @@ label {
   background: #cccccc;
   margin-top: 10rpx;
 }
+.record{
+  display: flex;
+  flex-direction: row;
+}

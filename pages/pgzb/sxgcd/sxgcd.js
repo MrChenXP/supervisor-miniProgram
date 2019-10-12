@@ -30,8 +30,8 @@ Component({
         // 去评估填报
         toPgtb(e){
             let item = e.currentTarget.dataset.item
-            if (!item.parentid || !item.children){ // 没有父id 或者没有子
-                let url = `pgId=${this.data.pgId}&pId=${item.pId}&type=${this.data.type}&evaluationType=${this.data.evaluationType}&evaluationOrgId=${this.data.evaluationOrgId}&isReport=${this.data.isReport}&name=${this.data.name}&nbId=${this.data.nbId}`
+            if (!item.parentid || item.children.length == 0){ // 没有父id 或者没有子
+          let url = `pgId=${this.data.pgId}&pId=${item.pId}&type=${this.data.type}&evaluationType=${this.data.evaluationType}&evaluationOrgId=${this.data.evaluationOrgId}&isReport=${this.data.isReport}&name=${this.data.name}&nbId=${this.data.nbId}`
                 wx.navigateTo({
                     url: `/pages/pgzb/pgtb/pgtb?` + url
                 })

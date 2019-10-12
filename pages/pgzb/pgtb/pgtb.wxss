@@ -40,3 +40,17 @@
 .pgtb-an button[type="primary"]{
     background: #109dea;
 }
+.rich-text {
+  overflow: hidden;
+  border: none;
+}
+.p_class{
+    padding-left: 50rpx;
+    border: none;
+}
+.textareablur{
+    height: 120rpx;
+}
+.textareafocus{
+    height: 250rpx;
+}

@@ -277,6 +277,10 @@ i-input-number {
     width: 100%;
 }
 
+.ddjs-body rich-text{
+    width: 100%;
+}
+
 /* ----------------- 一个单独占一行的保存按钮（参考督导纪实新增页保存按钮） --- */
 
 .save {

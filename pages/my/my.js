@@ -126,7 +126,9 @@ Page({
                 time:TIME
             },
             then(response) {
-                app.$kwz.alert(response.msg, 2000)
+                setTimeout(function () {
+                    app.$kwz.alert(response.msg, 2000)
+                }, 500)
             }
         })
     }
